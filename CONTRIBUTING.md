@@ -27,9 +27,12 @@ pnpm check:package  # publint + are-the-types-wrong on the built package
 ## Adding or fixing a scheme
 
 1. Follow the ecosystem's reference implementation, not another port. Link it at the top of the file.
-2. Add test vectors from a permissive source or a reference-tool oracle, never from GPL test suites. Record
-   where they came from in [testdata/README.md](testdata/README.md).
-3. Never copy code from Renovate (AGPL-3.0) or other copyleft projects.
+2. Add test vectors from a permissive source or a reference-tool oracle, never from GPL test suites or
+   files copied from them. Fetch vendored files with `scripts/vendor-testdata.sh` (pin the commit there)
+   and record where they came from in [testdata/README.md](testdata/README.md).
+3. If polyver deliberately disagrees with an upstream vector, add the case and the reason to
+   `test/support/divergences.ts` rather than skipping it.
+4. Never copy code from Renovate (AGPL-3.0) or other copyleft projects.
 
 ## Pull requests
 

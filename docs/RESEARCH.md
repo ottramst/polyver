@@ -39,7 +39,16 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   deb, rpm and apk upstream is a good way to contribute back.
 - Conformance data in [tests/](https://github.com/package-url/vers-spec/tree/main/tests): canonical parse,
   npm/pypi containment, range-from-native for several types, version-compare for alpine, alpm, conan,
-  datetime, gentoo, intdot, maven, nuget, openssl. README says MIT (GitHub shows NOASSERTION).
+  datetime, gentoo, intdot, maven, nuget, openssl. README says MIT (GitHub shows NOASSERTION). The
+  alpine file is copied from GPL apk-tools data (see below).
+- The how-to containment algorithm ignores a range with a single `<` or `>` bound
+  ([vers-spec#54](https://github.com/package-url/vers-spec/issues/54)); polyver implements the fix.
+- Some upstream vectors contradict Clause 5.4 (checked 2026-10-26): 3 required cases in
+  `pypi_range_validate_test.json` expect duplicate versions or broken `<`/`>` alternation to be valid,
+  and 6 cases in `npm_range_from_native_test.json` turn overlapping `||` alternatives into duplicate
+  versions or repeated `<`/`>` (one is the npm type definition's own example, `2.0.x || 2.1.x` to
+  `>=2.0.0|<2.1.0|>=2.1.0|<2.2.0`). The canonical parse case `vers:npm/1.0%252F0` expects `1.0%2F0` to
+  be a valid npm version. polyver follows Clause 5 and lists each case in `test/support/divergences.ts`.
 
 ## Demand
 
@@ -53,24 +62,28 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 
 ## Per-ecosystem references
 
-| Scheme   | Spec                                                                                                                 | Reference implementation          | Permissive test vectors                                                      | Notorious edge cases                                                                                  |
-| -------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| deb      | [Debian Policy §5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version)                      | dpkg `lib/dpkg/version.c` (GPL)   | osv-scalibr `debian-versions*.txt`; univers tests                            | `1.0~rc1 < 1.0`; epoch wins (`1:0.1 > 9.9`); missing revision = `-0`; letters sort before non-letters |
-| rpm      | [RPM dependencies](https://rpm-software-management.github.io/rpm/manual/dependencies.html)                           | `rpmio/rpmvercmp.cc` (GPL/LGPL)   | osv-scalibr `redhat-versions.txt`                                            | `~` before everything; `1.0 < 1.0^git1 < 1.0.1`; numeric beats alpha; separators ignored              |
-| apk      | apk-tools `src/version.c` (GPL-2.0-only)                                                                             | same                              | osv-scalibr `alpine-versions*.txt`; vers-spec `alpine_version_cmp_test.json` | `_alpha < _beta < _pre < _rc < (none) < _cvs < _svn < _git < _hg < _p`; `1.2a`; `-rN`                 |
-| pypi     | [Version specifiers (PEP 440)](https://packaging.python.org/en/latest/specifications/version-specifiers/)            | pypa/packaging (Apache/BSD)       | vers-spec `pypi_*`; osv-scalibr `pypi-versions*.txt`                         | `1.0.dev0 < 1.0a1 < 1.0 < 1.0.post1`; epochs `1!`; normalization `1.0-1 == 1.0.post1`                 |
-| npm      | [semver 2.0.0](https://semver.org/spec/v2.0.0.html), [node-semver ranges](https://github.com/npm/node-semver#ranges) | node-semver (ISC)                 | node-semver fixtures; vers-spec `npm_*`                                      | pre-releases only match within the same `M.m.p`; build metadata ignored                               |
-| maven    | [POM version order](https://maven.apache.org/pom.html#version-order-specification)                                   | `ComparableVersion.java` (Apache) | osv-scalibr `maven-versions*.txt`; vers-spec `maven_version_cmp_test.json`   | `alpha < beta < milestone < rc=cr < snapshot < "" = ga = final < sp`; `1.0 == 1.0.0`                  |
-| golang   | [go.dev/ref/mod#versions](https://go.dev/ref/mod#versions)                                                           | golang.org/x/mod (BSD-3)          | `semver_test.go`, `pseudo_test.go`                                           | pseudo-versions are pre-releases; `+incompatible`; `v` prefix often omitted in OSV/VERS               |
-| gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`                                         | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
-| nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | vers-spec `nuget_*`                                                          | 4-part versions; case-insensitive pre-release labels                                                  |
-| cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests                                                                    | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`                                                              |
-| composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                        | 4-part normalization; stability flags; `dev-` branches                                                |
+| Scheme   | Spec                                                                                                                 | Reference implementation          | Permissive test vectors                                                    | Notorious edge cases                                                                                  |
+| -------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| deb      | [Debian Policy §5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version)                      | dpkg `lib/dpkg/version.c` (GPL)   | osv-scalibr `debian-versions*.txt`; univers tests                          | `1.0~rc1 < 1.0`; epoch wins (`1:0.1 > 9.9`); missing revision = `-0`; letters sort before non-letters |
+| rpm      | [RPM dependencies](https://rpm-software-management.github.io/rpm/manual/dependencies.html)                           | `rpmio/rpmvercmp.cc` (GPL/LGPL)   | our `rpm` oracle only (osv-scalibr `redhat-versions.txt` is GPL-derived)   | `~` before everything; `1.0 < 1.0^git1 < 1.0.1`; numeric beats alpha; separators ignored              |
+| apk      | apk-tools `src/version.c` (GPL-2.0-only)                                                                             | same                              | osv-scalibr `alpine-versions-generated.txt`; our `apk` oracle              | `_alpha < _beta < _pre < _rc < (none) < _cvs < _svn < _git < _hg < _p`; `1.2a`; `-rN`                 |
+| pypi     | [Version specifiers (PEP 440)](https://packaging.python.org/en/latest/specifications/version-specifiers/)            | pypa/packaging (Apache/BSD)       | vers-spec `pypi_*`; osv-scalibr `pypi-versions*.txt`                       | `1.0.dev0 < 1.0a1 < 1.0 < 1.0.post1`; epochs `1!`; normalization `1.0-1 == 1.0.post1`                 |
+| npm      | [semver 2.0.0](https://semver.org/spec/v2.0.0.html), [node-semver ranges](https://github.com/npm/node-semver#ranges) | node-semver (ISC)                 | node-semver fixtures; vers-spec `npm_*`                                    | pre-releases only match within the same `M.m.p`; build metadata ignored                               |
+| maven    | [POM version order](https://maven.apache.org/pom.html#version-order-specification)                                   | `ComparableVersion.java` (Apache) | osv-scalibr `maven-versions*.txt`; vers-spec `maven_version_cmp_test.json` | `alpha < beta < milestone < rc=cr < snapshot < "" = ga = final < sp`; `1.0 == 1.0.0`                  |
+| golang   | [go.dev/ref/mod#versions](https://go.dev/ref/mod#versions)                                                           | golang.org/x/mod (BSD-3)          | `semver_test.go`, `pseudo_test.go`                                         | pseudo-versions are pre-releases; `+incompatible`; `v` prefix often omitted in OSV/VERS               |
+| gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`                                       | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
+| nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | vers-spec `nuget_*`                                                        | 4-part versions; case-insensitive pre-release labels                                                  |
+| cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests                                                                  | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`                                                              |
+| composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                      | 4-part normalization; stability flags; `dev-` branches                                                |
 
 ## Licensing of test data
 
 - **Do not vendor** dpkg's `t-version.c`, rpm's `tests/rpmvercmp.at`, apk-tools' `test/unit/version.data`,
   or univers' `alpine_test.txt` / `rpmvercmp.at`: they are GPL.
+- **Also do not vendor copies of them published under permissive licenses:** vers-spec
+  `alpine_version_cmp_test.json` (all 716 pairs are from apk-tools' `version.data`), osv-scalibr
+  `alpine-versions.txt` (says it is from that file) and osv-scalibr `redhat-versions.txt` (contains 96 of
+  the 103 pairs of `rpmvercmp.at`). Details in [testdata/README.md](../testdata/README.md#excluded).
 - **Permissive sources:** osv-scalibr `semantic/testdata` (Apache-2.0), vers-spec `tests/` (MIT),
   pypa/packaging tests, node-semver fixtures, dtolnay/semver tests.
 - **Oracles:** generate our own vectors by running the real tools (`dpkg --compare-versions`,

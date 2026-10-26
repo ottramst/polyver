@@ -3,15 +3,59 @@
 Compare package versions and evaluate [VERS](https://github.com/package-url/vers-spec) version ranges
 across ecosystems, in JavaScript and TypeScript. Zero dependencies; runs in Node.js, browsers, Deno and Bun.
 
-> **Status:** early development. The API below is the plan, not yet implemented.
+> **Status:** early development, not yet published. The VERS core and the generic schemes work;
+> ecosystem schemes are being added (see [Supported schemes](#supported-schemes)).
 
 ```ts
-import { contains, getScheme } from 'polyver'
+import { contains, getScheme, normalizeVers, parseVers, stringifyVers, VersError } from 'polyver'
 
+contains('vers:npm/>=1.2.3|<2.0.0', '1.4.0') // true
+contains('vers:npm/<1.0.0|>=2.0.0', '1.5.0') // false
+
+parseVers('vers:npm/>=1.0.0|<2.0.0')
+// { type: 'npm', constraints: [{ comparator: '>=', version: '1.0.0' }, { comparator: '<', version: '2.0.0' }] }
+
+getScheme('semver')?.compare('1.0.0-rc.1', '1.0.0') // < 0
+```
+
+Planned for v0.1:
+
+```ts
 contains('vers:deb/>=1.2.3-1|<1.2.3-4~bpo11', '1.2.3-2') // true
 getScheme('rpm')?.compare('1.0^git1', '1.0.1') // < 0
 getScheme('apk')?.compare('1.2_rc1', '1.2') // < 0
 ```
+
+### Strict and lenient parsing
+
+`parseVers`, `contains` and `stringifyVers` follow the VERS specification strictly: a range must be in
+canonical form (constraints sorted and unique, no explicit `=`, no whitespace, canonical
+percent-encoding), and anything else is an error. To accept ranges from sources that are not canonical,
+normalise them first:
+
+```ts
+parseVers('vers:npm/ <2.0.0|>= 1.0.0') // throws VersError (code 'INVALID_SYNTAX')
+stringifyVers(normalizeVers('vers:npm/ <2.0.0|>= 1.0.0')) // 'vers:npm/>=1.0.0|<2.0.0'
+```
+
+`normalizeVers` sorts constraints, removes duplicates and redundant constraints, and fixes case,
+whitespace and percent-encoding. It still throws if the input is ambiguous, for example the same version
+with two comparators.
+
+### Errors
+
+Every function throws a `VersError` with a `code`:
+
+| Code                  | Meaning                                                           |
+| --------------------- | ----------------------------------------------------------------- |
+| `INVALID_SYNTAX`      | Not a syntactically valid, canonical VERS string                  |
+| `INVALID_VERSION`     | A version is not valid in the range's scheme                      |
+| `INVALID_CONSTRAINTS` | Unsorted or duplicate versions, or an invalid comparator sequence |
+| `UNSUPPORTED_SCHEME`  | polyver does not implement the VERS type                          |
+
+The containment check includes the fix for single-bound ranges such as `vers:npm/>=1.0.0`
+([vers-spec#54](https://github.com/package-url/vers-spec/issues/54)), and a range made only of `!=`
+constraints contains every other version.
 
 ## Why
 
@@ -25,9 +69,10 @@ all for RPM or Alpine versions.
 
 | Scheme                                                         | Status           |
 | -------------------------------------------------------------- | ---------------- |
-| VERS core (parse, validate, canonicalize, contains)            | planned for v0.1 |
-| `semver`, `intdot`, `lexicographic`, `datetime`, `all`, `none` | planned for v0.1 |
-| `npm`, `pypi`                                                  | planned for v0.1 |
+| VERS core (parse, validate, canonicalize, contains)            | done             |
+| `semver`, `intdot`, `lexicographic`, `datetime`, `all`, `none` | done             |
+| `npm` versions                                                 | done             |
+| `npm` and `pypi` ranges from native syntax, `pypi` versions    | planned for v0.1 |
 | `deb`, `rpm`, `apk`                                            | planned for v0.1 |
 | `maven`, `golang`, `gem`, `nuget`, `cargo`, `composer`         | planned          |
 

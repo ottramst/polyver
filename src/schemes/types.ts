@@ -9,6 +9,9 @@ export interface Scheme {
   readonly type: string
   /** Reports whether `version` is a valid version in this scheme. */
   isValid(version: string): boolean
-  /** Returns a negative number, zero or a positive number as `a` sorts before, equal to or after `b`. */
+  /**
+   * Returns a negative number, zero or a positive number as `a` sorts before, equal to or after `b`.
+   * Throws a `VersError` with code `INVALID_VERSION` if either version is invalid.
+   */
   compare(a: string, b: string): number
 }
