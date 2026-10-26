@@ -48,7 +48,10 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   and 6 cases in `npm_range_from_native_test.json` turn overlapping `||` alternatives into duplicate
   versions or repeated `<`/`>` (one is the npm type definition's own example, `2.0.x || 2.1.x` to
   `>=2.0.0|<2.1.0|>=2.1.0|<2.2.0`). The canonical parse case `vers:npm/1.0%252F0` expects `1.0%2F0` to
-  be a valid npm version. polyver follows Clause 5 and lists each case in `test/support/divergences.ts`.
+  be a valid npm version. Separately, 5 npm range-from-native cases disagree with node-semver's own
+  desugaring of x-ranges (`2.1 || 2.6` expected as exact versions, `>= 2.2.x` given an upper bound,
+  `<= 1.0` as `<=1.0.0`). polyver follows Clause 5 and node-semver, and lists each case in
+  `test/support/divergences.ts`.
 
 ## Demand
 

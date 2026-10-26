@@ -29,6 +29,7 @@ it('lists the supported schemes', () => {
     'lexicographic',
     'none',
     'npm',
+    'pypi',
     'semver',
   ])
   expect(getScheme('SemVer')).toBe(getScheme('semver'))

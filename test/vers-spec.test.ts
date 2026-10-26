@@ -3,6 +3,7 @@ import { readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import {
   contains,
+  fromNative,
   getScheme,
   normalizeVers,
   parseVers,
@@ -33,7 +34,7 @@ function requiredType(t: VersTest): string | undefined {
     case 'equality':
       return t.input.input_type ?? t.input.input_scheme
     case 'from_native':
-      return undefined
+      return getScheme(t.input.scheme)?.fromNative ? t.input.scheme : undefined
   }
 }
 
@@ -85,8 +86,15 @@ function run(t: VersTest): void {
       expect(scheme?.compare(a, b) === 0).toBe(t.expected_output)
       return
     }
-    case 'from_native':
-      throw new Error('from_native is not implemented')
+    case 'from_native': {
+      const { scheme, native_range } = t.input
+      if (t.expected_failure) {
+        expectVersError(() => fromNative(scheme, native_range))
+        return
+      }
+      expect(stringifyVers(fromNative(scheme, native_range))).toBe(t.expected_output)
+      return
+    }
   }
 }
 
@@ -108,5 +116,5 @@ for (const file of files) {
 }
 
 it('every documented divergence matches a vendored case', () => {
-  expect(divergent).toBe(divergenceCount())
+  expect(divergent).toBe(divergenceCount(DIR))
 })

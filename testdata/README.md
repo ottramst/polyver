@@ -25,6 +25,12 @@ commits below; do not edit them by hand.
 | `vers-spec/types/pypi-definition.json` | vers-spec `types/` | MIT | `7d0cc19` |
 | `osv-scalibr/LICENSE` | [google/osv-scalibr](https://github.com/google/osv-scalibr) | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/semver-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/pypi-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/pypi-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with pypa/packaging) | Apache-2.0 | `1ca96d6` |
+| `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
+| `node-semver/{comparisons,equality,range-include,range-exclude,range-parse}.json` | node-semver `test/fixtures/*.js`, converted to JSON by `scripts/js-fixture-to-json.ts` | ISC | v7.8.5 (`6e05b76`) |
+| `packaging/LICENSE.BSD` | [pypa/packaging](https://github.com/pypa/packaging) (dual BSD-2-Clause / Apache-2.0) | BSD-2-Clause | 26.3 (`929fd4b`) |
+| `packaging/versions.json` | packaging `tests/test_version.py` (`VERSIONS`, `test_invalid_versions`, `test_normalized_versions`), extracted by `scripts/extract-packaging-vectors.py` | BSD-2-Clause | 26.3 (`929fd4b`) |
 
 vers-spec `7d0cc19` is the `main` branch after the v1.2.1 tag; it includes the fix to
 `npm_range_from_native_test.json` that treats a space as intersection

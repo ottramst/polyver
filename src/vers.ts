@@ -344,7 +344,7 @@ export function contains(range: VersRange | string, version: string): boolean {
     typeof range === 'string'
       ? parse(range)
       : { range, scheme: validate(range.type, range.constraints) }
-  if (!scheme.isValid(version)) {
+  if (typeof version !== 'string' || !scheme.isValid(version)) {
     throw new VersError('INVALID_VERSION', `invalid ${r.type} version: ${JSON.stringify(version)}`)
   }
   if (r.constraints[0]?.comparator === '*') return r.type !== 'none'
@@ -375,4 +375,23 @@ export function contains(range: VersRange | string, version: string): boolean {
     }
   }
   return false
+}
+
+/**
+ * Converts a range in an ecosystem's native syntax to a canonical VERS range, for example
+ * `fromNative('npm', '^1.2.3 || >=2.0.1')` to `vers:npm/>=1.2.3|<2.0.0|>=2.0.1`.
+ *
+ * Throws {@link VersError}: `UNSUPPORTED_SCHEME` if the type has no native range syntax support,
+ * `INVALID_SYNTAX` or `INVALID_VERSION` for an invalid native range, and `INVALID_CONSTRAINTS` if the
+ * range matches no version (VERS cannot express an empty range).
+ */
+export function fromNative(type: string, native: string): VersRange {
+  const scheme = lookupScheme(type)
+  if (!scheme.fromNative) {
+    throw new VersError('UNSUPPORTED_SCHEME', `converting native ${type} ranges is not supported`)
+  }
+  if (typeof native !== 'string') throw syntaxError('a native range must be a string')
+  const constraints = scheme.fromNative(native)
+  validate(type, constraints)
+  return { type, constraints }
 }

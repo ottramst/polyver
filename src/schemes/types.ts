@@ -1,3 +1,5 @@
+import type { Constraint } from '../vers.ts'
+
 /**
  * A versioning scheme: how one ecosystem's versions are validated and ordered.
  *
@@ -14,4 +16,9 @@ export interface Scheme {
    * Throws a `VersError` with code `INVALID_VERSION` if either version is invalid.
    */
   compare(a: string, b: string): number
+  /**
+   * Converts a range in the ecosystem's native syntax (such as npm's `^1.2.3 || >=2.0.1`) to canonical
+   * VERS constraints. Only some schemes implement it; use the package's `fromNative` function.
+   */
+  fromNative?(native: string): Constraint[]
 }
