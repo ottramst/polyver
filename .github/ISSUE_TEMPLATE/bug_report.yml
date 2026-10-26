@@ -1,0 +1,39 @@
+name: Bug report
+description: A wrong comparison, range result, or other bug.
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: polyver version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: scheme
+    attributes:
+      label: Scheme
+      description: The VERS type involved, if any.
+      placeholder: deb, rpm, apk, pypi, npm, maven, ...
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: A minimal snippet, with the result you got.
+      render: ts
+      placeholder: |
+        getScheme('deb')?.compare('1.0~rc1', '1.0') // returned 1
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What the ecosystem's own tool says, with its version (for example `dpkg --compare-versions 1.0~rc1 lt 1.0; echo $?` on dpkg 1.22.6), or a link to the spec.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime
+      placeholder: Node.js 24.3.0 / Chrome 150 / Deno 2.6
