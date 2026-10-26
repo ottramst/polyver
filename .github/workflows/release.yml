@@ -48,7 +48,21 @@ jobs:
       - run: pnpm build
       - run: pnpm check:package
       - name: Publish to npm
-        run: npm publish --access public
+        run: |
+          name="$(node -p 'require("./package.json").name')"
+          version="$(node -p 'require("./package.json").version')"
+          # A rerun after a failed release step must not try to publish the same version again.
+          # For an existing package, `npm view` prints nothing (and exits 0) for a missing version.
+          if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
+            echo "$name@$version is already on npm; skipping publish."
+            exit 0
+          fi
+          # Pre-releases (e.g. 1.0.0-rc.1) must not become the default install.
+          case "$version" in
+            *-*) dist_tag=next ;;
+            *) dist_tag=latest ;;
+          esac
+          npm publish --access public --tag "$dist_tag"
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -56,4 +70,13 @@ jobs:
         run: |
           # The release notes are the CHANGELOG.md section for this version.
           awk -v heading="## $TAG" '$0 == heading { found = 1; next } found && /^## / { exit } found' CHANGELOG.md > notes.md
-          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$TAG" --notes-file notes.md
+          if [ ! -s notes.md ]; then
+            echo "CHANGELOG.md has no '## $TAG' section."
+            exit 1
+          fi
+          case "$TAG" in
+            *-*) prerelease=true ;;
+            *) prerelease=false ;;
+          esac
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$TAG" \
+            --notes-file notes.md --prerelease="$prerelease"

@@ -50,4 +50,7 @@ pnpm check:package  # publint + are-the-types-wrong on the built package
 Maintainers release by bumping `version` in `package.json`, moving the `## Unreleased` entries in
 `CHANGELOG.md` under a new `## vX.Y.Z` heading, and pushing a matching `vX.Y.Z` tag. The release workflow
 checks that the tag matches `package.json`, runs the full check suite, publishes to npm through trusted
-publishing (with provenance), and creates a GitHub release from that `CHANGELOG.md` section.
+publishing (with provenance), and creates a GitHub release from that `CHANGELOG.md` section. No npm token
+is stored anywhere. A version with a `-` (for example `1.0.0-rc.1`) is published under the `next` dist-tag
+and marked as a pre-release, and it needs its own `## vX.Y.Z-rc.N` section. If a version is already on npm,
+for example when rerunning a release whose last step failed, the workflow skips the publish step.

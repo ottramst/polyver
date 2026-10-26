@@ -1,7 +1,7 @@
 {
   "name": "polyver",
-  "version": "0.0.0",
-  "description": "Compare package versions and evaluate VERS version ranges across ecosystems: npm, PyPI, Debian, RPM, Alpine, Maven and more. Zero dependencies.",
+  "version": "0.1.0",
+  "description": "Compare package versions and evaluate VERS version ranges across ecosystems: npm, PyPI, Debian, RPM, Alpine and more. Zero dependencies.",
   "keywords": [
     "vers",
     "purl",

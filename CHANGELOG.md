@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.1.0
+
 FEATURES:
 
 - VERS core following vers-spec Clause 5: `parseVers` (strict), `normalizeVers` (repairs non-canonical
@@ -13,6 +15,5 @@ FEATURES:
 
 NOTES:
 
-- Initial project setup
 - The package includes `THIRD_PARTY_NOTICES.md` for code adapted from pypa/packaging, node-semver and
   osv-scalibr.
