@@ -4,7 +4,8 @@
  * Reference: https://github.com/npm/node-semver (ISC), `classes/semver.js` and `classes/range.js`.
  * Versions are SemVer 2.0.0 with an optional leading `v`, at most 256 characters, and numeric core
  * parts no larger than `Number.MAX_SAFE_INTEGER`. Build metadata is ignored when comparing, as in
- * `semver.compare`.
+ * `semver.compare`. Numeric pre-release identifiers are compared exactly, as SemVer requires; node-semver
+ * converts them to numbers, so it treats `1.0.0-9007199254740993` and `1.0.0-9007199254740992` as equal.
  *
  * Native ranges are desugared as node-semver does (hyphen ranges, `~`, `^`, x-ranges, `*`), with two
  * differences that follow the vers-spec convention: an upper bound is written `<2.0.0` rather than

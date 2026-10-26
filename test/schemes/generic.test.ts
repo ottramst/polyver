@@ -183,6 +183,16 @@ describe('datetime', () => {
       '2024-01-01T00:00:00Z',
     ])
     expect(s.compare('2024-01-01T00:00:00Z', '2023-12-31T19:00:00-05:00')).toBe(0)
+  })
+
+  it('orders a leap second between its minute and the next', () => {
+    expectAscending('datetime', [
+      '2016-12-31T23:59:59.999Z',
+      '2016-12-31T23:59:60Z',
+      '2016-12-31T23:59:60.5Z',
+      '2017-01-01T00:00:00Z',
+    ])
+    expect(s.compare('2016-12-31T23:59:60Z', '2017-01-01T00:59:60+01:00')).toBe(0)
     expect(s.compare('2024-01-01T00:00:00Z', '2024-01-01T00:00:00.000Z')).toBe(0)
   })
 })
