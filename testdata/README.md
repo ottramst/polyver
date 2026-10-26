@@ -27,6 +27,11 @@ commits below; do not edit them by hand.
 | `osv-scalibr/semver-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/pypi-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/pypi-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with pypa/packaging) | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/debian-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/debian-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with dpkg) | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/alpine-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with apk-tools) | Apache-2.0 | `1ca96d6` |
+| `oracle/{deb,rpm,apk}-index.txt` | Version strings sampled from the Debian, Fedora and Alpine package indexes by `scripts/oracle/harvest.sh` (date and image in each header) | Facts from public package metadata | 2026-10-26 |
+| `oracle/{deb,rpm,apk}.txt`, `oracle/{deb,rpm,apk}-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs dpkg 1.22.22, rpm 6.0.2 and apk-tools 3.0.8 in digest-pinned containers (`scripts/oracle/images.env`) | MIT (our output) | see headers |
 | `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
 | `node-semver/{comparisons,equality,range-include,range-exclude,range-parse}.json` | node-semver `test/fixtures/*.js`, converted to JSON by `scripts/js-fixture-to-json.ts` | ISC | v7.8.5 (`6e05b76`) |
 | `packaging/LICENSE.BSD` | [pypa/packaging](https://github.com/pypa/packaging) (dual BSD-2-Clause / Apache-2.0) | BSD-2-Clause | 26.3 (`929fd4b`) |
@@ -39,6 +44,35 @@ vers-spec `7d0cc19` is the `main` branch after the v1.2.1 tag; it includes the f
 Where polyver deliberately gives a different result than a vendored case expects, the case is listed
 with the reason in [`test/support/divergences.ts`](../test/support/divergences.ts). It still runs and
 asserts polyver's result.
+
+## Oracle vectors
+
+`pnpm oracle <deb|rpm|apk>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt` from committed
+inputs only, so a rerun is byte-identical. Its inputs are:
+
+- hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
+  (Debian Policy §5.6.12, Fedora's versioning guidelines, the apk version format), not from any test
+  suite;
+- the index sample, refreshed with `pnpm oracle:harvest <eco>`;
+- grammar-based random versions and single-edit mutations from a fixed-seed PRNG
+  (`scripts/oracle/generate.ts`).
+
+Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`), and
+only pairs of valid versions are compared, because dpkg merely warns about some invalid versions and apk
+prints nothing for them.
+
+The generated pairs were checked against the GPL suites on 2026-10-26. A few trivial or textbook pairs
+occur there too: 2 for deb (`0`/`1`, `00`/`0`), 3 for apk (such as `9`/`8`), and 8 for rpm (the
+`~`/`^` examples from Fedora's versioning guidelines, such as `1.0~rc1`/`1.0`). This is the same bar
+as the osv-scalibr generated files.
+
+**apk-tools 2.x.** polyver follows apk-tools 3 (Alpine 3.23 and later). On the same inputs, apk-tools
+2.14.12 (`alpine:3.22`) differs in two ways:
+
+- validity: 2.x rejects a `~hash` and accepts some malformed versions, such as `1.0-r` and `a1`;
+- order: 109 of 3,168 pairs differ, all involving a `~hash` or a non-first component with a leading
+  zero. The latter occurs in real versions (59 of 932 sampled, mostly Perl modules); for example, 3.x
+  orders `0.002-r6 > 0.0.202605-r0` and 2.x the opposite.
 
 ## Excluded
 

@@ -31,9 +31,12 @@ pnpm check:package  # publint + are-the-types-wrong on the built package
    files copied from them. Fetch vendored files with `scripts/vendor-testdata.sh` (pin the commit there;
    it needs `curl`, Node.js and `python3`) and record where they came from in
    [testdata/README.md](testdata/README.md).
-3. If polyver deliberately disagrees with an upstream vector, add the case and the reason to
+3. For ecosystems with a command-line tool (deb, rpm, apk), regenerate the oracle vectors with Docker:
+   `pnpm oracle <eco>` (reads only committed inputs; byte-identical on rerun) and, to refresh the
+   real-world sample, `pnpm oracle:harvest <eco>`. Images are pinned in `scripts/oracle/images.env`.
+4. If polyver deliberately disagrees with an upstream vector, add the case and the reason to
    `test/support/divergences.ts` rather than skipping it.
-4. Never copy code from Renovate (AGPL-3.0) or other copyleft projects.
+5. Never copy code from Renovate (AGPL-3.0) or other copyleft projects.
 
 ## Pull requests
 
