@@ -62,9 +62,9 @@ only pairs of valid versions are compared, because dpkg merely warns about some 
 prints nothing for them.
 
 The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and
-`scripts/t/Dpkg_Version.t`, rpm's `rpmvercmp.at`, apk-tools' `version.data`) on 2026-10-26. Only two
-trivial apk pairs occur there too (`1.0`/`1.1` and `8`/`9`). This is the same bar as the osv-scalibr
-generated files.
+`scripts/t/Dpkg_Version.t`, rpm's `rpmvercmp.at`, apk-tools' `version.data`) on 2026-10-26. Only a few
+trivial pairs occur there too: `1.0`/`1.1` and `8`/`9` for apk, and pairs of `0`, `00`, `1` and `1:0`
+for deb. None occur for rpm. This is the same bar as the osv-scalibr generated files.
 
 **apk-tools 2.x.** polyver follows apk-tools 3 (Alpine 3.23 and later). On the same inputs, apk-tools
 2.14.12 (`alpine:3.22`) differs in two ways:
