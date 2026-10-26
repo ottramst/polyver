@@ -156,7 +156,11 @@ function specifierSet(text: string, range: string): VersionSet {
 
   if (version.endsWith('.*')) {
     const prefix = parse(version.slice(0, -2))
-    if (!prefix || (op !== '==' && op !== '!=') || /[^0-9.!]/.test(version.slice(0, -2))) {
+    if (
+      !prefix ||
+      (op !== '==' && op !== '!=') ||
+      /[^0-9.!]/.test(version.slice(0, -2).replace(/^v/i, ''))
+    ) {
       throw syntaxError(
         range,
         `${JSON.stringify(text)}: a wildcard needs == or != and a release prefix`,
@@ -167,8 +171,11 @@ function specifierSet(text: string, range: string): VersionSet {
   }
   const parsed = parse(version)
   if (!parsed) throw invalidVersion('pypi', version)
+  if (parsed.local && op !== '==' && op !== '!=') {
+    throw syntaxError(range, `${JSON.stringify(text)}: a local version needs == or !=`)
+  }
   if (op === '~=') {
-    if (parsed.release.length < 2 || parsed.local) {
+    if (parsed.release.length < 2) {
       throw syntaxError(range, `${JSON.stringify(text)}: ~= needs a release with two or more parts`)
     }
     const prefix = { ...parsed, release: parsed.release.slice(0, -1) }
@@ -187,12 +194,17 @@ function invert(set: VersionSet): VersionSet {
 }
 
 function fromNative(range: string): Constraint[] {
+  const alternatives = range.split('||')
   const set = union(
-    range.split('||').map((alt) => {
+    alternatives.map((alt) => {
       const specs = alt
         .split(',')
         .map((s) => s.trim())
         .filter((s) => s !== '')
+      // Only a wholly empty specifier set matches every version; an empty `||` alternative is a typo.
+      if (specs.length === 0 && alternatives.length > 1) {
+        throw syntaxError(range, 'empty alternative')
+      }
       return specs.length === 0
         ? ALL
         : intersect(

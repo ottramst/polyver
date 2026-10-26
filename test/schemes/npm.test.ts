@@ -33,6 +33,10 @@ describe('npm', () => {
     expect(s.compare('1.2.3-beta', '1.2.3')).toBeLessThan(0)
   })
 
+  it('compares large numeric pre-release identifiers exactly', () => {
+    expect(s.compare('1.0.0-9007199254740993', '1.0.0-9007199254740992')).toBeGreaterThan(0)
+  })
+
   it('throws on invalid versions', () => {
     expect(() => s.compare('latest', '1.0.0')).toThrow(VersError)
   })
@@ -48,6 +52,30 @@ describe('npm', () => {
     }
     expect(used).toBeGreaterThan(70)
   })
+
+  it.each([
+    ['=v1.2.3', 'vers:npm/1.2.3'],
+    ['==1.2', 'vers:npm/>=1.2.0|<1.3.0'],
+    ['<0.x', 'error INVALID_CONSTRAINTS'],
+    ['<0.0', 'error INVALID_CONSTRAINTS'],
+    ['<0.0.0', 'vers:npm/<0.0.0'],
+  ])('converts the native range %j to %s', (range, expected) => {
+    expect(outcome(range)).toBe(expected)
+  })
+
+  // node-semver accepts `[v=]*` before a partial version but only `v` before a full one.
+  it.each([
+    '==1.2.3',
+    'v=1.2.3',
+    '=v=1.2.3',
+    'vv1.2.3',
+    '= =1.2.3',
+    '>==1.2.3',
+    '>= =1.2.3',
+    '> = 1',
+  ])('rejects the native range %j like node-semver', (range) =>
+    expect(outcome(range)).toBe('error INVALID_SYNTAX'),
+  )
 })
 
 // node-semver's own test fixtures (testdata/node-semver), restricted to its default options: loose
@@ -106,8 +134,6 @@ describe('npm node-semver fixtures', () => {
       ([, v]) => typeof v === 'string' && s.isValid(v) && isRelease(v),
     ),
   )('%j excludes %s', (range, version) => {
-    expect(
-      outcome(range) !== 'vers:npm/*' && contains(fromNative('npm', range), version as string),
-    ).toBe(false)
+    expect(contains(fromNative('npm', range), version as string)).toBe(false)
   })
 })

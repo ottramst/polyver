@@ -130,6 +130,15 @@ describe('normalizeVers', () => {
     ['vers:nosuchtype/1.0', 'UNSUPPORTED_SCHEME'],
     // The same version with different comparators cannot be repaired without guessing.
     ['vers:npm/1.0.0|>=1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/>=1.0.0|1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/1.0.0|>1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/>1.0.0|1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/1.0.0|<1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/<1.0.0|1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/<=1.0.0|<1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/>1.0.0|>=1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/1.0.0|!=1.0.0', 'INVALID_CONSTRAINTS'],
+    ['vers:npm/1.0.0+a|>1.0.0+b', 'INVALID_CONSTRAINTS'],
   ])('rejects %s with %s', (input, code) => {
     expect(errorCode(() => normalizeVers(input))).toBe(code)
   })
@@ -173,6 +182,8 @@ describe('stringifyVers', () => {
       },
       'INVALID_CONSTRAINTS',
     ],
+    // Not a VersRange, but JavaScript callers can pass one.
+    [{ type: 'npm' } as unknown as VersRange, 'INVALID_SYNTAX'],
   ])('rejects %j with %s', (range, code) => {
     expect(errorCode(() => stringifyVers(range))).toBe(code)
   })

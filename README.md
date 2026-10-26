@@ -43,12 +43,12 @@ with two comparators.
 
 Every function throws a `VersError` with a `code`:
 
-| Code                  | Meaning                                                           |
-| --------------------- | ----------------------------------------------------------------- |
-| `INVALID_SYNTAX`      | Not a syntactically valid, canonical VERS string                  |
-| `INVALID_VERSION`     | A version is not valid in the range's scheme                      |
-| `INVALID_CONSTRAINTS` | Unsorted or duplicate versions, or an invalid comparator sequence |
-| `UNSUPPORTED_SCHEME`  | polyver does not implement the VERS type                          |
+| Code                  | Meaning                                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------------------- |
+| `INVALID_SYNTAX`      | Not a syntactically valid, canonical VERS string                                                          |
+| `INVALID_VERSION`     | A version is not valid in the range's scheme                                                              |
+| `INVALID_CONSTRAINTS` | Unsorted or duplicate versions, an invalid comparator sequence, or a native range that matches no version |
+| `UNSUPPORTED_SCHEME`  | polyver does not implement the VERS type                                                                  |
 
 ### Native ranges
 
