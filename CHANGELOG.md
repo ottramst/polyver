@@ -14,3 +14,5 @@ FEATURES:
 NOTES:
 
 - Initial project setup
+- The package includes `THIRD_PARTY_NOTICES.md` for code adapted from pypa/packaging, node-semver and
+  osv-scalibr.

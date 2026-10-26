@@ -29,7 +29,7 @@ pnpm check:package  # publint + are-the-types-wrong on the built package
 1. Follow the ecosystem's reference implementation, not another port. Link it at the top of the file.
 2. Add test vectors from a permissive source or a reference-tool oracle, never from GPL test suites or
    files copied from them. Fetch vendored files with `scripts/vendor-testdata.sh` (pin the commit there;
-   it needs `curl`, Node.js and `python3`) and record where they came from in
+   it needs `curl`, Node.js 22.18 or newer for its `.ts` helpers, and `python3`) and record where they came from in
    [testdata/README.md](testdata/README.md).
 3. For ecosystems with a command-line tool (deb, rpm, apk), regenerate the oracle vectors with Docker:
    `pnpm oracle <eco>` (reads only committed inputs; byte-identical on rerun) and, to refresh the
