@@ -87,7 +87,8 @@ describe('pypi fromNative', () => {
     ['>=1.0,<1.5||>=1.2,<2.0', 'vers:pypi/>=1.0|<2.0'],
     ['<1.0||>1.0', 'vers:pypi/!=1.0'],
     ['', 'vers:pypi/*'],
-    ['>=1.0||', 'vers:pypi/*'],
+    ['==v1.*', 'vers:pypi/>=1.dev0|<2.dev0'],
+    ['==1.0+local', 'vers:pypi/1.0+local'],
   ])('%j -> %s', (native, expected) => {
     expect(stringifyVers(fromNative('pypi', native))).toBe(expected)
   })
@@ -101,6 +102,11 @@ describe('pypi fromNative', () => {
     ['===1.0', 'INVALID_SYNTAX'],
     ['~=1', 'INVALID_SYNTAX'],
     ['~=1.0+local', 'INVALID_SYNTAX'],
+    ['<1.0+local', 'INVALID_SYNTAX'],
+    ['>=1.0+local', 'INVALID_SYNTAX'],
+    ['>=1.0||', 'INVALID_SYNTAX'],
+    ['||>=1.0', 'INVALID_SYNTAX'],
+    ['>=1.0||,', 'INVALID_SYNTAX'],
     ['>=1.*', 'INVALID_SYNTAX'],
     ['==1.0a1.*', 'INVALID_SYNTAX'],
     ['>=not-a-version', 'INVALID_VERSION'],
@@ -113,6 +119,17 @@ describe('pypi fromNative', () => {
     } catch (e) {
       expect((e as VersError).code).toBe(code)
     }
+  })
+
+  it('throws a VersError for a non-string range', () => {
+    expect(() => fromNative('pypi', undefined as unknown as string)).toThrow(VersError)
+  })
+
+  it('intersects many != specifiers quickly', () => {
+    const native = Array.from({ length: 5000 }, (_, i) => `!=${i}.0`).join(',')
+    const start = performance.now()
+    expect(fromNative('pypi', native).constraints).toHaveLength(5000)
+    expect(performance.now() - start).toBeLessThan(2000)
   })
 
   it('agrees with PEP 440 prefix matching for ==X.*', () => {

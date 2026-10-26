@@ -91,23 +91,28 @@ export function union(sets: readonly VersionSet[], compare: Compare): VersionSet
   return normalize(sets.flat(), compare)
 }
 
-export function intersect(sets: readonly VersionSet[], compare: Compare): VersionSet {
-  let result: VersionSet = ALL
-  for (const set of sets) {
-    const next: Interval[] = []
-    for (const a of result) {
-      for (const b of set) {
-        next.push(
-          bounds(
-            compareLo(a.lo, b.lo, compare) >= 0 ? a.lo : b.lo,
-            compareHi(a.hi, b.hi, compare) <= 0 ? a.hi : b.hi,
-          ),
-        )
-      }
-    }
-    result = normalize(next, compare)
+function flip(b: Bound): Bound {
+  return { version: b.version, inclusive: !b.inclusive }
+}
+
+// The gaps around and between the intervals of a normalized set.
+function complement(set: VersionSet): VersionSet {
+  if (set.length === 0) return ALL
+  const out: Interval[] = []
+  let lo: Bound | undefined
+  for (const i of set) {
+    if (i.lo) out.push(bounds(lo, flip(i.lo)))
+    if (!i.hi) return out
+    lo = flip(i.hi)
   }
-  return result
+  out.push(bounds(lo, undefined))
+  return out
+}
+
+// The complement of the union of the complements, so that many `!=` constraints stay O(n log n).
+export function intersect(sets: readonly VersionSet[], compare: Compare): VersionSet {
+  const gaps = sets.flatMap((set) => complement(normalize(set, compare)))
+  return complement(normalize(gaps, compare))
 }
 
 /**

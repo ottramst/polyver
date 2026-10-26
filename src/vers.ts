@@ -390,6 +390,7 @@ export function fromNative(type: string, native: string): VersRange {
   if (!scheme.fromNative) {
     throw new VersError('UNSUPPORTED_SCHEME', `converting native ${type} ranges is not supported`)
   }
+  if (typeof native !== 'string') throw syntaxError('a native range must be a string')
   const constraints = scheme.fromNative(native)
   validate(type, constraints)
   return { type, constraints }

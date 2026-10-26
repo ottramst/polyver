@@ -10,7 +10,8 @@
  * Native ranges are desugared as node-semver does (hyphen ranges, `~`, `^`, x-ranges, `*`), with two
  * differences that follow the vers-spec convention: an upper bound is written `<2.0.0` rather than
  * node-semver's `<2.0.0-0`, and node-semver's rule that excludes pre-releases outside the bounds' own
- * `major.minor.patch` is not applied, because VERS ranges are plain intervals.
+ * `major.minor.patch` is not applied, because VERS ranges are plain intervals. A few unusual forms
+ * that node-semver accepts are rejected, such as more than one `+` in build metadata or `>= =1`.
  */
 
 import { VersError } from '../errors.ts'
@@ -54,13 +55,15 @@ interface Partial {
   readonly minor?: number
   readonly patch?: number
   readonly prerelease?: string
+  /** Any `v` and `=` characters before the version, when they are not just `v`. */
+  readonly prefix?: string
 }
 
 const NUMERIC = '0|[1-9]\\d*'
 const XID = `${NUMERIC}|[xX*]`
 const PRERELEASE_ID = `(?:${NUMERIC}|\\d*[a-zA-Z-][a-zA-Z0-9-]*)`
 const PARTIAL = new RegExp(
-  `^[v=]*(${XID})(?:\\.(${XID})(?:\\.(${XID})(?:-(${PRERELEASE_ID}(?:\\.${PRERELEASE_ID})*))?)?)?$`,
+  `^([v=]*)(${XID})(?:\\.(${XID})(?:\\.(${XID})(?:-(${PRERELEASE_ID}(?:\\.${PRERELEASE_ID})*))?)?)?$`,
 )
 // node-semver removes build metadata from a comparator before parsing it.
 const BUILD = /\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*/
@@ -72,7 +75,7 @@ function syntaxError(range: string, detail: string): VersError {
 function parsePartial(text: string, range: string): Partial {
   const m = PARTIAL.exec(text.replace(BUILD, ''))
   if (!m) throw syntaxError(range, `cannot parse ${JSON.stringify(text)}`)
-  const parts = [m[1], m[2], m[3]].map((part) => {
+  const parts = [m[2], m[3], m[4]].map((part) => {
     if (part === undefined || /^[xX*]$/.test(part)) return undefined
     if (compareDigits(part, MAX_SAFE_DIGITS) > 0) throw syntaxError(range, `${part} is too large`)
     return Number(part)
@@ -88,7 +91,8 @@ function parsePartial(text: string, range: string): Partial {
     ...(minor !== undefined && { minor }),
     ...(patch !== undefined && { patch }),
     // A pre-release after a wildcard, as in `1.x.x-alpha`, is ignored.
-    ...(m[4] !== undefined && wildcard === -1 && { prerelease: m[4] }),
+    ...(m[5] !== undefined && wildcard === -1 && { prerelease: m[5] }),
+    ...(m[1] !== '' && m[1] !== 'v' && { prefix: m[1] }),
   }
 }
 
@@ -122,10 +126,13 @@ function tilde({ major: M, minor: m, patch: p, prerelease }: Partial): VersionSe
   return between(v(M, m, p ?? 0, prerelease), v(M, m + 1, 0))
 }
 
-function xrange(op: string, partial: Partial): VersionSet {
+function xrange(op: string, partial: Partial, range: string): VersionSet {
   const { major: M, minor: m, patch: p, prerelease } = partial
   if (M === undefined) return op === '<' || op === '>' ? [] : ALL
   if (m !== undefined && p !== undefined) {
+    if (partial.prefix !== undefined) {
+      throw syntaxError(range, `${JSON.stringify(partial.prefix)} before a full version`)
+    }
     return cmp(op === '' ? '=' : (op as Comparator), v(M, m, p, prerelease))
   }
   switch (op) {
@@ -134,6 +141,8 @@ function xrange(op: string, partial: Partial): VersionSet {
     case '>=':
       return cmp('>=', v(M, m ?? 0, 0))
     case '<':
+      // node-semver's `<0.0.0-0`, which matches nothing.
+      if (M === 0 && !m) return []
       return cmp('<', v(M, m ?? 0, 0))
     case '<=':
       return cmp('<', m === undefined ? v(M + 1, 0, 0) : v(M, m + 1, 0))
@@ -166,14 +175,14 @@ function parseAlternative(text: string, range: string): VersionSet {
   if (h) return hyphen(parsePartial(h[1] as string, range), parsePartial(h[2] as string, range))
   if (alt === '') return ALL
   const sets = alt
-    .replace(/(~>?|\^|[<>]=?|=)\s+/g, '$1')
+    .replace(/(~>?|\^|[<>]=?|=)\s+(?!=)/g, '$1')
     .split(/\s+/)
     .map((token) => {
       const [, op = '', rest] = COMPARATOR.exec(token) as RegExpExecArray
       const partial = parsePartial(rest as string, range)
       if (op === '^') return caret(partial)
       if (op.startsWith('~')) return tilde(partial)
-      return xrange(op === '=' ? '' : op, partial)
+      return xrange(op === '=' ? '' : op, partial, range)
     })
   return intersect(sets, compare)
 }
