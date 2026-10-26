@@ -27,6 +27,15 @@
 1.0_pre1
 1.0_rc
 1.0_rc1
+1.0_rc_p
+1.0_rc1_p
+1.0_rc_p1
+1.0_rc_cvs
+1.0_alpha_p
+1.0_alpha0
+1.0_p_p
+1.0_p_p1
+1.0_p0_p1
 1.0_rc1-r1
 1.0_cvs
 1.0_svn1
@@ -43,7 +52,7 @@
 1.0~abc124
 1.0~abc123-r1
 1.0_git20240101~abcdef-r2
-1.0bc
+2.5xy
 1.0A
 1.0_foo
 1.0-r

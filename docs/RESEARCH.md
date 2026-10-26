@@ -81,11 +81,13 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 
 ## Findings from the oracles (2026-10-26)
 
-- dpkg 1.22 reads the epoch with `strtol`, so `+2:1` is valid and equal to `2:1`.
+- dpkg 1.22 reads the epoch with `strtol`, so `+2:1` is valid and equal to `2:1`, and so is `-0:1`;
+  a negative epoch such as `-1:1` is invalid.
 - rpm 6.0 (`rpm.ver`): a missing release sorts before any release, even one starting with `~`
   (`1.0 < 1.0-~1`); rpm accepts any string as a version.
 - apk-tools 3.0: a missing suffix number or revision sorts before an explicit 0 (`1.0 < 1.0-r0`,
-  `_svn < _svn0`), and more components sort higher (`1.0 < 1.0.0`). apk-tools 2.14 differs on `~hash`
+  `_svn < _svn0`), unless a post-release suffix follows the missing number (`1.0_rc_p > 1.0_rc1`), and
+  more components sort higher (`1.0 < 1.0.0`). apk-tools 2.14 differs on `~hash`
   validity and on components with leading zeros; see [testdata/README.md](../testdata/README.md#oracle-vectors).
 
 ## Licensing of test data

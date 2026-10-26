@@ -29,6 +29,15 @@ valid 1.0_beta1
 valid 1.0_pre1
 valid 1.0_rc
 valid 1.0_rc1
+valid 1.0_rc_p
+valid 1.0_rc1_p
+valid 1.0_rc_p1
+valid 1.0_rc_cvs
+valid 1.0_alpha_p
+valid 1.0_alpha0
+valid 1.0_p_p
+valid 1.0_p_p1
+valid 1.0_p0_p1
 valid 1.0_rc1-r1
 valid 1.0_cvs
 valid 1.0_svn1
@@ -45,7 +54,7 @@ valid 1.0~abc123
 valid 1.0~abc124
 valid 1.0~abc123-r1
 valid 1.0_git20240101~abcdef-r2
-invalid 1.0bc
+invalid 2.5xy
 invalid 1.0A
 invalid 1.0_foo
 invalid 1.0-r
@@ -3110,6 +3119,7 @@ invalid 2..01_rc10-r1
 valid 99.1.0.2_cvs_cvs
 invalid 2.1~rc10-r1
 valid 8
+invalid -r19
 valid 00.9b
 invalid 00-9b
 valid 2.9.9.0_git01
@@ -3625,6 +3635,7 @@ invalid 10.01~cvs_p9
 valid 10.01_cvs_p9_p1
 valid 0.01.50370-r0
 invalid 0.01.50370-r
+invalid -r10.01.50370-r0
 invalid 00.35013.98146~pre1_git
 invalid 00.35013.98146_pre1_git.01
 invalid 00.01.10.10_rc10_h

@@ -3,7 +3,8 @@
  *
  * Reference: Debian Policy §5.6.12 (https://www.debian.org/doc/debian-policy/ch-controlfields.html#version),
  * which defines the comparison, and the validity rules that `dpkg --validate-version` applies. Tested
- * against dpkg 1.22 as an oracle (testdata/oracle). A missing revision compares equal to `0`.
+ * against dpkg 1.22 as an oracle (testdata/oracle). A missing revision compares equal to `0`. dpkg
+ * also trims surrounding whitespace, which VERS does not allow, so it is rejected here.
  */
 import type { Scheme } from './types.ts'
 import { compareDigits, invalidVersion } from './util.ts'
@@ -23,12 +24,13 @@ function parse(version: string): DebVersion | undefined {
   const dash = rest.lastIndexOf('-')
   const upstream = dash === -1 ? rest : rest.slice(0, dash)
   const revision = dash === -1 ? '' : rest.slice(dash + 1)
-  // dpkg reads the epoch with strtol, so it accepts a leading `+`.
-  if (!/^\+?\d+$/.test(epoch) || compareDigits(epoch.replace('+', ''), MAX_EPOCH) > 0)
-    return undefined
+  // dpkg reads the epoch with strtol, so it accepts a sign, and rejects only a negative value.
+  const digits = epoch.replace(/^[+-]/, '')
+  if (!/^[+-]?\d+$/.test(epoch) || compareDigits(digits, MAX_EPOCH) > 0) return undefined
+  if (epoch.startsWith('-') && /[1-9]/.test(digits)) return undefined
   if (!/^\d[A-Za-z0-9.+~:-]*$/.test(upstream)) return undefined
   if (dash !== -1 && !/^[A-Za-z0-9.+~]+$/.test(revision)) return undefined
-  return { epoch: epoch.replace('+', ''), upstream, revision }
+  return { epoch: digits, upstream, revision }
 }
 
 // Sort weight of a character in a non-digit part: `~` before the end of the part, the end before

@@ -107,9 +107,8 @@ function mutate(v: string): string {
   }
 }
 
-// Shell-safe, line-safe candidates: no whitespace, `#`, quotes, or a leading `-` (read as an option).
-const usable = (v: string): boolean =>
-  v !== '' && /^[\x21-\x7e]+$/.test(v) && !/[#'"\\`$]/.test(v) && !v.startsWith('-')
+// Shell-safe, line-safe candidates: no whitespace, `#` or quotes.
+const usable = (v: string): boolean => v !== '' && /^[\x21-\x7e]+$/.test(v) && !/[#'"\\`$]/.test(v)
 
 const cases = lines(`scripts/oracle/cases/${eco}.txt`)
 const index = lines(`testdata/oracle/${eco}-index.txt`)

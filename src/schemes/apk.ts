@@ -5,6 +5,7 @@
  * with `apk version -t` and `apk version -c` as an oracle (testdata/oracle), and the osv-scalibr
  * comparator (https://github.com/google/osv-scalibr/blob/main/semantic/version-alpine.go, Apache-2.0).
  * apk-tools 2.x (Alpine 3.22 and older) differs for `~hash` and for components with leading zeros.
+ * Numbers have unlimited precision; apk-tools wraps them at 2^64.
  *
  * A version is `number(.number)*[letter](_suffix[number])*[~hash][-rN]`, for example `1.2.3a_rc1-r2`.
  * Suffixes sort `_alpha < _beta < _pre < _rc < (none) < _cvs < _svn < _git < _hg < _p`.
@@ -48,7 +49,7 @@ function compareNumber(a: string, b: string, index: number): number {
   return compareDigits(a, b)
 }
 
-// A missing suffix number or revision sorts before any number, even 0: `1.0 < 1.0-r0`.
+// A missing revision sorts before any number, even 0: `1.0 < 1.0-r0`.
 function compareOptional(a: string, b: string): number {
   if (a === '' || b === '') return Number(a !== '') - Number(b !== '')
   return compareDigits(a, b)
@@ -65,7 +66,15 @@ function compareParsed(a: ApkVersion, b: ApkVersion): number {
   for (let i = 0; i < Math.max(a.suffixes.length, b.suffixes.length); i++) {
     const [x, xn] = a.suffixes[i] ?? [NO_SUFFIX, '']
     const [y, yn] = b.suffixes[i] ?? [NO_SUFFIX, '']
-    const d = x - y || compareOptional(xn, yn)
+    if (x !== y) return x - y
+    if ((xn === '') !== (yn === '')) {
+      // apk-tools compares the side without a number by its next token: a post-release suffix such
+      // as `_p` makes it greater (`1.0_rc_p > 1.0_rc1`), anything else makes it smaller.
+      const next = (xn === '' ? a : b).suffixes[i + 1]?.[0]
+      const greater = next !== undefined && next > NO_SUFFIX
+      return (greater ? 1 : -1) * (xn === '' ? 1 : -1)
+    }
+    const d = compareOptional(xn, yn)
     if (d !== 0) return d
   }
   if (a.hash !== b.hash) return a.hash < b.hash ? -1 : 1

@@ -25,13 +25,13 @@ case "$eco" in
     # dpkg only warns about some invalid versions when comparing, so validate first.
     script='
       while IFS= read -r v; do
-        if dpkg --validate-version "$v" 2>/dev/null; then echo "valid $v"; else echo "invalid $v"; fi
+        if dpkg --validate-version -- "$v" 2>/dev/null; then echo "valid $v"; else echo "invalid $v"; fi
       done </in/versions.txt >/out/validity.txt
       sed -n "s/^valid //p" /out/validity.txt >/tmp/valid
       awk "NR == FNR { ok[\$0] = 1; next } (\$1 in ok) && (\$2 in ok)" /tmp/valid /in/pairs.txt |
         while IFS=" " read -r a b; do
-          if dpkg --compare-versions "$a" lt "$b"; then op="<"
-          elif dpkg --compare-versions "$a" eq "$b"; then op="="
+          if dpkg --compare-versions -- "$a" lt "$b"; then op="<"
+          elif dpkg --compare-versions -- "$a" eq "$b"; then op="="
           else op=">"; fi
           echo "$a $op $b"
         done >/out/pairs.txt'
@@ -65,11 +65,11 @@ case "$eco" in
     tool='apk --version'
     script='
       while IFS= read -r v; do
-        if apk version -c "$v" >/dev/null; then echo "valid $v"; else echo "invalid $v"; fi
+        if apk version -c -- "$v" >/dev/null; then echo "valid $v"; else echo "invalid $v"; fi
       done </in/versions.txt >/out/validity.txt
       sed -n "s/^valid //p" /out/validity.txt >/tmp/valid
       awk "NR == FNR { ok[\$0] = 1; next } (\$1 in ok) && (\$2 in ok)" /tmp/valid /in/pairs.txt |
-        while IFS=" " read -r a b; do echo "$a $(apk version -t "$a" "$b") $b"; done >/out/pairs.txt'
+        while IFS=" " read -r a b; do echo "$a $(apk version -t -- "$a" "$b") $b"; done >/out/pairs.txt'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2

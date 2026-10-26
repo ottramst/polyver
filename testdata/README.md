@@ -51,8 +51,8 @@ asserts polyver's result.
 inputs only, so a rerun is byte-identical. Its inputs are:
 
 - hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
-  (Debian Policy §5.6.12, Fedora's versioning guidelines, the apk version format), not from any test
-  suite;
+  (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format),
+  not from any test suite;
 - the index sample, refreshed with `pnpm oracle:harvest <eco>`;
 - grammar-based random versions and single-edit mutations from a fixed-seed PRNG
   (`scripts/oracle/generate.ts`).
@@ -61,10 +61,10 @@ Each version is first checked for validity (`dpkg --validate-version`, `apk vers
 only pairs of valid versions are compared, because dpkg merely warns about some invalid versions and apk
 prints nothing for them.
 
-The generated pairs were checked against the GPL suites on 2026-10-26. A few trivial or textbook pairs
-occur there too: 2 for deb (`0`/`1`, `00`/`0`), 3 for apk (such as `9`/`8`), and 8 for rpm (the
-`~`/`^` examples from Fedora's versioning guidelines, such as `1.0~rc1`/`1.0`). This is the same bar
-as the osv-scalibr generated files.
+The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and
+`scripts/t/Dpkg_Version.t`, rpm's `rpmvercmp.at`, apk-tools' `version.data`) on 2026-10-26. Only two
+trivial apk pairs occur there too (`1.0`/`1.1` and `8`/`9`). This is the same bar as the osv-scalibr
+generated files.
 
 **apk-tools 2.x.** polyver follows apk-tools 3 (Alpine 3.23 and later). On the same inputs, apk-tools
 2.14.12 (`alpine:3.22`) differs in two ways:

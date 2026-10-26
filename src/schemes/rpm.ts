@@ -9,7 +9,8 @@
  * Segments of letters or digits are compared one by one and other characters only separate them;
  * `~` sorts before everything (`1.0~rc1 < 1.0`) and `^` sorts after the end of a string but before any
  * further segment (`1.0 < 1.0^git1 < 1.0.1`). A missing epoch is 0, and a missing release sorts
- * before any release (`1.0 < 1.0-~1 < 1.0-1`).
+ * before any release (`1.0 < 1.0-~1 < 1.0-1`). rpm accepts any string, but a valid version here is
+ * printable ASCII without spaces, which is what RPM packages use.
  */
 import type { Scheme } from './types.ts'
 import { compareDigits, invalidVersion } from './util.ts'
@@ -39,7 +40,7 @@ function isAlpha(c: string): boolean {
 }
 
 /** Compares two version or release strings segment by segment. */
-export function rpmvercmp(a: string, b: string): number {
+function rpmvercmp(a: string, b: string): number {
   if (a === b) return 0
   let i = 0
   let j = 0
