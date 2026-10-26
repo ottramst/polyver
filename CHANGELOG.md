@@ -1,5 +1,14 @@
 ## Unreleased
 
+## v0.1.1
+
+NOTES:
+
+- The README no longer says polyver is unpublished, and it now covers installation and how to verify
+  provenance.
+- Releases are now published from GitHub Actions through npm trusted publishing, with provenance. v0.1.0
+  was published by hand and has no provenance.
+
 ## v0.1.0
 
 FEATURES:
