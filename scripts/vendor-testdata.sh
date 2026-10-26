@@ -7,6 +7,8 @@ cd "$(dirname "$0")/.."
 
 VERS_SPEC=7d0cc1914aa921ade2a68ed83640fbc3f9701e40
 OSV_SCALIBR=1ca96d6fb34c58289978fbf732cac83281b962c4
+NODE_SEMVER=6e05b7637396ac66522cff8731f07cfe0ef49a29 # v7.8.5
+PACKAGING=929fd4b1410ac7ef61ef3f45b2f5d7e87711a9b5 # 26.3
 
 fetch() { # <repo> <commit> <path> <dest>
   mkdir -p "$(dirname "$4")"
@@ -30,6 +32,20 @@ for f in \
 done
 
 fetch google/osv-scalibr "$OSV_SCALIBR" LICENSE testdata/osv-scalibr/LICENSE
-for f in semver-versions.txt; do
+for f in semver-versions.txt pypi-versions.txt pypi-versions-generated.txt; do
   fetch google/osv-scalibr "$OSV_SCALIBR" "semantic/testdata/$f" "testdata/osv-scalibr/$f"
 done
+
+# node-semver fixtures are CommonJS modules; store them as JSON.
+fetch npm/node-semver "$NODE_SEMVER" LICENSE testdata/node-semver/LICENSE
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+for f in comparisons equality range-include range-exclude range-parse; do
+  fetch npm/node-semver "$NODE_SEMVER" "test/fixtures/$f.js" "$tmp/$f.js"
+  node scripts/js-fixture-to-json.ts "$tmp/$f.js" "testdata/node-semver/$f.json"
+done
+
+# pypa/packaging's version tests are Python; extract the vectors without running them.
+fetch pypa/packaging "$PACKAGING" LICENSE.BSD testdata/packaging/LICENSE.BSD
+fetch pypa/packaging "$PACKAGING" tests/test_version.py "$tmp/test_version.py"
+python3 -I scripts/extract-packaging-vectors.py "$tmp/test_version.py" testdata/packaging/versions.json

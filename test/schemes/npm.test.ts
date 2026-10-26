@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { getScheme, type Scheme, VersError } from '../../src/index.ts'
-import { loadComparisonPairs } from '../support/vectors.ts'
+import {
+  contains,
+  fromNative,
+  getScheme,
+  type Scheme,
+  stringifyVers,
+  VersError,
+} from '../../src/index.ts'
+import { loadComparisonPairs, readTestdata } from '../support/vectors.ts'
 
 const s = getScheme('npm') as Scheme
 
@@ -40,5 +47,67 @@ describe('npm', () => {
       )
     }
     expect(used).toBeGreaterThan(70)
+  })
+})
+
+// node-semver's own test fixtures (testdata/node-semver), restricted to its default options: loose
+// parsing and includePrerelease are not npm VERS semantics.
+type Fixture = [string, string | null, unknown?]
+
+function fixtures(name: string): Fixture[] {
+  return (JSON.parse(readTestdata(`node-semver/${name}.json`)) as Fixture[]).filter(
+    ([, , options]) => {
+      if (options === undefined || options === false || options === null) return true
+      return typeof options === 'object' && !Object.values(options as object).some(Boolean)
+    },
+  )
+}
+
+function outcome(range: string): string {
+  try {
+    return stringifyVers(fromNative('npm', range))
+  } catch (e) {
+    if (e instanceof VersError) return `error ${e.code}`
+    throw e
+  }
+}
+
+describe('npm node-semver fixtures', () => {
+  it.each(fixtures('comparisons'))('%s > %s', (a, b) => {
+    expect(s.compare(a, b as string)).toBeGreaterThan(0)
+    expect(s.compare(b as string, a)).toBeLessThan(0)
+  })
+
+  it.each(fixtures('equality').filter(([a, b]) => s.isValid(a) && s.isValid(b as string)))(
+    '%s == %s',
+    (a, b) => expect(s.compare(a, b as string)).toBe(0),
+  )
+
+  // The fixture gives node-semver's desugared form; both must convert to the same VERS. node-semver
+  // writes upper bounds as `<X-0`, polyver as `<X`.
+  it.each(fixtures('range-parse'))('fromNative(%j) matches node-semver %j', (range, desugared) => {
+    if (desugared === null) {
+      expect(outcome(range)).toMatch(/^error /)
+    } else if (desugared === '<0.0.0-0') {
+      // node-semver's "null set": VERS cannot express a range that matches nothing.
+      expect(outcome(range)).toBe('error INVALID_CONSTRAINTS')
+    } else {
+      expect(outcome(range)).toBe(outcome(desugared.replace(/<(\S+)-0\b/g, '<$1')))
+    }
+  })
+
+  const isRelease = (version: string): boolean => !/^v?\d+\.\d+\.\d+-/.test(version)
+  it.each(fixtures('range-include').filter(([, v]) => isRelease(v as string)))(
+    '%j includes %s',
+    (range, version) => expect(contains(fromNative('npm', range), version as string)).toBe(true),
+  )
+  it.each(
+    fixtures('range-exclude').filter(
+      ([, v]) => typeof v === 'string' && s.isValid(v) && isRelease(v),
+    ),
+  )('%j excludes %s', (range, version) => {
+    expect(
+      outcome(range) !== 'vers:npm/*' && contains(fromNative('npm', range), version as string),
+    ).toBe(false)
   })
 })

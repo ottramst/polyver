@@ -7,7 +7,7 @@ across ecosystems, in JavaScript and TypeScript. Zero dependencies; runs in Node
 > ecosystem schemes are being added (see [Supported schemes](#supported-schemes)).
 
 ```ts
-import { contains, getScheme, normalizeVers, parseVers, stringifyVers, VersError } from 'polyver'
+import { contains, fromNative, getScheme, normalizeVers, parseVers, stringifyVers } from 'polyver'
 
 contains('vers:npm/>=1.2.3|<2.0.0', '1.4.0') // true
 contains('vers:npm/<1.0.0|>=2.0.0', '1.5.0') // false
@@ -16,6 +16,10 @@ parseVers('vers:npm/>=1.0.0|<2.0.0')
 // { type: 'npm', constraints: [{ comparator: '>=', version: '1.0.0' }, { comparator: '<', version: '2.0.0' }] }
 
 getScheme('semver')?.compare('1.0.0-rc.1', '1.0.0') // < 0
+
+// Native range syntax to VERS
+stringifyVers(fromNative('npm', '^1.1.7 || >= 2.0.1')) // 'vers:npm/>=1.1.7|<2.0.0|>=2.0.1'
+stringifyVers(fromNative('pypi', '>=1.0,!=1.5,<2.0')) // 'vers:pypi/>=1.0|!=1.5|<2.0'
 ```
 
 Planned for v0.1:
@@ -53,6 +57,16 @@ Every function throws a `VersError` with a `code`:
 | `INVALID_CONSTRAINTS` | Unsorted or duplicate versions, or an invalid comparator sequence |
 | `UNSUPPORTED_SCHEME`  | polyver does not implement the VERS type                          |
 
+### Native ranges
+
+`fromNative` converts npm ranges (`^`, `~`, x-ranges, hyphen ranges, `||`) and PEP 440 specifiers
+(`~=`, `==1.*`, `!=`, `,` and `||`) to canonical VERS by interval arithmetic, so overlapping alternatives
+are merged. Two conventions follow vers-spec rather than the native tool: npm upper bounds are written
+`<2.0.0` (node-semver uses `<2.0.0-0`), and the native rules that exclude some pre-releases (npm) or
+post-releases (PEP 440 `>V`) are not applied, because a VERS range is a plain set of intervals.
+
+### Notes
+
 The containment check includes the fix for single-bound ranges such as `vers:npm/>=1.0.0`
 ([vers-spec#54](https://github.com/package-url/vers-spec/issues/54)), and a range made only of `!=`
 constraints contains every other version.
@@ -71,8 +85,7 @@ all for RPM or Alpine versions.
 | -------------------------------------------------------------- | ---------------- |
 | VERS core (parse, validate, canonicalize, contains)            | done             |
 | `semver`, `intdot`, `lexicographic`, `datetime`, `all`, `none` | done             |
-| `npm` versions                                                 | done             |
-| `npm` and `pypi` ranges from native syntax, `pypi` versions    | planned for v0.1 |
+| `npm`, `pypi` (versions and native ranges)                     | done             |
 | `deb`, `rpm`, `apk`                                            | planned for v0.1 |
 | `maven`, `golang`, `gem`, `nuget`, `cargo`, `composer`         | planned          |
 
