@@ -26,6 +26,10 @@ describe('npm', () => {
     expect(s.compare('1.2.3-beta', '1.2.3')).toBeLessThan(0)
   })
 
+  it('compares large numeric pre-release identifiers exactly', () => {
+    expect(s.compare('1.0.0-9007199254740993', '1.0.0-9007199254740992')).toBeGreaterThan(0)
+  })
+
   it('throws on invalid versions', () => {
     expect(() => s.compare('latest', '1.0.0')).toThrow(VersError)
   })

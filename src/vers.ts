@@ -133,6 +133,7 @@ function format(c: Constraint): string {
 /** Applies the validation rules of Clause 5.4 and returns the range's scheme. */
 function validate(type: string, constraints: readonly Constraint[]): Scheme {
   const scheme = lookupScheme(type)
+  if (!Array.isArray(constraints)) throw syntaxError('constraints must be an array')
   if (constraints.length === 0) throw syntaxError('constraints must not be empty')
   if (constraints.some((c) => c.comparator === '*')) {
     if (constraints.length !== 1) throw constraintsError('"*" must be used alone')
@@ -224,11 +225,11 @@ export function parseVers(input: string): VersRange {
   return parse(input).range
 }
 
-function isLower(c: Constraint): boolean {
+function isLessThan(c: Constraint): boolean {
   return c.comparator === '<' || c.comparator === '<='
 }
 
-function isUpper(c: Constraint): boolean {
+function isGreaterThan(c: Constraint): boolean {
   return c.comparator === '>' || c.comparator === '>='
 }
 
@@ -242,10 +243,10 @@ function simplify(cs: VersionConstraint[], scheme: Scheme): VersionConstraint[] 
     while (out.length >= 2) {
       const prev = out[out.length - 2] as VersionConstraint
       const cur = out[out.length - 1] as VersionConstraint
-      if (isUpper(prev) && (cur.comparator === '=' || isUpper(cur))) {
+      if (isGreaterThan(prev) && (cur.comparator === '=' || isGreaterThan(cur))) {
         // Already inside the range opened by `prev`.
         out.pop()
-      } else if ((prev.comparator === '=' || isLower(prev)) && isLower(cur)) {
+      } else if ((prev.comparator === '=' || isLessThan(prev)) && isLessThan(cur)) {
         // `cur` extends the range below it, which covers `prev`.
         out.splice(out.length - 2, 1)
       } else {
@@ -306,6 +307,16 @@ export function normalizeVers(input: string): VersRange {
       scheme.compare(prev.version, c.version) === 0
     )
   })
+  for (let i = 1; i < unique.length; i++) {
+    const prev = unique[i - 1] as VersionConstraint
+    const cur = unique[i] as VersionConstraint
+    // Simplifying would keep one of the two depending on input order, so refuse to guess.
+    if (scheme.compare(prev.version, cur.version) === 0) {
+      throw constraintsError(
+        `${format(prev)} and ${format(cur)} use the same version with different comparators`,
+      )
+    }
+  }
   const constraints = simplify(unique, scheme)
   validate(type, constraints)
   return { type, constraints }
@@ -349,14 +360,14 @@ export function contains(range: VersRange | string, version: string): boolean {
   const first = bounds[0]
   const last = bounds[bounds.length - 1]
   if (!first || !last) return !cs.some((c) => c.comparator === '=')
-  if (isLower(first) && scheme.compare(version, first.version) < 0) return true
-  if (isUpper(last) && scheme.compare(version, last.version) > 0) return true
+  if (isLessThan(first) && scheme.compare(version, first.version) < 0) return true
+  if (isGreaterThan(last) && scheme.compare(version, last.version) > 0) return true
   for (let i = 0; i + 1 < bounds.length; i++) {
     const lo = bounds[i] as VersionConstraint
     const hi = bounds[i + 1] as VersionConstraint
     if (
-      isUpper(lo) &&
-      isLower(hi) &&
+      isGreaterThan(lo) &&
+      isLessThan(hi) &&
       scheme.compare(version, lo.version) > 0 &&
       scheme.compare(version, hi.version) < 0
     ) {
