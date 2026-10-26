@@ -38,7 +38,8 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "engines": {
     "node": ">=22"
@@ -52,6 +53,8 @@
     "format": "biome check --write .",
     "check": "biome check . && tsc",
     "check:package": "publint && attw --pack . --profile esm-only",
+    "oracle": "sh scripts/oracle/run.sh",
+    "oracle:harvest": "sh scripts/oracle/harvest.sh",
     "prepublishOnly": "pnpm check && pnpm test && pnpm build && pnpm check:package"
   },
   "devDependencies": {

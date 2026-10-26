@@ -32,7 +32,8 @@ for f in \
 done
 
 fetch google/osv-scalibr "$OSV_SCALIBR" LICENSE testdata/osv-scalibr/LICENSE
-for f in semver-versions.txt pypi-versions.txt pypi-versions-generated.txt; do
+for f in semver-versions.txt pypi-versions.txt pypi-versions-generated.txt debian-versions.txt \
+  debian-versions-generated.txt alpine-versions-generated.txt; do
   fetch google/osv-scalibr "$OSV_SCALIBR" "semantic/testdata/$f" "testdata/osv-scalibr/$f"
 done
 

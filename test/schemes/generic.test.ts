@@ -24,12 +24,15 @@ function expectAscending(type: string, versions: string[]): void {
 it('lists the supported schemes', () => {
   expect(supportedSchemes()).toEqual([
     'all',
+    'apk',
     'datetime',
+    'deb',
     'intdot',
     'lexicographic',
     'none',
     'npm',
     'pypi',
+    'rpm',
     'semver',
   ])
   expect(getScheme('SemVer')).toBe(getScheme('semver'))
