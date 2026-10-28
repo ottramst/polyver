@@ -7,3 +7,4 @@ coverage/
 .idea/
 scripts/oracle/nuget/bin/
 scripts/oracle/nuget/obj/
+scripts/oracle/composer/vendor/

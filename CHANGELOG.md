@@ -8,6 +8,10 @@ FEATURES:
   metadata ignored, and `fromNative` for Cargo requirements such as `^0.2.3`, `~1.2`, `1.*` and
   `>= 1.0, < 2.0`. The VERS range contains every version the requirement matches, so `^1.2` is
   `>=1.2.0-0|<2.0.0`, as Cargo's `^1.2` also matches `1.2.0-beta`.
+- Scheme `composer`, matching composer/semver 3.5.2 (`VersionParser::normalize`, with PHP's
+  `version_compare` on the normalized versions), and `fromNative` for Composer constraints such as
+  `^1.2 || ~2.0.3` and `>=1.0 <2.0`. `dev-` branches are not valid versions, because Composer gives them
+  no order.
 
 ## v0.4.0
 

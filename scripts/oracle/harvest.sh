@@ -2,9 +2,10 @@
 # Samples real-world version strings from a distribution's own package index (for Maven, the
 # maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt; for Go, the module
 # index; for RubyGems, the compact index; for NuGet, the nuget.org search API; for Cargo, the sparse
-# index entries of the crates in scripts/oracle/cargo-crates.txt) into testdata/oracle/<eco>-index.txt.
-# The repositories change daily, so the sample is committed and `run.sh` only reads committed inputs.
-# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo
+# index entries of the crates in scripts/oracle/cargo-crates.txt; for Composer, the Packagist metadata
+# of the most popular packages) into testdata/oracle/<eco>-index.txt. The repositories change daily,
+# so the sample is committed and `run.sh` only reads committed inputs.
+# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo|composer
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -13,7 +14,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo}"
+eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo|composer}"
 case "$eco" in
   deb)
     image="$DEB_IMAGE"
@@ -44,6 +45,9 @@ case "$eco" in
     ;;
   cargo)
     source='the crates.io sparse index (scripts/oracle/cargo-crates.txt), without yanked versions'
+    ;;
+  composer)
+    source='the Packagist metadata (tags and branches) of the 200 most popular packages'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2
@@ -122,6 +126,22 @@ elif [ "$eco" = cargo ]; then
   done
   # One JSON object per published version, in which a yank only sets "yanked":true.
   all="$(sed -n 's/.*"vers":"\([^"]*\)".*"yanked":false.*/\1/p' "$index" | LC_ALL=C sort -u)"
+elif [ "$eco" = composer ]; then
+  origin='Repository: https://repo.packagist.org/p2 (packages from https://packagist.org/explore/popular.json)'
+  metadata="$(mktemp)"
+  trap 'rm -f "$metadata"' EXIT
+  names="$(for page in 1 2; do
+    curl -fsSL "https://packagist.org/explore/popular.json?per_page=100&page=$page"
+  done | grep -o '"name":"[^"]*"' | sed 's|^"name":"||; s|"$||; s|\\/|/|g')"
+  # `<name>.json` lists tagged releases and `<name>~dev.json` branches (`dev-main`, `2.x-dev`). Not a
+  # pipeline, so that `set -e` stops on a failed download instead of dropping the package.
+  for name in $names; do
+    curl -fsSL "https://repo.packagist.org/p2/$name.json" >>"$metadata"
+    curl -fsSL "https://repo.packagist.org/p2/$name~dev.json" >>"$metadata"
+  done
+  # JSON escapes `/` as `\/`; other escapes do not occur in versions.
+  all="$(grep -o '"version":"[^"]*"' "$metadata" | sed 's|^"version":"||; s|"$||; s|\\/|/|g' |
+    LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"

@@ -26,6 +26,7 @@ it('lists the supported schemes', () => {
     'all',
     'apk',
     'cargo',
+    'composer',
     'datetime',
     'deb',
     'gem',

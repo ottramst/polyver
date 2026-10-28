@@ -77,7 +77,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 | gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`; vers-spec `gem_*`; our `gem` oracle  | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
 | nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | osv-scalibr `nuget-versions.txt`; vers-spec `nuget_*`; our `nuget` oracle  | 4-part versions; case-insensitive labels; `-1` is a numeric label                                     |
 | cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests; our `cargo` oracle                                              | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`; `Ord` breaks ties by build metadata                         |
-| composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                      | 4-part normalization; stability flags; `dev-` branches                                                |
+| composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`; our `composer` oracle               | 4-part normalization; stability flags; `dev-` branches                                                |
 
 ## Findings from the oracles (2026-10-26)
 
@@ -191,6 +191,45 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   42 that publish pre-releases or build metadata), 118 are pre-releases and 64 have build metadata,
   mostly the bundled C library's version (`0.4.83+curl-8.15.0`, `0.11.2+zstd.1.5.2`). All are valid.
   A yank only sets `"yanked":true` on a version's line, so `harvest.sh` drops those lines.
+
+## Findings from the Composer oracle (2026-10-28)
+
+- composer/semver 3.5.2 on PHP 8.5.12 matched the port on all 13,805 oracle pairs and 3,988 validity
+  verdicts with their normalized forms. Of 166 constraints, Composer rejects 9 and polyver rejects the
+  same 9 plus 6 whose bound is not a version: `>=1.0-p1@beta` (Composer appends the flag to the patch
+  version, giving `1.0.0.0-patch1-beta`) and 5 whose bound is above PHP_INT_MAX, which PHP turns into
+  a float string (`^9223372036854775807` gives `9.2233720368548E+18.0.0.0-dev`). The other 151 agree
+  with `Semver::satisfies` on every version (22,800 checks).
+- `Comparator::compare` passes its strings to PHP's `version_compare` unchanged; `Semver::sort` and
+  constraints normalize them first. On raw strings, `1.0 < 1.0.0`, `3.0 < 3.0.0-beta`, and `ALPHA`,
+  `BETA` and `stable` are unknown words that sort before `dev`. osv-scalibr's Packagist vectors
+  compare raw strings, so 11 of their pairs disagree with Composer.
+- `version_compare` reads numbers with C's `strtol`, so on 64-bit PHP numbers above 2^63 - 1 are
+  all equal (`1.9223372036854775807 == 1.99999999999999999999`). The first number of a classical
+  version has at most 5 digits (composer/semver 3.4.0); a longer one makes a date version, which is
+  not padded: `2010-01-02` is `2010.01.02`, but `2010.01.02` is the classical `2010.01.02.0`, which
+  sorts after it.
+- Case matters in two places. `normalize` keeps an upper-case `STABLE` (`1.0-STABLE` is
+  `1.0.0.0-stable`, an unknown word sorting below `dev`), while `1.0-stable` loses its suffix. A
+  stability flag in a constraint keeps its case, so `>=1.0@BETA` matches `1.0-alpha` and `>=1.0@beta`
+  does not. polyver writes such a bound as `-STABLE`, which normalizes to the same unknown word.
+- Composer's bounds are not always their own normalized form. A date bound such as `2010.01.02-dev`
+  (from `>=2010-01-02`) normalizes again as the classical `2010.01.02.0-dev`, so polyver writes it
+  with dashes. `<` and `>=` append `-dev` unless the text has a `-` modifier, so `>=1.0dev` gives
+  `1.0.0.0-dev-dev`; no normalized version lies between that and `1.0.0.0-dev`, which polyver uses.
+- A `dev-` branch only matches itself (`Constraint::versionCompare`), so over numeric versions
+  `== dev-x` matches nothing and `!= dev-x` everything: `dev-master || ^1.0` is `^1.0`.
+- `MultiConstraint::create` merges `[>= a < b] || [>= b < c]` into `[>= a < c]` without checking that
+  the first group is non-empty, so `>=3 <2 || >=2 <4` matches `3.0` but not `2.5`. polyver applies the
+  same merge.
+- The basic comparator regex ends in `(.*)`, which stops at a line break: Composer reads
+  `>=1.0\n<2.0` as `>=1.0`. polyver rejects line breaks inside a constraint instead.
+- The modifier regex relies on PCRE's possessive `((?:[.-]?\d+)*+)`; without it, V8 backtracks
+  exponentially on a long run of digits. polyver writes it `((?:[.-]?\d)*)`, which matches the same
+  strings, and splits constraints with loops instead of the `preg_split` regexes.
+- In the metadata of the 200 most popular Packagist packages, 954 sampled versions include 58 `dev-`
+  branches and 15 branch aliases (`2.x-dev`); 341 start with `v` and 46 have a stability suffix. All
+  other versions are valid, and none is a date version.
 
 ## Licensing of test data
 
