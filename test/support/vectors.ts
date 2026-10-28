@@ -67,9 +67,8 @@ export type VersTest = Base &
 export function loadVersTests(path: string): VersTest[] {
   const { tests } = JSON.parse(readTestdata(path)) as { tests: VersTest[] }
   return tests.map((t) => {
-    const d = divergence(path, t.input)
-    if (!d || (d.testType !== undefined && d.testType !== t.test_type)) return t
-    return { ...t, ...d.override, divergence: d.reason } as VersTest
+    const d = divergence(path, t.input, t.test_type)
+    return d ? ({ ...t, ...d.override, divergence: d.reason } as VersTest) : t
   })
 }
 

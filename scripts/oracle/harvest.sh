@@ -99,7 +99,7 @@ elif [ "$eco" = nuget ]; then
   index="$(mktemp)"
   trap 'rm -f "$index"' EXIT
   # The search API skips at most 3,000 results and returns at most 1,000. It lists only listed
-  # versions, normalized by nuget.org (`1.0` is stored as `1.0.0`, without build metadata).
+  # versions, normalized by nuget.org (`1.0` is stored as `1.0.0`; build metadata is kept).
   for skip in 0 1000 2000 3000; do
     curl -fsSL "https://azuresearch-usnc.nuget.org/query?skip=$skip&take=1000&prerelease=true&semVerLevel=2.0.0" >>"$index"
   done

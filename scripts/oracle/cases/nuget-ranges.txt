@@ -1,7 +1,10 @@
 # Hand-written NuGet version ranges, one per line, from the version range examples of the NuGet
 # package versioning documentation and the cases of VersionRangeFactory.TryParse. Each is parsed with
 # VersionRange.TryParse (without floating versions) and checked with VersionRange.Satisfies against
-# every version in nuget.txt. Leading and trailing whitespace is trimmed by generate.ts.
+# every version in nuget.txt. generate.ts trims each line, so a range that needs leading, trailing or
+# invisible whitespace is written as a JSON string (a line starting with `"`), which the oracle
+# decodes and the tests read back with the same rule. Version lines cannot hold whitespace, so NuGet's
+# whitespace handling in versions is exercised through range bounds (`1 . 0`, `1.0\u0085`).
 # A bare version is a minimum, inclusive.
 1.0
 1.0.0.0
@@ -45,6 +48,18 @@
 [1.0--1,1.0-0)
 [ , ]
 ( , )
+# NuGet's trimming: string.Trim and NuGetVersion.TryParse remove .NET whitespace (including U+0085,
+# but not U+FEFF) around the range and each bound.
+"  [1.0,2.0)  "
+"[1.0,2.0)\u0085"
+"\ufeff[1.0,2.0)"
+"1.0\u0085"
+"\t[ 1.0\u3000,\u00a02.0 )\n"
+# NuGet accepts these; polyver rejects them (see test/support/divergences.ts): an empty interval, and
+# whitespace inside a bound, which NuGetVersion.TryParse ignores around each number.
+(1.0,1.0)
+1 . 0
+[1 .0,2.0)
 # Invalid: NuGet rejects these.
 (1.0]
 [1.0)

@@ -136,9 +136,11 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 
 ## Findings from the NuGet oracle (2026-10-28)
 
-- NuGet.Versioning 7.9.0 matched the port on all 6,595 oracle pairs, 4,077 validity verdicts, 76 range
-  parses and 3,608 range checks (`VersionRange.Satisfies`). Ranges need no divergence: `Satisfies` only
-  compares bounds, with no pre-release rule like npm's.
+- NuGet.Versioning 7.9.0 matched the port on all 6,595 oracle pairs and 4,077 validity verdicts. Of 84
+  ranges parsed with `VersionRange.TryParse` without floating versions (the same as `Parse` for ranges
+  that do not float), it differs only on three that polyver rejects on purpose (below), and it matched
+  all 3,960 range checks (`VersionRange.Satisfies`) on the others: `Satisfies` only compares bounds,
+  with no pre-release rule like npm's.
 - A pre-release label is a number when `int.TryParse` reads it, not when it is all digits as in SemVer.
   So `-1` and `-05` are numbers (`1.0--1 < 1.0-0`, and `1.0--0 == 1.0-0`), while `2147483648` is a string,
   which sorts after every number and before letters. `VersionComparer.Equals` compares labels as strings,

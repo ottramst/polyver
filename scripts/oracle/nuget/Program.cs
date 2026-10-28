@@ -5,12 +5,17 @@
 // `a <op> b` using VersionComparer.Default. Each range is written as `valid-range <r>` or
 // `invalid-range <r>` by VersionRange.TryParse without floating versions, which polyver does not
 // support, and each `version<TAB>range` row with a valid version and range as
-// `version satisfies|fails range` by VersionRange.Satisfies.
+// `version satisfies|fails range` by VersionRange.Satisfies. A range line starting with `"` is a JSON
+// string, so that it can keep surrounding or invisible whitespace; it is written out as given.
+using System.Text.Json;
 using NuGet.Versioning;
 
 static string[] Lines(string path) => File.ReadAllText(path).TrimEnd('\n').Split('\n');
 
 static StreamWriter Create(string path) => new(path) { NewLine = "\n" };
+
+static string Decode(string line) =>
+    line.StartsWith('"') ? JsonSerializer.Deserialize<string>(line)! : line;
 
 var valid = new Dictionary<string, NuGetVersion>();
 using (var w = Create(args[4]))
@@ -42,7 +47,7 @@ using (var w = Create(args[6]))
 {
     foreach (var r in Lines(args[2]))
     {
-        var ok = VersionRange.TryParse(r, allowFloating: false, out var parsed);
+        var ok = VersionRange.TryParse(Decode(r), allowFloating: false, out var parsed);
         if (ok) ranges[r] = parsed!;
         w.WriteLine($"{(ok ? "valid" : "invalid")}-range {r}");
     }

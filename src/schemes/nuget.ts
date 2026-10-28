@@ -4,7 +4,8 @@
  * Reference: https://learn.microsoft.com/en-us/nuget/concepts/package-versioning and NuGet.Versioning
  * 7.9.0 (https://github.com/NuGet/NuGet.Client/tree/977537e19c6be57fead1411e6cf05f936bf1baf4/src/NuGet.Core/NuGet.Versioning,
  * Apache-2.0). This file mirrors `NuGetVersion.TryParse` (validity), `VersionComparer.Default`
- * (order) and `VersionRange.Parse` (native ranges), and is tested against them as an oracle
+ * (order) and `VersionRange.TryParse` without floating versions (native ranges; the same as `Parse`
+ * for ranges that do not float), and is tested against them as an oracle
  * (testdata/oracle). Unlike NuGet, whitespace is not accepted in a version: NuGet trims it and
  * ignores it around each number (`1 . 0`), but a VERS version cannot contain it.
  *
@@ -16,7 +17,8 @@
  * it, so `-1` is a number and `2147483648` a string. Build metadata is ignored.
  *
  * Native ranges are NuGet's interval notation (`[1.0,2.0)`, `(,1.0]`, `[1.0]`, `(1.0,)`) and a bare
- * version meaning `>=` that version, parsed as by `VersionRange.Parse`. Surrounding whitespace is
+ * version meaning `>=` that version, parsed as by `VersionRange.TryParse` without floating versions
+ * (the same as `Parse` for ranges that do not float). Surrounding whitespace is
  * trimmed as .NET's `string.Trim` does, but a bound with whitespace inside is rejected. Floating
  * versions (`1.*`, `1.0.0-*`) select the newest matching version rather than a set of versions, so
  * they are rejected. `(1.0,1.0)`, which NuGet accepts and which matches no version, is rejected
@@ -199,6 +201,11 @@ function bound(text: string): string | undefined {
 function fromNative(range: string): Constraint[] {
   const value = dotnetTrim(range)
   if (value === '') throw syntaxError(range, 'empty range')
+  const bracketed = value.startsWith('[') || value.startsWith('(')
+  const last = value[value.length - 1]
+  if (bracketed && last !== ']' && last !== ')') {
+    throw syntaxError(range, 'a range must end with ] or )')
+  }
   if (value.includes('*')) {
     throw syntaxError(range, 'floating versions such as 1.* are not supported')
   }
@@ -206,12 +213,8 @@ function fromNative(range: string): Constraint[] {
   let upper: string | undefined
   let loInclusive = true
   let hiInclusive = false
-  if (value.startsWith('[') || value.startsWith('(')) {
+  if (bracketed) {
     loInclusive = value.startsWith('[')
-    const last = value[value.length - 1]
-    if (last !== ']' && last !== ')') {
-      throw syntaxError(range, 'a range must end with ] or )')
-    }
     hiInclusive = last === ']'
     const parts = value.slice(1, -1).split(',')
     if (parts.length > 2) throw syntaxError(range, 'a range has at most two versions')
@@ -226,8 +229,9 @@ function fromNative(range: string): Constraint[] {
   }
   if (lower !== undefined && upper !== undefined) {
     const c = compare(lower, upper)
-    if (c > 0 || (c === 0 && loInclusive !== hiInclusive)) {
-      throw syntaxError(range, 'the lower bound is above the upper bound')
+    if (c > 0) throw syntaxError(range, 'the lower bound is above the upper bound')
+    if (c === 0 && loInclusive !== hiInclusive) {
+      throw syntaxError(range, 'equal bounds need [] on both sides')
     }
   }
   const set = intersect(

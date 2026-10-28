@@ -72,17 +72,27 @@ describe('ranges against VersionRange.Parse and Satisfies', () => {
   const ranges = oracleRangeValidity('nuget')
   const rows = oracleRequirements('nuget', 'ranges')
 
+  // Ranges that NuGet parses and polyver deliberately rejects; their rows cannot be converted.
+  const rejected = new Set(ranges.filter((r) => r.divergence).map((r) => r.range))
+
   it('agrees on which ranges parse', () => {
-    expect(ranges.length).toBeGreaterThan(70)
+    expect(ranges.length).toBeGreaterThan(80)
     const wrong = ranges
-      .filter(([range, ok]) => parses(range) !== ok)
-      .map(([range, ok]) => `${range} (NuGet: ${ok ? 'valid' : 'invalid'})`)
+      .filter(({ range, valid }) => parses(range) !== valid)
+      .map(
+        ({ range, valid }) => `${JSON.stringify(range)} (expected: ${valid ? 'valid' : 'invalid'})`,
+      )
     expect(wrong).toEqual([])
+  })
+
+  it('every documented range divergence matches an oracle range', () => {
+    expect(rejected.size).toBe(divergenceCount('oracle/nuget-ranges'))
   })
 
   it('agrees on every range and version', () => {
     expect(rows.length).toBeGreaterThan(3000)
     const wrong = rows
+      .filter((r) => !rejected.has(r.requirement))
       .filter((r) => contains(fromNative('nuget', r.requirement), r.version) !== r.satisfied)
       .map(
         (r) =>
@@ -91,8 +101,14 @@ describe('ranges against VersionRange.Parse and Satisfies', () => {
     expect(wrong).toEqual([])
   })
 
-  it('every documented divergence matches an oracle row', () => {
-    expect(rows.filter((r) => r.divergence).length).toBe(divergenceCount('oracle/nuget-ranges'))
+  it('has no row divergences', () => {
+    expect(rows.filter((r) => r.divergence)).toEqual([])
+  })
+
+  it('finds that NuGet matches no version with an empty interval', () => {
+    const empty = rows.filter((r) => r.requirement === '(1.0,1.0)')
+    expect(empty.length).toBeGreaterThan(0)
+    expect(empty.filter((r) => r.satisfied)).toEqual([])
   })
 })
 
@@ -157,7 +173,7 @@ describe('validity', () => {
     ' 1.0',
     '1.0 ',
     '1 .0',
-    '1.0 ',
+    '1.0\u00a0',
   ])('rejects %j', (v) => expect(s.isValid(v)).toBe(false))
 
   it('throws on an invalid version', () => {
@@ -178,6 +194,19 @@ describe('VersionComparer order', () => {
       ['1.10'],
       ['2147483647'],
     ])
+  })
+
+  it('orders the vers-spec cases whose expected output changes case', () => {
+    // The overrides in divergences.ts keep the input order, which a compare returning 0 would also
+    // give with a stable sort, so check that the first version is smaller.
+    for (const [a, b] of [
+      ['1.0.0-BETA', '1.0.0-beta2'],
+      ['1.0.0-BETA', '1.0.0-beta.1+AA'],
+      ['1.0.0-BETA.X.y.5.77.0+AA', '1.0.0-beta.x.y.5.79.0+aa'],
+      ['1.0.0-BETA.X.y.5.79.0+AA', '1.0.0-beta.x.y.5.790.0+abc'],
+    ] as const) {
+      expect(Math.sign(s.compare(a, b)), `${a} vs ${b}`).toBe(-1)
+    }
   })
 
   it('compares labels numerically, before strings, and strings ignoring case', () => {
@@ -224,7 +253,7 @@ describe('fromNative', () => {
     ['1.0-beta+build', 'vers:nuget/>=1.0-beta+build'],
     // `string.Trim` and NuGetVersion.TryParse trim .NET whitespace, including U+0085 and U+3000.
     ['  [ 1.0 , 2.0 )  ', 'vers:nuget/>=1.0|<2.0'],
-    ['\u0085[1.0,　2.0)\t', 'vers:nuget/>=1.0|<2.0'],
+    ['\u0085[1.0,\u30002.0)\t', 'vers:nuget/>=1.0|<2.0'],
     // Both bounds empty but not missing: NuGet reads this as every version.
     ['[ , ]', 'vers:nuget/*'],
   ])('%j is %s', (native, vers) => {
@@ -237,6 +266,7 @@ describe('fromNative', () => {
     ['(1.0]', 'INVALID_SYNTAX'],
     ['[2.0,1.0]', 'INVALID_SYNTAX'],
     ['[1.0,1.0)', 'INVALID_SYNTAX'],
+    ['[1.0,1.0.0.0)', 'INVALID_SYNTAX'],
     ['[,]', 'INVALID_SYNTAX'],
     ['[1.0,2.0,3.0]', 'INVALID_SYNTAX'],
     ['[1.0,2.0),[3.0,4.0)', 'INVALID_SYNTAX'],
@@ -253,9 +283,20 @@ describe('fromNative', () => {
     ['(1.0,1.0.0)', 'INVALID_CONSTRAINTS'],
     ['[1 .0,2.0)', 'INVALID_VERSION'],
     // .NET whitespace does not include U+FEFF, which JavaScript's trim() removes.
-    ['﻿1.0', 'INVALID_VERSION'],
+    ['\ufeff1.0', 'INVALID_VERSION'],
   ])('rejects %j with %s', (native, code) => {
     expect(() => fromNative('nuget', native)).toThrow(expect.objectContaining({ code }))
+  })
+
+  it.each([
+    ['[2.0,1.0]', 'the lower bound is above the upper bound'],
+    ['[1.0,1.0)', 'equal bounds need [] on both sides'],
+    ['(1.0,1.0.0.0]', 'equal bounds need [] on both sides'],
+    // The brackets are checked before the floating-version `*`.
+    ['[1.0,2.0)*', 'a range must end with ] or )'],
+    ['[1.0.*,2.0)', 'floating versions such as 1.* are not supported'],
+  ])('explains why %j is rejected', (native, message) => {
+    expect(() => fromNative('nuget', native)).toThrow(message)
   })
 
   it('parses long ranges in linear time', () => {

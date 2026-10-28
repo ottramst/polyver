@@ -43,6 +43,14 @@ valid-range (2147483647,]
 valid-range [1.0--1,1.0-0)
 valid-range [ , ]
 valid-range ( , )
+valid-range "  [1.0,2.0)  "
+valid-range "[1.0,2.0)\u0085"
+invalid-range "\ufeff[1.0,2.0)"
+valid-range "1.0\u0085"
+valid-range "\t[ 1.0\u3000,\u00a02.0 )\n"
+valid-range (1.0,1.0)
+valid-range 1 . 0
+valid-range [1 .0,2.0)
 invalid-range (1.0]
 invalid-range [1.0)
 invalid-range (1.0)
@@ -3686,3 +3694,619 @@ invalid-range [1.0,2.*)
 1.0+a.b-c satisfies ( , )
 1.0-beta+build satisfies ( , )
 1.0.0+git.abc123 satisfies ( , )
+0 fails "  [1.0,2.0)  "
+0.0 fails "  [1.0,2.0)  "
+0.0.0 fails "  [1.0,2.0)  "
+0.0.0.0 fails "  [1.0,2.0)  "
+0.0.0-0 fails "  [1.0,2.0)  "
+0.0.0--1 fails "  [1.0,2.0)  "
+1 satisfies "  [1.0,2.0)  "
+1.0 satisfies "  [1.0,2.0)  "
+1.0.0 satisfies "  [1.0,2.0)  "
+1.0.0.0 satisfies "  [1.0,2.0)  "
+01.0 satisfies "  [1.0,2.0)  "
+1.00 satisfies "  [1.0,2.0)  "
+1.0.01 satisfies "  [1.0,2.0)  "
+001.002.003.004 satisfies "  [1.0,2.0)  "
+1.0.0.1 satisfies "  [1.0,2.0)  "
+1.0.0.01 satisfies "  [1.0,2.0)  "
+1.0.1 satisfies "  [1.0,2.0)  "
+1.0.0.1-alpha satisfies "  [1.0,2.0)  "
+1.0.0.1-pre satisfies "  [1.0,2.0)  "
+1.0.0-pre fails "  [1.0,2.0)  "
+1.1 satisfies "  [1.0,2.0)  "
+1.2 satisfies "  [1.0,2.0)  "
+1.10 satisfies "  [1.0,2.0)  "
+2 fails "  [1.0,2.0)  "
+2.0 fails "  [1.0,2.0)  "
+2.0.0 fails "  [1.0,2.0)  "
+2.0.0.1 fails "  [1.0,2.0)  "
+2.1 fails "  [1.0,2.0)  "
+10 fails "  [1.0,2.0)  "
+1.2.3 satisfies "  [1.0,2.0)  "
+1.2.3.4 satisfies "  [1.0,2.0)  "
+2147483647 fails "  [1.0,2.0)  "
+1.2147483647 satisfies "  [1.0,2.0)  "
+2147483647.2147483647.2147483647.2147483647 fails "  [1.0,2.0)  "
+0.9.9.1 fails "  [1.0,2.0)  "
+1.999.9999 satisfies "  [1.0,2.0)  "
+1.0-alpha fails "  [1.0,2.0)  "
+1.0-ALPHA fails "  [1.0,2.0)  "
+1.0-Alpha fails "  [1.0,2.0)  "
+1.0-alpha1 fails "  [1.0,2.0)  "
+1.0-alpha2 fails "  [1.0,2.0)  "
+1.0-alpha10 fails "  [1.0,2.0)  "
+1.0-alpha.1 fails "  [1.0,2.0)  "
+1.0-alpha.2 fails "  [1.0,2.0)  "
+1.0-alpha.10 fails "  [1.0,2.0)  "
+1.0-alpha.beta fails "  [1.0,2.0)  "
+1.0-beta fails "  [1.0,2.0)  "
+1.0-BETA fails "  [1.0,2.0)  "
+1.0-beta1 fails "  [1.0,2.0)  "
+1.0-beta2 fails "  [1.0,2.0)  "
+1.0-beta11 fails "  [1.0,2.0)  "
+1.0-beta.2 fails "  [1.0,2.0)  "
+1.0-beta.11 fails "  [1.0,2.0)  "
+1.0-rc.1 fails "  [1.0,2.0)  "
+1.0-rc1 fails "  [1.0,2.0)  "
+1.0-RC1 fails "  [1.0,2.0)  "
+1.0-0 fails "  [1.0,2.0)  "
+1.0-1 fails "  [1.0,2.0)  "
+1.0-2 fails "  [1.0,2.0)  "
+1.0-10 fails "  [1.0,2.0)  "
+1.0--1 fails "  [1.0,2.0)  "
+1.0--0 fails "  [1.0,2.0)  "
+1.0--05 fails "  [1.0,2.0)  "
+1.0-0a fails "  [1.0,2.0)  "
+1.0-a0 fails "  [1.0,2.0)  "
+1.0-- fails "  [1.0,2.0)  "
+1.0--- fails "  [1.0,2.0)  "
+1.0-a-b fails "  [1.0,2.0)  "
+1.0-a.-1 fails "  [1.0,2.0)  "
+1.0-2147483647 fails "  [1.0,2.0)  "
+1.0-2147483648 fails "  [1.0,2.0)  "
+1.0--2147483648 fails "  [1.0,2.0)  "
+1.0--2147483649 fails "  [1.0,2.0)  "
+1.0-99999999999 fails "  [1.0,2.0)  "
+1.0-x.y.z fails "  [1.0,2.0)  "
+1.0-X.Y.Z fails "  [1.0,2.0)  "
+1.0-alpha.0 fails "  [1.0,2.0)  "
+1.0.0-beta fails "  [1.0,2.0)  "
+1.0.0-beta.1 fails "  [1.0,2.0)  "
+1.0.0.0-beta fails "  [1.0,2.0)  "
+1.0.0.1-beta satisfies "  [1.0,2.0)  "
+1.0.1-beta satisfies "  [1.0,2.0)  "
+1.0+build satisfies "  [1.0,2.0)  "
+1.0+BUILD.5 satisfies "  [1.0,2.0)  "
+1.0+007 satisfies "  [1.0,2.0)  "
+1.0+a.b-c satisfies "  [1.0,2.0)  "
+1.0-beta+build fails "  [1.0,2.0)  "
+1.0.0+git.abc123 satisfies "  [1.0,2.0)  "
+0 fails "[1.0,2.0)\u0085"
+0.0 fails "[1.0,2.0)\u0085"
+0.0.0 fails "[1.0,2.0)\u0085"
+0.0.0.0 fails "[1.0,2.0)\u0085"
+0.0.0-0 fails "[1.0,2.0)\u0085"
+0.0.0--1 fails "[1.0,2.0)\u0085"
+1 satisfies "[1.0,2.0)\u0085"
+1.0 satisfies "[1.0,2.0)\u0085"
+1.0.0 satisfies "[1.0,2.0)\u0085"
+1.0.0.0 satisfies "[1.0,2.0)\u0085"
+01.0 satisfies "[1.0,2.0)\u0085"
+1.00 satisfies "[1.0,2.0)\u0085"
+1.0.01 satisfies "[1.0,2.0)\u0085"
+001.002.003.004 satisfies "[1.0,2.0)\u0085"
+1.0.0.1 satisfies "[1.0,2.0)\u0085"
+1.0.0.01 satisfies "[1.0,2.0)\u0085"
+1.0.1 satisfies "[1.0,2.0)\u0085"
+1.0.0.1-alpha satisfies "[1.0,2.0)\u0085"
+1.0.0.1-pre satisfies "[1.0,2.0)\u0085"
+1.0.0-pre fails "[1.0,2.0)\u0085"
+1.1 satisfies "[1.0,2.0)\u0085"
+1.2 satisfies "[1.0,2.0)\u0085"
+1.10 satisfies "[1.0,2.0)\u0085"
+2 fails "[1.0,2.0)\u0085"
+2.0 fails "[1.0,2.0)\u0085"
+2.0.0 fails "[1.0,2.0)\u0085"
+2.0.0.1 fails "[1.0,2.0)\u0085"
+2.1 fails "[1.0,2.0)\u0085"
+10 fails "[1.0,2.0)\u0085"
+1.2.3 satisfies "[1.0,2.0)\u0085"
+1.2.3.4 satisfies "[1.0,2.0)\u0085"
+2147483647 fails "[1.0,2.0)\u0085"
+1.2147483647 satisfies "[1.0,2.0)\u0085"
+2147483647.2147483647.2147483647.2147483647 fails "[1.0,2.0)\u0085"
+0.9.9.1 fails "[1.0,2.0)\u0085"
+1.999.9999 satisfies "[1.0,2.0)\u0085"
+1.0-alpha fails "[1.0,2.0)\u0085"
+1.0-ALPHA fails "[1.0,2.0)\u0085"
+1.0-Alpha fails "[1.0,2.0)\u0085"
+1.0-alpha1 fails "[1.0,2.0)\u0085"
+1.0-alpha2 fails "[1.0,2.0)\u0085"
+1.0-alpha10 fails "[1.0,2.0)\u0085"
+1.0-alpha.1 fails "[1.0,2.0)\u0085"
+1.0-alpha.2 fails "[1.0,2.0)\u0085"
+1.0-alpha.10 fails "[1.0,2.0)\u0085"
+1.0-alpha.beta fails "[1.0,2.0)\u0085"
+1.0-beta fails "[1.0,2.0)\u0085"
+1.0-BETA fails "[1.0,2.0)\u0085"
+1.0-beta1 fails "[1.0,2.0)\u0085"
+1.0-beta2 fails "[1.0,2.0)\u0085"
+1.0-beta11 fails "[1.0,2.0)\u0085"
+1.0-beta.2 fails "[1.0,2.0)\u0085"
+1.0-beta.11 fails "[1.0,2.0)\u0085"
+1.0-rc.1 fails "[1.0,2.0)\u0085"
+1.0-rc1 fails "[1.0,2.0)\u0085"
+1.0-RC1 fails "[1.0,2.0)\u0085"
+1.0-0 fails "[1.0,2.0)\u0085"
+1.0-1 fails "[1.0,2.0)\u0085"
+1.0-2 fails "[1.0,2.0)\u0085"
+1.0-10 fails "[1.0,2.0)\u0085"
+1.0--1 fails "[1.0,2.0)\u0085"
+1.0--0 fails "[1.0,2.0)\u0085"
+1.0--05 fails "[1.0,2.0)\u0085"
+1.0-0a fails "[1.0,2.0)\u0085"
+1.0-a0 fails "[1.0,2.0)\u0085"
+1.0-- fails "[1.0,2.0)\u0085"
+1.0--- fails "[1.0,2.0)\u0085"
+1.0-a-b fails "[1.0,2.0)\u0085"
+1.0-a.-1 fails "[1.0,2.0)\u0085"
+1.0-2147483647 fails "[1.0,2.0)\u0085"
+1.0-2147483648 fails "[1.0,2.0)\u0085"
+1.0--2147483648 fails "[1.0,2.0)\u0085"
+1.0--2147483649 fails "[1.0,2.0)\u0085"
+1.0-99999999999 fails "[1.0,2.0)\u0085"
+1.0-x.y.z fails "[1.0,2.0)\u0085"
+1.0-X.Y.Z fails "[1.0,2.0)\u0085"
+1.0-alpha.0 fails "[1.0,2.0)\u0085"
+1.0.0-beta fails "[1.0,2.0)\u0085"
+1.0.0-beta.1 fails "[1.0,2.0)\u0085"
+1.0.0.0-beta fails "[1.0,2.0)\u0085"
+1.0.0.1-beta satisfies "[1.0,2.0)\u0085"
+1.0.1-beta satisfies "[1.0,2.0)\u0085"
+1.0+build satisfies "[1.0,2.0)\u0085"
+1.0+BUILD.5 satisfies "[1.0,2.0)\u0085"
+1.0+007 satisfies "[1.0,2.0)\u0085"
+1.0+a.b-c satisfies "[1.0,2.0)\u0085"
+1.0-beta+build fails "[1.0,2.0)\u0085"
+1.0.0+git.abc123 satisfies "[1.0,2.0)\u0085"
+0 fails "1.0\u0085"
+0.0 fails "1.0\u0085"
+0.0.0 fails "1.0\u0085"
+0.0.0.0 fails "1.0\u0085"
+0.0.0-0 fails "1.0\u0085"
+0.0.0--1 fails "1.0\u0085"
+1 satisfies "1.0\u0085"
+1.0 satisfies "1.0\u0085"
+1.0.0 satisfies "1.0\u0085"
+1.0.0.0 satisfies "1.0\u0085"
+01.0 satisfies "1.0\u0085"
+1.00 satisfies "1.0\u0085"
+1.0.01 satisfies "1.0\u0085"
+001.002.003.004 satisfies "1.0\u0085"
+1.0.0.1 satisfies "1.0\u0085"
+1.0.0.01 satisfies "1.0\u0085"
+1.0.1 satisfies "1.0\u0085"
+1.0.0.1-alpha satisfies "1.0\u0085"
+1.0.0.1-pre satisfies "1.0\u0085"
+1.0.0-pre fails "1.0\u0085"
+1.1 satisfies "1.0\u0085"
+1.2 satisfies "1.0\u0085"
+1.10 satisfies "1.0\u0085"
+2 satisfies "1.0\u0085"
+2.0 satisfies "1.0\u0085"
+2.0.0 satisfies "1.0\u0085"
+2.0.0.1 satisfies "1.0\u0085"
+2.1 satisfies "1.0\u0085"
+10 satisfies "1.0\u0085"
+1.2.3 satisfies "1.0\u0085"
+1.2.3.4 satisfies "1.0\u0085"
+2147483647 satisfies "1.0\u0085"
+1.2147483647 satisfies "1.0\u0085"
+2147483647.2147483647.2147483647.2147483647 satisfies "1.0\u0085"
+0.9.9.1 fails "1.0\u0085"
+1.999.9999 satisfies "1.0\u0085"
+1.0-alpha fails "1.0\u0085"
+1.0-ALPHA fails "1.0\u0085"
+1.0-Alpha fails "1.0\u0085"
+1.0-alpha1 fails "1.0\u0085"
+1.0-alpha2 fails "1.0\u0085"
+1.0-alpha10 fails "1.0\u0085"
+1.0-alpha.1 fails "1.0\u0085"
+1.0-alpha.2 fails "1.0\u0085"
+1.0-alpha.10 fails "1.0\u0085"
+1.0-alpha.beta fails "1.0\u0085"
+1.0-beta fails "1.0\u0085"
+1.0-BETA fails "1.0\u0085"
+1.0-beta1 fails "1.0\u0085"
+1.0-beta2 fails "1.0\u0085"
+1.0-beta11 fails "1.0\u0085"
+1.0-beta.2 fails "1.0\u0085"
+1.0-beta.11 fails "1.0\u0085"
+1.0-rc.1 fails "1.0\u0085"
+1.0-rc1 fails "1.0\u0085"
+1.0-RC1 fails "1.0\u0085"
+1.0-0 fails "1.0\u0085"
+1.0-1 fails "1.0\u0085"
+1.0-2 fails "1.0\u0085"
+1.0-10 fails "1.0\u0085"
+1.0--1 fails "1.0\u0085"
+1.0--0 fails "1.0\u0085"
+1.0--05 fails "1.0\u0085"
+1.0-0a fails "1.0\u0085"
+1.0-a0 fails "1.0\u0085"
+1.0-- fails "1.0\u0085"
+1.0--- fails "1.0\u0085"
+1.0-a-b fails "1.0\u0085"
+1.0-a.-1 fails "1.0\u0085"
+1.0-2147483647 fails "1.0\u0085"
+1.0-2147483648 fails "1.0\u0085"
+1.0--2147483648 fails "1.0\u0085"
+1.0--2147483649 fails "1.0\u0085"
+1.0-99999999999 fails "1.0\u0085"
+1.0-x.y.z fails "1.0\u0085"
+1.0-X.Y.Z fails "1.0\u0085"
+1.0-alpha.0 fails "1.0\u0085"
+1.0.0-beta fails "1.0\u0085"
+1.0.0-beta.1 fails "1.0\u0085"
+1.0.0.0-beta fails "1.0\u0085"
+1.0.0.1-beta satisfies "1.0\u0085"
+1.0.1-beta satisfies "1.0\u0085"
+1.0+build satisfies "1.0\u0085"
+1.0+BUILD.5 satisfies "1.0\u0085"
+1.0+007 satisfies "1.0\u0085"
+1.0+a.b-c satisfies "1.0\u0085"
+1.0-beta+build fails "1.0\u0085"
+1.0.0+git.abc123 satisfies "1.0\u0085"
+0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.0.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.0.0.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.0.0-0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.0.0--1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.0 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+01.0 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.00 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.01 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+001.002.003.004 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.1 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.01 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.1 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.1-alpha satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.1-pre satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0-pre fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.1 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.2 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.10 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+2.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+2.0.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+2.0.0.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+2.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+10 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.2.3 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.2.3.4 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+2147483647 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.2147483647 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+2147483647.2147483647.2147483647.2147483647 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+0.9.9.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.999.9999 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-ALPHA fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-Alpha fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha10 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha.2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha.10 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha.beta fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-BETA fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta11 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta.2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta.11 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-rc.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-rc1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-RC1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-2 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-10 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--05 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-0a fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-a0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-- fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--- fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-a-b fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-a.-1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-2147483647 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-2147483648 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--2147483648 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0--2147483649 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-99999999999 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-x.y.z fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-X.Y.Z fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-alpha.0 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0-beta fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0-beta.1 fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.0-beta fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0.1-beta satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.1-beta satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0+build satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0+BUILD.5 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0+007 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0+a.b-c satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0-beta+build fails "\t[ 1.0\u3000,\u00a02.0 )\n"
+1.0.0+git.abc123 satisfies "\t[ 1.0\u3000,\u00a02.0 )\n"
+0 fails (1.0,1.0)
+0.0 fails (1.0,1.0)
+0.0.0 fails (1.0,1.0)
+0.0.0.0 fails (1.0,1.0)
+0.0.0-0 fails (1.0,1.0)
+0.0.0--1 fails (1.0,1.0)
+1 fails (1.0,1.0)
+1.0 fails (1.0,1.0)
+1.0.0 fails (1.0,1.0)
+1.0.0.0 fails (1.0,1.0)
+01.0 fails (1.0,1.0)
+1.00 fails (1.0,1.0)
+1.0.01 fails (1.0,1.0)
+001.002.003.004 fails (1.0,1.0)
+1.0.0.1 fails (1.0,1.0)
+1.0.0.01 fails (1.0,1.0)
+1.0.1 fails (1.0,1.0)
+1.0.0.1-alpha fails (1.0,1.0)
+1.0.0.1-pre fails (1.0,1.0)
+1.0.0-pre fails (1.0,1.0)
+1.1 fails (1.0,1.0)
+1.2 fails (1.0,1.0)
+1.10 fails (1.0,1.0)
+2 fails (1.0,1.0)
+2.0 fails (1.0,1.0)
+2.0.0 fails (1.0,1.0)
+2.0.0.1 fails (1.0,1.0)
+2.1 fails (1.0,1.0)
+10 fails (1.0,1.0)
+1.2.3 fails (1.0,1.0)
+1.2.3.4 fails (1.0,1.0)
+2147483647 fails (1.0,1.0)
+1.2147483647 fails (1.0,1.0)
+2147483647.2147483647.2147483647.2147483647 fails (1.0,1.0)
+0.9.9.1 fails (1.0,1.0)
+1.999.9999 fails (1.0,1.0)
+1.0-alpha fails (1.0,1.0)
+1.0-ALPHA fails (1.0,1.0)
+1.0-Alpha fails (1.0,1.0)
+1.0-alpha1 fails (1.0,1.0)
+1.0-alpha2 fails (1.0,1.0)
+1.0-alpha10 fails (1.0,1.0)
+1.0-alpha.1 fails (1.0,1.0)
+1.0-alpha.2 fails (1.0,1.0)
+1.0-alpha.10 fails (1.0,1.0)
+1.0-alpha.beta fails (1.0,1.0)
+1.0-beta fails (1.0,1.0)
+1.0-BETA fails (1.0,1.0)
+1.0-beta1 fails (1.0,1.0)
+1.0-beta2 fails (1.0,1.0)
+1.0-beta11 fails (1.0,1.0)
+1.0-beta.2 fails (1.0,1.0)
+1.0-beta.11 fails (1.0,1.0)
+1.0-rc.1 fails (1.0,1.0)
+1.0-rc1 fails (1.0,1.0)
+1.0-RC1 fails (1.0,1.0)
+1.0-0 fails (1.0,1.0)
+1.0-1 fails (1.0,1.0)
+1.0-2 fails (1.0,1.0)
+1.0-10 fails (1.0,1.0)
+1.0--1 fails (1.0,1.0)
+1.0--0 fails (1.0,1.0)
+1.0--05 fails (1.0,1.0)
+1.0-0a fails (1.0,1.0)
+1.0-a0 fails (1.0,1.0)
+1.0-- fails (1.0,1.0)
+1.0--- fails (1.0,1.0)
+1.0-a-b fails (1.0,1.0)
+1.0-a.-1 fails (1.0,1.0)
+1.0-2147483647 fails (1.0,1.0)
+1.0-2147483648 fails (1.0,1.0)
+1.0--2147483648 fails (1.0,1.0)
+1.0--2147483649 fails (1.0,1.0)
+1.0-99999999999 fails (1.0,1.0)
+1.0-x.y.z fails (1.0,1.0)
+1.0-X.Y.Z fails (1.0,1.0)
+1.0-alpha.0 fails (1.0,1.0)
+1.0.0-beta fails (1.0,1.0)
+1.0.0-beta.1 fails (1.0,1.0)
+1.0.0.0-beta fails (1.0,1.0)
+1.0.0.1-beta fails (1.0,1.0)
+1.0.1-beta fails (1.0,1.0)
+1.0+build fails (1.0,1.0)
+1.0+BUILD.5 fails (1.0,1.0)
+1.0+007 fails (1.0,1.0)
+1.0+a.b-c fails (1.0,1.0)
+1.0-beta+build fails (1.0,1.0)
+1.0.0+git.abc123 fails (1.0,1.0)
+0 fails 1 . 0
+0.0 fails 1 . 0
+0.0.0 fails 1 . 0
+0.0.0.0 fails 1 . 0
+0.0.0-0 fails 1 . 0
+0.0.0--1 fails 1 . 0
+1 satisfies 1 . 0
+1.0 satisfies 1 . 0
+1.0.0 satisfies 1 . 0
+1.0.0.0 satisfies 1 . 0
+01.0 satisfies 1 . 0
+1.00 satisfies 1 . 0
+1.0.01 satisfies 1 . 0
+001.002.003.004 satisfies 1 . 0
+1.0.0.1 satisfies 1 . 0
+1.0.0.01 satisfies 1 . 0
+1.0.1 satisfies 1 . 0
+1.0.0.1-alpha satisfies 1 . 0
+1.0.0.1-pre satisfies 1 . 0
+1.0.0-pre fails 1 . 0
+1.1 satisfies 1 . 0
+1.2 satisfies 1 . 0
+1.10 satisfies 1 . 0
+2 satisfies 1 . 0
+2.0 satisfies 1 . 0
+2.0.0 satisfies 1 . 0
+2.0.0.1 satisfies 1 . 0
+2.1 satisfies 1 . 0
+10 satisfies 1 . 0
+1.2.3 satisfies 1 . 0
+1.2.3.4 satisfies 1 . 0
+2147483647 satisfies 1 . 0
+1.2147483647 satisfies 1 . 0
+2147483647.2147483647.2147483647.2147483647 satisfies 1 . 0
+0.9.9.1 fails 1 . 0
+1.999.9999 satisfies 1 . 0
+1.0-alpha fails 1 . 0
+1.0-ALPHA fails 1 . 0
+1.0-Alpha fails 1 . 0
+1.0-alpha1 fails 1 . 0
+1.0-alpha2 fails 1 . 0
+1.0-alpha10 fails 1 . 0
+1.0-alpha.1 fails 1 . 0
+1.0-alpha.2 fails 1 . 0
+1.0-alpha.10 fails 1 . 0
+1.0-alpha.beta fails 1 . 0
+1.0-beta fails 1 . 0
+1.0-BETA fails 1 . 0
+1.0-beta1 fails 1 . 0
+1.0-beta2 fails 1 . 0
+1.0-beta11 fails 1 . 0
+1.0-beta.2 fails 1 . 0
+1.0-beta.11 fails 1 . 0
+1.0-rc.1 fails 1 . 0
+1.0-rc1 fails 1 . 0
+1.0-RC1 fails 1 . 0
+1.0-0 fails 1 . 0
+1.0-1 fails 1 . 0
+1.0-2 fails 1 . 0
+1.0-10 fails 1 . 0
+1.0--1 fails 1 . 0
+1.0--0 fails 1 . 0
+1.0--05 fails 1 . 0
+1.0-0a fails 1 . 0
+1.0-a0 fails 1 . 0
+1.0-- fails 1 . 0
+1.0--- fails 1 . 0
+1.0-a-b fails 1 . 0
+1.0-a.-1 fails 1 . 0
+1.0-2147483647 fails 1 . 0
+1.0-2147483648 fails 1 . 0
+1.0--2147483648 fails 1 . 0
+1.0--2147483649 fails 1 . 0
+1.0-99999999999 fails 1 . 0
+1.0-x.y.z fails 1 . 0
+1.0-X.Y.Z fails 1 . 0
+1.0-alpha.0 fails 1 . 0
+1.0.0-beta fails 1 . 0
+1.0.0-beta.1 fails 1 . 0
+1.0.0.0-beta fails 1 . 0
+1.0.0.1-beta satisfies 1 . 0
+1.0.1-beta satisfies 1 . 0
+1.0+build satisfies 1 . 0
+1.0+BUILD.5 satisfies 1 . 0
+1.0+007 satisfies 1 . 0
+1.0+a.b-c satisfies 1 . 0
+1.0-beta+build fails 1 . 0
+1.0.0+git.abc123 satisfies 1 . 0
+0 fails [1 .0,2.0)
+0.0 fails [1 .0,2.0)
+0.0.0 fails [1 .0,2.0)
+0.0.0.0 fails [1 .0,2.0)
+0.0.0-0 fails [1 .0,2.0)
+0.0.0--1 fails [1 .0,2.0)
+1 satisfies [1 .0,2.0)
+1.0 satisfies [1 .0,2.0)
+1.0.0 satisfies [1 .0,2.0)
+1.0.0.0 satisfies [1 .0,2.0)
+01.0 satisfies [1 .0,2.0)
+1.00 satisfies [1 .0,2.0)
+1.0.01 satisfies [1 .0,2.0)
+001.002.003.004 satisfies [1 .0,2.0)
+1.0.0.1 satisfies [1 .0,2.0)
+1.0.0.01 satisfies [1 .0,2.0)
+1.0.1 satisfies [1 .0,2.0)
+1.0.0.1-alpha satisfies [1 .0,2.0)
+1.0.0.1-pre satisfies [1 .0,2.0)
+1.0.0-pre fails [1 .0,2.0)
+1.1 satisfies [1 .0,2.0)
+1.2 satisfies [1 .0,2.0)
+1.10 satisfies [1 .0,2.0)
+2 fails [1 .0,2.0)
+2.0 fails [1 .0,2.0)
+2.0.0 fails [1 .0,2.0)
+2.0.0.1 fails [1 .0,2.0)
+2.1 fails [1 .0,2.0)
+10 fails [1 .0,2.0)
+1.2.3 satisfies [1 .0,2.0)
+1.2.3.4 satisfies [1 .0,2.0)
+2147483647 fails [1 .0,2.0)
+1.2147483647 satisfies [1 .0,2.0)
+2147483647.2147483647.2147483647.2147483647 fails [1 .0,2.0)
+0.9.9.1 fails [1 .0,2.0)
+1.999.9999 satisfies [1 .0,2.0)
+1.0-alpha fails [1 .0,2.0)
+1.0-ALPHA fails [1 .0,2.0)
+1.0-Alpha fails [1 .0,2.0)
+1.0-alpha1 fails [1 .0,2.0)
+1.0-alpha2 fails [1 .0,2.0)
+1.0-alpha10 fails [1 .0,2.0)
+1.0-alpha.1 fails [1 .0,2.0)
+1.0-alpha.2 fails [1 .0,2.0)
+1.0-alpha.10 fails [1 .0,2.0)
+1.0-alpha.beta fails [1 .0,2.0)
+1.0-beta fails [1 .0,2.0)
+1.0-BETA fails [1 .0,2.0)
+1.0-beta1 fails [1 .0,2.0)
+1.0-beta2 fails [1 .0,2.0)
+1.0-beta11 fails [1 .0,2.0)
+1.0-beta.2 fails [1 .0,2.0)
+1.0-beta.11 fails [1 .0,2.0)
+1.0-rc.1 fails [1 .0,2.0)
+1.0-rc1 fails [1 .0,2.0)
+1.0-RC1 fails [1 .0,2.0)
+1.0-0 fails [1 .0,2.0)
+1.0-1 fails [1 .0,2.0)
+1.0-2 fails [1 .0,2.0)
+1.0-10 fails [1 .0,2.0)
+1.0--1 fails [1 .0,2.0)
+1.0--0 fails [1 .0,2.0)
+1.0--05 fails [1 .0,2.0)
+1.0-0a fails [1 .0,2.0)
+1.0-a0 fails [1 .0,2.0)
+1.0-- fails [1 .0,2.0)
+1.0--- fails [1 .0,2.0)
+1.0-a-b fails [1 .0,2.0)
+1.0-a.-1 fails [1 .0,2.0)
+1.0-2147483647 fails [1 .0,2.0)
+1.0-2147483648 fails [1 .0,2.0)
+1.0--2147483648 fails [1 .0,2.0)
+1.0--2147483649 fails [1 .0,2.0)
+1.0-99999999999 fails [1 .0,2.0)
+1.0-x.y.z fails [1 .0,2.0)
+1.0-X.Y.Z fails [1 .0,2.0)
+1.0-alpha.0 fails [1 .0,2.0)
+1.0.0-beta fails [1 .0,2.0)
+1.0.0-beta.1 fails [1 .0,2.0)
+1.0.0.0-beta fails [1 .0,2.0)
+1.0.0.1-beta satisfies [1 .0,2.0)
+1.0.1-beta satisfies [1 .0,2.0)
+1.0+build satisfies [1 .0,2.0)
+1.0+BUILD.5 satisfies [1 .0,2.0)
+1.0+007 satisfies [1 .0,2.0)
+1.0+a.b-c satisfies [1 .0,2.0)
+1.0-beta+build fails [1 .0,2.0)
+1.0.0+git.abc123 satisfies [1 .0,2.0)

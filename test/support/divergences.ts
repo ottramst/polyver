@@ -5,10 +5,12 @@
  * the vendored file (relative to testdata/) and the case's input; upstream descriptions are not unique.
  */
 
+import type { VersTest } from './vectors.ts'
+
 interface Divergence {
   readonly reason: string
   /** The test type the divergence applies to, if the same input also appears in other test types. */
-  readonly testType?: string
+  readonly testType?: VersTest['test_type']
   /** Fields that replace the upstream expectation. */
   readonly override: { readonly expected_failure?: boolean; readonly expected_output?: unknown }
 }
@@ -31,7 +33,8 @@ const NUGET_CMP = 'vers-spec/tests/nuget_version_cmp_test.json'
 const NUGET_CASE =
   'The expected output lower-cases the pre-release labels of an input (1.0.0-BETA becomes ' +
   '1.0.0-beta), so it is not a sorted copy of the input. polyver returns the input strings in the ' +
-  'same order; NuGet compares labels ignoring case, so the versions are equal either way.'
+  'same order; NuGet compares labels ignoring case, so the lower-cased and original strings compare ' +
+  'equal.'
 
 /** A NuGet comparison case whose expected output lower-cases the labels of its sorted input. */
 function nugetCase(versions: readonly [string, string]): [string, Divergence] {
@@ -263,15 +266,45 @@ export function divergenceCount(prefix: string): number {
     ...DIVERGENCES.keys(),
     ...PAIR_DIVERGENCES.keys(),
     ...REQUIREMENT_DIVERGENCES.keys(),
+    ...RANGE_DIVERGENCES.keys(),
   ].filter((k) => k.startsWith(prefix)).length
 }
 
-export function divergence(path: string, input: unknown): Divergence | undefined {
-  return DIVERGENCES.get(key(path, input))
+/**
+ * The divergence for a vendored case, if any. One scoped to a test type applies only when `testType`
+ * matches it.
+ */
+export function divergence(
+  path: string,
+  input: unknown,
+  testType?: VersTest['test_type'],
+): Divergence | undefined {
+  const d = DIVERGENCES.get(key(path, input))
+  return d && (d.testType === undefined || d.testType === testType) ? d : undefined
 }
 
 export function pairDivergence(path: string, a: string, b: string): PairDivergence | undefined {
   return PAIR_DIVERGENCES.get(key(path, [a, b]))
+}
+
+/** A range of testdata/oracle/nuget-ranges.txt that NuGet parses and polyver rejects. */
+const NUGET_RANGES = 'oracle/nuget-ranges.txt'
+const NUGET_EMPTY =
+  'NuGet accepts an interval whose bounds are equal and both exclusive, which matches no version. VERS ' +
+  'cannot express an empty range, so fromNative throws INVALID_CONSTRAINTS.'
+const NUGET_SPACE =
+  'NuGetVersion.TryParse ignores whitespace around each number, so "1 . 0" is 1.0. A VERS version ' +
+  'cannot contain whitespace, so fromNative rejects a bound with whitespace inside it.'
+
+const RANGE_DIVERGENCES: ReadonlyMap<string, string> = new Map([
+  [key(NUGET_RANGES, '(1.0,1.0)'), NUGET_EMPTY],
+  [key(NUGET_RANGES, '1 . 0'), NUGET_SPACE],
+  [key(NUGET_RANGES, '[1 .0,2.0)'), NUGET_SPACE],
+])
+
+/** The reason polyver rejects a range that the native tool parses (or the reverse), if it does. */
+export function rangeDivergence(path: string, range: string): string | undefined {
+  return RANGE_DIVERGENCES.get(key(path, range))
 }
 
 /** The reason polyver gives the opposite verdict for a row of an oracle requirements file, if it does. */
