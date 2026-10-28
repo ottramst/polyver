@@ -30,7 +30,8 @@ describe('golang against x/mod', () => {
     expect(wrong).toEqual([])
   })
 
-  it('accepts a version without "v" exactly when x/mod accepts it with "v"', () => {
+  // x/mod requires the "v"; the test above ties the prefixed form to x/mod.
+  it('accepts a version without "v" exactly when it accepts it with "v"', () => {
     const wrong = valid
       .filter(([v]) => !v.startsWith('v') && s.isValid(v) !== s.isValid(`v${v}`))
       .map(([v]) => v)
