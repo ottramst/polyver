@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.3.0
+
 FEATURES:
 
 - Scheme `golang`, matching `golang.org/x/mod/semver` v0.42.0, including pseudo-versions and
