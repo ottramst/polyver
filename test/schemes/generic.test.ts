@@ -27,6 +27,7 @@ it('lists the supported schemes', () => {
     'apk',
     'datetime',
     'deb',
+    'golang',
     'intdot',
     'lexicographic',
     'maven',

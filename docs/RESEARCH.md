@@ -102,6 +102,14 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   4.0.0-rc-7, and 5 more with 4.0.0-rc-7 only. vers-spec `maven_version_cmp_test.json` expects
   `2-1 < 2.0.a`, but since Maven 3.9 (MNG-7644) `2.0.a` reads as `2-a`, which sorts first.
 
+## Findings from the Go oracle (2026-10-28)
+
+- `golang.org/x/mod/semver` v0.42.0 is SemVer 2.0.0 precedence plus a required `v` and the shorthands
+  `v1` and `v1.2`. No pair in the oracle needs special handling for pseudo-versions or `+incompatible`.
+- Real versions are mostly pseudo-versions: in a sample of 902 versions from the module index, 554 are
+  pseudo-versions and 44 end in `+incompatible`. All 902 are valid and none is a shorthand or lacks
+  the `v`, so those forms come from advisory data, not from Go.
+
 ## Licensing of test data
 
 - **Do not vendor** dpkg's `t-version.c`, rpm's `tests/rpmvercmp.at`, apk-tools' `test/unit/version.data`,

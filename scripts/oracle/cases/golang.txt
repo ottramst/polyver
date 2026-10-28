@@ -1,0 +1,68 @@
+# Hand-written Go module versions covering the Go modules reference
+# (https://go.dev/ref/mod#versions and https://go.dev/ref/mod#pseudo-versions).
+v0.0.0
+v0.0.1
+v0.1.0
+v1
+v1.0
+v1.0.0
+v1.2
+v1.2.0
+v1.2.3
+v1.10.0
+v2.0.0
+v10.0.0
+# Pre-releases, ordered by SemVer 2.0.0 precedence.
+v1.0.0-alpha
+v1.0.0-alpha.1
+v1.0.0-alpha.beta
+v1.0.0-beta
+v1.0.0-beta.2
+v1.0.0-beta.11
+v1.0.0-rc.1
+v1.0.0-0
+v1.0.0-1
+v1.0.0-10
+v1.0.0--
+v1.0.0-a-b
+v1.0.0-A
+# Build metadata, which does not affect the order.
+v1.0.0+build
+v1.0.0+build.1
+v1.0.0-rc.1+build
+v2.0.0+incompatible
+v2.1.0+incompatible
+v3.2.1+incompatible
+# The three pseudo-version forms: no base version, after a release, after a pre-release.
+v0.0.0-20191109021931-daa7c04131f5
+v0.0.0-20200101000000-0123456789ab
+v1.2.4-0.20191109021931-daa7c04131f5
+v1.2.4-0.20240101120000-abcdefabcdef
+v1.2.3-pre.0.20191109021931-daa7c04131f5
+v2.0.1-0.20191109021931-daa7c04131f5+incompatible
+v1.0.0-20191109021931-daa7c04131f5
+# Large numbers.
+v1.2.99999999999999999
+v1.2.100000000000000000
+v1.0.0-99999999999999999999
+# Invalid in Go: leading zeros, empty identifiers, a shorthand with a suffix, a missing or wrong prefix.
+v01.0.0
+v1.00.0
+v1.0.00
+v1.0.0-01
+v1.0.0-
+v1.0.0-a..b
+v1.0.0+
+v1.0.0+a..b
+v1-pre
+v1.2-pre
+v1+meta
+v1.2+meta
+v1.0.0.0
+v1.0.0-a_b
+v
+vv1.0.0
+V1.0.0
+1.0.0
+1.2
+1
