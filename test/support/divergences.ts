@@ -287,6 +287,48 @@ const CONSTRAINT_DIVERGENCES: ReadonlyMap<string, string> = new Map([
       'which is not a valid Composer version, so it cannot be written in VERS.',
   ],
 ])
+// Cargo's divergences are rules rather than rows: they apply to every build-metadata tie among the
+// oracle pairs and to hundreds of requirement rows (every pre-release case against almost every
+// requirement). The cargo tests check that nothing outside these rules differs.
+
+/** A pair of Cargo versions that differ only in build metadata. */
+const CARGO_BUILD =
+  "semver's Ord for Version breaks ties by build metadata (1.2.3+23 < 1.2.3+42), but SemVer " +
+  'precedence, Version::cmp_precedence and VersionReq::matches ignore it, and so does polyver: ' +
+  'vers:cargo/=1.0.0 contains 1.0.0+build, as =1.0.0 matches it.'
+
+const CARGO_PAIRS = ['oracle/cargo.txt', 'dtolnay-semver/test_version.json']
+
+/** The reason polyver orders two Cargo versions as equal where semver's Ord does not, if it does. */
+export function cargoBuildDivergence(path: string, a: string, b: string): string | undefined {
+  const release = (v: string): string => v.split('+')[0] as string
+  return CARGO_PAIRS.includes(path) && a !== b && release(a) === release(b)
+    ? CARGO_BUILD
+    : undefined
+}
+
+/** A pre-release version that VersionReq::matches rejects but polyver's VERS range contains. */
+const CARGO_PRERELEASE =
+  'VersionReq::matches only lets a pre-release match if a comparator names a pre-release of the ' +
+  "same major.minor.patch (eval.rs, pre_is_compatible), a bound such as <1.0 or ^1.2.3's upper " +
+  'bound excludes the pre-releases of 1.0.0 and 2.0.0 (<1.0.0-0), and =1, ~1 and >=1 match no ' +
+  'pre-release of 1.x. As for npm, the VERS range is a plain set of intervals written with bounds ' +
+  'such as <2.0.0, so it contains these pre-releases. It never misses a version that Cargo matches.'
+
+const CARGO_REQUIREMENTS = ['oracle/cargo-requirements.txt', 'dtolnay-semver/test_version_req.json']
+
+/** The reason polyver contains a pre-release that Cargo's requirement rejects, if that is the case. */
+export function cargoPrereleaseDivergence(
+  path: string,
+  version: string,
+  cargoMatches: boolean,
+  polyverContains: boolean,
+): string | undefined {
+  const prerelease = (version.split('+')[0] as string).includes('-')
+  return CARGO_REQUIREMENTS.includes(path) && prerelease && !cargoMatches && polyverContains
+    ? CARGO_PRERELEASE
+    : undefined
+}
 
 function key(path: string, input: unknown): string {
   return `${path} ${JSON.stringify(input)}`
@@ -317,6 +359,8 @@ export function divergence(
 }
 
 export function pairDivergence(path: string, a: string, b: string): PairDivergence | undefined {
+  const build = cargoBuildDivergence(path, a, b)
+  if (build) return { reason: build, op: '=' }
   return PAIR_DIVERGENCES.get(key(path, [a, b]))
 }
 

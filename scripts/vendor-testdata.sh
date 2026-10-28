@@ -10,6 +10,7 @@ OSV_SCALIBR=1ca96d6fb34c58289978fbf732cac83281b962c4
 NODE_SEMVER=6e05b7637396ac66522cff8731f07cfe0ef49a29 # v7.8.5
 PACKAGING=929fd4b1410ac7ef61ef3f45b2f5d7e87711a9b5 # 26.3
 XMOD=b5136e5ba156da612a1efc6e49b55988a134a5e0 # v0.42.0
+SEMVER_RS=7625c7aa3f0e8ba21e099d1765bcebcb72aa8816 # 1.0.28
 
 fetch() { # <repo> <commit> <path> <dest>
   mkdir -p "$(dirname "$4")"
@@ -63,3 +64,10 @@ fetch golang/mod "$XMOD" LICENSE testdata/x-mod/LICENSE
 fetch golang/mod "$XMOD" semver/semver_test.go "$tmp/semver_test.go"
 fetch golang/mod "$XMOD" module/pseudo_test.go "$tmp/pseudo_test.go"
 node scripts/go-fixture-to-json.ts "$tmp/semver_test.go" "$tmp/pseudo_test.go" testdata/x-mod
+
+# dtolnay/semver's tests are Rust; extract the version and requirement cases without running them.
+fetch dtolnay/semver "$SEMVER_RS" LICENSE-MIT testdata/dtolnay-semver/LICENSE-MIT
+fetch dtolnay/semver "$SEMVER_RS" LICENSE-APACHE testdata/dtolnay-semver/LICENSE-APACHE
+fetch dtolnay/semver "$SEMVER_RS" tests/test_version.rs "$tmp/test_version.rs"
+fetch dtolnay/semver "$SEMVER_RS" tests/test_version_req.rs "$tmp/test_version_req.rs"
+node scripts/rust-fixture-to-json.ts "$tmp/test_version.rs" "$tmp/test_version_req.rs" testdata/dtolnay-semver

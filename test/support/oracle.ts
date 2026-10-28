@@ -69,6 +69,13 @@ export function oracleRequirements(
     })
 }
 
+/** Reads the `rejects <requirement>` rows of testdata/oracle/<eco>-requirements.txt. */
+export function oracleRejectedRequirements(eco: string): string[] {
+  return readTestdata(`oracle/${eco}-requirements.txt`)
+    .split('\n')
+    .flatMap((text) => (text.startsWith('rejects ') ? [decode(text.slice('rejects '.length))] : []))
+}
+
 export interface RangeValidity {
   readonly range: string
   /** The native tool's verdict, or polyver's where it deliberately differs (see divergences.ts). */
@@ -93,7 +100,8 @@ export function oracleRangeValidity(eco: string): RangeValidity[] {
 
 /**
  * An oracle input written as a JSON string, so that it can keep surrounding or invisible whitespace
- * that a plain line would lose (see scripts/oracle/cases/nuget-ranges.txt).
+ * that a plain line would lose (see scripts/oracle/cases/nuget-ranges.txt, and `quote` in
+ * scripts/oracle/generate.ts for cargo).
  */
 function decode(text: string): string {
   return text.startsWith('"') ? (JSON.parse(text) as string) : text

@@ -33,6 +33,7 @@ stringifyVers(fromNative('pypi', '>=1.0,!=1.5,<2.0')) // 'vers:pypi/>=1.0|!=1.5|
 stringifyVers(fromNative('maven', '(,1.0],[1.2,)')) // 'vers:maven/<=1.0|>=1.2'
 stringifyVers(fromNative('gem', '~> 2.0.8, != 2.0.9')) // 'vers:gem/>=2.0.8|!=2.0.9|<2.1'
 stringifyVers(fromNative('nuget', '[1.0.0, 2.0.0)')) // 'vers:nuget/>=1.0.0|<2.0.0'
+stringifyVers(fromNative('cargo', '^0.2.3, <0.2.7')) // 'vers:cargo/>=0.2.3|<0.2.7'
 stringifyVers(fromNative('composer', '^1.2 || ~2.0.3'))
 // 'vers:composer/>=1.2.0.0-dev|<2.0.0.0-dev|>=2.0.3.0-dev|<2.1.0.0-dev'
 ```
@@ -69,18 +70,23 @@ Every function throws a `VersError` with a `code`:
 `fromNative` converts npm ranges (`^`, `~`, x-ranges, hyphen ranges, `||`), PEP 440 specifiers
 (`~=`, `==1.*`, `!=`, `,` and `||`), Maven version ranges (`[1.0,2.0)`, `(,1.0],[1.2,)`, `[1.0]`),
 RubyGems requirements (`~>`, `>=`, `!=`, joined with `,`), NuGet version ranges (`[1.0,2.0)`,
-`(,1.0]`, `[1.0]`) and Composer constraints (`^`, `~`, `1.2.*`, `1.0 - 2.0`, `,` or space for AND,
-`||` for OR) to canonical VERS by interval arithmetic, so overlapping alternatives are merged.
+`(,1.0]`, `[1.0]`), Cargo requirements (`^`, `~`, `1.*`, `>=`, joined with `,`) and Composer
+constraints (`^`, `~`, `1.2.*`, `1.0 - 2.0`, `,` or space for AND, `||` for OR) to canonical VERS by
+interval arithmetic, so overlapping alternatives are merged.
 A bare Maven version such as `1.0`, which Maven treats as a soft requirement, means `>=1.0`, as in the
 [enforcer plugin's range documentation](https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html).
 A bare RubyGems version means `=`, as in `Gem::Requirement`, and a bare NuGet version means `>=`, as in
 `VersionRange.TryParse` without floating versions (the same as `Parse` for ranges that do not float).
 NuGet floating versions (`1.*`, `1.0.0-*`) are not supported, because they pick
-the newest matching version instead of describing a set of versions. Two conventions follow vers-spec
-rather than the native tool: npm upper bounds are written `<2.0.0` (node-semver uses `<2.0.0-0`), and
-the native rules that exclude some pre-releases (npm, and RubyGems `~>`, which rejects `2.1.a` for
-`~> 2.0.8`) or post-releases (PEP 440 `>V`) are not applied, because a VERS range is a plain set of
-intervals.
+the newest matching version instead of describing a set of versions. A bare Cargo version means `^`, so
+`0.0.3` is `=0.0.3` and `1.2` is `>=1.2.0-0|<2.0.0`: Cargo's `^1.2` and `>1.1` also match pre-releases
+of `1.2.0` such as `1.2.0-beta`, so their lower bound is `1.2.0-0`, the smallest pre-release. Two
+conventions follow vers-spec rather than the native tool: npm and Cargo upper bounds are written
+`<2.0.0` (node-semver and Cargo exclude the pre-releases of `2.0.0`), and the native rules that exclude
+some pre-releases (npm; Cargo, where `^1.0.0` does not match `1.5.0-alpha`; and RubyGems `~>`, which
+rejects `2.1.a` for `~> 2.0.8`) or post-releases (PEP 440 `>V`) are not applied, because a VERS range
+is a plain set of intervals. A Cargo range therefore contains every version that the requirement
+matches, and some pre-releases that it does not.
 Composer constraints keep the bounds Composer itself compares against, including its `-dev` bounds:
 `^1.2` is `>=1.2.0.0-dev|<2.0.0.0-dev`, so `1.2.0-beta` matches and `2.0.0-beta` does not. A constraint
 on a `dev-` branch (`dev-main`, `1.0 || dev-main`) throws, because a branch has no place in the order.
@@ -101,18 +107,18 @@ all for RPM or Alpine versions.
 
 ## Supported schemes
 
-| Scheme                                                         | Status  |
-| -------------------------------------------------------------- | ------- |
-| VERS core (parse, validate, canonicalize, contains)            | done    |
-| `semver`, `intdot`, `lexicographic`, `datetime`, `all`, `none` | done    |
-| `npm`, `pypi` (versions and native ranges)                     | done    |
-| `deb`, `rpm`, `apk` (versions)                                 | done    |
-| `maven` (versions and native ranges)                           | done    |
-| `golang` (versions)                                            | done    |
-| `gem` (versions and native ranges)                             | done    |
-| `nuget` (versions and native ranges)                           | done    |
-| `composer` (versions and native ranges)                        | done    |
-| `cargo`                                                        | planned |
+| Scheme                                                         | Status |
+| -------------------------------------------------------------- | ------ |
+| VERS core (parse, validate, canonicalize, contains)            | done   |
+| `semver`, `intdot`, `lexicographic`, `datetime`, `all`, `none` | done   |
+| `npm`, `pypi` (versions and native ranges)                     | done   |
+| `deb`, `rpm`, `apk` (versions)                                 | done   |
+| `maven` (versions and native ranges)                           | done   |
+| `golang` (versions)                                            | done   |
+| `gem` (versions and native ranges)                             | done   |
+| `nuget` (versions and native ranges)                           | done   |
+| `cargo` (versions and native ranges)                           | done   |
+| `composer` (versions and native ranges)                        | done   |
 
 ## Correctness
 
@@ -120,7 +126,8 @@ Every scheme is tested against the
 [vers-spec conformance suite](https://github.com/package-url/vers-spec/tree/main/tests), permissively
 licensed vectors (such as [osv-scalibr](https://github.com/google/osv-scalibr/tree/main/semantic/testdata)),
 and vectors generated by running the ecosystem's own tool (`dpkg`, `rpm`, `apk`, Maven's
-`ComparableVersion`, Go's `golang.org/x/mod`, RubyGems, NuGet.Versioning, Composer's composer/semver) as an oracle. See
+`ComparableVersion`, Go's `golang.org/x/mod`, RubyGems, NuGet.Versioning, Cargo's `semver` crate,
+Composer's composer/semver) as an oracle. See
 [testdata/README.md](testdata/README.md).
 
 - `deb` matches dpkg 1.22, including validity (`dpkg --validate-version`), except that surrounding
@@ -156,6 +163,14 @@ and vectors generated by running the ecosystem's own tool (`dpkg`, `rpm`, `apk`,
   ranges and 3,960 range and version pairs. The only differences are three ranges that NuGet accepts
   and polyver rejects: `(1.0,1.0)`, which matches no version, and `1 . 0` and `[1 .0,2.0)`, which
   have whitespace inside a version.
+- `cargo` matches `Version::parse` and `VersionReq::parse` in [dtolnay/semver](https://github.com/dtolnay/semver)
+  1.0.28, the crate Cargo uses: SemVer 2.0.0 with major, minor and patch numbers no larger than u64::MAX,
+  and only U+0020 spaces in a requirement. Build metadata is ignored when comparing, as in SemVer
+  precedence and `VersionReq::matches`, so `vers:cargo/1.0.0` contains `1.0.0+build`; the crate's `Ord`
+  for `Version` instead breaks ties by build metadata (`1.2.3+23 < 1.2.3+42`), which polyver does not
+  follow. `fromNative` is checked against `VersionReq::matches` on 13,764 requirement and version
+  pairs: every release version agrees, every version that Cargo matches is in the VERS range, and the
+  only differences are the pre-releases described under [Native ranges](#native-ranges).
 - `composer` matches composer/semver 3.5.2 on PHP 8.5.12: a version is valid if
   `VersionParser::normalize` accepts it, and two versions compare as PHP's `version_compare` compares
   their normalized forms (`Semver::sort`). Versions are padded to four numbers (`1.2 == 1.2.0.0`),

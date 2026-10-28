@@ -51,6 +51,8 @@ commits below; do not edit them by hand.
 | `oracle/gem.txt`, `oracle/gem-validity.txt`, `oracle/gem-requirements.txt` | Our oracle output: `scripts/oracle/run.sh` runs `Gem::Version` and `Gem::Requirement` from RubyGems 4.0.20, bundled with Ruby 4.0.9, in a digest-pinned Ruby container. The hand-written cases in `scripts/oracle/cases/gem*.txt` include those of RubyGems' `test_gem_version.rb` and `test_gem_requirement.rb` (MIT) | MIT (our output) | see headers |
 | `oracle/nuget-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the nuget.org search API (listed versions of the 4,000 most downloaded packages, as normalized by nuget.org) | Facts from public package metadata | 2026-10-28 |
 | `oracle/nuget.txt`, `oracle/nuget-validity.txt`, `oracle/nuget-ranges.txt` | Our oracle output: `scripts/oracle/run.sh` runs `NuGetVersion.TryParse`, `VersionComparer.Default`, `VersionRange.TryParse` and `VersionRange.Satisfies` from NuGet.Versioning 7.9.0 (pinned with its content hash by `scripts/oracle/nuget/packages.lock.json`) in a digest-pinned .NET SDK 10.0 container | MIT (our output) | see headers |
+| `oracle/cargo-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the crates.io sparse index (`index.crates.io`) entries of the crates in `scripts/oracle/cargo-crates.txt`, without yanked versions | Facts from public package metadata | 2026-10-28 |
+| `oracle/cargo.txt`, `oracle/cargo-validity.txt`, `oracle/cargo-requirements.txt` | Our oracle output: `scripts/oracle/run.sh` runs `Version::parse`, `Version`'s `Ord`, `VersionReq::parse` and `VersionReq::matches` from dtolnay/semver 1.0.28 (pinned by `scripts/oracle/cargo/Cargo.lock`) in a digest-pinned Rust container. The hand-written cases in `scripts/oracle/cases/cargo*.txt` include those of dtolnay/semver's `test_version.rs` and `test_version_req.rs` (MIT/Apache-2.0) | MIT (our output) | see headers |
 | `oracle/composer-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the Packagist metadata (`repo.packagist.org/p2`, tags and branches) of the 200 most popular packages | Facts from public package metadata | 2026-10-28 |
 | `oracle/composer.txt`, `oracle/composer-validity.txt`, `oracle/composer-requirements.txt` | Our oracle output: `scripts/oracle/run.sh` runs `VersionParser::normalize`, `Comparator` and `Semver::satisfies` from composer/semver 3.5.2 (pinned to its commit by `scripts/oracle/composer/composer.lock`) on PHP 8.5.12 in a digest-pinned Composer container. The hand-written cases in `scripts/oracle/cases/composer*.txt` include those of composer/semver's `VersionParserTest.php`, `ComparatorTest.php` and `SemverTest.php` (MIT) | MIT (our output) | see headers |
 | `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
@@ -59,6 +61,8 @@ commits below; do not edit them by hand.
 | `packaging/versions.json` | packaging `tests/test_version.py` (`VERSIONS`, `test_invalid_versions`, `test_normalized_versions`), extracted by `scripts/extract-packaging-vectors.py` | BSD-2-Clause | 26.3 (`929fd4b`) |
 | `x-mod/LICENSE` | [golang/mod](https://github.com/golang/mod) (`golang.org/x/mod`) | BSD-3-Clause | v0.42.0 (`b5136e5`) |
 | `x-mod/semver.json`, `x-mod/pseudo.json` | x/mod `semver/semver_test.go` (`tests`) and `module/pseudo_test.go` (`pseudoTests`), extracted by `scripts/go-fixture-to-json.ts` | BSD-3-Clause | v0.42.0 (`b5136e5`) |
+| `dtolnay-semver/LICENSE-MIT`, `dtolnay-semver/LICENSE-APACHE` | [dtolnay/semver](https://github.com/dtolnay/semver) (dual MIT / Apache-2.0) | MIT, Apache-2.0 | 1.0.28 (`7625c7a`) |
+| `dtolnay-semver/test_version.json`, `dtolnay-semver/test_version_req.json` | dtolnay/semver `tests/test_version.rs` and `tests/test_version_req.rs` (parse, comparison, `matches` and equality assertions), extracted by `scripts/rust-fixture-to-json.ts`. `tests/test_identifier.rs` is not extracted: it tests `Prerelease` and `BuildMetadata` on their own, not versions | MIT, Apache-2.0 | 1.0.28 (`7625c7a`) |
 
 vers-spec `7d0cc19` is the `main` branch after the v1.2.1 tag; it includes the fix to
 `npm_range_from_native_test.json` that treats a space as intersection
@@ -66,25 +70,31 @@ vers-spec `7d0cc19` is the `main` branch after the v1.2.1 tag; it includes the f
 
 Where polyver deliberately gives a different result than a vendored case expects, the case is listed
 with the reason in [`test/support/divergences.ts`](../test/support/divergences.ts). It still runs and
-asserts polyver's result.
+asserts polyver's result. Cargo's two divergences (build-metadata ties and pre-releases that
+`VersionReq::matches` rejects) are rules there rather than lists of cases, because they cover hundreds
+of oracle rows; the cargo tests check that no other row differs, that every version Cargo matches is in
+the VERS range, and pin the exempt rows per requirement in
+[`test/schemes/__snapshots__/cargo-prerelease-divergences.txt`](../test/schemes/__snapshots__/cargo-prerelease-divergences.txt).
+In `oracle/cargo-requirements.txt`, a requirement that is empty, starts or ends with a space, or has a
+character other than printable ASCII is written as a JSON string, as in `oracle/nuget-ranges.txt`.
 
 ## Oracle vectors
 
-`pnpm oracle <deb|rpm|apk|maven|golang|gem|nuget|composer>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt`
-(and, for gem and composer, `oracle/<eco>-requirements.txt`; for nuget, `oracle/nuget-ranges.txt`) from committed
-inputs only, so a rerun is byte-identical. Its inputs are:
+`pnpm oracle <deb|rpm|apk|maven|golang|gem|nuget|cargo|composer>` regenerates `oracle/<eco>.txt` and
+`oracle/<eco>-validity.txt` (and, for gem, cargo and composer, `oracle/<eco>-requirements.txt`; for nuget,
+`oracle/nuget-ranges.txt`) from committed inputs only, so a rerun is byte-identical. Its inputs are:
 
 - hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
   (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format, the
   POM version order specification and its examples, the Go modules reference, NuGet's package versioning
-  page), not from any test suite, except that the gem and composer cases include those of RubyGems' and
-  composer/semver's own (MIT) tests;
+  page), not from any test suite, except that the gem, cargo and composer cases include those of
+  RubyGems', dtolnay/semver's and composer/semver's own (MIT) tests;
 - the index sample, refreshed with `pnpm oracle:harvest <eco>`;
 - grammar-based random versions and single-edit mutations from a fixed-seed PRNG
   (`scripts/oracle/generate.ts`).
 
 Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`,
-`new ComparableVersion`, `semver.IsValid`, `Gem::Version.correct?`, `NuGetVersion.TryParse`, `VersionParser::normalize`), and only pairs of valid versions are compared, because dpkg merely warns about
+`new ComparableVersion`, `semver.IsValid`, `Gem::Version.correct?`, `NuGetVersion.TryParse`, `Version::parse`, `VersionParser::normalize`), and only pairs of valid versions are compared, because dpkg merely warns about
 some invalid versions and apk prints nothing for them.
 
 The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and
