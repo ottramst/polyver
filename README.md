@@ -68,33 +68,49 @@ Every function throws a `VersError` with a `code`:
 
 ### Native ranges
 
-`fromNative` converts npm ranges (`^`, `~`, x-ranges, hyphen ranges, `||`), PEP 440 specifiers
-(`~=`, `==1.*`, `!=`, `,` and `||`), Maven version ranges (`[1.0,2.0)`, `(,1.0],[1.2,)`, `[1.0]`),
-RubyGems requirements (`~>`, `>=`, `!=`, joined with `,`), NuGet version ranges (`[1.0,2.0)`,
-`(,1.0]`, `[1.0]`), Cargo requirements (`^`, `~`, `1.*`, `>=`, joined with `,`) and Composer
-constraints (`^`, `~`, `1.2.*`, `1.0 - 2.0`, `,` or space for AND, `||` for OR) to canonical VERS by
-interval arithmetic, so overlapping alternatives are merged.
-A bare Maven version such as `1.0`, which Maven treats as a soft requirement, means `>=1.0`, as in the
-[enforcer plugin's range documentation](https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html).
-A bare RubyGems version means `=`, as in `Gem::Requirement`, and a bare NuGet version means `>=`, as in
-`VersionRange.TryParse` without floating versions (the same as `Parse` for ranges that do not float).
-NuGet floating versions (`1.*`, `1.0.0-*`) are not supported, because they pick
-the newest matching version instead of describing a set of versions. A bare Cargo version means `^`, so
-`0.0.3` is `=0.0.3` and `1.2` is `>=1.2.0-0|<2.0.0`: Cargo's `^1.2` and `>1.1` also match pre-releases
-of `1.2.0` such as `1.2.0-beta`, so their lower bound is `1.2.0-0`, the smallest pre-release. Two
-conventions follow vers-spec rather than the native tool: npm and Cargo upper bounds are written
-`<2.0.0` (node-semver and Cargo exclude the pre-releases of `2.0.0`), and the native rules that exclude
-some pre-releases (npm; Cargo, where `^1.0.0` does not match `1.5.0-alpha`; and RubyGems `~>`, which
-rejects `2.1.a` for `~> 2.0.8`) or post-releases (PEP 440 `>V`) are not applied, because a VERS range
-is a plain set of intervals. A Cargo range therefore contains every version that the requirement
-matches, and some pre-releases that it does not.
-Composer constraints keep the bounds Composer itself compares against, including its `-dev` bounds:
-`^1.2` is `>=1.2.0.0-dev|<2.0.0.0-dev`, so `1.2.0-beta` matches and `2.0.0-beta` does not. A
-`dev-` branch only matches itself, so it is dropped from an OR (`dev-main || ^1.0` is `^1.0`),
-`!=dev-main` matches every version, and a constraint that matches only branches (`dev-main`,
-`>=dev-main`) throws. A stability flag in a constraint keeps its case in Composer, so `>=1.0@BETA` is
-`>=1.0.0.0-STABLE`: `version_compare` reads both `BETA` and `STABLE` as unknown words, which compare
-equal, so the range is exact.
+`fromNative(type, range)` converts a range written in an ecosystem's own syntax to canonical VERS.
+Alternatives are combined by interval arithmetic, so overlapping ones are merged.
+
+| Scheme     | Native syntax                                                              | A bare `1.2` means |
+| ---------- | -------------------------------------------------------------------------- | ------------------ |
+| `npm`      | `^`, `~`, x-ranges (`1.x`), hyphen ranges (`1.0 - 2.0`), `\|\|`             | `1.2.x`            |
+| `pypi`     | PEP 440 specifiers: `~=`, `==1.*`, `!=`, joined with `,`; `\|\|` for OR     | invalid            |
+| `maven`    | Version ranges: `[1.0,2.0)`, `(,1.0],[1.2,)`, `[1.0]`                      | `>=1.2` ¹          |
+| `gem`      | RubyGems requirements: `~>`, `>=`, `!=`, joined with `,`                   | `=1.2`             |
+| `nuget`    | Version ranges: `[1.0,2.0)`, `(,1.0]`, `[1.0]` ²                           | `>=1.2`            |
+| `cargo`    | `^`, `~`, `1.*`, `>=`, joined with `,`                                     | `^1.2`             |
+| `composer` | `^`, `~`, `1.2.*`, `1.0 - 2.0`; `,` or a space for AND, `\|\|` for OR       | `==1.2` ³          |
+
+1. Maven treats a bare version as a soft requirement; polyver reads it as `>=`, as the
+   [enforcer plugin](https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html) does.
+2. NuGet floating versions (`1.*`, `1.0.0-*`) are not supported: they pick the newest matching version
+   rather than describe a set of versions.
+3. Composer's own bound, `==1.2.0.0`.
+
+#### Where the result differs from the native tool
+
+A VERS range is a plain set of intervals, so some native rules cannot be expressed:
+
+- **Pre-release and post-release exclusions are not applied.** npm and Cargo match a pre-release only
+  when a comparator names a pre-release of the same version (Cargo's `^1.0.0` does not match
+  `1.5.0-alpha`). RubyGems `~> 2.0.8` rejects `2.1.a`, and PEP 440 `>1.0` rejects `1.0.post1`. The VERS
+  range contains these versions.
+- **npm and Cargo upper bounds are written `<2.0.0`**, following vers-spec, although node-semver and
+  Cargo also exclude the pre-releases of `2.0.0`.
+
+#### Scheme notes
+
+- **Cargo.** A range always contains every version the requirement matches, plus some pre-releases it
+  does not. Because `^1.2`, a bare `1.2` and `>1.1` also match pre-releases of `1.2.0` such as
+  `1.2.0-beta`, their lower bound is `1.2.0-0`, the smallest pre-release: `1.2` is `>=1.2.0-0|<2.0.0`.
+  On a `0.0` major and minor, `^` is exact: `0.0.3` is `=0.0.3`.
+- **Composer.** Ranges keep the bounds Composer itself compares against, including its `-dev` bounds:
+  `^1.2` is `>=1.2.0.0-dev|<2.0.0.0-dev`, so `1.2.0-beta` matches and `2.0.0-beta` does not.
+  - A `dev-` branch matches only itself. It is dropped from an OR (`dev-main || ^1.0` is `^1.0`),
+    `!=dev-main` matches every version, and a constraint that matches only branches (`dev-main`,
+    `>=dev-main`) throws.
+  - A stability flag keeps its case, so `>=1.0@BETA` is `>=1.0.0.0-STABLE`. `version_compare` reads
+    `BETA` and `STABLE` as unknown words, which compare equal, so the range is exact.
 
 ### Notes
 
