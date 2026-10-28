@@ -8,6 +8,7 @@ import { intdot } from './intdot.ts'
 import { lexicographic } from './lexicographic.ts'
 import { maven } from './maven.ts'
 import { npm } from './npm.ts'
+import { nuget } from './nuget.ts'
 import { pypi } from './pypi.ts'
 import { rpm } from './rpm.ts'
 import { semver } from './semver.ts'
@@ -30,6 +31,7 @@ const schemes = new Map<string, Scheme>(
     maven,
     none,
     npm,
+    nuget,
     pypi,
     rpm,
     semver,

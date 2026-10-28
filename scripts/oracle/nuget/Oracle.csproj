@@ -1,0 +1,15 @@
+<!-- NuGet oracle, run by scripts/oracle/run.sh. NuGet.Versioning is pinned here and, with its
+     content hash, in packages.lock.json, which run.sh restores in locked mode. -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Versioning" Version="7.9.0" />
+  </ItemGroup>
+</Project>

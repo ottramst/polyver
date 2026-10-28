@@ -2,6 +2,8 @@
 
 FEATURES:
 
+- Scheme `nuget`, matching NuGet.Versioning 7.9.0, and `fromNative` for NuGet version ranges such as
+  `[1.0,2.0)`, `(,1.0]` and `1.0`. Floating versions such as `1.*` are not supported.
 - Scheme `composer`, matching composer/semver 3.5.2 (`VersionParser::normalize`, with PHP's
   `version_compare` on the normalized versions), and `fromNative` for Composer constraints such as
   `^1.2 || ~2.0.3` and `>=1.0 <2.0`. `dev-` branches are not valid versions, because Composer gives them

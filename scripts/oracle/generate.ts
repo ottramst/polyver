@@ -4,14 +4,16 @@
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison). For
 // gem and composer, also <out>/requirements.txt: `version<TAB>requirement` for every version in
-// cases/<eco>.txt and every requirement in cases/<eco>-requirements.txt.
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem|composer <out-dir>
+// cases/<eco>.txt and every requirement in cases/<eco>-requirements.txt. For nuget, also
+// <out>/ranges.txt (the ranges in cases/nuget-ranges.txt) and <out>/range-rows.txt
+// (`version<TAB>range` for every version in cases/nuget.txt and every range).
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem|nuget|composer <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem' | 'composer'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem' | 'nuget' | 'composer'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem', 'composer'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem|composer <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem', 'nuget', 'composer'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem|nuget|composer <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -113,6 +115,20 @@ const GRAMMAR: Record<Eco, () => string> = {
     (chance(0.2)
       ? `-${repeat(1 + int(3), () => pick([digits(), 'a', 'rc', 'beta', '.', '-']))}`
       : ''),
+  // One to five numbers (four is the most NuGet accepts), some near int.MaxValue, then optional
+  // pre-release labels (numeric, negative, SemVer 1.0 style such as `beta1`) and build metadata.
+  nuget: () =>
+    Array.from({ length: pick([1, 2, 3, 3, 3, 4, 4, 5]) }, () =>
+      chance(0.05) ? pick(['2147483647', '2147483648', '4294967296']) : digits(),
+    ).join('.') +
+    (chance(0.5)
+      ? `-${repeat(
+          1 + int(3),
+          () =>
+            `${pick([digits(), 'alpha', 'beta', 'BETA', 'Beta1', 'rc', 'pre', '-', '-1', 'a-b', '0a', '2147483648'])}.`,
+        ).slice(0, -1)}`
+      : '') +
+    (chance(0.2) ? `+${pick(['meta', 'build.5', '007', 'sha.abc123', 'A-B', '', 'a..b'])}` : ''),
   // Mostly up to four numbers with a stability suffix in any case and separator, then dates and
   // branch aliases (`1.x-dev`); sometimes build metadata or a stability flag.
   composer: () =>
@@ -169,6 +185,7 @@ const EDITS: Record<Eco, readonly string[]> = {
   maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
   golang: ['-0', '-rc.1', '.0', '+incompatible', '-pre', '.01', 'v', '-', '+', '.'],
   gem: ['.0', '.a', '-rc1', '.pre', '0', 'A', '-', '.b2', 'a', '.'],
+  nuget: ['.0', '-0', '-beta', '-BETA.1', '+meta', '.', '-', '+', '01', '.-1'],
   composer: ['-dev', '.0', '-beta1', 'RC', '-p1', '.x-dev', '@dev', 'v', '+b', '.'],
 }
 
@@ -238,4 +255,12 @@ if (eco === 'gem' || eco === 'composer') {
   )
   writeFileSync(`${out}/requirements.txt`, `${rows.join('\n')}\n`)
   console.log(`${eco}: ${rows.length} requirement rows`)
+}
+
+if (eco === 'nuget') {
+  const ranges = lines('scripts/oracle/cases/nuget-ranges.txt')
+  const rows = ranges.flatMap((r) => cases.map((v) => `${v}\t${r}`))
+  writeFileSync(`${out}/ranges.txt`, `${ranges.join('\n')}\n`)
+  writeFileSync(`${out}/range-rows.txt`, `${rows.join('\n')}\n`)
+  console.log(`nuget: ${ranges.length} ranges, ${rows.length} range rows`)
 }

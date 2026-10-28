@@ -1,7 +1,7 @@
 // Helpers for testing a scheme against its oracle output in testdata/oracle (see scripts/oracle).
 import { expect } from 'vitest'
 import type { Scheme } from '../../src/index.ts'
-import { constraintDivergence, requirementDivergence } from './divergences.ts'
+import { constraintDivergence, rangeDivergence, requirementDivergence } from './divergences.ts'
 import { readTestdata } from './vectors.ts'
 
 export const SIGN = { '<': -1, '=': 0, '>': 1 } as const
@@ -33,17 +33,22 @@ export interface RequirementRow {
 }
 
 /**
- * Reads testdata/oracle/<eco>-requirements.txt (`<version> satisfies|fails|error <requirement>`,
- * where `error` means the native tool rejects the requirement).
+ * Reads testdata/oracle/<eco>-<file>.txt (`<version> satisfies|fails <requirement>`): `requirements`
+ * for gem and composer, `ranges` for nuget. A composer row `<version> error <requirement>` means that
+ * Composer rejects the requirement.
  */
-export function oracleRequirements(eco: string): RequirementRow[] {
-  const path = `oracle/${eco}-requirements.txt`
+export function oracleRequirements(
+  eco: string,
+  file: 'requirements' | 'ranges' = 'requirements',
+): RequirementRow[] {
+  const path = `oracle/${eco}-${file}.txt`
   return readTestdata(path)
     .split('\n')
     .flatMap((text, i) => {
       const m = /^(\S+) (satisfies|fails|error) (.+)$/.exec(text)
       if (!m) return []
-      const [, version = '', verdict, requirement = ''] = m
+      const [, version = '', verdict, encoded = ''] = m
+      const requirement = decode(encoded)
       const line = i + 1
       const thrown = constraintDivergence(path, requirement)
       if (verdict === 'error' || thrown) {
@@ -62,6 +67,36 @@ export function oracleRequirements(eco: string): RequirementRow[] {
       const satisfied = (verdict === 'satisfies') !== (divergence !== undefined)
       return [{ version, requirement, satisfied, line, ...(divergence && { divergence }) }]
     })
+}
+
+export interface RangeValidity {
+  readonly range: string
+  /** The native tool's verdict, or polyver's where it deliberately differs (see divergences.ts). */
+  readonly valid: boolean
+  readonly divergence?: string
+}
+
+/** Reads the `valid-range <range>` and `invalid-range <range>` lines of testdata/oracle/<eco>-ranges.txt. */
+export function oracleRangeValidity(eco: string): RangeValidity[] {
+  const path = `oracle/${eco}-ranges.txt`
+  return readTestdata(path)
+    .split('\n')
+    .flatMap((line) => {
+      const m = /^(valid|invalid)-range (.+)$/.exec(line)
+      if (!m) return []
+      const range = decode(m[2] as string)
+      const divergence = rangeDivergence(path, range)
+      const valid = (m[1] === 'valid') !== (divergence !== undefined)
+      return [{ range, valid, ...(divergence && { divergence }) }]
+    })
+}
+
+/**
+ * An oracle input written as a JSON string, so that it can keep surrounding or invisible whitespace
+ * that a plain line would lose (see scripts/oracle/cases/nuget-ranges.txt).
+ */
+function decode(text: string): string {
+  return text.startsWith('"') ? (JSON.parse(text) as string) : text
 }
 
 /**

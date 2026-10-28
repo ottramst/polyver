@@ -4,9 +4,11 @@
 # - testdata/oracle/<eco>.txt: `a <op> b` for every pair whose versions are both valid,
 # - testdata/oracle/<eco>-validity.txt: `valid <v>` or `invalid <v>` for every input version,
 # - for gem and composer, testdata/oracle/<eco>-requirements.txt: `<v> satisfies|fails <requirement>`
-#   (or, for composer, `<v> error <requirement>` when Composer rejects the constraint).
+#   (or, for composer, `<v> error <requirement>` when Composer rejects the constraint),
+# - for nuget, testdata/oracle/nuget-ranges.txt: `valid-range|invalid-range <range>`, then
+#   `<v> satisfies|fails <range>`.
 # The output depends only on committed files and the pinned image, so a rerun is byte-identical.
-# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|composer
+# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|nuget|composer
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -15,7 +17,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|composer}"
+eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|nuget|composer}"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 node scripts/oracle/generate.ts "$eco" "$tmp" >&2
@@ -109,6 +111,21 @@ case "$eco" in
     cp scripts/oracle/gem.rb "$tmp/"
     script='cd /in && ruby gem.rb versions.txt pairs.txt requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
     ;;
+  nuget)
+    image="$NUGET_IMAGE"
+    nv="$(sed -n 's|.*Include="NuGet.Versioning" Version="\([^"]*\)".*|\1|p' scripts/oracle/nuget/Oracle.csproj)"
+    tool="DOTNET_NOLOGO=1 dotnet --version | sed 's|^|NuGet.Versioning $nv on .NET SDK |'"
+    mkdir "$tmp/nuget"
+    cp scripts/oracle/nuget/Oracle.csproj scripts/oracle/nuget/Program.cs \
+      scripts/oracle/nuget/packages.lock.json "$tmp/nuget/"
+    # /in is read-only, and dotnet writes bin/ and obj/ next to the project.
+    script='
+      export DOTNET_NOLOGO=1 DOTNET_CLI_TELEMETRY_OPTOUT=1
+      cp -R /in/nuget /tmp/oracle && cd /tmp/oracle &&
+        dotnet restore --locked-mode >/dev/null &&
+        dotnet run --no-restore -c Release -- /in/versions.txt /in/pairs.txt /in/ranges.txt \
+          /in/range-rows.txt /out/validity.txt /out/pairs.txt /out/ranges.txt'
+    ;;
   composer)
     image="$COMPOSER_IMAGE"
     tool="php -r 'echo PHP_VERSION;' | sed 's|^|composer/semver $COMPOSER_SEMVER on PHP |'"
@@ -142,6 +159,14 @@ if [ -f "$tmp/out/requirements.txt" ]; then
     cat "$tmp/out/requirements.txt"
   } >"testdata/oracle/$eco-requirements.txt"
   echo "wrote testdata/oracle/$eco-requirements.txt" >&2
+fi
+if [ -f "$tmp/out/ranges.txt" ]; then
+  {
+    echo "$header"
+    echo "# Ranges: scripts/oracle/cases/$eco-ranges.txt, checked against cases/$eco.txt."
+    cat "$tmp/out/ranges.txt"
+  } >"testdata/oracle/$eco-ranges.txt"
+  echo "wrote testdata/oracle/$eco-ranges.txt" >&2
 fi
 if [ -f "$tmp/out/pairs-old.txt" ]; then
   old="testdata/oracle/$eco-${MAVEN_ARTIFACT_OLD%.*}.txt"

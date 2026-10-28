@@ -5,8 +5,12 @@
  * the vendored file (relative to testdata/) and the case's input; upstream descriptions are not unique.
  */
 
+import type { VersTest } from './vectors.ts'
+
 interface Divergence {
   readonly reason: string
+  /** The test type the divergence applies to, if the same input also appears in other test types. */
+  readonly testType?: VersTest['test_type']
   /** Fields that replace the upstream expectation. */
   readonly override: { readonly expected_failure?: boolean; readonly expected_output?: unknown }
 }
@@ -24,6 +28,21 @@ const MAVEN_CMP = 'vers-spec/tests/maven_version_cmp_test.json'
 const MAVEN_DOT =
   'Maven 3.9 and later read a qualifier after "." as one after "-" (MNG-7644), so 2.0.a and 2.0.0.a ' +
   'are both 2-a, which sorts before 2-1. maven-artifact 3.9.16 and 4.0.0-rc-7 give this order.'
+
+const NUGET_CMP = 'vers-spec/tests/nuget_version_cmp_test.json'
+const NUGET_CASE =
+  'The expected output lower-cases the pre-release labels of an input (1.0.0-BETA becomes ' +
+  '1.0.0-beta), so it is not a sorted copy of the input. polyver returns the input strings in the ' +
+  'same order; NuGet compares labels ignoring case, so the lower-cased and original strings compare ' +
+  'equal.'
+
+/** A NuGet comparison case whose expected output lower-cases the labels of its sorted input. */
+function nugetCase(versions: readonly [string, string]): [string, Divergence] {
+  return [
+    key(NUGET_CMP, { input_scheme: 'nuget', versions }),
+    { reason: NUGET_CASE, testType: 'comparison', override: { expected_output: versions } },
+  ]
+}
 
 const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
   [
@@ -152,6 +171,10 @@ const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
     // The two versions are equal, so a stable sort keeps the input order.
     { reason: MAVEN_DOT, override: { expected_output: ['2.0.0.a', '2.0.a'] } },
   ],
+  nugetCase(['1.0.0-BETA', '1.0.0-beta2']),
+  nugetCase(['1.0.0-BETA', '1.0.0-beta.1+AA']),
+  nugetCase(['1.0.0-BETA.X.y.5.77.0+AA', '1.0.0-beta.x.y.5.79.0+aa']),
+  nugetCase(['1.0.0-BETA.X.y.5.79.0+AA', '1.0.0-beta.x.y.5.790.0+abc']),
 ])
 
 /** A pair of an `a <op> b` file (see loadComparisonPairs) where polyver gives another order. */
@@ -276,15 +299,45 @@ export function divergenceCount(prefix: string): number {
     ...PAIR_DIVERGENCES.keys(),
     ...REQUIREMENT_DIVERGENCES.keys(),
     ...CONSTRAINT_DIVERGENCES.keys(),
+    ...RANGE_DIVERGENCES.keys(),
   ].filter((k) => k.startsWith(prefix)).length
 }
 
-export function divergence(path: string, input: unknown): Divergence | undefined {
-  return DIVERGENCES.get(key(path, input))
+/**
+ * The divergence for a vendored case, if any. One scoped to a test type applies only when `testType`
+ * matches it.
+ */
+export function divergence(
+  path: string,
+  input: unknown,
+  testType?: VersTest['test_type'],
+): Divergence | undefined {
+  const d = DIVERGENCES.get(key(path, input))
+  return d && (d.testType === undefined || d.testType === testType) ? d : undefined
 }
 
 export function pairDivergence(path: string, a: string, b: string): PairDivergence | undefined {
   return PAIR_DIVERGENCES.get(key(path, [a, b]))
+}
+
+/** A range of testdata/oracle/nuget-ranges.txt that NuGet parses and polyver rejects. */
+const NUGET_RANGES = 'oracle/nuget-ranges.txt'
+const NUGET_EMPTY =
+  'NuGet accepts an interval whose bounds are equal and both exclusive, which matches no version. VERS ' +
+  'cannot express an empty range, so fromNative throws INVALID_CONSTRAINTS.'
+const NUGET_SPACE =
+  'NuGetVersion.TryParse ignores whitespace around each number, so "1 . 0" is 1.0. A VERS version ' +
+  'cannot contain whitespace, so fromNative rejects a bound with whitespace inside it.'
+
+const RANGE_DIVERGENCES: ReadonlyMap<string, string> = new Map([
+  [key(NUGET_RANGES, '(1.0,1.0)'), NUGET_EMPTY],
+  [key(NUGET_RANGES, '1 . 0'), NUGET_SPACE],
+  [key(NUGET_RANGES, '[1 .0,2.0)'), NUGET_SPACE],
+])
+
+/** The reason polyver rejects a range that the native tool parses (or the reverse), if it does. */
+export function rangeDivergence(path: string, range: string): string | undefined {
+  return RANGE_DIVERGENCES.get(key(path, range))
 }
 
 /** The reason polyver gives the opposite verdict for a row of an oracle requirements file, if it does. */
