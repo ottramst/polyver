@@ -4,6 +4,10 @@ FEATURES:
 
 - Scheme `nuget`, matching NuGet.Versioning 7.9.0, and `fromNative` for NuGet version ranges such as
   `[1.0,2.0)`, `(,1.0]` and `1.0`. Floating versions such as `1.*` are not supported.
+- Scheme `cargo`, matching `Version` from dtolnay/semver 1.0.28 (the crate Cargo uses) with build
+  metadata ignored, and `fromNative` for Cargo requirements such as `^0.2.3`, `~1.2`, `1.*` and
+  `>= 1.0, < 2.0`. The VERS range contains every version the requirement matches, so `^1.2` is
+  `>=1.2.0-0|<2.0.0`, as Cargo's `^1.2` also matches `1.2.0-beta`.
 
 ## v0.4.0
 

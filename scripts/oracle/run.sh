@@ -5,9 +5,11 @@
 # - testdata/oracle/<eco>-validity.txt: `valid <v>` or `invalid <v>` for every input version,
 # - for gem, testdata/oracle/gem-requirements.txt: `<v> satisfies|fails <requirement>`,
 # - for nuget, testdata/oracle/nuget-ranges.txt: `valid-range|invalid-range <range>`, then
-#   `<v> satisfies|fails <range>`.
+#   `<v> satisfies|fails <range>`,
+# - for cargo, testdata/oracle/cargo-requirements.txt: `rejects <requirement>` and
+#   `<v> satisfies|fails <requirement>`, with a requirement JSON-quoted if it has unusual whitespace.
 # The output depends only on committed files and the pinned image, so a rerun is byte-identical.
-# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|nuget
+# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|nuget|cargo
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -16,7 +18,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|nuget}"
+eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|nuget|cargo}"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 node scripts/oracle/generate.ts "$eco" "$tmp" >&2
@@ -124,6 +126,15 @@ case "$eco" in
         dotnet restore --locked-mode >/dev/null &&
         dotnet run --no-restore -c Release -- /in/versions.txt /in/pairs.txt /in/ranges.txt \
           /in/range-rows.txt /out/validity.txt /out/pairs.txt /out/ranges.txt'
+    ;;
+  cargo)
+    image="$CARGO_IMAGE"
+    semver="$(awk '/^name = "semver"$/ { getline; gsub(/^version = "|"$/, ""); print }' scripts/oracle/cargo/Cargo.lock)"
+    tool="rustc --version | cut -d ' ' -f 1-2 | sed 's|^|semver $semver on |'"
+    mkdir -p "$tmp/cargo/src"
+    cp scripts/oracle/cargo/Cargo.toml scripts/oracle/cargo/Cargo.lock "$tmp/cargo/"
+    cp scripts/oracle/cargo/src/main.rs "$tmp/cargo/src/"
+    script='cd /in/cargo && CARGO_TARGET_DIR=/tmp/target cargo run --quiet --locked --release -- /in/versions.txt /in/pairs.txt /in/requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2

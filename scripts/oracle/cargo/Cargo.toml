@@ -1,0 +1,9 @@
+[package]
+name = "polyver-oracle"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+# Cargo.lock pins the exact semver release; run.sh builds with --locked.
+[dependencies]
+semver = "=1.0.28"

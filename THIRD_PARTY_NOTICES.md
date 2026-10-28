@@ -7,6 +7,7 @@ license terms require reproducing these notices.
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | `src/schemes/pypi.ts`                      | [pypa/packaging](https://github.com/pypa/packaging) `src/packaging/version.py` (`VERSION_PATTERN`, version ordering)                             | BSD-2-Clause (packaging is dual-licensed BSD-2-Clause or Apache-2.0; polyver uses it under BSD-2-Clause) |
 | `src/schemes/npm.ts`                       | [npm/node-semver](https://github.com/npm/node-semver) `classes/range.js` and `internal/re.js` (range grammar and desugaring rules)               | ISC                                                                                                      |
+| `src/schemes/cargo.ts`                     | [dtolnay/semver](https://github.com/dtolnay/semver) `src/parse.rs` and `src/eval.rs` (requirement parser and comparator semantics)               | MIT (semver is dual-licensed MIT or Apache-2.0; polyver uses it under MIT)                               |
 | `src/schemes/rpm.ts`, `src/schemes/apk.ts` | [google/osv-scalibr](https://github.com/google/osv-scalibr) `semantic/version-redhat.go` and `semantic/version-alpine.go` (comparison structure) | Apache-2.0                                                                                               |
 | `src/schemes/semver.ts`                    | The regular expression suggested by [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)                                             | CC BY 3.0                                                                                                |
 
@@ -324,6 +325,36 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+```
+
+## dtolnay/semver (MIT)
+
+semver is by David Tolnay. Its `LICENSE-MIT`:
+
+```text
+Permission is hereby granted, free of charge, to any
+person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the
+Software without restriction, including without
+limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice
+shall be included in all copies or substantial portions
+of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
 ```
 
 ## Semantic Versioning 2.0.0 (CC BY 3.0)

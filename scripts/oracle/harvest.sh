@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 # Samples real-world version strings from a distribution's own package index (for Maven, the
 # maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt; for Go, the module
-# index; for RubyGems, the compact index; for NuGet, the nuget.org search API) into
-# testdata/oracle/<eco>-index.txt. The repositories change daily, so the sample is committed and
-# `run.sh` only reads committed inputs.
-# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|nuget
+# index; for RubyGems, the compact index; for NuGet, the nuget.org search API; for Cargo, the sparse
+# index entries of the crates in scripts/oracle/cargo-crates.txt) into testdata/oracle/<eco>-index.txt.
+# The repositories change daily, so the sample is committed and `run.sh` only reads committed inputs.
+# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -13,7 +13,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|nuget}"
+eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo}"
 case "$eco" in
   deb)
     image="$DEB_IMAGE"
@@ -41,6 +41,9 @@ case "$eco" in
     ;;
   nuget)
     source='the listed versions of the 4,000 most downloaded packages in the nuget.org search API'
+    ;;
+  cargo)
+    source='the crates.io sparse index (scripts/oracle/cargo-crates.txt), without yanked versions'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2
@@ -104,6 +107,21 @@ elif [ "$eco" = nuget ]; then
     curl -fsSL "https://azuresearch-usnc.nuget.org/query?skip=$skip&take=1000&prerelease=true&semVerLevel=2.0.0" >>"$index"
   done
   all="$(grep -o '"version":"[^"]*"' "$index" | sed 's/^"version":"//; s/"$//' | LC_ALL=C sort -u)"
+elif [ "$eco" = cargo ]; then
+  origin='Index: https://index.crates.io'
+  index="$(mktemp)"
+  trap 'rm -f "$index"' EXIT
+  # The sparse index stores a crate at 1/a, 2/ab, 3/a/abc or ab/cd/abcd... (names are lower case).
+  for name in $(sed -n '/^[^#]/p' scripts/oracle/cargo-crates.txt); do
+    case "${#name}" in
+      1 | 2) path="${#name}/$name" ;;
+      3) path="3/$(printf '%s' "$name" | cut -c 1)/$name" ;;
+      *) path="$(printf '%s' "$name" | cut -c 1-2)/$(printf '%s' "$name" | cut -c 3-4)/$name" ;;
+    esac
+    curl -fsSL "https://index.crates.io/$path" >>"$index"
+  done
+  # One JSON object per published version, in which a yank only sets "yanked":true.
+  all="$(sed -n 's/.*"vers":"\([^"]*\)".*"yanked":false.*/\1/p' "$index" | LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"
