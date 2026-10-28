@@ -82,20 +82,41 @@ function expectMatches(path: string, rows: readonly MatchRow[]): MatchRow[] {
 }
 
 /**
- * The rows that eval.rs's pre_is_compatible lets through, because some comparator names a pre-release
- * of the version's major.minor.patch. Cargo rejects such a pre-release only because of a bound such as
- * <1.0, which ends below 1.0.0-0 where the VERS range ends below 1.0.0.
+ * Whether eval.rs's pre_is_compatible lets the row's pre-release through, because some comparator
+ * names a pre-release of the version's major.minor.patch. If it does, Cargo rejects the pre-release
+ * only because a comparator itself does (matches_impl): a bound such as <1.0 ends below 1.0.0-0 where
+ * the VERS range ends below 1.0.0, and =1, ~1 and >=1 match no pre-release of 1.x. Otherwise Cargo
+ * rejects it at least because of pre_is_compatible, and often a comparator rejects it too.
  */
-function boundDivergences(rows: readonly MatchRow[]): MatchRow[] {
-  return rows.filter(({ version, requirement }) => {
-    const release = version.split(/[-+]/)[0] as string
-    return requirement.split(',').some((c) => /(\d+\.\d+\.\d+)-/.exec(c)?.[1] === release)
-  })
+function preCompatible({ version, requirement }: MatchRow): boolean {
+  const release = version.split(/[-+]/)[0] as string
+  return requirement.split(',').some((c) => /(\d+\.\d+\.\d+)-/.exec(c)?.[1] === release)
 }
 
 const requirementsOf = (rows: readonly MatchRow[]): string[] => [
   ...new Set(rows.map((r) => r.requirement)),
 ]
+
+/**
+ * The exempt rows per requirement, one `<rejected at least by pre_is_compatible> <rejected only by a
+ * comparator> <requirement>` line each, so that a snapshot shows any change to the baseline.
+ */
+function perRequirement(rows: readonly MatchRow[]): string {
+  const counts = new Map<string, [number, number]>()
+  for (const r of rows) {
+    const c = counts.get(r.requirement) ?? [0, 0]
+    c[preCompatible(r) ? 1 : 0]++
+    counts.set(r.requirement, c)
+  }
+  const lines = [...counts].map(
+    ([req, [gate, own]]) =>
+      `${String(gate).padStart(4)} ${String(own).padStart(4)} ${JSON.stringify(req)}`,
+  )
+  const header =
+    '# Exempt rows (CARGO_PRERELEASE) of testdata/oracle/cargo-requirements.txt per requirement: rows\n' +
+    '# rejected at least by pre_is_compatible, rows rejected only by a comparator, the requirement.\n'
+  return `${header}${lines.join('\n')}\n`
+}
 
 /** Asserts that each group holds equal versions and the groups are in strictly ascending order. */
 function expectOrder(groups: string[][]): void {
@@ -159,16 +180,31 @@ describe('requirements against VersionReq', () => {
     expect(expectMatches(path, rows2)).toEqual([])
   })
 
-  it('agrees on pre-releases, except where Cargo excludes them', () => {
+  it('contains every version that VersionReq::matches accepts', () => {
+    // No exemption: CARGO_PRERELEASE only covers versions that Cargo rejects.
+    const missing = rows.filter((r) => r.satisfied && !polyverContains(r.requirement, r.version))
+    expect(missing.map((r) => `line ${r.line}: ${r.version} ${r.requirement}`)).toEqual([])
+  })
+
+  it('agrees on pre-releases, except where Cargo excludes them', async () => {
     const pre = rows
       .filter((r) => isPrerelease(r.version))
       .map((r) => ({ ...r, matches: r.satisfied }))
     const diverged = expectMatches(path, pre)
-    expect(diverged.length).toBe(1321)
-    // All but 14 come from the pre-release rule; those 14 are pre-releases of 1.0.0 below <1.0.
-    const bound = boundDivergences(diverged)
-    expect(bound.length).toBe(14)
-    expect(requirementsOf(bound)).toEqual(['>1.0.0-alpha, <1.0', '>1.0.0-alpha, <1'])
+    expect(diverged.length).toBe(1949)
+    // Rows that pre_is_compatible lets through, which a partial upper bound rejects on its own (<1.0
+    // ends below 1.0.0-0). Every other exempt row is rejected at least by pre_is_compatible.
+    expect(requirementsOf(diverged.filter(preCompatible))).toEqual([
+      '>1.0.0-alpha, <1.0',
+      '>1.0.0-alpha, <1',
+      '<1, >=1.0.0-alpha',
+      '<1.2, >=1.2.0-alpha',
+      '<=1, >=2.0.0-alpha',
+      '<=1.2, >=1.3.0-alpha',
+    ])
+    await expect(perRequirement(diverged)).toMatchFileSnapshot(
+      './__snapshots__/cargo-prerelease-divergences.txt',
+    )
   })
 })
 
@@ -218,10 +254,32 @@ describe('dtolnay/semver tests', () => {
   it('agrees on VersionReq::matches, except where Cargo excludes pre-releases', () => {
     const rows = req.matches.map((r) => ({ ...r, requirement: r.req }))
     const diverged = expectMatches('dtolnay-semver/test_version_req.json', rows)
-    expect(diverged.length).toBe(23)
-    expect(requirementsOf(boundDivergences(diverged))).toEqual([
-      '>1.0.0-alpha, <1.0',
-      '>1.0.0-alpha, <1',
+    // Every one is a pre-release that VersionReq::matches rejects and the VERS range contains.
+    expect(diverged.map((r) => `${r.version} ${r.requirement}`)).toEqual([
+      '1.0.1-pre 1.0.0',
+      '2.0.0-pre >= 1.0.0',
+      '3.0.0-alpha2 >= 2.1.0-alpha2',
+      '1.0.0-beta < 1.0.0',
+      '0.9.9-alpha < 1.0.0',
+      '2.0.0-alpha2 <= 2.1.0-alpha2',
+      '1.0.0-alpha2 <= 2.1.0-alpha2',
+      '1.0.0-beta >1.0.0-alpha, <1.0',
+      '1.0.0-beta >1.0.0-alpha, <1',
+      '0.5.2-alpha3 >=0.5.1-alpha3, <0.6',
+      '0.5.5-pre >=0.5.1-alpha3, <0.6',
+      '0.6.0-pre >=0.5.1-alpha3, <0.6',
+      '1.2.4-beta.2 ~1.2.3-beta.2',
+      '1.0.0-beta1 ^1',
+      '1.0.1-pre ^1',
+      '1.1.3-alpha1 ^1.1.2',
+      '0.1.3-alpha ^0.1.2',
+      '0.2.0-pre ^0.1.2',
+      '0.5.2-alpha3 ^0.5.1-alpha3',
+      '0.5.5-pre ^0.5.1-alpha3',
+      '1.4.3-beta.5 ^1.4.2-beta.5',
+      '1.0.0-pre *',
+      '1.2.0-pre 1.*',
+      '1.2.2-pre 1.2.*',
     ])
   })
 
@@ -300,16 +358,16 @@ describe('fromNative', () => {
   it.each([
     // A bare version means ^.
     ['1.2.3', 'vers:cargo/>=1.2.3|<2.0.0'],
-    ['1.2', 'vers:cargo/>=1.2.0|<2.0.0'],
-    ['1', 'vers:cargo/>=1.0.0|<2.0.0'],
+    ['1.2', 'vers:cargo/>=1.2.0-0|<2.0.0'],
+    ['1', 'vers:cargo/>=1.0.0-0|<2.0.0'],
     ['^1.2.3', 'vers:cargo/>=1.2.3|<2.0.0'],
     // Caret keeps the leftmost nonzero number.
     ['^0.2.3', 'vers:cargo/>=0.2.3|<0.3.0'],
-    ['^0.2', 'vers:cargo/>=0.2.0|<0.3.0'],
+    ['^0.2', 'vers:cargo/>=0.2.0-0|<0.3.0'],
     ['^0.0.3', 'vers:cargo/0.0.3'],
     ['^0.0.3-alpha', 'vers:cargo/>=0.0.3-alpha|<=0.0.3'],
-    ['^0.0', 'vers:cargo/>=0.0.0|<0.1.0'],
-    ['^0', 'vers:cargo/>=0.0.0|<1.0.0'],
+    ['^0.0', 'vers:cargo/>=0.0.0-0|<0.1.0'],
+    ['^0', 'vers:cargo/>=0.0.0-0|<1.0.0'],
     ['~1.2.3', 'vers:cargo/>=1.2.3|<1.3.0'],
     ['~1.2', 'vers:cargo/>=1.2.0|<1.3.0'],
     ['~1', 'vers:cargo/>=1.0.0|<2.0.0'],
@@ -324,8 +382,15 @@ describe('fromNative', () => {
     // Build metadata in a requirement is checked, then ignored.
     ['=0.1.0+meta', 'vers:cargo/0.1.0'],
     ['>1.2.3', 'vers:cargo/>1.2.3'],
-    ['>1.2', 'vers:cargo/>=1.3.0'],
-    ['>1', 'vers:cargo/>=2.0.0'],
+    // Partial `>` and `^` comparators also match the pre-releases of their lower bound (`^1` matches
+    // 1.0.0-beta), so the bound is the smallest pre-release, `-0`.
+    ['>1.2', 'vers:cargo/>=1.3.0-0'],
+    ['>1', 'vers:cargo/>=2.0.0-0'],
+    ['>1.*', 'vers:cargo/>=2.0.0-0'],
+    ['>1.18446744073709551615', 'vers:cargo/>=2.0.0-0'],
+    ['^1.*', 'vers:cargo/>=1.0.0-0|<2.0.0'],
+    ['^1, >=1.0.0-alpha', 'vers:cargo/>=1.0.0-alpha|<2.0.0'],
+    ['>1, >=2.0.0-alpha', 'vers:cargo/>=2.0.0-alpha'],
     ['>=1.2', 'vers:cargo/>=1.2.0'],
     ['>=1.*', 'vers:cargo/>=1.0.0'],
     ['<1.2', 'vers:cargo/<1.2.0'],
@@ -337,7 +402,7 @@ describe('fromNative', () => {
     ['0.1.0, 0.1.4, 0.1.6', 'vers:cargo/>=0.1.6|<0.2.0'],
     // u64::MAX: the next minor of 1.MAX is 2.0.0, and nothing comes after MAX.*.
     ['~1.18446744073709551615', 'vers:cargo/>=1.18446744073709551615.0|<2.0.0'],
-    ['^18446744073709551615', 'vers:cargo/>=18446744073709551615.0.0'],
+    ['^18446744073709551615', 'vers:cargo/>=18446744073709551615.0.0-0'],
     ['<=18446744073709551615', 'vers:cargo/*'],
   ])('%j is %s', (native, vers) => {
     expect(stringifyVers(fromNative('cargo', native))).toBe(vers)
@@ -359,8 +424,8 @@ describe('fromNative', () => {
     // semver only skips U+0020.
     ['\t1.0', 'INVALID_SYNTAX'],
     ['1.0\n', 'INVALID_SYNTAX'],
-    [' 1.0', 'INVALID_SYNTAX'],
-    ['>= 1.0', 'INVALID_SYNTAX'],
+    ['\u00a01.0', 'INVALID_SYNTAX'],
+    ['>=\u20031.0', 'INVALID_SYNTAX'],
     ['>=2.0.0, <1.0.0', 'INVALID_CONSTRAINTS'],
     ['>18446744073709551615', 'INVALID_CONSTRAINTS'],
   ])('rejects %j with %s', (native, code) => {

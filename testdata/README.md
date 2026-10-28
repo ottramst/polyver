@@ -68,7 +68,11 @@ Where polyver deliberately gives a different result than a vendored case expects
 with the reason in [`test/support/divergences.ts`](../test/support/divergences.ts). It still runs and
 asserts polyver's result. Cargo's two divergences (build-metadata ties and pre-releases that
 `VersionReq::matches` rejects) are rules there rather than lists of cases, because they cover hundreds
-of oracle rows; the cargo tests check that no other row differs.
+of oracle rows; the cargo tests check that no other row differs, that every version Cargo matches is in
+the VERS range, and pin the exempt rows per requirement in
+[`test/schemes/__snapshots__/cargo-prerelease-divergences.txt`](../test/schemes/__snapshots__/cargo-prerelease-divergences.txt).
+In `oracle/cargo-requirements.txt`, a requirement that is empty, starts or ends with a space, or has a
+character other than printable ASCII is written as a JSON string, as in `oracle/nuget-ranges.txt`.
 
 ## Oracle vectors
 

@@ -15,11 +15,16 @@
  * Native ranges are `VersionReq` strings: comparators joined with `,` (Cargo has no `||`), each one of
  * `^`, `~`, `=`, `>`, `>=`, `<`, `<=` or none, which means `^`. A comparator can omit the minor and
  * patch numbers or replace them with `*`, `x` or `X`; a lone `*` matches every version. `^` allows
- * changes that keep the leftmost nonzero number (`^0.2.3` is `>=0.2.3|<0.3.0`, `^0.0.3` is `=0.0.3`),
- * and `~` allows patch changes (`~1.2` is `>=1.2.0|<1.3.0`). As for npm, upper bounds are written
- * `<2.0.0` rather than `<2.0.0-0`, and Cargo's rule that a pre-release only matches a requirement with a
- * pre-release of the same `major.minor.patch` is not applied, because a VERS range is a plain set of
- * intervals: `vers:cargo/>=1.0.0|<2.0.0` contains `1.5.0-alpha`, which `^1.0.0` does not match.
+ * changes that keep the leftmost nonzero number (`^0.2.3` is `>=0.2.3|<0.3.0`, `^0.0.3` is `0.0.3`),
+ * and `~` allows patch changes (`~1.2` is `>=1.2.0|<1.3.0`).
+ *
+ * The VERS range contains every version that the requirement matches. A partial `^` (or bare)
+ * comparator and a partial `>` also match the pre-releases of their lower bound, so that bound is the
+ * smallest pre-release: `^1.2` is `>=1.2.0-0|<2.0.0` and `>1` is `>=2.0.0-0`. It can also contain
+ * pre-releases that the requirement rejects: as for npm, upper bounds are written `<2.0.0` rather than
+ * `<2.0.0-0`, and Cargo's rule that a pre-release only matches a requirement with a pre-release of the
+ * same `major.minor.patch` is not applied, because a VERS range is a plain set of intervals:
+ * `vers:cargo/>=1.0.0|<2.0.0` contains `1.5.0-alpha`, which `^1.0.0` does not match.
  */
 import { VersError } from '../errors.ts'
 import { ALL, comparatorSet, intersect, toConstraints, type VersionSet } from '../intervals.ts'
@@ -46,7 +51,7 @@ function compare(a: string, b: string): number {
   return compareSemverParts(parseOrThrow(a), parseOrThrow(b))
 }
 
-type Op = '=' | '>' | '>=' | '<' | '<=' | '~' | '^' | '*'
+type Op = '=' | '>' | '>=' | '<' | '<=' | '~' | '^'
 
 /** A comparator of a requirement; a missing minor or patch number was omitted or a wildcard. */
 interface Comparator {
@@ -153,7 +158,8 @@ class ReqParser {
         else patch = this.numeric()
       }
     }
-    if (wildcard && !explicit) op = '*'
+    // `Op::Wildcard` (`1.*`, `1.2.*`) matches as `Op::Exact` does in `eval.rs`.
+    if (wildcard && !explicit) op = '='
     let pre = ''
     if (patch !== undefined && this.eat('-')) {
       pre = this.identifier(true)
@@ -215,26 +221,35 @@ function between(lo: string, hi: string | undefined, inclusive = false): Version
     : intersect([from, comparatorSet(inclusive ? '<=' : '<', hi)], compare)
 }
 
-/** The versions that `eval.rs` lets a comparator match, ignoring the pre-release rule. */
+/**
+ * The versions that `eval.rs` lets a comparator match, ignoring the pre-release rule. Every version
+ * that `matches_impl` accepts is in the set, so the VERS range of a requirement contains every version
+ * that `VersionReq::matches` accepts.
+ */
 function comparatorVersions({ op, major: M, minor: m, patch: p, pre }: Comparator): VersionSet {
-  // The smallest version the partial version covers, and the first one after them.
+  // The smallest release the partial version covers, and the first release after them. `-0` is the
+  // smallest pre-release of a release.
   const floor = `${M}.${m ?? 0}.0`
   const next = m === undefined ? nextMajor(M) : nextMinor(M, m)
   if (m === undefined || p === undefined) {
     switch (op) {
       case '>':
-        return next === undefined ? [] : comparatorSet('>=', next)
+        // `matches_greater` compares only the given numbers, so `>1` matches 2.0.0-beta.
+        return next === undefined ? [] : comparatorSet('>=', `${next}-0`)
       case '>=':
+        // `matches_exact` needs an empty pre-release, so `>=1.2` does not match 1.2.0-beta.
         return comparatorSet('>=', floor)
       case '<':
         return comparatorSet('<', floor)
       case '<=':
         return next === undefined ? ALL : comparatorSet('<', next)
       case '^':
-        // `^0.m` keeps the minor number; `^M.m` with M > 0, and `^M`, keep the major number.
-        return between(floor, M === '0' && m !== undefined ? next : nextMajor(M))
+        // `matches_caret` compares only the given numbers, so `^1.2` matches 1.2.0-beta. `^0.m` keeps
+        // the minor number; `^M.m` with M > 0, and `^M`, keep the major number.
+        return between(`${floor}-0`, M === '0' && m !== undefined ? next : nextMajor(M))
       default:
-        // `=`, `~` and wildcards: every version that starts with the given numbers.
+        // `=`, `~` and wildcards: every release that starts with the given numbers (`matches_exact`
+        // and `matches_tilde` need an empty pre-release).
         return between(floor, next)
     }
   }
@@ -248,7 +263,7 @@ function comparatorVersions({ op, major: M, minor: m, patch: p, pre }: Comparato
       // `^0.0.p` matches only 0.0.p and, with a pre-release, its later pre-releases.
       return between(version, `0.0.${p}`, true)
     default:
-      return comparatorSet(op === '*' ? '=' : op, version)
+      return comparatorSet(op, version)
   }
 }
 

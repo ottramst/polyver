@@ -10,3 +10,7 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+
+# Oracle output is data: a trailing space can be part of a test case.
+[testdata/oracle/*.txt]
+trim_trailing_whitespace = false

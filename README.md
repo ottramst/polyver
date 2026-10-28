@@ -162,7 +162,7 @@ oracle. See
   and only U+0020 spaces in a requirement. Build metadata is ignored when comparing, as in SemVer
   precedence and `VersionReq::matches`, so `vers:cargo/1.0.0` contains `1.0.0+build`; the crate's `Ord`
   for `Version` instead breaks ties by build metadata (`1.2.3+23 < 1.2.3+42`), which polyver does not
-  follow. `fromNative` is checked against `VersionReq::matches` on REQROWS requirement and version
+  follow. `fromNative` is checked against `VersionReq::matches` on 13,764 requirement and version
   pairs: every release version agrees, every version that Cargo matches is in the VERS range, and the
   only differences are the pre-releases described under [Native ranges](#native-ranges).
 

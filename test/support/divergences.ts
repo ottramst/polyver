@@ -279,9 +279,10 @@ export function cargoBuildDivergence(path: string, a: string, b: string): string
 /** A pre-release version that VersionReq::matches rejects but polyver's VERS range contains. */
 const CARGO_PRERELEASE =
   'VersionReq::matches only lets a pre-release match if a comparator names a pre-release of the ' +
-  "same major.minor.patch (eval.rs, pre_is_compatible), and a bound such as <1.0 or ^1.2.3's upper " +
-  'bound excludes the pre-releases of 1.0.0 and 2.0.0 (<1.0.0-0). As for npm, the VERS range is a ' +
-  'plain set of intervals written with bounds such as <2.0.0, so it contains these pre-releases.'
+  "same major.minor.patch (eval.rs, pre_is_compatible), a bound such as <1.0 or ^1.2.3's upper " +
+  'bound excludes the pre-releases of 1.0.0 and 2.0.0 (<1.0.0-0), and =1, ~1 and >=1 match no ' +
+  'pre-release of 1.x. As for npm, the VERS range is a plain set of intervals written with bounds ' +
+  'such as <2.0.0, so it contains these pre-releases. It never misses a version that Cargo matches.'
 
 const CARGO_REQUIREMENTS = ['oracle/cargo-requirements.txt', 'dtolnay-semver/test_version_req.json']
 

@@ -164,7 +164,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 
 - `Version::parse` in dtolnay/semver 1.0.28 is SemVer 2.0.0 with one limit: the major, minor and patch
   numbers are u64, so `18446744073709551616.0.0` is invalid. Pre-release numbers have no limit
-  (`1.0.0-18446744073709551616` is valid). It matched the port on all 7,093 oracle pairs and 3,619
+  (`1.0.0-18446744073709551616` is valid). It matched the port on all 7,848 oracle pairs and 3,624
   validity verdicts once build metadata is set aside.
 - `Ord` for `Version` breaks ties by build metadata (`1.0.0+0 < 1.0.0+00 < 1.0.0+build`), while
   `Version::cmp_precedence` and `VersionReq::matches` ignore it, so `=1.0.0` matches `1.0.0+build`.
@@ -173,13 +173,20 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 - `VersionReq::parse` skips only U+0020, accepts at most 32 comparators and no `||` or `!=`, and
   takes a pre-release or build metadata only after a full `major.minor.patch` (`1.2-alpha` is
   rejected). A wildcard after an explicit operator is a missing part (`>=1.*` is `>=1.0.0`), and a lone
-  `*`, `x` or `X` must be the only comparator. It accepted or rejected all 141 hand-written
+  `*`, `x` or `X` must be the only comparator. It accepted or rejected all 171 hand-written
   requirements as the port does.
-- `VersionReq::matches` agreed with the VERS ranges on all 5,170 rows with a release version. Of the
-  4,606 rows with a pre-release, 1,321 differ, all because Cargo rejects a pre-release that the
-  interval contains. In 1,307 no comparator names a pre-release of the same `major.minor.patch`,
-  which a pre-release needs in order to match; the other 14 come from a partial bound, which ends
-  below the pre-releases of the bound (`>1.0.0-alpha, <1.0` rejects `1.0.0-beta`).
+- Each comparator decides on its own which pre-releases of its bounds it accepts (`matches_impl`), and
+  then `matches_req` requires some comparator to name a pre-release of the version's
+  `major.minor.patch`. A partial `^` or bare comparator and a partial `>` compare only the numbers they
+  give, so `^1` and `>0` accept `1.0.0-beta`, and `^1, >=1.0.0-alpha` matches it. Their VERS lower bound
+  is therefore the smallest pre-release (`^1` is `>=1.0.0-0|<2.0.0`). Partial `=`, `~` and `>=` need an
+  empty pre-release, and partial `<` and `<=` end below the pre-releases of the bound (`<1.0` is
+  `<1.0.0-0`), where VERS follows npm and writes `<1.0.0`.
+- `VersionReq::matches` agreed with the VERS ranges on all 6,820 rows with a release version, and every
+  version it accepts is in the VERS range. Of the 6,944 rows with a pre-release, 1,949 differ, all
+  because Cargo rejects a pre-release that the range contains. 1,921 are rejected at least by
+  `pre_is_compatible` (many also by a comparator, such as `=1` against `1.5.0-alpha`); the other 28
+  pass it and are rejected only by a partial upper bound (`>1.0.0-alpha, <1.0` rejects `1.0.0-beta`).
 - In a sample of 863 versions from the sparse index entries of 242 crates (the 200 most downloaded and
   42 that publish pre-releases or build metadata), 118 are pre-releases and 64 have build metadata,
   mostly the bundled C library's version (`0.4.83+curl-8.15.0`, `0.11.2+zstd.1.5.2`). All are valid.
