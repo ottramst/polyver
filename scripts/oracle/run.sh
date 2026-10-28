@@ -106,8 +106,7 @@ case "$eco" in
     image="$GEM_IMAGE"
     tool="echo \"rubygems \$(gem -v) on \$(ruby -v | cut -d ' ' -f 1-2)\""
     cp scripts/oracle/gem.rb "$tmp/"
-    script='ruby /in/gem.rb /in/versions.txt /in/pairs.txt /in/requirements.txt /out/validity.txt \
-      /out/pairs.txt /out/requirements.txt'
+    script='cd /in && ruby gem.rb versions.txt pairs.txt requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2

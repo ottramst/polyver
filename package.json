@@ -1,7 +1,7 @@
 {
   "name": "polyver",
   "version": "0.3.0",
-  "description": "Compare package versions and evaluate VERS version ranges across ecosystems: npm, PyPI, Debian, RPM, Alpine, Maven, Go and more. Zero dependencies.",
+  "description": "Compare package versions and evaluate VERS version ranges across ecosystems: npm, PyPI, Debian, RPM, Alpine, Maven, Go, RubyGems and more. Zero dependencies.",
   "keywords": [
     "vers",
     "purl",
@@ -14,6 +14,7 @@
     "apk",
     "maven",
     "golang",
+    "rubygems",
     "sbom",
     "cyclonedx",
     "vulnerability"
