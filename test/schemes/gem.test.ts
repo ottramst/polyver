@@ -152,6 +152,15 @@ describe('Gem::Version order', () => {
   it('compares numbers of any length', () => {
     expectOrder([['999999999999999999999999999991'], ['999999999999999999999999999999']])
   })
+
+  it('compares long runs of zeros in linear time', () => {
+    // With the `canonical_segments` regexes, V8 took 13 to 54 seconds for the first, second and last.
+    const zeros = '.0'.repeat(100_000)
+    expect(s.compare(`1${zeros}.1`, '1')).toBe(1)
+    expect(s.compare(`1${zeros}.1.a`, '1')).toBe(1)
+    expect(s.compare(`1.a${zeros}`, '1.a')).toBe(0)
+    expect(s.compare(`1${zeros}.a`, '1.a')).toBe(0)
+  })
 })
 
 describe('fromNative', () => {
@@ -174,7 +183,8 @@ describe('fromNative', () => {
     ['1.2', 'vers:gem/1.2'],
     ['= 1.2', 'vers:gem/1.2'],
     ['  >=  1.0 ,  <  2  ', 'vers:gem/>=1.0|<2'],
-  ])('%s is %s', (native, vers) => {
+    ['\t>=\n1.0\v,\f<\r2', 'vers:gem/>=1.0|<2'],
+  ])('%j is %s', (native, vers) => {
     expect(stringifyVers(fromNative('gem', native))).toBe(vers)
   })
 
@@ -188,8 +198,18 @@ describe('fromNative', () => {
     ['== 1.0', 'INVALID_SYNTAX'],
     ['>= 1.0 || < 0.5', 'INVALID_SYNTAX'],
     ['>= 2.0, < 1.0', 'INVALID_CONSTRAINTS'],
+    // Ruby's `\s` is ASCII-only.
+    ['>= 1.0', 'INVALID_SYNTAX'],
+    [' 1.0', 'INVALID_SYNTAX'],
   ])('rejects %j with %s', (native, code) => {
     expect(() => fromNative('gem', native)).toThrow(expect.objectContaining({ code }))
+  })
+
+  it('rejects long malformed requirements in linear time', () => {
+    const spaces = ' '.repeat(100_000)
+    expect(() => fromNative('gem', `${spaces}x`)).toThrow(VersError)
+    expect(() => fromNative('gem', `>=${spaces}1${'-'.repeat(100_000)}!`)).toThrow(VersError)
+    expect(stringifyVers(fromNative('gem', `${spaces}>=${spaces}1${spaces}`))).toBe('vers:gem/>=1')
   })
 })
 

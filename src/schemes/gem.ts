@@ -46,12 +46,49 @@ function normalized(version: string): string {
   return version.replaceAll('-', '.pre.')
 }
 
+const isLetter = (c: string | undefined): boolean => c !== undefined && /[a-zA-Z]/.test(c)
+const isDotOrZero = (c: string | undefined): boolean => c === '.' || c === '0'
+
+// The two regexes of `canonical_segments`, as loops: V8 backtracks through a long run of `.0` once
+// per starting position, which takes quadratic time.
+
+/** `sub(/(?<=[a-zA-Z.])[.0]+\z/, "")`: the match starts at the first position of the trailing run
+ * of dots and zeros that follows a letter or dot. */
+function stripTrailingZeros(v: string): string {
+  let i = v.length
+  while (i > 0 && isDotOrZero(v[i - 1])) i--
+  for (let j = Math.max(i, 1); j < v.length; j++) {
+    if (isLetter(v[j - 1]) || v[j - 1] === '.') return v.slice(0, j)
+  }
+  return v
+}
+
+/** `sub!(/(?<=\.|\A)[0.]+(?=[a-zA-Z])/, "")`: only the first match is removed. */
+function stripZerosBeforeLetter(v: string): string {
+  for (let i = 0; i < v.length; ) {
+    if (!isDotOrZero(v[i])) {
+      i++
+      continue
+    }
+    let end = i
+    while (isDotOrZero(v[end])) end++
+    if (isLetter(v[end])) {
+      // `i` follows neither a dot nor a zero, so it starts a match only at the start of the string.
+      for (let j = i; j < end; j++) {
+        if (j === 0 || v[j - 1] === '.') return v.slice(0, j) + v.slice(end)
+      }
+    }
+    i = end
+  }
+  return v
+}
+
 /** `Gem::Version#canonical_segments`. */
 function canonicalSegments(version: string): Segment[] {
   // Remove trailing zero segments, using a dot or letter as anchor.
-  let v = normalized(version).replace(/(?<=[a-zA-Z.])[.0]+$/, '')
-  // Remove zero segments before the first letter in a pre-release (only the first match, as `sub!`).
-  if (/[a-zA-Z]/.test(v)) v = v.replace(/(?<=\.|^)[0.]+(?=[a-zA-Z])/, '')
+  let v = stripTrailingZeros(normalized(version))
+  // Remove zero segments before the first letter in a pre-release.
+  if (/[a-zA-Z]/.test(v)) v = stripZerosBeforeLetter(v)
   return partitionSegments(v)
 }
 
@@ -99,14 +136,16 @@ function syntaxError(range: string, detail: string): VersError {
   )
 }
 
-// Requirement::PATTERN for one requirement, after trimming.
-const REQUIREMENT = new RegExp(`^(=|!=|>=|<=|>|<|~>)?\\s*(${VERSION_PATTERN})$`)
+// Requirement::PATTERN for one requirement. Ruby's `\s` is ASCII-only, so JavaScript's `\s` and
+// `trim()`, which also accept Unicode spaces, are not used. The optional operator takes its trailing
+// whitespace with it, so that two whitespace runs never compete for the same spaces.
+const WS = '[ \\t\\n\\v\\f\\r]*'
+const REQUIREMENT = new RegExp(`^${WS}(?:(=|!=|>=|<=|>|<|~>)${WS})?(${VERSION_PATTERN})${WS}$`)
 
 function fromNative(range: string): Constraint[] {
   const sets = range.split(',').map((part) => {
-    const text = part.trim()
-    const m = REQUIREMENT.exec(text)
-    if (!m) throw syntaxError(range, `cannot parse ${JSON.stringify(text)}`)
+    const m = REQUIREMENT.exec(part)
+    if (!m) throw syntaxError(range, `cannot parse ${JSON.stringify(part)}`)
     const op = m[1] ?? '='
     const version = m[2] as string
     if (op !== '~>') return comparatorSet(op as Comparator, version)

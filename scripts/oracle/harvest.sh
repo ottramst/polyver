@@ -70,11 +70,26 @@ elif [ "$eco" = gem ]; then
   index="$(mktemp)"
   trap 'rm -f "$index"' EXIT
   curl -fsSL https://rubygems.org/versions -o "$index"
-  # Lines are `name v1,v2,... md5` after a `---` header. A leading `-` marks a yanked version, and a
-  # `-` within one starts its platform (`1.0.0-java`): Gem::Version reads `-` as `.pre.`, so a
+  # Lines are `name v1,v2,... md5` after a `---` header. The file is append-only: a yank appends
+  # `name -v`, and the earlier line still lists `v`, so yanks are matched by gem name and version. A
+  # `-` within a version starts its platform (`1.0.0-java`): Gem::Version reads `-` as `.pre.`, so a
   # published version never contains one.
-  all="$(sed '1,/^---$/d' "$index" | cut -d ' ' -f 2 | tr ',' '\n' | grep -v '^-' | sed 's/-.*//' |
-    LC_ALL=C sort -u)"
+  all="$(sed '1,/^---$/d' "$index" | awk '
+    {
+      n = split($2, v, ",")
+      for (i = 1; i <= n; i++) {
+        if (sub(/^-/, "", v[i])) yanked[$1 " " v[i]] = 1
+        else listed[$1 " " v[i]] = 1
+      }
+    }
+    END {
+      for (k in listed) {
+        if (k in yanked) continue
+        sub(/^[^ ]* /, "", k)
+        sub(/-.*/, "", k)
+        print k
+      }
+    }' | LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"
