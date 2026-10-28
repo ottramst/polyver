@@ -169,6 +169,17 @@ const MAVEN_4 =
   'Maven 4 changed this order (polyver follows maven-artifact 4.0.0-rc-7); maven-artifact 3.9.16 ' +
   'gives the upstream order.'
 
+const PACKAGIST_PAIRS = 'osv-scalibr/packagist-versions.txt'
+const PACKAGIST_GENERATED = 'osv-scalibr/packagist-versions-generated.txt'
+const PACKAGIST_PADDING =
+  "osv-scalibr's Packagist vectors compare the raw strings with PHP's version_compare. Composer " +
+  '(Semver::sort, constraints) first normalizes both to four numbers, so 1.0 and 1.0.0 are equal ' +
+  'and 3.0 (3.0.0.0) sorts after 3.0.0-beta (3.0.0.0-beta).'
+const PACKAGIST_CASE =
+  "osv-scalibr's Packagist vectors compare the raw strings with PHP's version_compare, which only " +
+  'knows lower-case stabilities and reads ALPHA, BETA and stable as unknown words, sorting first. ' +
+  'Composer normalizes them first (alpha, beta, and no suffix for stable).'
+
 function pair(
   path: string,
   a: string,
@@ -204,6 +215,17 @@ const PAIR_DIVERGENCES: ReadonlyMap<string, PairDivergence> = new Map([
   pair(MAVEN_GENERATED, '3.5.0-CR-2', '>', '3.5.0.Beta-1', MAVEN_4),
   pair(MAVEN_GENERATED, '1.1.0-01-glassfish', '>', '1.1.0.Beta1', MAVEN_39),
   pair(MAVEN_GENERATED, 'v3.7.0rc2', '>', 'v3.7.0-rc.3', MAVEN_4),
+  pair(PACKAGIST_PAIRS, '1.0.0', '=', '1.0', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v3.0', '>', 'v3.0.0-beta', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v3.4', '>', 'v3.4.0-alpha', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v4-beta4', '>', 'v4.0-alpha', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v4.4', '>', 'v4.4.0-beta', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v6.5', '>', 'v6.5.0-beta-0', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v6.6', '>', 'v6.6.0-beta', PACKAGIST_PADDING),
+  pair(PACKAGIST_GENERATED, 'v1.9.0-ALPHA.1', '<', 'v1.9.0-BETA.1', PACKAGIST_CASE),
+  pair(PACKAGIST_GENERATED, 'v1.9.0-BETA.1', '>', 'v1.9.0-ALPHA.2', PACKAGIST_CASE),
+  pair(PACKAGIST_GENERATED, 'v1.9.0-ALPHA.2', '<', 'v1.9.0-BETA.2', PACKAGIST_CASE),
+  pair(PACKAGIST_GENERATED, '5.1.0-stable', '>', '5.1.0-beta2', PACKAGIST_CASE),
 ])
 
 /** A row of testdata/oracle/gem-requirements.txt where polyver gives the opposite verdict. */
@@ -233,6 +255,16 @@ const REQUIREMENT_DIVERGENCES: ReadonlyMap<string, string> = new Map(
   ].map(([version, requirement]) => [key(GEM_REQUIREMENTS, [version, requirement]), GEM_TILDE]),
 )
 
+/** Composer constraints that composer/semver accepts but polyver throws on, with the reason. */
+const COMPOSER_REQUIREMENTS = 'oracle/composer-requirements.txt'
+const CONSTRAINT_DIVERGENCES: ReadonlyMap<string, string> = new Map([
+  [
+    key(COMPOSER_REQUIREMENTS, '>=1.0-p1@beta'),
+    'Composer appends the @beta flag to the patch version, giving the bound 1.0.0.0-patch1-beta, ' +
+      'which is not a valid Composer version, so it cannot be written in VERS.',
+  ],
+])
+
 function key(path: string, input: unknown): string {
   return `${path} ${JSON.stringify(input)}`
 }
@@ -243,6 +275,7 @@ export function divergenceCount(prefix: string): number {
     ...DIVERGENCES.keys(),
     ...PAIR_DIVERGENCES.keys(),
     ...REQUIREMENT_DIVERGENCES.keys(),
+    ...CONSTRAINT_DIVERGENCES.keys(),
   ].filter((k) => k.startsWith(prefix)).length
 }
 
@@ -261,4 +294,9 @@ export function requirementDivergence(
   requirement: string,
 ): string | undefined {
   return REQUIREMENT_DIVERGENCES.get(key(path, [version, requirement]))
+}
+
+/** The reason polyver's fromNative throws on a constraint the native tool accepts, if it does. */
+export function constraintDivergence(path: string, constraint: string): string | undefined {
+  return CONSTRAINT_DIVERGENCES.get(key(path, constraint))
 }

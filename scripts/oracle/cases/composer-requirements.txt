@@ -1,0 +1,133 @@
+# Hand-written Composer constraints, one per line. Each is checked with Semver::satisfies against every
+# version in composer.txt. Includes constraints of composer/semver's tests/VersionParserTest.php and
+# SemverTest.php (MIT). `dev-` branch constraints are left out: composer/semver parses them, but
+# polyver cannot express them in VERS and throws (see test/schemes/composer.test.ts).
+*
+x
+v*
+*.*
+x.X.x.*
+@dev
+1.0
+=1.0
+==1.2.3
+1.2.3
+1.2.3b5
+<>1.0.0
+!=1.0.0
+>1.0.0
+>=1.2.3
+<1.2.3.4
+<=1.2.3
+>= 1.2.3
+< 1.2.3
+<1.2.3.4-stable
+>=1.2.3.4-stable
+<1.2.3-beta1
+>=1.2.3-alpha1
+>=1.2.3-RC1
+>=1.2.3-rc1
+>=1.0beta
+>=1.0-beta
+>=1.0-p1
+>=1.0@beta
+>=1.0@rc
+>=1.0@RC
+>=1.0@BETA
+>=1.0@stable
+>=1.0@STABLE
+<=1.0@dev
+>1.0@dev
+=1.0@dev
+^1.0@dev
+>=1.0-p1@beta
+<1.0-STABLE
+=1.0-STABLE
+>=1.0-Beta2
+2.*
+v2.*
+2.0.*
+2.x.x
+2.10.X
+2.1.3.*
+0.*
+0.0.*
+0.x
+1.2.x || 2.x
+~1
+~v1
+~1.0
+~1.0.0
+~1.2.3
+~1.2.3.4
+~1.2-beta
+~1.2-BETA2
+~1.2.2-stable
+~201903.0
+~2.x-dev
+~2.0.x-dev
+~0.x-dev
+~1.x-dev
+~1.
+^1.
+^v1
+^0
+^0.0
+^00.1
+^1.2
+^1.2.3-beta.2
+^1.2.3.4
+^0.2.3
+^0.0.3
+^0.0.3-dev
+^201903.0
+^2.x-dev
+^2.0.*-dev
+^1.2.3+build
+v1 - v2
+1.2.3 - 2.3.4.5
+1.2-beta - 2.3
+1.2-beta - 2.3-dev
+1.2-RC - 2.3.1
+1 - 2.0
+1.0 - 2
+1.0 - 2.0.0
+1.2.3+asdf - 2.4.3+asdf
+2.0.x-dev - 3.0.x-dev
+1.2.
+1.2..dev
+3.x-dev
+3-dev
+1.0 as 2.0
+>2.0,<=3.0
+>2.0 <=3.0
+>2.0  <=3.0
+>2.0 ,<=3.0
+>2.0 , <=3.0
+> 2.0  ,  <=  3.0
+>= 1.0 < 2.0
+>=1.0,<2.0
+>=1.0, <2.0
+1.0 ,2.0
+>2.0,<2.0.5 | >2.0.6
+>2.0,<2.0.5 || >2.0.6
+~2.5.9|~2.6,>=2.6.2
+>2.0@stable,<=3.0@dev
+>2.0@stable || 0@dev
+0.1.20 || 1.2.4
+>=0.2.3 || <0.0.1
+^1 || ^2
+>=3 <2 || >=2 <4
+>=1 <3 || >=3 <2
+<1 || >=2
+!=1.0 !=2.0
+>=1.0 !=1.2.3
+<1.0 || ==1.0
+~>1.0
+^
+>2.0,,<=3.0
+1.0.0-meh
+^2.0.*
+~2.x
+1.x - 2.*
+*-dev

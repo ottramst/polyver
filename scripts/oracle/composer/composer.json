@@ -1,0 +1,11 @@
+{
+  "name": "polyver/composer-oracle",
+  "description": "The composer/semver oracle run by scripts/oracle/run.sh; the version is pinned by composer.lock.",
+  "license": "MIT",
+  "require": {
+    "composer/semver": "3.5.2"
+  },
+  "config": {
+    "preferred-install": "source"
+  }
+}

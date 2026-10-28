@@ -25,6 +25,7 @@ it('lists the supported schemes', () => {
   expect(supportedSchemes()).toEqual([
     'all',
     'apk',
+    'composer',
     'datetime',
     'deb',
     'gem',

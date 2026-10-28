@@ -1,4 +1,5 @@
 import { apk } from './apk.ts'
+import { composer } from './composer.ts'
 import { datetime } from './datetime.ts'
 import { deb } from './deb.ts'
 import { gem } from './gem.ts'
@@ -19,6 +20,7 @@ const schemes = new Map<string, Scheme>(
   [
     all,
     apk,
+    composer,
     datetime,
     deb,
     gem,

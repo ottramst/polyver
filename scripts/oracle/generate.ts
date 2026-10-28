@@ -3,15 +3,15 @@
 // - testdata/oracle/<eco>-index.txt: versions sampled from the distribution's package index,
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison). For
-// gem, also <out>/requirements.txt: `version<TAB>requirement` for every version in cases/gem.txt and
-// every requirement in cases/gem-requirements.txt.
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem <out-dir>
+// gem and composer, also <out>/requirements.txt: `version<TAB>requirement` for every version in
+// cases/<eco>.txt and every requirement in cases/<eco>-requirements.txt.
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem|composer <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem' | 'composer'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem', 'composer'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem|composer <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -113,6 +113,48 @@ const GRAMMAR: Record<Eco, () => string> = {
     (chance(0.2)
       ? `-${repeat(1 + int(3), () => pick([digits(), 'a', 'rc', 'beta', '.', '-']))}`
       : ''),
+  // Mostly up to four numbers with a stability suffix in any case and separator, then dates and
+  // branch aliases (`1.x-dev`); sometimes build metadata or a stability flag.
+  composer: () =>
+    pick([
+      composerClassical,
+      composerClassical,
+      composerClassical,
+      composerDate,
+      composerBranch,
+    ])() +
+    (chance(0.08) ? pick(['+build', '+b.1', '+1', '+a+b']) : '') +
+    (chance(0.04) ? pick(['@dev', '@stable', '@beta', '@RC']) : ''),
+}
+
+function composerClassical(): string {
+  const stabilities = ['alpha', 'a', 'beta', 'b', 'RC', 'rc', 'Rc', 'patch', 'pl', 'p', 'stable']
+  return (
+    (chance(0.15) ? pick(['v', 'V']) : '') +
+    Array.from({ length: 1 + int(4) }, digits).join('.') +
+    (chance(0.5)
+      ? pick(['', '-', '.', '_']) +
+        pick([...stabilities, 'STABLE', 'BETA', 'Alpha', 'gamma']) +
+        (chance(0.6) ? repeat(1 + int(2), () => pick(['', '.', '-', '..']) + digits()) : '')
+      : '') +
+    (chance(0.2) ? pick(['-dev', '.dev', 'dev', '-DEV', '_dev']) : '')
+  )
+}
+
+function composerDate(): string {
+  return (
+    `20${10 + int(17)}` +
+    repeat(1 + int(5), () => pick(['', '.', '-', ':']) + String(10 + int(18))) +
+    (chance(0.3) ? pick(['.1', '-123', '.0.3', '-beta', '-dev', 'RC1', '-p1']) : '')
+  )
+}
+
+function composerBranch(): string {
+  return (
+    (chance(0.1) ? 'v' : '') +
+    Array.from({ length: 1 + int(4) }, () => pick([digits(), digits(), 'x', 'X', '*'])).join('.') +
+    pick(['-dev', '.x-dev', '.*-dev', 'x-dev', '.dev', 'dev'])
+  )
 }
 
 /** A pseudo-version timestamp, yyyymmddhhmmss. */
@@ -127,6 +169,7 @@ const EDITS: Record<Eco, readonly string[]> = {
   maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
   golang: ['-0', '-rc.1', '.0', '+incompatible', '-pre', '.01', 'v', '-', '+', '.'],
   gem: ['.0', '.a', '-rc1', '.pre', '0', 'A', '-', '.b2', 'a', '.'],
+  composer: ['-dev', '.0', '-beta1', 'RC', '-p1', '.x-dev', '@dev', 'v', '+b', '.'],
 }
 
 /** A single random edit: bump a digit, insert or append a token, or drop a character. */
@@ -189,10 +232,10 @@ writeFileSync(`${out}/versions.txt`, `${versions.join('\n')}\n`)
 writeFileSync(`${out}/pairs.txt`, `${unique.map((p) => p.join(' ')).join('\n')}\n`)
 console.log(`${eco}: ${versions.length} versions, ${unique.length} pairs`)
 
-if (eco === 'gem') {
-  const rows = lines('scripts/oracle/cases/gem-requirements.txt').flatMap((r) =>
+if (eco === 'gem' || eco === 'composer') {
+  const rows = lines(`scripts/oracle/cases/${eco}-requirements.txt`).flatMap((r) =>
     cases.map((v) => `${v}\t${r}`),
   )
   writeFileSync(`${out}/requirements.txt`, `${rows.join('\n')}\n`)
-  console.log(`gem: ${rows.length} requirement rows`)
+  console.log(`${eco}: ${rows.length} requirement rows`)
 }

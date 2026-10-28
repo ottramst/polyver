@@ -1,7 +1,7 @@
 // Helpers for testing a scheme against its oracle output in testdata/oracle (see scripts/oracle).
 import { expect } from 'vitest'
 import type { Scheme } from '../../src/index.ts'
-import { requirementDivergence } from './divergences.ts'
+import { constraintDivergence, requirementDivergence } from './divergences.ts'
 import { readTestdata } from './vectors.ts'
 
 export const SIGN = { '<': -1, '=': 0, '>': 1 } as const
@@ -22,23 +22,45 @@ export interface RequirementRow {
   readonly requirement: string
   /** The native tool's verdict, or polyver's where it deliberately differs (see divergences.ts). */
   readonly satisfied: boolean
+  /**
+   * Set when the requirement cannot be converted: the native tool rejects it, or polyver throws on
+   * it for the reason in `divergence`.
+   */
+  readonly rejected?: true
   /** 1-based line number in the source file. */
   readonly line: number
   readonly divergence?: string
 }
 
-/** Reads testdata/oracle/<eco>-requirements.txt (`<version> satisfies|fails <requirement>`). */
+/**
+ * Reads testdata/oracle/<eco>-requirements.txt (`<version> satisfies|fails|error <requirement>`,
+ * where `error` means the native tool rejects the requirement).
+ */
 export function oracleRequirements(eco: string): RequirementRow[] {
   const path = `oracle/${eco}-requirements.txt`
   return readTestdata(path)
     .split('\n')
     .flatMap((text, i) => {
-      const m = /^(\S+) (satisfies|fails) (.+)$/.exec(text)
+      const m = /^(\S+) (satisfies|fails|error) (.+)$/.exec(text)
       if (!m) return []
       const [, version = '', verdict, requirement = ''] = m
+      const line = i + 1
+      const thrown = constraintDivergence(path, requirement)
+      if (verdict === 'error' || thrown) {
+        return [
+          {
+            version,
+            requirement,
+            satisfied: false,
+            rejected: true as const,
+            line,
+            ...(thrown && { divergence: thrown }),
+          },
+        ]
+      }
       const divergence = requirementDivergence(path, version, requirement)
       const satisfied = (verdict === 'satisfies') !== (divergence !== undefined)
-      return [{ version, requirement, satisfied, line: i + 1, ...(divergence && { divergence }) }]
+      return [{ version, requirement, satisfied, line, ...(divergence && { divergence }) }]
     })
 }
 

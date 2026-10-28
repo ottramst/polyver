@@ -3,9 +3,10 @@
 # inputs from generate.ts, and writes:
 # - testdata/oracle/<eco>.txt: `a <op> b` for every pair whose versions are both valid,
 # - testdata/oracle/<eco>-validity.txt: `valid <v>` or `invalid <v>` for every input version,
-# - for gem, testdata/oracle/gem-requirements.txt: `<v> satisfies|fails <requirement>`.
+# - for gem and composer, testdata/oracle/<eco>-requirements.txt: `<v> satisfies|fails <requirement>`
+#   (or, for composer, `<v> error <requirement>` when Composer rejects the constraint).
 # The output depends only on committed files and the pinned image, so a rerun is byte-identical.
-# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem
+# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|composer
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -14,7 +15,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem}"
+eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|composer}"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 node scripts/oracle/generate.ts "$eco" "$tmp" >&2
@@ -107,6 +108,16 @@ case "$eco" in
     tool="echo \"rubygems \$(gem -v) on \$(ruby -v | cut -d ' ' -f 1-2)\""
     cp scripts/oracle/gem.rb "$tmp/"
     script='cd /in && ruby gem.rb versions.txt pairs.txt requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
+    ;;
+  composer)
+    image="$COMPOSER_IMAGE"
+    tool="php -r 'echo PHP_VERSION;' | sed 's|^|composer/semver $COMPOSER_SEMVER on PHP |'"
+    cp -R scripts/oracle/composer "$tmp/composer"
+    # /in is read-only, so install into a copy. The lock file pins composer/semver to a commit.
+    script="cp -R /in/composer /tmp/oracle && cd /tmp/oracle &&
+      composer install --no-dev --no-interaction --no-progress --quiet &&
+      php oracle.php /in/versions.txt /in/pairs.txt /in/requirements.txt /out/validity.txt \
+        /out/pairs.txt /out/requirements.txt $COMPOSER_SEMVER"
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2
