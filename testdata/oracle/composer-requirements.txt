@@ -18160,3 +18160,5554 @@ v20100102 fails <1.0 || ==1.0
 0 error ~2.x
 0 error 1.x - 2.*
 0 error *-dev
+0 fails >=2010-01-02
+0.0 fails >=2010-01-02
+00 fails >=2010-01-02
+0.0.0.0-dev fails >=2010-01-02
+0.0.1 fails >=2010-01-02
+0.0.3 fails >=2010-01-02
+0.0.3-alpha fails >=2010-01-02
+0.0.4-dev fails >=2010-01-02
+0.1 fails >=2010-01-02
+0.1.97 fails >=2010-01-02
+0.2.9 fails >=2010-01-02
+0.9 fails >=2010-01-02
+0.x-dev fails >=2010-01-02
+1-dev fails >=2010-01-02
+1.0-dev fails >=2010-01-02
+1.0.-dev fails >=2010-01-02
+1.0.0-dev fails >=2010-01-02
+1.2..dev fails >=2010-01-02
+1.2-.dev fails >=2010-01-02
+1.2_-dev fails >=2010-01-02
+1.0.0-alpha fails >=2010-01-02
+1.0-a fails >=2010-01-02
+1.0a1 fails >=2010-01-02
+1.0-alpha1 fails >=2010-01-02
+1.0.0-ALPHA2 fails >=2010-01-02
+1.0-alpha.2 fails >=2010-01-02
+1.0-b fails >=2010-01-02
+1.0-beta fails >=2010-01-02
+1.0b1 fails >=2010-01-02
+1.0-beta1 fails >=2010-01-02
+1.0-beta.1.2 fails >=2010-01-02
+1.0-beta1-2 fails >=2010-01-02
+1.0-Beta2 fails >=2010-01-02
+1.0-RC fails >=2010-01-02
+1.0-rc1 fails >=2010-01-02
+1.0RC1 fails >=2010-01-02
+1.0-Rc1 fails >=2010-01-02
+1.0-RC1-dev fails >=2010-01-02
+1.0.0RC1dev fails >=2010-01-02
+1.0.0-rC15-dev fails >=2010-01-02
+1.0.0.RC.15-dev fails >=2010-01-02
+1.0-RC2 fails >=2010-01-02
+1.0-stable fails >=2010-01-02
+1.0-STABLE fails >=2010-01-02
+1.0-Stable-dev fails >=2010-01-02
+1.0-stabledev fails >=2010-01-02
+1 fails >=2010-01-02
+1.0 fails >=2010-01-02
+1.0.0 fails >=2010-01-02
+1.0.0.0 fails >=2010-01-02
+v1.0 fails >=2010-01-02
+V1.0.0 fails >=2010-01-02
+01.0 fails >=2010-01-02
+1.00 fails >=2010-01-02
+1.0+build fails >=2010-01-02
+1.0.0+20100101 fails >=2010-01-02
+1.0-dev+b fails >=2010-01-02
+1.0@dev fails >=2010-01-02
+1.0@stable fails >=2010-01-02
+1.0.0+foo@dev fails >=2010-01-02
+1.0-p fails >=2010-01-02
+1.0-p1 fails >=2010-01-02
+1.0-pl1 fails >=2010-01-02
+1.0.0.pl3-dev fails >=2010-01-02
+1.0-patch1 fails >=2010-01-02
+1.0-patch2 fails >=2010-01-02
+1.0.1 fails >=2010-01-02
+1.0.1-dev fails >=2010-01-02
+1.1 fails >=2010-01-02
+1.2 fails >=2010-01-02
+1.2-dev fails >=2010-01-02
+1.2. fails >=2010-01-02
+1.2-beta fails >=2010-01-02
+1.2.3-beta fails >=2010-01-02
+1.2.3 fails >=2010-01-02
+1.2.3b5 fails >=2010-01-02
+1.2.3a1 fails >=2010-01-02
+1.2.3p1234 fails >=2010-01-02
+1.2.4 fails >=2010-01-02
+1.2.3.4 fails >=2010-01-02
+1.2.3.4-dev fails >=2010-01-02
+1.3.0-beta fails >=2010-01-02
+1.9999.9999 fails >=2010-01-02
+1.9999999.9999999.9999999-dev fails >=2010-01-02
+1.x-dev fails >=2010-01-02
+1.X-dev fails >=2010-01-02
+1.*-dev fails >=2010-01-02
+1.xdev fails >=2010-01-02
+1.x.dev fails >=2010-01-02
+1.0.x-dev fails >=2010-01-02
+1.2.x-dev fails >=2010-01-02
+1.2.3.x-dev fails >=2010-01-02
+v1.x-dev fails >=2010-01-02
+041.x-dev fails >=2010-01-02
+1.25.0-beta2.1 fails >=2010-01-02
+1.25.0-b.2.1 fails >=2010-01-02
+1.25.0beta2.1 fails >=2010-01-02
+1.25.0-b2.1 fails >=2010-01-02
+1.25.0-b-2.1 fails >=2010-01-02
+1.25.0-b.3 fails >=2010-01-02
+1.25.0beta.3 fails >=2010-01-02
+1.25.0-rc fails >=2010-01-02
+1.25.0 fails >=2010-01-02
+1.26.0 fails >=2010-01-02
+10.4.13beta.2 fails >=2010-01-02
+v1.13.11-beta.0 fails >=2010-01-02
+1.0.0-alpha-2.1-3+foo fails >=2010-01-02
+2 fails >=2010-01-02
+2.0 fails >=2010-01-02
+2.0-dev fails >=2010-01-02
+2.0.0-beta fails >=2010-01-02
+2.0.5 fails >=2010-01-02
+2.0.6 fails >=2010-01-02
+2.1 fails >=2010-01-02
+2.1.3 fails >=2010-01-02
+2.4.0-alpha fails >=2010-01-02
+2.4.3-alpha fails >=2010-01-02
+2.9.0 fails >=2010-01-02
+3.0 fails >=2010-01-02
+10 fails >=2010-01-02
+10.0-alpha fails >=2010-01-02
+00.01.03.04 fails >=2010-01-02
+0700 fails >=2010-01-02
+12345 satisfies >=2010-01-02
+99999 satisfies >=2010-01-02
+100000 satisfies >=2010-01-02
+123456 satisfies >=2010-01-02
+2010.01 fails >=2010-01-02
+2010.01.02 satisfies >=2010-01-02
+2010-01-02 satisfies >=2010-01-02
+2010-01-02-beta satisfies >=2010-01-02
+2010-01-02.5 satisfies >=2010-01-02
+20100102 satisfies >=2010-01-02
+v20100102 satisfies >=2010-01-02
+20100102.0 satisfies >=2010-01-02
+20100102-dev satisfies >=2010-01-02
+20100102-203040 satisfies >=2010-01-02
+20100102-203040-p1 satisfies >=2010-01-02
+20100102.x-dev satisfies >=2010-01-02
+201903.0 satisfies >=2010-01-02
+201903.0-p2 satisfies >=2010-01-02
+201903.x-dev satisfies >=2010-01-02
+2010-01-02-10-20-30.5 satisfies >=2010-01-02
+9999999-dev satisfies >=2010-01-02
+1.9223372036854775806 fails >=2010-01-02
+1.9223372036854775807 fails >=2010-01-02
+1.9223372036854775808 fails >=2010-01-02
+1.99999999999999999999 fails >=2010-01-02
+2010010203040506070808 satisfies >=2010-01-02
+2010010203040506070809 satisfies >=2010-01-02
+0 satisfies <2010-01-02
+0.0 satisfies <2010-01-02
+00 satisfies <2010-01-02
+0.0.0.0-dev satisfies <2010-01-02
+0.0.1 satisfies <2010-01-02
+0.0.3 satisfies <2010-01-02
+0.0.3-alpha satisfies <2010-01-02
+0.0.4-dev satisfies <2010-01-02
+0.1 satisfies <2010-01-02
+0.1.97 satisfies <2010-01-02
+0.2.9 satisfies <2010-01-02
+0.9 satisfies <2010-01-02
+0.x-dev satisfies <2010-01-02
+1-dev satisfies <2010-01-02
+1.0-dev satisfies <2010-01-02
+1.0.-dev satisfies <2010-01-02
+1.0.0-dev satisfies <2010-01-02
+1.2..dev satisfies <2010-01-02
+1.2-.dev satisfies <2010-01-02
+1.2_-dev satisfies <2010-01-02
+1.0.0-alpha satisfies <2010-01-02
+1.0-a satisfies <2010-01-02
+1.0a1 satisfies <2010-01-02
+1.0-alpha1 satisfies <2010-01-02
+1.0.0-ALPHA2 satisfies <2010-01-02
+1.0-alpha.2 satisfies <2010-01-02
+1.0-b satisfies <2010-01-02
+1.0-beta satisfies <2010-01-02
+1.0b1 satisfies <2010-01-02
+1.0-beta1 satisfies <2010-01-02
+1.0-beta.1.2 satisfies <2010-01-02
+1.0-beta1-2 satisfies <2010-01-02
+1.0-Beta2 satisfies <2010-01-02
+1.0-RC satisfies <2010-01-02
+1.0-rc1 satisfies <2010-01-02
+1.0RC1 satisfies <2010-01-02
+1.0-Rc1 satisfies <2010-01-02
+1.0-RC1-dev satisfies <2010-01-02
+1.0.0RC1dev satisfies <2010-01-02
+1.0.0-rC15-dev satisfies <2010-01-02
+1.0.0.RC.15-dev satisfies <2010-01-02
+1.0-RC2 satisfies <2010-01-02
+1.0-stable satisfies <2010-01-02
+1.0-STABLE satisfies <2010-01-02
+1.0-Stable-dev satisfies <2010-01-02
+1.0-stabledev satisfies <2010-01-02
+1 satisfies <2010-01-02
+1.0 satisfies <2010-01-02
+1.0.0 satisfies <2010-01-02
+1.0.0.0 satisfies <2010-01-02
+v1.0 satisfies <2010-01-02
+V1.0.0 satisfies <2010-01-02
+01.0 satisfies <2010-01-02
+1.00 satisfies <2010-01-02
+1.0+build satisfies <2010-01-02
+1.0.0+20100101 satisfies <2010-01-02
+1.0-dev+b satisfies <2010-01-02
+1.0@dev satisfies <2010-01-02
+1.0@stable satisfies <2010-01-02
+1.0.0+foo@dev satisfies <2010-01-02
+1.0-p satisfies <2010-01-02
+1.0-p1 satisfies <2010-01-02
+1.0-pl1 satisfies <2010-01-02
+1.0.0.pl3-dev satisfies <2010-01-02
+1.0-patch1 satisfies <2010-01-02
+1.0-patch2 satisfies <2010-01-02
+1.0.1 satisfies <2010-01-02
+1.0.1-dev satisfies <2010-01-02
+1.1 satisfies <2010-01-02
+1.2 satisfies <2010-01-02
+1.2-dev satisfies <2010-01-02
+1.2. satisfies <2010-01-02
+1.2-beta satisfies <2010-01-02
+1.2.3-beta satisfies <2010-01-02
+1.2.3 satisfies <2010-01-02
+1.2.3b5 satisfies <2010-01-02
+1.2.3a1 satisfies <2010-01-02
+1.2.3p1234 satisfies <2010-01-02
+1.2.4 satisfies <2010-01-02
+1.2.3.4 satisfies <2010-01-02
+1.2.3.4-dev satisfies <2010-01-02
+1.3.0-beta satisfies <2010-01-02
+1.9999.9999 satisfies <2010-01-02
+1.9999999.9999999.9999999-dev satisfies <2010-01-02
+1.x-dev satisfies <2010-01-02
+1.X-dev satisfies <2010-01-02
+1.*-dev satisfies <2010-01-02
+1.xdev satisfies <2010-01-02
+1.x.dev satisfies <2010-01-02
+1.0.x-dev satisfies <2010-01-02
+1.2.x-dev satisfies <2010-01-02
+1.2.3.x-dev satisfies <2010-01-02
+v1.x-dev satisfies <2010-01-02
+041.x-dev satisfies <2010-01-02
+1.25.0-beta2.1 satisfies <2010-01-02
+1.25.0-b.2.1 satisfies <2010-01-02
+1.25.0beta2.1 satisfies <2010-01-02
+1.25.0-b2.1 satisfies <2010-01-02
+1.25.0-b-2.1 satisfies <2010-01-02
+1.25.0-b.3 satisfies <2010-01-02
+1.25.0beta.3 satisfies <2010-01-02
+1.25.0-rc satisfies <2010-01-02
+1.25.0 satisfies <2010-01-02
+1.26.0 satisfies <2010-01-02
+10.4.13beta.2 satisfies <2010-01-02
+v1.13.11-beta.0 satisfies <2010-01-02
+1.0.0-alpha-2.1-3+foo satisfies <2010-01-02
+2 satisfies <2010-01-02
+2.0 satisfies <2010-01-02
+2.0-dev satisfies <2010-01-02
+2.0.0-beta satisfies <2010-01-02
+2.0.5 satisfies <2010-01-02
+2.0.6 satisfies <2010-01-02
+2.1 satisfies <2010-01-02
+2.1.3 satisfies <2010-01-02
+2.4.0-alpha satisfies <2010-01-02
+2.4.3-alpha satisfies <2010-01-02
+2.9.0 satisfies <2010-01-02
+3.0 satisfies <2010-01-02
+10 satisfies <2010-01-02
+10.0-alpha satisfies <2010-01-02
+00.01.03.04 satisfies <2010-01-02
+0700 satisfies <2010-01-02
+12345 fails <2010-01-02
+99999 fails <2010-01-02
+100000 fails <2010-01-02
+123456 fails <2010-01-02
+2010.01 satisfies <2010-01-02
+2010.01.02 fails <2010-01-02
+2010-01-02 fails <2010-01-02
+2010-01-02-beta fails <2010-01-02
+2010-01-02.5 fails <2010-01-02
+20100102 fails <2010-01-02
+v20100102 fails <2010-01-02
+20100102.0 fails <2010-01-02
+20100102-dev fails <2010-01-02
+20100102-203040 fails <2010-01-02
+20100102-203040-p1 fails <2010-01-02
+20100102.x-dev fails <2010-01-02
+201903.0 fails <2010-01-02
+201903.0-p2 fails <2010-01-02
+201903.x-dev fails <2010-01-02
+2010-01-02-10-20-30.5 fails <2010-01-02
+9999999-dev fails <2010-01-02
+1.9223372036854775806 satisfies <2010-01-02
+1.9223372036854775807 satisfies <2010-01-02
+1.9223372036854775808 satisfies <2010-01-02
+1.99999999999999999999 satisfies <2010-01-02
+2010010203040506070808 fails <2010-01-02
+2010010203040506070809 fails <2010-01-02
+0 fails 2010-01-02
+0.0 fails 2010-01-02
+00 fails 2010-01-02
+0.0.0.0-dev fails 2010-01-02
+0.0.1 fails 2010-01-02
+0.0.3 fails 2010-01-02
+0.0.3-alpha fails 2010-01-02
+0.0.4-dev fails 2010-01-02
+0.1 fails 2010-01-02
+0.1.97 fails 2010-01-02
+0.2.9 fails 2010-01-02
+0.9 fails 2010-01-02
+0.x-dev fails 2010-01-02
+1-dev fails 2010-01-02
+1.0-dev fails 2010-01-02
+1.0.-dev fails 2010-01-02
+1.0.0-dev fails 2010-01-02
+1.2..dev fails 2010-01-02
+1.2-.dev fails 2010-01-02
+1.2_-dev fails 2010-01-02
+1.0.0-alpha fails 2010-01-02
+1.0-a fails 2010-01-02
+1.0a1 fails 2010-01-02
+1.0-alpha1 fails 2010-01-02
+1.0.0-ALPHA2 fails 2010-01-02
+1.0-alpha.2 fails 2010-01-02
+1.0-b fails 2010-01-02
+1.0-beta fails 2010-01-02
+1.0b1 fails 2010-01-02
+1.0-beta1 fails 2010-01-02
+1.0-beta.1.2 fails 2010-01-02
+1.0-beta1-2 fails 2010-01-02
+1.0-Beta2 fails 2010-01-02
+1.0-RC fails 2010-01-02
+1.0-rc1 fails 2010-01-02
+1.0RC1 fails 2010-01-02
+1.0-Rc1 fails 2010-01-02
+1.0-RC1-dev fails 2010-01-02
+1.0.0RC1dev fails 2010-01-02
+1.0.0-rC15-dev fails 2010-01-02
+1.0.0.RC.15-dev fails 2010-01-02
+1.0-RC2 fails 2010-01-02
+1.0-stable fails 2010-01-02
+1.0-STABLE fails 2010-01-02
+1.0-Stable-dev fails 2010-01-02
+1.0-stabledev fails 2010-01-02
+1 fails 2010-01-02
+1.0 fails 2010-01-02
+1.0.0 fails 2010-01-02
+1.0.0.0 fails 2010-01-02
+v1.0 fails 2010-01-02
+V1.0.0 fails 2010-01-02
+01.0 fails 2010-01-02
+1.00 fails 2010-01-02
+1.0+build fails 2010-01-02
+1.0.0+20100101 fails 2010-01-02
+1.0-dev+b fails 2010-01-02
+1.0@dev fails 2010-01-02
+1.0@stable fails 2010-01-02
+1.0.0+foo@dev fails 2010-01-02
+1.0-p fails 2010-01-02
+1.0-p1 fails 2010-01-02
+1.0-pl1 fails 2010-01-02
+1.0.0.pl3-dev fails 2010-01-02
+1.0-patch1 fails 2010-01-02
+1.0-patch2 fails 2010-01-02
+1.0.1 fails 2010-01-02
+1.0.1-dev fails 2010-01-02
+1.1 fails 2010-01-02
+1.2 fails 2010-01-02
+1.2-dev fails 2010-01-02
+1.2. fails 2010-01-02
+1.2-beta fails 2010-01-02
+1.2.3-beta fails 2010-01-02
+1.2.3 fails 2010-01-02
+1.2.3b5 fails 2010-01-02
+1.2.3a1 fails 2010-01-02
+1.2.3p1234 fails 2010-01-02
+1.2.4 fails 2010-01-02
+1.2.3.4 fails 2010-01-02
+1.2.3.4-dev fails 2010-01-02
+1.3.0-beta fails 2010-01-02
+1.9999.9999 fails 2010-01-02
+1.9999999.9999999.9999999-dev fails 2010-01-02
+1.x-dev fails 2010-01-02
+1.X-dev fails 2010-01-02
+1.*-dev fails 2010-01-02
+1.xdev fails 2010-01-02
+1.x.dev fails 2010-01-02
+1.0.x-dev fails 2010-01-02
+1.2.x-dev fails 2010-01-02
+1.2.3.x-dev fails 2010-01-02
+v1.x-dev fails 2010-01-02
+041.x-dev fails 2010-01-02
+1.25.0-beta2.1 fails 2010-01-02
+1.25.0-b.2.1 fails 2010-01-02
+1.25.0beta2.1 fails 2010-01-02
+1.25.0-b2.1 fails 2010-01-02
+1.25.0-b-2.1 fails 2010-01-02
+1.25.0-b.3 fails 2010-01-02
+1.25.0beta.3 fails 2010-01-02
+1.25.0-rc fails 2010-01-02
+1.25.0 fails 2010-01-02
+1.26.0 fails 2010-01-02
+10.4.13beta.2 fails 2010-01-02
+v1.13.11-beta.0 fails 2010-01-02
+1.0.0-alpha-2.1-3+foo fails 2010-01-02
+2 fails 2010-01-02
+2.0 fails 2010-01-02
+2.0-dev fails 2010-01-02
+2.0.0-beta fails 2010-01-02
+2.0.5 fails 2010-01-02
+2.0.6 fails 2010-01-02
+2.1 fails 2010-01-02
+2.1.3 fails 2010-01-02
+2.4.0-alpha fails 2010-01-02
+2.4.3-alpha fails 2010-01-02
+2.9.0 fails 2010-01-02
+3.0 fails 2010-01-02
+10 fails 2010-01-02
+10.0-alpha fails 2010-01-02
+00.01.03.04 fails 2010-01-02
+0700 fails 2010-01-02
+12345 fails 2010-01-02
+99999 fails 2010-01-02
+100000 fails 2010-01-02
+123456 fails 2010-01-02
+2010.01 fails 2010-01-02
+2010.01.02 fails 2010-01-02
+2010-01-02 satisfies 2010-01-02
+2010-01-02-beta fails 2010-01-02
+2010-01-02.5 fails 2010-01-02
+20100102 fails 2010-01-02
+v20100102 fails 2010-01-02
+20100102.0 fails 2010-01-02
+20100102-dev fails 2010-01-02
+20100102-203040 fails 2010-01-02
+20100102-203040-p1 fails 2010-01-02
+20100102.x-dev fails 2010-01-02
+201903.0 fails 2010-01-02
+201903.0-p2 fails 2010-01-02
+201903.x-dev fails 2010-01-02
+2010-01-02-10-20-30.5 fails 2010-01-02
+9999999-dev fails 2010-01-02
+1.9223372036854775806 fails 2010-01-02
+1.9223372036854775807 fails 2010-01-02
+1.9223372036854775808 fails 2010-01-02
+1.99999999999999999999 fails 2010-01-02
+2010010203040506070808 fails 2010-01-02
+2010010203040506070809 fails 2010-01-02
+0 satisfies !=2010-01-02
+0.0 satisfies !=2010-01-02
+00 satisfies !=2010-01-02
+0.0.0.0-dev satisfies !=2010-01-02
+0.0.1 satisfies !=2010-01-02
+0.0.3 satisfies !=2010-01-02
+0.0.3-alpha satisfies !=2010-01-02
+0.0.4-dev satisfies !=2010-01-02
+0.1 satisfies !=2010-01-02
+0.1.97 satisfies !=2010-01-02
+0.2.9 satisfies !=2010-01-02
+0.9 satisfies !=2010-01-02
+0.x-dev satisfies !=2010-01-02
+1-dev satisfies !=2010-01-02
+1.0-dev satisfies !=2010-01-02
+1.0.-dev satisfies !=2010-01-02
+1.0.0-dev satisfies !=2010-01-02
+1.2..dev satisfies !=2010-01-02
+1.2-.dev satisfies !=2010-01-02
+1.2_-dev satisfies !=2010-01-02
+1.0.0-alpha satisfies !=2010-01-02
+1.0-a satisfies !=2010-01-02
+1.0a1 satisfies !=2010-01-02
+1.0-alpha1 satisfies !=2010-01-02
+1.0.0-ALPHA2 satisfies !=2010-01-02
+1.0-alpha.2 satisfies !=2010-01-02
+1.0-b satisfies !=2010-01-02
+1.0-beta satisfies !=2010-01-02
+1.0b1 satisfies !=2010-01-02
+1.0-beta1 satisfies !=2010-01-02
+1.0-beta.1.2 satisfies !=2010-01-02
+1.0-beta1-2 satisfies !=2010-01-02
+1.0-Beta2 satisfies !=2010-01-02
+1.0-RC satisfies !=2010-01-02
+1.0-rc1 satisfies !=2010-01-02
+1.0RC1 satisfies !=2010-01-02
+1.0-Rc1 satisfies !=2010-01-02
+1.0-RC1-dev satisfies !=2010-01-02
+1.0.0RC1dev satisfies !=2010-01-02
+1.0.0-rC15-dev satisfies !=2010-01-02
+1.0.0.RC.15-dev satisfies !=2010-01-02
+1.0-RC2 satisfies !=2010-01-02
+1.0-stable satisfies !=2010-01-02
+1.0-STABLE satisfies !=2010-01-02
+1.0-Stable-dev satisfies !=2010-01-02
+1.0-stabledev satisfies !=2010-01-02
+1 satisfies !=2010-01-02
+1.0 satisfies !=2010-01-02
+1.0.0 satisfies !=2010-01-02
+1.0.0.0 satisfies !=2010-01-02
+v1.0 satisfies !=2010-01-02
+V1.0.0 satisfies !=2010-01-02
+01.0 satisfies !=2010-01-02
+1.00 satisfies !=2010-01-02
+1.0+build satisfies !=2010-01-02
+1.0.0+20100101 satisfies !=2010-01-02
+1.0-dev+b satisfies !=2010-01-02
+1.0@dev satisfies !=2010-01-02
+1.0@stable satisfies !=2010-01-02
+1.0.0+foo@dev satisfies !=2010-01-02
+1.0-p satisfies !=2010-01-02
+1.0-p1 satisfies !=2010-01-02
+1.0-pl1 satisfies !=2010-01-02
+1.0.0.pl3-dev satisfies !=2010-01-02
+1.0-patch1 satisfies !=2010-01-02
+1.0-patch2 satisfies !=2010-01-02
+1.0.1 satisfies !=2010-01-02
+1.0.1-dev satisfies !=2010-01-02
+1.1 satisfies !=2010-01-02
+1.2 satisfies !=2010-01-02
+1.2-dev satisfies !=2010-01-02
+1.2. satisfies !=2010-01-02
+1.2-beta satisfies !=2010-01-02
+1.2.3-beta satisfies !=2010-01-02
+1.2.3 satisfies !=2010-01-02
+1.2.3b5 satisfies !=2010-01-02
+1.2.3a1 satisfies !=2010-01-02
+1.2.3p1234 satisfies !=2010-01-02
+1.2.4 satisfies !=2010-01-02
+1.2.3.4 satisfies !=2010-01-02
+1.2.3.4-dev satisfies !=2010-01-02
+1.3.0-beta satisfies !=2010-01-02
+1.9999.9999 satisfies !=2010-01-02
+1.9999999.9999999.9999999-dev satisfies !=2010-01-02
+1.x-dev satisfies !=2010-01-02
+1.X-dev satisfies !=2010-01-02
+1.*-dev satisfies !=2010-01-02
+1.xdev satisfies !=2010-01-02
+1.x.dev satisfies !=2010-01-02
+1.0.x-dev satisfies !=2010-01-02
+1.2.x-dev satisfies !=2010-01-02
+1.2.3.x-dev satisfies !=2010-01-02
+v1.x-dev satisfies !=2010-01-02
+041.x-dev satisfies !=2010-01-02
+1.25.0-beta2.1 satisfies !=2010-01-02
+1.25.0-b.2.1 satisfies !=2010-01-02
+1.25.0beta2.1 satisfies !=2010-01-02
+1.25.0-b2.1 satisfies !=2010-01-02
+1.25.0-b-2.1 satisfies !=2010-01-02
+1.25.0-b.3 satisfies !=2010-01-02
+1.25.0beta.3 satisfies !=2010-01-02
+1.25.0-rc satisfies !=2010-01-02
+1.25.0 satisfies !=2010-01-02
+1.26.0 satisfies !=2010-01-02
+10.4.13beta.2 satisfies !=2010-01-02
+v1.13.11-beta.0 satisfies !=2010-01-02
+1.0.0-alpha-2.1-3+foo satisfies !=2010-01-02
+2 satisfies !=2010-01-02
+2.0 satisfies !=2010-01-02
+2.0-dev satisfies !=2010-01-02
+2.0.0-beta satisfies !=2010-01-02
+2.0.5 satisfies !=2010-01-02
+2.0.6 satisfies !=2010-01-02
+2.1 satisfies !=2010-01-02
+2.1.3 satisfies !=2010-01-02
+2.4.0-alpha satisfies !=2010-01-02
+2.4.3-alpha satisfies !=2010-01-02
+2.9.0 satisfies !=2010-01-02
+3.0 satisfies !=2010-01-02
+10 satisfies !=2010-01-02
+10.0-alpha satisfies !=2010-01-02
+00.01.03.04 satisfies !=2010-01-02
+0700 satisfies !=2010-01-02
+12345 satisfies !=2010-01-02
+99999 satisfies !=2010-01-02
+100000 satisfies !=2010-01-02
+123456 satisfies !=2010-01-02
+2010.01 satisfies !=2010-01-02
+2010.01.02 satisfies !=2010-01-02
+2010-01-02 fails !=2010-01-02
+2010-01-02-beta satisfies !=2010-01-02
+2010-01-02.5 satisfies !=2010-01-02
+20100102 satisfies !=2010-01-02
+v20100102 satisfies !=2010-01-02
+20100102.0 satisfies !=2010-01-02
+20100102-dev satisfies !=2010-01-02
+20100102-203040 satisfies !=2010-01-02
+20100102-203040-p1 satisfies !=2010-01-02
+20100102.x-dev satisfies !=2010-01-02
+201903.0 satisfies !=2010-01-02
+201903.0-p2 satisfies !=2010-01-02
+201903.x-dev satisfies !=2010-01-02
+2010-01-02-10-20-30.5 satisfies !=2010-01-02
+9999999-dev satisfies !=2010-01-02
+1.9223372036854775806 satisfies !=2010-01-02
+1.9223372036854775807 satisfies !=2010-01-02
+1.9223372036854775808 satisfies !=2010-01-02
+1.99999999999999999999 satisfies !=2010-01-02
+2010010203040506070808 satisfies !=2010-01-02
+2010010203040506070809 satisfies !=2010-01-02
+0 fails >2010-01-02
+0.0 fails >2010-01-02
+00 fails >2010-01-02
+0.0.0.0-dev fails >2010-01-02
+0.0.1 fails >2010-01-02
+0.0.3 fails >2010-01-02
+0.0.3-alpha fails >2010-01-02
+0.0.4-dev fails >2010-01-02
+0.1 fails >2010-01-02
+0.1.97 fails >2010-01-02
+0.2.9 fails >2010-01-02
+0.9 fails >2010-01-02
+0.x-dev fails >2010-01-02
+1-dev fails >2010-01-02
+1.0-dev fails >2010-01-02
+1.0.-dev fails >2010-01-02
+1.0.0-dev fails >2010-01-02
+1.2..dev fails >2010-01-02
+1.2-.dev fails >2010-01-02
+1.2_-dev fails >2010-01-02
+1.0.0-alpha fails >2010-01-02
+1.0-a fails >2010-01-02
+1.0a1 fails >2010-01-02
+1.0-alpha1 fails >2010-01-02
+1.0.0-ALPHA2 fails >2010-01-02
+1.0-alpha.2 fails >2010-01-02
+1.0-b fails >2010-01-02
+1.0-beta fails >2010-01-02
+1.0b1 fails >2010-01-02
+1.0-beta1 fails >2010-01-02
+1.0-beta.1.2 fails >2010-01-02
+1.0-beta1-2 fails >2010-01-02
+1.0-Beta2 fails >2010-01-02
+1.0-RC fails >2010-01-02
+1.0-rc1 fails >2010-01-02
+1.0RC1 fails >2010-01-02
+1.0-Rc1 fails >2010-01-02
+1.0-RC1-dev fails >2010-01-02
+1.0.0RC1dev fails >2010-01-02
+1.0.0-rC15-dev fails >2010-01-02
+1.0.0.RC.15-dev fails >2010-01-02
+1.0-RC2 fails >2010-01-02
+1.0-stable fails >2010-01-02
+1.0-STABLE fails >2010-01-02
+1.0-Stable-dev fails >2010-01-02
+1.0-stabledev fails >2010-01-02
+1 fails >2010-01-02
+1.0 fails >2010-01-02
+1.0.0 fails >2010-01-02
+1.0.0.0 fails >2010-01-02
+v1.0 fails >2010-01-02
+V1.0.0 fails >2010-01-02
+01.0 fails >2010-01-02
+1.00 fails >2010-01-02
+1.0+build fails >2010-01-02
+1.0.0+20100101 fails >2010-01-02
+1.0-dev+b fails >2010-01-02
+1.0@dev fails >2010-01-02
+1.0@stable fails >2010-01-02
+1.0.0+foo@dev fails >2010-01-02
+1.0-p fails >2010-01-02
+1.0-p1 fails >2010-01-02
+1.0-pl1 fails >2010-01-02
+1.0.0.pl3-dev fails >2010-01-02
+1.0-patch1 fails >2010-01-02
+1.0-patch2 fails >2010-01-02
+1.0.1 fails >2010-01-02
+1.0.1-dev fails >2010-01-02
+1.1 fails >2010-01-02
+1.2 fails >2010-01-02
+1.2-dev fails >2010-01-02
+1.2. fails >2010-01-02
+1.2-beta fails >2010-01-02
+1.2.3-beta fails >2010-01-02
+1.2.3 fails >2010-01-02
+1.2.3b5 fails >2010-01-02
+1.2.3a1 fails >2010-01-02
+1.2.3p1234 fails >2010-01-02
+1.2.4 fails >2010-01-02
+1.2.3.4 fails >2010-01-02
+1.2.3.4-dev fails >2010-01-02
+1.3.0-beta fails >2010-01-02
+1.9999.9999 fails >2010-01-02
+1.9999999.9999999.9999999-dev fails >2010-01-02
+1.x-dev fails >2010-01-02
+1.X-dev fails >2010-01-02
+1.*-dev fails >2010-01-02
+1.xdev fails >2010-01-02
+1.x.dev fails >2010-01-02
+1.0.x-dev fails >2010-01-02
+1.2.x-dev fails >2010-01-02
+1.2.3.x-dev fails >2010-01-02
+v1.x-dev fails >2010-01-02
+041.x-dev fails >2010-01-02
+1.25.0-beta2.1 fails >2010-01-02
+1.25.0-b.2.1 fails >2010-01-02
+1.25.0beta2.1 fails >2010-01-02
+1.25.0-b2.1 fails >2010-01-02
+1.25.0-b-2.1 fails >2010-01-02
+1.25.0-b.3 fails >2010-01-02
+1.25.0beta.3 fails >2010-01-02
+1.25.0-rc fails >2010-01-02
+1.25.0 fails >2010-01-02
+1.26.0 fails >2010-01-02
+10.4.13beta.2 fails >2010-01-02
+v1.13.11-beta.0 fails >2010-01-02
+1.0.0-alpha-2.1-3+foo fails >2010-01-02
+2 fails >2010-01-02
+2.0 fails >2010-01-02
+2.0-dev fails >2010-01-02
+2.0.0-beta fails >2010-01-02
+2.0.5 fails >2010-01-02
+2.0.6 fails >2010-01-02
+2.1 fails >2010-01-02
+2.1.3 fails >2010-01-02
+2.4.0-alpha fails >2010-01-02
+2.4.3-alpha fails >2010-01-02
+2.9.0 fails >2010-01-02
+3.0 fails >2010-01-02
+10 fails >2010-01-02
+10.0-alpha fails >2010-01-02
+00.01.03.04 fails >2010-01-02
+0700 fails >2010-01-02
+12345 satisfies >2010-01-02
+99999 satisfies >2010-01-02
+100000 satisfies >2010-01-02
+123456 satisfies >2010-01-02
+2010.01 fails >2010-01-02
+2010.01.02 satisfies >2010-01-02
+2010-01-02 fails >2010-01-02
+2010-01-02-beta fails >2010-01-02
+2010-01-02.5 satisfies >2010-01-02
+20100102 satisfies >2010-01-02
+v20100102 satisfies >2010-01-02
+20100102.0 satisfies >2010-01-02
+20100102-dev satisfies >2010-01-02
+20100102-203040 satisfies >2010-01-02
+20100102-203040-p1 satisfies >2010-01-02
+20100102.x-dev satisfies >2010-01-02
+201903.0 satisfies >2010-01-02
+201903.0-p2 satisfies >2010-01-02
+201903.x-dev satisfies >2010-01-02
+2010-01-02-10-20-30.5 satisfies >2010-01-02
+9999999-dev satisfies >2010-01-02
+1.9223372036854775806 fails >2010-01-02
+1.9223372036854775807 fails >2010-01-02
+1.9223372036854775808 fails >2010-01-02
+1.99999999999999999999 fails >2010-01-02
+2010010203040506070808 satisfies >2010-01-02
+2010010203040506070809 satisfies >2010-01-02
+0 satisfies <=2010-01-02
+0.0 satisfies <=2010-01-02
+00 satisfies <=2010-01-02
+0.0.0.0-dev satisfies <=2010-01-02
+0.0.1 satisfies <=2010-01-02
+0.0.3 satisfies <=2010-01-02
+0.0.3-alpha satisfies <=2010-01-02
+0.0.4-dev satisfies <=2010-01-02
+0.1 satisfies <=2010-01-02
+0.1.97 satisfies <=2010-01-02
+0.2.9 satisfies <=2010-01-02
+0.9 satisfies <=2010-01-02
+0.x-dev satisfies <=2010-01-02
+1-dev satisfies <=2010-01-02
+1.0-dev satisfies <=2010-01-02
+1.0.-dev satisfies <=2010-01-02
+1.0.0-dev satisfies <=2010-01-02
+1.2..dev satisfies <=2010-01-02
+1.2-.dev satisfies <=2010-01-02
+1.2_-dev satisfies <=2010-01-02
+1.0.0-alpha satisfies <=2010-01-02
+1.0-a satisfies <=2010-01-02
+1.0a1 satisfies <=2010-01-02
+1.0-alpha1 satisfies <=2010-01-02
+1.0.0-ALPHA2 satisfies <=2010-01-02
+1.0-alpha.2 satisfies <=2010-01-02
+1.0-b satisfies <=2010-01-02
+1.0-beta satisfies <=2010-01-02
+1.0b1 satisfies <=2010-01-02
+1.0-beta1 satisfies <=2010-01-02
+1.0-beta.1.2 satisfies <=2010-01-02
+1.0-beta1-2 satisfies <=2010-01-02
+1.0-Beta2 satisfies <=2010-01-02
+1.0-RC satisfies <=2010-01-02
+1.0-rc1 satisfies <=2010-01-02
+1.0RC1 satisfies <=2010-01-02
+1.0-Rc1 satisfies <=2010-01-02
+1.0-RC1-dev satisfies <=2010-01-02
+1.0.0RC1dev satisfies <=2010-01-02
+1.0.0-rC15-dev satisfies <=2010-01-02
+1.0.0.RC.15-dev satisfies <=2010-01-02
+1.0-RC2 satisfies <=2010-01-02
+1.0-stable satisfies <=2010-01-02
+1.0-STABLE satisfies <=2010-01-02
+1.0-Stable-dev satisfies <=2010-01-02
+1.0-stabledev satisfies <=2010-01-02
+1 satisfies <=2010-01-02
+1.0 satisfies <=2010-01-02
+1.0.0 satisfies <=2010-01-02
+1.0.0.0 satisfies <=2010-01-02
+v1.0 satisfies <=2010-01-02
+V1.0.0 satisfies <=2010-01-02
+01.0 satisfies <=2010-01-02
+1.00 satisfies <=2010-01-02
+1.0+build satisfies <=2010-01-02
+1.0.0+20100101 satisfies <=2010-01-02
+1.0-dev+b satisfies <=2010-01-02
+1.0@dev satisfies <=2010-01-02
+1.0@stable satisfies <=2010-01-02
+1.0.0+foo@dev satisfies <=2010-01-02
+1.0-p satisfies <=2010-01-02
+1.0-p1 satisfies <=2010-01-02
+1.0-pl1 satisfies <=2010-01-02
+1.0.0.pl3-dev satisfies <=2010-01-02
+1.0-patch1 satisfies <=2010-01-02
+1.0-patch2 satisfies <=2010-01-02
+1.0.1 satisfies <=2010-01-02
+1.0.1-dev satisfies <=2010-01-02
+1.1 satisfies <=2010-01-02
+1.2 satisfies <=2010-01-02
+1.2-dev satisfies <=2010-01-02
+1.2. satisfies <=2010-01-02
+1.2-beta satisfies <=2010-01-02
+1.2.3-beta satisfies <=2010-01-02
+1.2.3 satisfies <=2010-01-02
+1.2.3b5 satisfies <=2010-01-02
+1.2.3a1 satisfies <=2010-01-02
+1.2.3p1234 satisfies <=2010-01-02
+1.2.4 satisfies <=2010-01-02
+1.2.3.4 satisfies <=2010-01-02
+1.2.3.4-dev satisfies <=2010-01-02
+1.3.0-beta satisfies <=2010-01-02
+1.9999.9999 satisfies <=2010-01-02
+1.9999999.9999999.9999999-dev satisfies <=2010-01-02
+1.x-dev satisfies <=2010-01-02
+1.X-dev satisfies <=2010-01-02
+1.*-dev satisfies <=2010-01-02
+1.xdev satisfies <=2010-01-02
+1.x.dev satisfies <=2010-01-02
+1.0.x-dev satisfies <=2010-01-02
+1.2.x-dev satisfies <=2010-01-02
+1.2.3.x-dev satisfies <=2010-01-02
+v1.x-dev satisfies <=2010-01-02
+041.x-dev satisfies <=2010-01-02
+1.25.0-beta2.1 satisfies <=2010-01-02
+1.25.0-b.2.1 satisfies <=2010-01-02
+1.25.0beta2.1 satisfies <=2010-01-02
+1.25.0-b2.1 satisfies <=2010-01-02
+1.25.0-b-2.1 satisfies <=2010-01-02
+1.25.0-b.3 satisfies <=2010-01-02
+1.25.0beta.3 satisfies <=2010-01-02
+1.25.0-rc satisfies <=2010-01-02
+1.25.0 satisfies <=2010-01-02
+1.26.0 satisfies <=2010-01-02
+10.4.13beta.2 satisfies <=2010-01-02
+v1.13.11-beta.0 satisfies <=2010-01-02
+1.0.0-alpha-2.1-3+foo satisfies <=2010-01-02
+2 satisfies <=2010-01-02
+2.0 satisfies <=2010-01-02
+2.0-dev satisfies <=2010-01-02
+2.0.0-beta satisfies <=2010-01-02
+2.0.5 satisfies <=2010-01-02
+2.0.6 satisfies <=2010-01-02
+2.1 satisfies <=2010-01-02
+2.1.3 satisfies <=2010-01-02
+2.4.0-alpha satisfies <=2010-01-02
+2.4.3-alpha satisfies <=2010-01-02
+2.9.0 satisfies <=2010-01-02
+3.0 satisfies <=2010-01-02
+10 satisfies <=2010-01-02
+10.0-alpha satisfies <=2010-01-02
+00.01.03.04 satisfies <=2010-01-02
+0700 satisfies <=2010-01-02
+12345 fails <=2010-01-02
+99999 fails <=2010-01-02
+100000 fails <=2010-01-02
+123456 fails <=2010-01-02
+2010.01 satisfies <=2010-01-02
+2010.01.02 fails <=2010-01-02
+2010-01-02 satisfies <=2010-01-02
+2010-01-02-beta satisfies <=2010-01-02
+2010-01-02.5 fails <=2010-01-02
+20100102 fails <=2010-01-02
+v20100102 fails <=2010-01-02
+20100102.0 fails <=2010-01-02
+20100102-dev fails <=2010-01-02
+20100102-203040 fails <=2010-01-02
+20100102-203040-p1 fails <=2010-01-02
+20100102.x-dev fails <=2010-01-02
+201903.0 fails <=2010-01-02
+201903.0-p2 fails <=2010-01-02
+201903.x-dev fails <=2010-01-02
+2010-01-02-10-20-30.5 fails <=2010-01-02
+9999999-dev fails <=2010-01-02
+1.9223372036854775806 satisfies <=2010-01-02
+1.9223372036854775807 satisfies <=2010-01-02
+1.9223372036854775808 satisfies <=2010-01-02
+1.99999999999999999999 satisfies <=2010-01-02
+2010010203040506070808 fails <=2010-01-02
+2010010203040506070809 fails <=2010-01-02
+0 fails >=2010:01:02
+0.0 fails >=2010:01:02
+00 fails >=2010:01:02
+0.0.0.0-dev fails >=2010:01:02
+0.0.1 fails >=2010:01:02
+0.0.3 fails >=2010:01:02
+0.0.3-alpha fails >=2010:01:02
+0.0.4-dev fails >=2010:01:02
+0.1 fails >=2010:01:02
+0.1.97 fails >=2010:01:02
+0.2.9 fails >=2010:01:02
+0.9 fails >=2010:01:02
+0.x-dev fails >=2010:01:02
+1-dev fails >=2010:01:02
+1.0-dev fails >=2010:01:02
+1.0.-dev fails >=2010:01:02
+1.0.0-dev fails >=2010:01:02
+1.2..dev fails >=2010:01:02
+1.2-.dev fails >=2010:01:02
+1.2_-dev fails >=2010:01:02
+1.0.0-alpha fails >=2010:01:02
+1.0-a fails >=2010:01:02
+1.0a1 fails >=2010:01:02
+1.0-alpha1 fails >=2010:01:02
+1.0.0-ALPHA2 fails >=2010:01:02
+1.0-alpha.2 fails >=2010:01:02
+1.0-b fails >=2010:01:02
+1.0-beta fails >=2010:01:02
+1.0b1 fails >=2010:01:02
+1.0-beta1 fails >=2010:01:02
+1.0-beta.1.2 fails >=2010:01:02
+1.0-beta1-2 fails >=2010:01:02
+1.0-Beta2 fails >=2010:01:02
+1.0-RC fails >=2010:01:02
+1.0-rc1 fails >=2010:01:02
+1.0RC1 fails >=2010:01:02
+1.0-Rc1 fails >=2010:01:02
+1.0-RC1-dev fails >=2010:01:02
+1.0.0RC1dev fails >=2010:01:02
+1.0.0-rC15-dev fails >=2010:01:02
+1.0.0.RC.15-dev fails >=2010:01:02
+1.0-RC2 fails >=2010:01:02
+1.0-stable fails >=2010:01:02
+1.0-STABLE fails >=2010:01:02
+1.0-Stable-dev fails >=2010:01:02
+1.0-stabledev fails >=2010:01:02
+1 fails >=2010:01:02
+1.0 fails >=2010:01:02
+1.0.0 fails >=2010:01:02
+1.0.0.0 fails >=2010:01:02
+v1.0 fails >=2010:01:02
+V1.0.0 fails >=2010:01:02
+01.0 fails >=2010:01:02
+1.00 fails >=2010:01:02
+1.0+build fails >=2010:01:02
+1.0.0+20100101 fails >=2010:01:02
+1.0-dev+b fails >=2010:01:02
+1.0@dev fails >=2010:01:02
+1.0@stable fails >=2010:01:02
+1.0.0+foo@dev fails >=2010:01:02
+1.0-p fails >=2010:01:02
+1.0-p1 fails >=2010:01:02
+1.0-pl1 fails >=2010:01:02
+1.0.0.pl3-dev fails >=2010:01:02
+1.0-patch1 fails >=2010:01:02
+1.0-patch2 fails >=2010:01:02
+1.0.1 fails >=2010:01:02
+1.0.1-dev fails >=2010:01:02
+1.1 fails >=2010:01:02
+1.2 fails >=2010:01:02
+1.2-dev fails >=2010:01:02
+1.2. fails >=2010:01:02
+1.2-beta fails >=2010:01:02
+1.2.3-beta fails >=2010:01:02
+1.2.3 fails >=2010:01:02
+1.2.3b5 fails >=2010:01:02
+1.2.3a1 fails >=2010:01:02
+1.2.3p1234 fails >=2010:01:02
+1.2.4 fails >=2010:01:02
+1.2.3.4 fails >=2010:01:02
+1.2.3.4-dev fails >=2010:01:02
+1.3.0-beta fails >=2010:01:02
+1.9999.9999 fails >=2010:01:02
+1.9999999.9999999.9999999-dev fails >=2010:01:02
+1.x-dev fails >=2010:01:02
+1.X-dev fails >=2010:01:02
+1.*-dev fails >=2010:01:02
+1.xdev fails >=2010:01:02
+1.x.dev fails >=2010:01:02
+1.0.x-dev fails >=2010:01:02
+1.2.x-dev fails >=2010:01:02
+1.2.3.x-dev fails >=2010:01:02
+v1.x-dev fails >=2010:01:02
+041.x-dev fails >=2010:01:02
+1.25.0-beta2.1 fails >=2010:01:02
+1.25.0-b.2.1 fails >=2010:01:02
+1.25.0beta2.1 fails >=2010:01:02
+1.25.0-b2.1 fails >=2010:01:02
+1.25.0-b-2.1 fails >=2010:01:02
+1.25.0-b.3 fails >=2010:01:02
+1.25.0beta.3 fails >=2010:01:02
+1.25.0-rc fails >=2010:01:02
+1.25.0 fails >=2010:01:02
+1.26.0 fails >=2010:01:02
+10.4.13beta.2 fails >=2010:01:02
+v1.13.11-beta.0 fails >=2010:01:02
+1.0.0-alpha-2.1-3+foo fails >=2010:01:02
+2 fails >=2010:01:02
+2.0 fails >=2010:01:02
+2.0-dev fails >=2010:01:02
+2.0.0-beta fails >=2010:01:02
+2.0.5 fails >=2010:01:02
+2.0.6 fails >=2010:01:02
+2.1 fails >=2010:01:02
+2.1.3 fails >=2010:01:02
+2.4.0-alpha fails >=2010:01:02
+2.4.3-alpha fails >=2010:01:02
+2.9.0 fails >=2010:01:02
+3.0 fails >=2010:01:02
+10 fails >=2010:01:02
+10.0-alpha fails >=2010:01:02
+00.01.03.04 fails >=2010:01:02
+0700 fails >=2010:01:02
+12345 satisfies >=2010:01:02
+99999 satisfies >=2010:01:02
+100000 satisfies >=2010:01:02
+123456 satisfies >=2010:01:02
+2010.01 fails >=2010:01:02
+2010.01.02 satisfies >=2010:01:02
+2010-01-02 satisfies >=2010:01:02
+2010-01-02-beta satisfies >=2010:01:02
+2010-01-02.5 satisfies >=2010:01:02
+20100102 satisfies >=2010:01:02
+v20100102 satisfies >=2010:01:02
+20100102.0 satisfies >=2010:01:02
+20100102-dev satisfies >=2010:01:02
+20100102-203040 satisfies >=2010:01:02
+20100102-203040-p1 satisfies >=2010:01:02
+20100102.x-dev satisfies >=2010:01:02
+201903.0 satisfies >=2010:01:02
+201903.0-p2 satisfies >=2010:01:02
+201903.x-dev satisfies >=2010:01:02
+2010-01-02-10-20-30.5 satisfies >=2010:01:02
+9999999-dev satisfies >=2010:01:02
+1.9223372036854775806 fails >=2010:01:02
+1.9223372036854775807 fails >=2010:01:02
+1.9223372036854775808 fails >=2010:01:02
+1.99999999999999999999 fails >=2010:01:02
+2010010203040506070808 satisfies >=2010:01:02
+2010010203040506070809 satisfies >=2010:01:02
+0 fails >=2010-01-02@beta
+0.0 fails >=2010-01-02@beta
+00 fails >=2010-01-02@beta
+0.0.0.0-dev fails >=2010-01-02@beta
+0.0.1 fails >=2010-01-02@beta
+0.0.3 fails >=2010-01-02@beta
+0.0.3-alpha fails >=2010-01-02@beta
+0.0.4-dev fails >=2010-01-02@beta
+0.1 fails >=2010-01-02@beta
+0.1.97 fails >=2010-01-02@beta
+0.2.9 fails >=2010-01-02@beta
+0.9 fails >=2010-01-02@beta
+0.x-dev fails >=2010-01-02@beta
+1-dev fails >=2010-01-02@beta
+1.0-dev fails >=2010-01-02@beta
+1.0.-dev fails >=2010-01-02@beta
+1.0.0-dev fails >=2010-01-02@beta
+1.2..dev fails >=2010-01-02@beta
+1.2-.dev fails >=2010-01-02@beta
+1.2_-dev fails >=2010-01-02@beta
+1.0.0-alpha fails >=2010-01-02@beta
+1.0-a fails >=2010-01-02@beta
+1.0a1 fails >=2010-01-02@beta
+1.0-alpha1 fails >=2010-01-02@beta
+1.0.0-ALPHA2 fails >=2010-01-02@beta
+1.0-alpha.2 fails >=2010-01-02@beta
+1.0-b fails >=2010-01-02@beta
+1.0-beta fails >=2010-01-02@beta
+1.0b1 fails >=2010-01-02@beta
+1.0-beta1 fails >=2010-01-02@beta
+1.0-beta.1.2 fails >=2010-01-02@beta
+1.0-beta1-2 fails >=2010-01-02@beta
+1.0-Beta2 fails >=2010-01-02@beta
+1.0-RC fails >=2010-01-02@beta
+1.0-rc1 fails >=2010-01-02@beta
+1.0RC1 fails >=2010-01-02@beta
+1.0-Rc1 fails >=2010-01-02@beta
+1.0-RC1-dev fails >=2010-01-02@beta
+1.0.0RC1dev fails >=2010-01-02@beta
+1.0.0-rC15-dev fails >=2010-01-02@beta
+1.0.0.RC.15-dev fails >=2010-01-02@beta
+1.0-RC2 fails >=2010-01-02@beta
+1.0-stable fails >=2010-01-02@beta
+1.0-STABLE fails >=2010-01-02@beta
+1.0-Stable-dev fails >=2010-01-02@beta
+1.0-stabledev fails >=2010-01-02@beta
+1 fails >=2010-01-02@beta
+1.0 fails >=2010-01-02@beta
+1.0.0 fails >=2010-01-02@beta
+1.0.0.0 fails >=2010-01-02@beta
+v1.0 fails >=2010-01-02@beta
+V1.0.0 fails >=2010-01-02@beta
+01.0 fails >=2010-01-02@beta
+1.00 fails >=2010-01-02@beta
+1.0+build fails >=2010-01-02@beta
+1.0.0+20100101 fails >=2010-01-02@beta
+1.0-dev+b fails >=2010-01-02@beta
+1.0@dev fails >=2010-01-02@beta
+1.0@stable fails >=2010-01-02@beta
+1.0.0+foo@dev fails >=2010-01-02@beta
+1.0-p fails >=2010-01-02@beta
+1.0-p1 fails >=2010-01-02@beta
+1.0-pl1 fails >=2010-01-02@beta
+1.0.0.pl3-dev fails >=2010-01-02@beta
+1.0-patch1 fails >=2010-01-02@beta
+1.0-patch2 fails >=2010-01-02@beta
+1.0.1 fails >=2010-01-02@beta
+1.0.1-dev fails >=2010-01-02@beta
+1.1 fails >=2010-01-02@beta
+1.2 fails >=2010-01-02@beta
+1.2-dev fails >=2010-01-02@beta
+1.2. fails >=2010-01-02@beta
+1.2-beta fails >=2010-01-02@beta
+1.2.3-beta fails >=2010-01-02@beta
+1.2.3 fails >=2010-01-02@beta
+1.2.3b5 fails >=2010-01-02@beta
+1.2.3a1 fails >=2010-01-02@beta
+1.2.3p1234 fails >=2010-01-02@beta
+1.2.4 fails >=2010-01-02@beta
+1.2.3.4 fails >=2010-01-02@beta
+1.2.3.4-dev fails >=2010-01-02@beta
+1.3.0-beta fails >=2010-01-02@beta
+1.9999.9999 fails >=2010-01-02@beta
+1.9999999.9999999.9999999-dev fails >=2010-01-02@beta
+1.x-dev fails >=2010-01-02@beta
+1.X-dev fails >=2010-01-02@beta
+1.*-dev fails >=2010-01-02@beta
+1.xdev fails >=2010-01-02@beta
+1.x.dev fails >=2010-01-02@beta
+1.0.x-dev fails >=2010-01-02@beta
+1.2.x-dev fails >=2010-01-02@beta
+1.2.3.x-dev fails >=2010-01-02@beta
+v1.x-dev fails >=2010-01-02@beta
+041.x-dev fails >=2010-01-02@beta
+1.25.0-beta2.1 fails >=2010-01-02@beta
+1.25.0-b.2.1 fails >=2010-01-02@beta
+1.25.0beta2.1 fails >=2010-01-02@beta
+1.25.0-b2.1 fails >=2010-01-02@beta
+1.25.0-b-2.1 fails >=2010-01-02@beta
+1.25.0-b.3 fails >=2010-01-02@beta
+1.25.0beta.3 fails >=2010-01-02@beta
+1.25.0-rc fails >=2010-01-02@beta
+1.25.0 fails >=2010-01-02@beta
+1.26.0 fails >=2010-01-02@beta
+10.4.13beta.2 fails >=2010-01-02@beta
+v1.13.11-beta.0 fails >=2010-01-02@beta
+1.0.0-alpha-2.1-3+foo fails >=2010-01-02@beta
+2 fails >=2010-01-02@beta
+2.0 fails >=2010-01-02@beta
+2.0-dev fails >=2010-01-02@beta
+2.0.0-beta fails >=2010-01-02@beta
+2.0.5 fails >=2010-01-02@beta
+2.0.6 fails >=2010-01-02@beta
+2.1 fails >=2010-01-02@beta
+2.1.3 fails >=2010-01-02@beta
+2.4.0-alpha fails >=2010-01-02@beta
+2.4.3-alpha fails >=2010-01-02@beta
+2.9.0 fails >=2010-01-02@beta
+3.0 fails >=2010-01-02@beta
+10 fails >=2010-01-02@beta
+10.0-alpha fails >=2010-01-02@beta
+00.01.03.04 fails >=2010-01-02@beta
+0700 fails >=2010-01-02@beta
+12345 satisfies >=2010-01-02@beta
+99999 satisfies >=2010-01-02@beta
+100000 satisfies >=2010-01-02@beta
+123456 satisfies >=2010-01-02@beta
+2010.01 fails >=2010-01-02@beta
+2010.01.02 satisfies >=2010-01-02@beta
+2010-01-02 satisfies >=2010-01-02@beta
+2010-01-02-beta satisfies >=2010-01-02@beta
+2010-01-02.5 satisfies >=2010-01-02@beta
+20100102 satisfies >=2010-01-02@beta
+v20100102 satisfies >=2010-01-02@beta
+20100102.0 satisfies >=2010-01-02@beta
+20100102-dev satisfies >=2010-01-02@beta
+20100102-203040 satisfies >=2010-01-02@beta
+20100102-203040-p1 satisfies >=2010-01-02@beta
+20100102.x-dev satisfies >=2010-01-02@beta
+201903.0 satisfies >=2010-01-02@beta
+201903.0-p2 satisfies >=2010-01-02@beta
+201903.x-dev satisfies >=2010-01-02@beta
+2010-01-02-10-20-30.5 satisfies >=2010-01-02@beta
+9999999-dev satisfies >=2010-01-02@beta
+1.9223372036854775806 fails >=2010-01-02@beta
+1.9223372036854775807 fails >=2010-01-02@beta
+1.9223372036854775808 fails >=2010-01-02@beta
+1.99999999999999999999 fails >=2010-01-02@beta
+2010010203040506070808 satisfies >=2010-01-02@beta
+2010010203040506070809 satisfies >=2010-01-02@beta
+0 fails >=2010-01-02-dev
+0.0 fails >=2010-01-02-dev
+00 fails >=2010-01-02-dev
+0.0.0.0-dev fails >=2010-01-02-dev
+0.0.1 fails >=2010-01-02-dev
+0.0.3 fails >=2010-01-02-dev
+0.0.3-alpha fails >=2010-01-02-dev
+0.0.4-dev fails >=2010-01-02-dev
+0.1 fails >=2010-01-02-dev
+0.1.97 fails >=2010-01-02-dev
+0.2.9 fails >=2010-01-02-dev
+0.9 fails >=2010-01-02-dev
+0.x-dev fails >=2010-01-02-dev
+1-dev fails >=2010-01-02-dev
+1.0-dev fails >=2010-01-02-dev
+1.0.-dev fails >=2010-01-02-dev
+1.0.0-dev fails >=2010-01-02-dev
+1.2..dev fails >=2010-01-02-dev
+1.2-.dev fails >=2010-01-02-dev
+1.2_-dev fails >=2010-01-02-dev
+1.0.0-alpha fails >=2010-01-02-dev
+1.0-a fails >=2010-01-02-dev
+1.0a1 fails >=2010-01-02-dev
+1.0-alpha1 fails >=2010-01-02-dev
+1.0.0-ALPHA2 fails >=2010-01-02-dev
+1.0-alpha.2 fails >=2010-01-02-dev
+1.0-b fails >=2010-01-02-dev
+1.0-beta fails >=2010-01-02-dev
+1.0b1 fails >=2010-01-02-dev
+1.0-beta1 fails >=2010-01-02-dev
+1.0-beta.1.2 fails >=2010-01-02-dev
+1.0-beta1-2 fails >=2010-01-02-dev
+1.0-Beta2 fails >=2010-01-02-dev
+1.0-RC fails >=2010-01-02-dev
+1.0-rc1 fails >=2010-01-02-dev
+1.0RC1 fails >=2010-01-02-dev
+1.0-Rc1 fails >=2010-01-02-dev
+1.0-RC1-dev fails >=2010-01-02-dev
+1.0.0RC1dev fails >=2010-01-02-dev
+1.0.0-rC15-dev fails >=2010-01-02-dev
+1.0.0.RC.15-dev fails >=2010-01-02-dev
+1.0-RC2 fails >=2010-01-02-dev
+1.0-stable fails >=2010-01-02-dev
+1.0-STABLE fails >=2010-01-02-dev
+1.0-Stable-dev fails >=2010-01-02-dev
+1.0-stabledev fails >=2010-01-02-dev
+1 fails >=2010-01-02-dev
+1.0 fails >=2010-01-02-dev
+1.0.0 fails >=2010-01-02-dev
+1.0.0.0 fails >=2010-01-02-dev
+v1.0 fails >=2010-01-02-dev
+V1.0.0 fails >=2010-01-02-dev
+01.0 fails >=2010-01-02-dev
+1.00 fails >=2010-01-02-dev
+1.0+build fails >=2010-01-02-dev
+1.0.0+20100101 fails >=2010-01-02-dev
+1.0-dev+b fails >=2010-01-02-dev
+1.0@dev fails >=2010-01-02-dev
+1.0@stable fails >=2010-01-02-dev
+1.0.0+foo@dev fails >=2010-01-02-dev
+1.0-p fails >=2010-01-02-dev
+1.0-p1 fails >=2010-01-02-dev
+1.0-pl1 fails >=2010-01-02-dev
+1.0.0.pl3-dev fails >=2010-01-02-dev
+1.0-patch1 fails >=2010-01-02-dev
+1.0-patch2 fails >=2010-01-02-dev
+1.0.1 fails >=2010-01-02-dev
+1.0.1-dev fails >=2010-01-02-dev
+1.1 fails >=2010-01-02-dev
+1.2 fails >=2010-01-02-dev
+1.2-dev fails >=2010-01-02-dev
+1.2. fails >=2010-01-02-dev
+1.2-beta fails >=2010-01-02-dev
+1.2.3-beta fails >=2010-01-02-dev
+1.2.3 fails >=2010-01-02-dev
+1.2.3b5 fails >=2010-01-02-dev
+1.2.3a1 fails >=2010-01-02-dev
+1.2.3p1234 fails >=2010-01-02-dev
+1.2.4 fails >=2010-01-02-dev
+1.2.3.4 fails >=2010-01-02-dev
+1.2.3.4-dev fails >=2010-01-02-dev
+1.3.0-beta fails >=2010-01-02-dev
+1.9999.9999 fails >=2010-01-02-dev
+1.9999999.9999999.9999999-dev fails >=2010-01-02-dev
+1.x-dev fails >=2010-01-02-dev
+1.X-dev fails >=2010-01-02-dev
+1.*-dev fails >=2010-01-02-dev
+1.xdev fails >=2010-01-02-dev
+1.x.dev fails >=2010-01-02-dev
+1.0.x-dev fails >=2010-01-02-dev
+1.2.x-dev fails >=2010-01-02-dev
+1.2.3.x-dev fails >=2010-01-02-dev
+v1.x-dev fails >=2010-01-02-dev
+041.x-dev fails >=2010-01-02-dev
+1.25.0-beta2.1 fails >=2010-01-02-dev
+1.25.0-b.2.1 fails >=2010-01-02-dev
+1.25.0beta2.1 fails >=2010-01-02-dev
+1.25.0-b2.1 fails >=2010-01-02-dev
+1.25.0-b-2.1 fails >=2010-01-02-dev
+1.25.0-b.3 fails >=2010-01-02-dev
+1.25.0beta.3 fails >=2010-01-02-dev
+1.25.0-rc fails >=2010-01-02-dev
+1.25.0 fails >=2010-01-02-dev
+1.26.0 fails >=2010-01-02-dev
+10.4.13beta.2 fails >=2010-01-02-dev
+v1.13.11-beta.0 fails >=2010-01-02-dev
+1.0.0-alpha-2.1-3+foo fails >=2010-01-02-dev
+2 fails >=2010-01-02-dev
+2.0 fails >=2010-01-02-dev
+2.0-dev fails >=2010-01-02-dev
+2.0.0-beta fails >=2010-01-02-dev
+2.0.5 fails >=2010-01-02-dev
+2.0.6 fails >=2010-01-02-dev
+2.1 fails >=2010-01-02-dev
+2.1.3 fails >=2010-01-02-dev
+2.4.0-alpha fails >=2010-01-02-dev
+2.4.3-alpha fails >=2010-01-02-dev
+2.9.0 fails >=2010-01-02-dev
+3.0 fails >=2010-01-02-dev
+10 fails >=2010-01-02-dev
+10.0-alpha fails >=2010-01-02-dev
+00.01.03.04 fails >=2010-01-02-dev
+0700 fails >=2010-01-02-dev
+12345 satisfies >=2010-01-02-dev
+99999 satisfies >=2010-01-02-dev
+100000 satisfies >=2010-01-02-dev
+123456 satisfies >=2010-01-02-dev
+2010.01 fails >=2010-01-02-dev
+2010.01.02 satisfies >=2010-01-02-dev
+2010-01-02 satisfies >=2010-01-02-dev
+2010-01-02-beta satisfies >=2010-01-02-dev
+2010-01-02.5 satisfies >=2010-01-02-dev
+20100102 satisfies >=2010-01-02-dev
+v20100102 satisfies >=2010-01-02-dev
+20100102.0 satisfies >=2010-01-02-dev
+20100102-dev satisfies >=2010-01-02-dev
+20100102-203040 satisfies >=2010-01-02-dev
+20100102-203040-p1 satisfies >=2010-01-02-dev
+20100102.x-dev satisfies >=2010-01-02-dev
+201903.0 satisfies >=2010-01-02-dev
+201903.0-p2 satisfies >=2010-01-02-dev
+201903.x-dev satisfies >=2010-01-02-dev
+2010-01-02-10-20-30.5 satisfies >=2010-01-02-dev
+9999999-dev satisfies >=2010-01-02-dev
+1.9223372036854775806 fails >=2010-01-02-dev
+1.9223372036854775807 fails >=2010-01-02-dev
+1.9223372036854775808 fails >=2010-01-02-dev
+1.99999999999999999999 fails >=2010-01-02-dev
+2010010203040506070808 satisfies >=2010-01-02-dev
+2010010203040506070809 satisfies >=2010-01-02-dev
+0 fails >=2010-01
+0.0 fails >=2010-01
+00 fails >=2010-01
+0.0.0.0-dev fails >=2010-01
+0.0.1 fails >=2010-01
+0.0.3 fails >=2010-01
+0.0.3-alpha fails >=2010-01
+0.0.4-dev fails >=2010-01
+0.1 fails >=2010-01
+0.1.97 fails >=2010-01
+0.2.9 fails >=2010-01
+0.9 fails >=2010-01
+0.x-dev fails >=2010-01
+1-dev fails >=2010-01
+1.0-dev fails >=2010-01
+1.0.-dev fails >=2010-01
+1.0.0-dev fails >=2010-01
+1.2..dev fails >=2010-01
+1.2-.dev fails >=2010-01
+1.2_-dev fails >=2010-01
+1.0.0-alpha fails >=2010-01
+1.0-a fails >=2010-01
+1.0a1 fails >=2010-01
+1.0-alpha1 fails >=2010-01
+1.0.0-ALPHA2 fails >=2010-01
+1.0-alpha.2 fails >=2010-01
+1.0-b fails >=2010-01
+1.0-beta fails >=2010-01
+1.0b1 fails >=2010-01
+1.0-beta1 fails >=2010-01
+1.0-beta.1.2 fails >=2010-01
+1.0-beta1-2 fails >=2010-01
+1.0-Beta2 fails >=2010-01
+1.0-RC fails >=2010-01
+1.0-rc1 fails >=2010-01
+1.0RC1 fails >=2010-01
+1.0-Rc1 fails >=2010-01
+1.0-RC1-dev fails >=2010-01
+1.0.0RC1dev fails >=2010-01
+1.0.0-rC15-dev fails >=2010-01
+1.0.0.RC.15-dev fails >=2010-01
+1.0-RC2 fails >=2010-01
+1.0-stable fails >=2010-01
+1.0-STABLE fails >=2010-01
+1.0-Stable-dev fails >=2010-01
+1.0-stabledev fails >=2010-01
+1 fails >=2010-01
+1.0 fails >=2010-01
+1.0.0 fails >=2010-01
+1.0.0.0 fails >=2010-01
+v1.0 fails >=2010-01
+V1.0.0 fails >=2010-01
+01.0 fails >=2010-01
+1.00 fails >=2010-01
+1.0+build fails >=2010-01
+1.0.0+20100101 fails >=2010-01
+1.0-dev+b fails >=2010-01
+1.0@dev fails >=2010-01
+1.0@stable fails >=2010-01
+1.0.0+foo@dev fails >=2010-01
+1.0-p fails >=2010-01
+1.0-p1 fails >=2010-01
+1.0-pl1 fails >=2010-01
+1.0.0.pl3-dev fails >=2010-01
+1.0-patch1 fails >=2010-01
+1.0-patch2 fails >=2010-01
+1.0.1 fails >=2010-01
+1.0.1-dev fails >=2010-01
+1.1 fails >=2010-01
+1.2 fails >=2010-01
+1.2-dev fails >=2010-01
+1.2. fails >=2010-01
+1.2-beta fails >=2010-01
+1.2.3-beta fails >=2010-01
+1.2.3 fails >=2010-01
+1.2.3b5 fails >=2010-01
+1.2.3a1 fails >=2010-01
+1.2.3p1234 fails >=2010-01
+1.2.4 fails >=2010-01
+1.2.3.4 fails >=2010-01
+1.2.3.4-dev fails >=2010-01
+1.3.0-beta fails >=2010-01
+1.9999.9999 fails >=2010-01
+1.9999999.9999999.9999999-dev fails >=2010-01
+1.x-dev fails >=2010-01
+1.X-dev fails >=2010-01
+1.*-dev fails >=2010-01
+1.xdev fails >=2010-01
+1.x.dev fails >=2010-01
+1.0.x-dev fails >=2010-01
+1.2.x-dev fails >=2010-01
+1.2.3.x-dev fails >=2010-01
+v1.x-dev fails >=2010-01
+041.x-dev fails >=2010-01
+1.25.0-beta2.1 fails >=2010-01
+1.25.0-b.2.1 fails >=2010-01
+1.25.0beta2.1 fails >=2010-01
+1.25.0-b2.1 fails >=2010-01
+1.25.0-b-2.1 fails >=2010-01
+1.25.0-b.3 fails >=2010-01
+1.25.0beta.3 fails >=2010-01
+1.25.0-rc fails >=2010-01
+1.25.0 fails >=2010-01
+1.26.0 fails >=2010-01
+10.4.13beta.2 fails >=2010-01
+v1.13.11-beta.0 fails >=2010-01
+1.0.0-alpha-2.1-3+foo fails >=2010-01
+2 fails >=2010-01
+2.0 fails >=2010-01
+2.0-dev fails >=2010-01
+2.0.0-beta fails >=2010-01
+2.0.5 fails >=2010-01
+2.0.6 fails >=2010-01
+2.1 fails >=2010-01
+2.1.3 fails >=2010-01
+2.4.0-alpha fails >=2010-01
+2.4.3-alpha fails >=2010-01
+2.9.0 fails >=2010-01
+3.0 fails >=2010-01
+10 fails >=2010-01
+10.0-alpha fails >=2010-01
+00.01.03.04 fails >=2010-01
+0700 fails >=2010-01
+12345 satisfies >=2010-01
+99999 satisfies >=2010-01
+100000 satisfies >=2010-01
+123456 satisfies >=2010-01
+2010.01 satisfies >=2010-01
+2010.01.02 satisfies >=2010-01
+2010-01-02 satisfies >=2010-01
+2010-01-02-beta satisfies >=2010-01
+2010-01-02.5 satisfies >=2010-01
+20100102 satisfies >=2010-01
+v20100102 satisfies >=2010-01
+20100102.0 satisfies >=2010-01
+20100102-dev satisfies >=2010-01
+20100102-203040 satisfies >=2010-01
+20100102-203040-p1 satisfies >=2010-01
+20100102.x-dev satisfies >=2010-01
+201903.0 satisfies >=2010-01
+201903.0-p2 satisfies >=2010-01
+201903.x-dev satisfies >=2010-01
+2010-01-02-10-20-30.5 satisfies >=2010-01
+9999999-dev satisfies >=2010-01
+1.9223372036854775806 fails >=2010-01
+1.9223372036854775807 fails >=2010-01
+1.9223372036854775808 fails >=2010-01
+1.99999999999999999999 fails >=2010-01
+2010010203040506070808 satisfies >=2010-01
+2010010203040506070809 satisfies >=2010-01
+0 error ~2010-01-02
+0 fails >=1.0dev
+0.0 fails >=1.0dev
+00 fails >=1.0dev
+0.0.0.0-dev fails >=1.0dev
+0.0.1 fails >=1.0dev
+0.0.3 fails >=1.0dev
+0.0.3-alpha fails >=1.0dev
+0.0.4-dev fails >=1.0dev
+0.1 fails >=1.0dev
+0.1.97 fails >=1.0dev
+0.2.9 fails >=1.0dev
+0.9 fails >=1.0dev
+0.x-dev fails >=1.0dev
+1-dev satisfies >=1.0dev
+1.0-dev satisfies >=1.0dev
+1.0.-dev satisfies >=1.0dev
+1.0.0-dev satisfies >=1.0dev
+1.2..dev satisfies >=1.0dev
+1.2-.dev satisfies >=1.0dev
+1.2_-dev satisfies >=1.0dev
+1.0.0-alpha satisfies >=1.0dev
+1.0-a satisfies >=1.0dev
+1.0a1 satisfies >=1.0dev
+1.0-alpha1 satisfies >=1.0dev
+1.0.0-ALPHA2 satisfies >=1.0dev
+1.0-alpha.2 satisfies >=1.0dev
+1.0-b satisfies >=1.0dev
+1.0-beta satisfies >=1.0dev
+1.0b1 satisfies >=1.0dev
+1.0-beta1 satisfies >=1.0dev
+1.0-beta.1.2 satisfies >=1.0dev
+1.0-beta1-2 satisfies >=1.0dev
+1.0-Beta2 satisfies >=1.0dev
+1.0-RC satisfies >=1.0dev
+1.0-rc1 satisfies >=1.0dev
+1.0RC1 satisfies >=1.0dev
+1.0-Rc1 satisfies >=1.0dev
+1.0-RC1-dev satisfies >=1.0dev
+1.0.0RC1dev satisfies >=1.0dev
+1.0.0-rC15-dev satisfies >=1.0dev
+1.0.0.RC.15-dev satisfies >=1.0dev
+1.0-RC2 satisfies >=1.0dev
+1.0-stable satisfies >=1.0dev
+1.0-STABLE fails >=1.0dev
+1.0-Stable-dev fails >=1.0dev
+1.0-stabledev satisfies >=1.0dev
+1 satisfies >=1.0dev
+1.0 satisfies >=1.0dev
+1.0.0 satisfies >=1.0dev
+1.0.0.0 satisfies >=1.0dev
+v1.0 satisfies >=1.0dev
+V1.0.0 satisfies >=1.0dev
+01.0 satisfies >=1.0dev
+1.00 satisfies >=1.0dev
+1.0+build satisfies >=1.0dev
+1.0.0+20100101 satisfies >=1.0dev
+1.0-dev+b satisfies >=1.0dev
+1.0@dev satisfies >=1.0dev
+1.0@stable satisfies >=1.0dev
+1.0.0+foo@dev satisfies >=1.0dev
+1.0-p satisfies >=1.0dev
+1.0-p1 satisfies >=1.0dev
+1.0-pl1 satisfies >=1.0dev
+1.0.0.pl3-dev satisfies >=1.0dev
+1.0-patch1 satisfies >=1.0dev
+1.0-patch2 satisfies >=1.0dev
+1.0.1 satisfies >=1.0dev
+1.0.1-dev satisfies >=1.0dev
+1.1 satisfies >=1.0dev
+1.2 satisfies >=1.0dev
+1.2-dev satisfies >=1.0dev
+1.2. satisfies >=1.0dev
+1.2-beta satisfies >=1.0dev
+1.2.3-beta satisfies >=1.0dev
+1.2.3 satisfies >=1.0dev
+1.2.3b5 satisfies >=1.0dev
+1.2.3a1 satisfies >=1.0dev
+1.2.3p1234 satisfies >=1.0dev
+1.2.4 satisfies >=1.0dev
+1.2.3.4 satisfies >=1.0dev
+1.2.3.4-dev satisfies >=1.0dev
+1.3.0-beta satisfies >=1.0dev
+1.9999.9999 satisfies >=1.0dev
+1.9999999.9999999.9999999-dev satisfies >=1.0dev
+1.x-dev satisfies >=1.0dev
+1.X-dev satisfies >=1.0dev
+1.*-dev satisfies >=1.0dev
+1.xdev satisfies >=1.0dev
+1.x.dev satisfies >=1.0dev
+1.0.x-dev satisfies >=1.0dev
+1.2.x-dev satisfies >=1.0dev
+1.2.3.x-dev satisfies >=1.0dev
+v1.x-dev satisfies >=1.0dev
+041.x-dev satisfies >=1.0dev
+1.25.0-beta2.1 satisfies >=1.0dev
+1.25.0-b.2.1 satisfies >=1.0dev
+1.25.0beta2.1 satisfies >=1.0dev
+1.25.0-b2.1 satisfies >=1.0dev
+1.25.0-b-2.1 satisfies >=1.0dev
+1.25.0-b.3 satisfies >=1.0dev
+1.25.0beta.3 satisfies >=1.0dev
+1.25.0-rc satisfies >=1.0dev
+1.25.0 satisfies >=1.0dev
+1.26.0 satisfies >=1.0dev
+10.4.13beta.2 satisfies >=1.0dev
+v1.13.11-beta.0 satisfies >=1.0dev
+1.0.0-alpha-2.1-3+foo satisfies >=1.0dev
+2 satisfies >=1.0dev
+2.0 satisfies >=1.0dev
+2.0-dev satisfies >=1.0dev
+2.0.0-beta satisfies >=1.0dev
+2.0.5 satisfies >=1.0dev
+2.0.6 satisfies >=1.0dev
+2.1 satisfies >=1.0dev
+2.1.3 satisfies >=1.0dev
+2.4.0-alpha satisfies >=1.0dev
+2.4.3-alpha satisfies >=1.0dev
+2.9.0 satisfies >=1.0dev
+3.0 satisfies >=1.0dev
+10 satisfies >=1.0dev
+10.0-alpha satisfies >=1.0dev
+00.01.03.04 fails >=1.0dev
+0700 satisfies >=1.0dev
+12345 satisfies >=1.0dev
+99999 satisfies >=1.0dev
+100000 satisfies >=1.0dev
+123456 satisfies >=1.0dev
+2010.01 satisfies >=1.0dev
+2010.01.02 satisfies >=1.0dev
+2010-01-02 satisfies >=1.0dev
+2010-01-02-beta satisfies >=1.0dev
+2010-01-02.5 satisfies >=1.0dev
+20100102 satisfies >=1.0dev
+v20100102 satisfies >=1.0dev
+20100102.0 satisfies >=1.0dev
+20100102-dev satisfies >=1.0dev
+20100102-203040 satisfies >=1.0dev
+20100102-203040-p1 satisfies >=1.0dev
+20100102.x-dev satisfies >=1.0dev
+201903.0 satisfies >=1.0dev
+201903.0-p2 satisfies >=1.0dev
+201903.x-dev satisfies >=1.0dev
+2010-01-02-10-20-30.5 satisfies >=1.0dev
+9999999-dev satisfies >=1.0dev
+1.9223372036854775806 satisfies >=1.0dev
+1.9223372036854775807 satisfies >=1.0dev
+1.9223372036854775808 satisfies >=1.0dev
+1.99999999999999999999 satisfies >=1.0dev
+2010010203040506070808 satisfies >=1.0dev
+2010010203040506070809 satisfies >=1.0dev
+0 fails >=1.0.dev
+0.0 fails >=1.0.dev
+00 fails >=1.0.dev
+0.0.0.0-dev fails >=1.0.dev
+0.0.1 fails >=1.0.dev
+0.0.3 fails >=1.0.dev
+0.0.3-alpha fails >=1.0.dev
+0.0.4-dev fails >=1.0.dev
+0.1 fails >=1.0.dev
+0.1.97 fails >=1.0.dev
+0.2.9 fails >=1.0.dev
+0.9 fails >=1.0.dev
+0.x-dev fails >=1.0.dev
+1-dev satisfies >=1.0.dev
+1.0-dev satisfies >=1.0.dev
+1.0.-dev satisfies >=1.0.dev
+1.0.0-dev satisfies >=1.0.dev
+1.2..dev satisfies >=1.0.dev
+1.2-.dev satisfies >=1.0.dev
+1.2_-dev satisfies >=1.0.dev
+1.0.0-alpha satisfies >=1.0.dev
+1.0-a satisfies >=1.0.dev
+1.0a1 satisfies >=1.0.dev
+1.0-alpha1 satisfies >=1.0.dev
+1.0.0-ALPHA2 satisfies >=1.0.dev
+1.0-alpha.2 satisfies >=1.0.dev
+1.0-b satisfies >=1.0.dev
+1.0-beta satisfies >=1.0.dev
+1.0b1 satisfies >=1.0.dev
+1.0-beta1 satisfies >=1.0.dev
+1.0-beta.1.2 satisfies >=1.0.dev
+1.0-beta1-2 satisfies >=1.0.dev
+1.0-Beta2 satisfies >=1.0.dev
+1.0-RC satisfies >=1.0.dev
+1.0-rc1 satisfies >=1.0.dev
+1.0RC1 satisfies >=1.0.dev
+1.0-Rc1 satisfies >=1.0.dev
+1.0-RC1-dev satisfies >=1.0.dev
+1.0.0RC1dev satisfies >=1.0.dev
+1.0.0-rC15-dev satisfies >=1.0.dev
+1.0.0.RC.15-dev satisfies >=1.0.dev
+1.0-RC2 satisfies >=1.0.dev
+1.0-stable satisfies >=1.0.dev
+1.0-STABLE fails >=1.0.dev
+1.0-Stable-dev fails >=1.0.dev
+1.0-stabledev satisfies >=1.0.dev
+1 satisfies >=1.0.dev
+1.0 satisfies >=1.0.dev
+1.0.0 satisfies >=1.0.dev
+1.0.0.0 satisfies >=1.0.dev
+v1.0 satisfies >=1.0.dev
+V1.0.0 satisfies >=1.0.dev
+01.0 satisfies >=1.0.dev
+1.00 satisfies >=1.0.dev
+1.0+build satisfies >=1.0.dev
+1.0.0+20100101 satisfies >=1.0.dev
+1.0-dev+b satisfies >=1.0.dev
+1.0@dev satisfies >=1.0.dev
+1.0@stable satisfies >=1.0.dev
+1.0.0+foo@dev satisfies >=1.0.dev
+1.0-p satisfies >=1.0.dev
+1.0-p1 satisfies >=1.0.dev
+1.0-pl1 satisfies >=1.0.dev
+1.0.0.pl3-dev satisfies >=1.0.dev
+1.0-patch1 satisfies >=1.0.dev
+1.0-patch2 satisfies >=1.0.dev
+1.0.1 satisfies >=1.0.dev
+1.0.1-dev satisfies >=1.0.dev
+1.1 satisfies >=1.0.dev
+1.2 satisfies >=1.0.dev
+1.2-dev satisfies >=1.0.dev
+1.2. satisfies >=1.0.dev
+1.2-beta satisfies >=1.0.dev
+1.2.3-beta satisfies >=1.0.dev
+1.2.3 satisfies >=1.0.dev
+1.2.3b5 satisfies >=1.0.dev
+1.2.3a1 satisfies >=1.0.dev
+1.2.3p1234 satisfies >=1.0.dev
+1.2.4 satisfies >=1.0.dev
+1.2.3.4 satisfies >=1.0.dev
+1.2.3.4-dev satisfies >=1.0.dev
+1.3.0-beta satisfies >=1.0.dev
+1.9999.9999 satisfies >=1.0.dev
+1.9999999.9999999.9999999-dev satisfies >=1.0.dev
+1.x-dev satisfies >=1.0.dev
+1.X-dev satisfies >=1.0.dev
+1.*-dev satisfies >=1.0.dev
+1.xdev satisfies >=1.0.dev
+1.x.dev satisfies >=1.0.dev
+1.0.x-dev satisfies >=1.0.dev
+1.2.x-dev satisfies >=1.0.dev
+1.2.3.x-dev satisfies >=1.0.dev
+v1.x-dev satisfies >=1.0.dev
+041.x-dev satisfies >=1.0.dev
+1.25.0-beta2.1 satisfies >=1.0.dev
+1.25.0-b.2.1 satisfies >=1.0.dev
+1.25.0beta2.1 satisfies >=1.0.dev
+1.25.0-b2.1 satisfies >=1.0.dev
+1.25.0-b-2.1 satisfies >=1.0.dev
+1.25.0-b.3 satisfies >=1.0.dev
+1.25.0beta.3 satisfies >=1.0.dev
+1.25.0-rc satisfies >=1.0.dev
+1.25.0 satisfies >=1.0.dev
+1.26.0 satisfies >=1.0.dev
+10.4.13beta.2 satisfies >=1.0.dev
+v1.13.11-beta.0 satisfies >=1.0.dev
+1.0.0-alpha-2.1-3+foo satisfies >=1.0.dev
+2 satisfies >=1.0.dev
+2.0 satisfies >=1.0.dev
+2.0-dev satisfies >=1.0.dev
+2.0.0-beta satisfies >=1.0.dev
+2.0.5 satisfies >=1.0.dev
+2.0.6 satisfies >=1.0.dev
+2.1 satisfies >=1.0.dev
+2.1.3 satisfies >=1.0.dev
+2.4.0-alpha satisfies >=1.0.dev
+2.4.3-alpha satisfies >=1.0.dev
+2.9.0 satisfies >=1.0.dev
+3.0 satisfies >=1.0.dev
+10 satisfies >=1.0.dev
+10.0-alpha satisfies >=1.0.dev
+00.01.03.04 fails >=1.0.dev
+0700 satisfies >=1.0.dev
+12345 satisfies >=1.0.dev
+99999 satisfies >=1.0.dev
+100000 satisfies >=1.0.dev
+123456 satisfies >=1.0.dev
+2010.01 satisfies >=1.0.dev
+2010.01.02 satisfies >=1.0.dev
+2010-01-02 satisfies >=1.0.dev
+2010-01-02-beta satisfies >=1.0.dev
+2010-01-02.5 satisfies >=1.0.dev
+20100102 satisfies >=1.0.dev
+v20100102 satisfies >=1.0.dev
+20100102.0 satisfies >=1.0.dev
+20100102-dev satisfies >=1.0.dev
+20100102-203040 satisfies >=1.0.dev
+20100102-203040-p1 satisfies >=1.0.dev
+20100102.x-dev satisfies >=1.0.dev
+201903.0 satisfies >=1.0.dev
+201903.0-p2 satisfies >=1.0.dev
+201903.x-dev satisfies >=1.0.dev
+2010-01-02-10-20-30.5 satisfies >=1.0.dev
+9999999-dev satisfies >=1.0.dev
+1.9223372036854775806 satisfies >=1.0.dev
+1.9223372036854775807 satisfies >=1.0.dev
+1.9223372036854775808 satisfies >=1.0.dev
+1.99999999999999999999 satisfies >=1.0.dev
+2010010203040506070808 satisfies >=1.0.dev
+2010010203040506070809 satisfies >=1.0.dev
+0 fails >=1.0_dev
+0.0 fails >=1.0_dev
+00 fails >=1.0_dev
+0.0.0.0-dev fails >=1.0_dev
+0.0.1 fails >=1.0_dev
+0.0.3 fails >=1.0_dev
+0.0.3-alpha fails >=1.0_dev
+0.0.4-dev fails >=1.0_dev
+0.1 fails >=1.0_dev
+0.1.97 fails >=1.0_dev
+0.2.9 fails >=1.0_dev
+0.9 fails >=1.0_dev
+0.x-dev fails >=1.0_dev
+1-dev satisfies >=1.0_dev
+1.0-dev satisfies >=1.0_dev
+1.0.-dev satisfies >=1.0_dev
+1.0.0-dev satisfies >=1.0_dev
+1.2..dev satisfies >=1.0_dev
+1.2-.dev satisfies >=1.0_dev
+1.2_-dev satisfies >=1.0_dev
+1.0.0-alpha satisfies >=1.0_dev
+1.0-a satisfies >=1.0_dev
+1.0a1 satisfies >=1.0_dev
+1.0-alpha1 satisfies >=1.0_dev
+1.0.0-ALPHA2 satisfies >=1.0_dev
+1.0-alpha.2 satisfies >=1.0_dev
+1.0-b satisfies >=1.0_dev
+1.0-beta satisfies >=1.0_dev
+1.0b1 satisfies >=1.0_dev
+1.0-beta1 satisfies >=1.0_dev
+1.0-beta.1.2 satisfies >=1.0_dev
+1.0-beta1-2 satisfies >=1.0_dev
+1.0-Beta2 satisfies >=1.0_dev
+1.0-RC satisfies >=1.0_dev
+1.0-rc1 satisfies >=1.0_dev
+1.0RC1 satisfies >=1.0_dev
+1.0-Rc1 satisfies >=1.0_dev
+1.0-RC1-dev satisfies >=1.0_dev
+1.0.0RC1dev satisfies >=1.0_dev
+1.0.0-rC15-dev satisfies >=1.0_dev
+1.0.0.RC.15-dev satisfies >=1.0_dev
+1.0-RC2 satisfies >=1.0_dev
+1.0-stable satisfies >=1.0_dev
+1.0-STABLE fails >=1.0_dev
+1.0-Stable-dev fails >=1.0_dev
+1.0-stabledev satisfies >=1.0_dev
+1 satisfies >=1.0_dev
+1.0 satisfies >=1.0_dev
+1.0.0 satisfies >=1.0_dev
+1.0.0.0 satisfies >=1.0_dev
+v1.0 satisfies >=1.0_dev
+V1.0.0 satisfies >=1.0_dev
+01.0 satisfies >=1.0_dev
+1.00 satisfies >=1.0_dev
+1.0+build satisfies >=1.0_dev
+1.0.0+20100101 satisfies >=1.0_dev
+1.0-dev+b satisfies >=1.0_dev
+1.0@dev satisfies >=1.0_dev
+1.0@stable satisfies >=1.0_dev
+1.0.0+foo@dev satisfies >=1.0_dev
+1.0-p satisfies >=1.0_dev
+1.0-p1 satisfies >=1.0_dev
+1.0-pl1 satisfies >=1.0_dev
+1.0.0.pl3-dev satisfies >=1.0_dev
+1.0-patch1 satisfies >=1.0_dev
+1.0-patch2 satisfies >=1.0_dev
+1.0.1 satisfies >=1.0_dev
+1.0.1-dev satisfies >=1.0_dev
+1.1 satisfies >=1.0_dev
+1.2 satisfies >=1.0_dev
+1.2-dev satisfies >=1.0_dev
+1.2. satisfies >=1.0_dev
+1.2-beta satisfies >=1.0_dev
+1.2.3-beta satisfies >=1.0_dev
+1.2.3 satisfies >=1.0_dev
+1.2.3b5 satisfies >=1.0_dev
+1.2.3a1 satisfies >=1.0_dev
+1.2.3p1234 satisfies >=1.0_dev
+1.2.4 satisfies >=1.0_dev
+1.2.3.4 satisfies >=1.0_dev
+1.2.3.4-dev satisfies >=1.0_dev
+1.3.0-beta satisfies >=1.0_dev
+1.9999.9999 satisfies >=1.0_dev
+1.9999999.9999999.9999999-dev satisfies >=1.0_dev
+1.x-dev satisfies >=1.0_dev
+1.X-dev satisfies >=1.0_dev
+1.*-dev satisfies >=1.0_dev
+1.xdev satisfies >=1.0_dev
+1.x.dev satisfies >=1.0_dev
+1.0.x-dev satisfies >=1.0_dev
+1.2.x-dev satisfies >=1.0_dev
+1.2.3.x-dev satisfies >=1.0_dev
+v1.x-dev satisfies >=1.0_dev
+041.x-dev satisfies >=1.0_dev
+1.25.0-beta2.1 satisfies >=1.0_dev
+1.25.0-b.2.1 satisfies >=1.0_dev
+1.25.0beta2.1 satisfies >=1.0_dev
+1.25.0-b2.1 satisfies >=1.0_dev
+1.25.0-b-2.1 satisfies >=1.0_dev
+1.25.0-b.3 satisfies >=1.0_dev
+1.25.0beta.3 satisfies >=1.0_dev
+1.25.0-rc satisfies >=1.0_dev
+1.25.0 satisfies >=1.0_dev
+1.26.0 satisfies >=1.0_dev
+10.4.13beta.2 satisfies >=1.0_dev
+v1.13.11-beta.0 satisfies >=1.0_dev
+1.0.0-alpha-2.1-3+foo satisfies >=1.0_dev
+2 satisfies >=1.0_dev
+2.0 satisfies >=1.0_dev
+2.0-dev satisfies >=1.0_dev
+2.0.0-beta satisfies >=1.0_dev
+2.0.5 satisfies >=1.0_dev
+2.0.6 satisfies >=1.0_dev
+2.1 satisfies >=1.0_dev
+2.1.3 satisfies >=1.0_dev
+2.4.0-alpha satisfies >=1.0_dev
+2.4.3-alpha satisfies >=1.0_dev
+2.9.0 satisfies >=1.0_dev
+3.0 satisfies >=1.0_dev
+10 satisfies >=1.0_dev
+10.0-alpha satisfies >=1.0_dev
+00.01.03.04 fails >=1.0_dev
+0700 satisfies >=1.0_dev
+12345 satisfies >=1.0_dev
+99999 satisfies >=1.0_dev
+100000 satisfies >=1.0_dev
+123456 satisfies >=1.0_dev
+2010.01 satisfies >=1.0_dev
+2010.01.02 satisfies >=1.0_dev
+2010-01-02 satisfies >=1.0_dev
+2010-01-02-beta satisfies >=1.0_dev
+2010-01-02.5 satisfies >=1.0_dev
+20100102 satisfies >=1.0_dev
+v20100102 satisfies >=1.0_dev
+20100102.0 satisfies >=1.0_dev
+20100102-dev satisfies >=1.0_dev
+20100102-203040 satisfies >=1.0_dev
+20100102-203040-p1 satisfies >=1.0_dev
+20100102.x-dev satisfies >=1.0_dev
+201903.0 satisfies >=1.0_dev
+201903.0-p2 satisfies >=1.0_dev
+201903.x-dev satisfies >=1.0_dev
+2010-01-02-10-20-30.5 satisfies >=1.0_dev
+9999999-dev satisfies >=1.0_dev
+1.9223372036854775806 satisfies >=1.0_dev
+1.9223372036854775807 satisfies >=1.0_dev
+1.9223372036854775808 satisfies >=1.0_dev
+1.99999999999999999999 satisfies >=1.0_dev
+2010010203040506070808 satisfies >=1.0_dev
+2010010203040506070809 satisfies >=1.0_dev
+0 satisfies <1.0dev
+0.0 satisfies <1.0dev
+00 satisfies <1.0dev
+0.0.0.0-dev satisfies <1.0dev
+0.0.1 satisfies <1.0dev
+0.0.3 satisfies <1.0dev
+0.0.3-alpha satisfies <1.0dev
+0.0.4-dev satisfies <1.0dev
+0.1 satisfies <1.0dev
+0.1.97 satisfies <1.0dev
+0.2.9 satisfies <1.0dev
+0.9 satisfies <1.0dev
+0.x-dev satisfies <1.0dev
+1-dev fails <1.0dev
+1.0-dev fails <1.0dev
+1.0.-dev fails <1.0dev
+1.0.0-dev fails <1.0dev
+1.2..dev fails <1.0dev
+1.2-.dev fails <1.0dev
+1.2_-dev fails <1.0dev
+1.0.0-alpha fails <1.0dev
+1.0-a fails <1.0dev
+1.0a1 fails <1.0dev
+1.0-alpha1 fails <1.0dev
+1.0.0-ALPHA2 fails <1.0dev
+1.0-alpha.2 fails <1.0dev
+1.0-b fails <1.0dev
+1.0-beta fails <1.0dev
+1.0b1 fails <1.0dev
+1.0-beta1 fails <1.0dev
+1.0-beta.1.2 fails <1.0dev
+1.0-beta1-2 fails <1.0dev
+1.0-Beta2 fails <1.0dev
+1.0-RC fails <1.0dev
+1.0-rc1 fails <1.0dev
+1.0RC1 fails <1.0dev
+1.0-Rc1 fails <1.0dev
+1.0-RC1-dev fails <1.0dev
+1.0.0RC1dev fails <1.0dev
+1.0.0-rC15-dev fails <1.0dev
+1.0.0.RC.15-dev fails <1.0dev
+1.0-RC2 fails <1.0dev
+1.0-stable fails <1.0dev
+1.0-STABLE satisfies <1.0dev
+1.0-Stable-dev satisfies <1.0dev
+1.0-stabledev fails <1.0dev
+1 fails <1.0dev
+1.0 fails <1.0dev
+1.0.0 fails <1.0dev
+1.0.0.0 fails <1.0dev
+v1.0 fails <1.0dev
+V1.0.0 fails <1.0dev
+01.0 fails <1.0dev
+1.00 fails <1.0dev
+1.0+build fails <1.0dev
+1.0.0+20100101 fails <1.0dev
+1.0-dev+b fails <1.0dev
+1.0@dev fails <1.0dev
+1.0@stable fails <1.0dev
+1.0.0+foo@dev fails <1.0dev
+1.0-p fails <1.0dev
+1.0-p1 fails <1.0dev
+1.0-pl1 fails <1.0dev
+1.0.0.pl3-dev fails <1.0dev
+1.0-patch1 fails <1.0dev
+1.0-patch2 fails <1.0dev
+1.0.1 fails <1.0dev
+1.0.1-dev fails <1.0dev
+1.1 fails <1.0dev
+1.2 fails <1.0dev
+1.2-dev fails <1.0dev
+1.2. fails <1.0dev
+1.2-beta fails <1.0dev
+1.2.3-beta fails <1.0dev
+1.2.3 fails <1.0dev
+1.2.3b5 fails <1.0dev
+1.2.3a1 fails <1.0dev
+1.2.3p1234 fails <1.0dev
+1.2.4 fails <1.0dev
+1.2.3.4 fails <1.0dev
+1.2.3.4-dev fails <1.0dev
+1.3.0-beta fails <1.0dev
+1.9999.9999 fails <1.0dev
+1.9999999.9999999.9999999-dev fails <1.0dev
+1.x-dev fails <1.0dev
+1.X-dev fails <1.0dev
+1.*-dev fails <1.0dev
+1.xdev fails <1.0dev
+1.x.dev fails <1.0dev
+1.0.x-dev fails <1.0dev
+1.2.x-dev fails <1.0dev
+1.2.3.x-dev fails <1.0dev
+v1.x-dev fails <1.0dev
+041.x-dev fails <1.0dev
+1.25.0-beta2.1 fails <1.0dev
+1.25.0-b.2.1 fails <1.0dev
+1.25.0beta2.1 fails <1.0dev
+1.25.0-b2.1 fails <1.0dev
+1.25.0-b-2.1 fails <1.0dev
+1.25.0-b.3 fails <1.0dev
+1.25.0beta.3 fails <1.0dev
+1.25.0-rc fails <1.0dev
+1.25.0 fails <1.0dev
+1.26.0 fails <1.0dev
+10.4.13beta.2 fails <1.0dev
+v1.13.11-beta.0 fails <1.0dev
+1.0.0-alpha-2.1-3+foo fails <1.0dev
+2 fails <1.0dev
+2.0 fails <1.0dev
+2.0-dev fails <1.0dev
+2.0.0-beta fails <1.0dev
+2.0.5 fails <1.0dev
+2.0.6 fails <1.0dev
+2.1 fails <1.0dev
+2.1.3 fails <1.0dev
+2.4.0-alpha fails <1.0dev
+2.4.3-alpha fails <1.0dev
+2.9.0 fails <1.0dev
+3.0 fails <1.0dev
+10 fails <1.0dev
+10.0-alpha fails <1.0dev
+00.01.03.04 satisfies <1.0dev
+0700 fails <1.0dev
+12345 fails <1.0dev
+99999 fails <1.0dev
+100000 fails <1.0dev
+123456 fails <1.0dev
+2010.01 fails <1.0dev
+2010.01.02 fails <1.0dev
+2010-01-02 fails <1.0dev
+2010-01-02-beta fails <1.0dev
+2010-01-02.5 fails <1.0dev
+20100102 fails <1.0dev
+v20100102 fails <1.0dev
+20100102.0 fails <1.0dev
+20100102-dev fails <1.0dev
+20100102-203040 fails <1.0dev
+20100102-203040-p1 fails <1.0dev
+20100102.x-dev fails <1.0dev
+201903.0 fails <1.0dev
+201903.0-p2 fails <1.0dev
+201903.x-dev fails <1.0dev
+2010-01-02-10-20-30.5 fails <1.0dev
+9999999-dev fails <1.0dev
+1.9223372036854775806 fails <1.0dev
+1.9223372036854775807 fails <1.0dev
+1.9223372036854775808 fails <1.0dev
+1.99999999999999999999 fails <1.0dev
+2010010203040506070808 fails <1.0dev
+2010010203040506070809 fails <1.0dev
+0 satisfies <0.*dev
+0.0 satisfies <0.*dev
+00 satisfies <0.*dev
+0.0.0.0-dev satisfies <0.*dev
+0.0.1 satisfies <0.*dev
+0.0.3 satisfies <0.*dev
+0.0.3-alpha satisfies <0.*dev
+0.0.4-dev satisfies <0.*dev
+0.1 satisfies <0.*dev
+0.1.97 satisfies <0.*dev
+0.2.9 satisfies <0.*dev
+0.9 satisfies <0.*dev
+0.x-dev fails <0.*dev
+1-dev fails <0.*dev
+1.0-dev fails <0.*dev
+1.0.-dev fails <0.*dev
+1.0.0-dev fails <0.*dev
+1.2..dev fails <0.*dev
+1.2-.dev fails <0.*dev
+1.2_-dev fails <0.*dev
+1.0.0-alpha fails <0.*dev
+1.0-a fails <0.*dev
+1.0a1 fails <0.*dev
+1.0-alpha1 fails <0.*dev
+1.0.0-ALPHA2 fails <0.*dev
+1.0-alpha.2 fails <0.*dev
+1.0-b fails <0.*dev
+1.0-beta fails <0.*dev
+1.0b1 fails <0.*dev
+1.0-beta1 fails <0.*dev
+1.0-beta.1.2 fails <0.*dev
+1.0-beta1-2 fails <0.*dev
+1.0-Beta2 fails <0.*dev
+1.0-RC fails <0.*dev
+1.0-rc1 fails <0.*dev
+1.0RC1 fails <0.*dev
+1.0-Rc1 fails <0.*dev
+1.0-RC1-dev fails <0.*dev
+1.0.0RC1dev fails <0.*dev
+1.0.0-rC15-dev fails <0.*dev
+1.0.0.RC.15-dev fails <0.*dev
+1.0-RC2 fails <0.*dev
+1.0-stable fails <0.*dev
+1.0-STABLE fails <0.*dev
+1.0-Stable-dev fails <0.*dev
+1.0-stabledev fails <0.*dev
+1 fails <0.*dev
+1.0 fails <0.*dev
+1.0.0 fails <0.*dev
+1.0.0.0 fails <0.*dev
+v1.0 fails <0.*dev
+V1.0.0 fails <0.*dev
+01.0 fails <0.*dev
+1.00 fails <0.*dev
+1.0+build fails <0.*dev
+1.0.0+20100101 fails <0.*dev
+1.0-dev+b fails <0.*dev
+1.0@dev fails <0.*dev
+1.0@stable fails <0.*dev
+1.0.0+foo@dev fails <0.*dev
+1.0-p fails <0.*dev
+1.0-p1 fails <0.*dev
+1.0-pl1 fails <0.*dev
+1.0.0.pl3-dev fails <0.*dev
+1.0-patch1 fails <0.*dev
+1.0-patch2 fails <0.*dev
+1.0.1 fails <0.*dev
+1.0.1-dev fails <0.*dev
+1.1 fails <0.*dev
+1.2 fails <0.*dev
+1.2-dev fails <0.*dev
+1.2. fails <0.*dev
+1.2-beta fails <0.*dev
+1.2.3-beta fails <0.*dev
+1.2.3 fails <0.*dev
+1.2.3b5 fails <0.*dev
+1.2.3a1 fails <0.*dev
+1.2.3p1234 fails <0.*dev
+1.2.4 fails <0.*dev
+1.2.3.4 fails <0.*dev
+1.2.3.4-dev fails <0.*dev
+1.3.0-beta fails <0.*dev
+1.9999.9999 fails <0.*dev
+1.9999999.9999999.9999999-dev fails <0.*dev
+1.x-dev fails <0.*dev
+1.X-dev fails <0.*dev
+1.*-dev fails <0.*dev
+1.xdev fails <0.*dev
+1.x.dev fails <0.*dev
+1.0.x-dev fails <0.*dev
+1.2.x-dev fails <0.*dev
+1.2.3.x-dev fails <0.*dev
+v1.x-dev fails <0.*dev
+041.x-dev fails <0.*dev
+1.25.0-beta2.1 fails <0.*dev
+1.25.0-b.2.1 fails <0.*dev
+1.25.0beta2.1 fails <0.*dev
+1.25.0-b2.1 fails <0.*dev
+1.25.0-b-2.1 fails <0.*dev
+1.25.0-b.3 fails <0.*dev
+1.25.0beta.3 fails <0.*dev
+1.25.0-rc fails <0.*dev
+1.25.0 fails <0.*dev
+1.26.0 fails <0.*dev
+10.4.13beta.2 fails <0.*dev
+v1.13.11-beta.0 fails <0.*dev
+1.0.0-alpha-2.1-3+foo fails <0.*dev
+2 fails <0.*dev
+2.0 fails <0.*dev
+2.0-dev fails <0.*dev
+2.0.0-beta fails <0.*dev
+2.0.5 fails <0.*dev
+2.0.6 fails <0.*dev
+2.1 fails <0.*dev
+2.1.3 fails <0.*dev
+2.4.0-alpha fails <0.*dev
+2.4.3-alpha fails <0.*dev
+2.9.0 fails <0.*dev
+3.0 fails <0.*dev
+10 fails <0.*dev
+10.0-alpha fails <0.*dev
+00.01.03.04 satisfies <0.*dev
+0700 fails <0.*dev
+12345 fails <0.*dev
+99999 fails <0.*dev
+100000 fails <0.*dev
+123456 fails <0.*dev
+2010.01 fails <0.*dev
+2010.01.02 fails <0.*dev
+2010-01-02 fails <0.*dev
+2010-01-02-beta fails <0.*dev
+2010-01-02.5 fails <0.*dev
+20100102 fails <0.*dev
+v20100102 fails <0.*dev
+20100102.0 fails <0.*dev
+20100102-dev fails <0.*dev
+20100102-203040 fails <0.*dev
+20100102-203040-p1 fails <0.*dev
+20100102.x-dev fails <0.*dev
+201903.0 fails <0.*dev
+201903.0-p2 fails <0.*dev
+201903.x-dev fails <0.*dev
+2010-01-02-10-20-30.5 fails <0.*dev
+9999999-dev fails <0.*dev
+1.9223372036854775806 fails <0.*dev
+1.9223372036854775807 fails <0.*dev
+1.9223372036854775808 fails <0.*dev
+1.99999999999999999999 fails <0.*dev
+2010010203040506070808 fails <0.*dev
+2010010203040506070809 fails <0.*dev
+0 fails >=10RCdev
+0.0 fails >=10RCdev
+00 fails >=10RCdev
+0.0.0.0-dev fails >=10RCdev
+0.0.1 fails >=10RCdev
+0.0.3 fails >=10RCdev
+0.0.3-alpha fails >=10RCdev
+0.0.4-dev fails >=10RCdev
+0.1 fails >=10RCdev
+0.1.97 fails >=10RCdev
+0.2.9 fails >=10RCdev
+0.9 fails >=10RCdev
+0.x-dev fails >=10RCdev
+1-dev fails >=10RCdev
+1.0-dev fails >=10RCdev
+1.0.-dev fails >=10RCdev
+1.0.0-dev fails >=10RCdev
+1.2..dev fails >=10RCdev
+1.2-.dev fails >=10RCdev
+1.2_-dev fails >=10RCdev
+1.0.0-alpha fails >=10RCdev
+1.0-a fails >=10RCdev
+1.0a1 fails >=10RCdev
+1.0-alpha1 fails >=10RCdev
+1.0.0-ALPHA2 fails >=10RCdev
+1.0-alpha.2 fails >=10RCdev
+1.0-b fails >=10RCdev
+1.0-beta fails >=10RCdev
+1.0b1 fails >=10RCdev
+1.0-beta1 fails >=10RCdev
+1.0-beta.1.2 fails >=10RCdev
+1.0-beta1-2 fails >=10RCdev
+1.0-Beta2 fails >=10RCdev
+1.0-RC fails >=10RCdev
+1.0-rc1 fails >=10RCdev
+1.0RC1 fails >=10RCdev
+1.0-Rc1 fails >=10RCdev
+1.0-RC1-dev fails >=10RCdev
+1.0.0RC1dev fails >=10RCdev
+1.0.0-rC15-dev fails >=10RCdev
+1.0.0.RC.15-dev fails >=10RCdev
+1.0-RC2 fails >=10RCdev
+1.0-stable fails >=10RCdev
+1.0-STABLE fails >=10RCdev
+1.0-Stable-dev fails >=10RCdev
+1.0-stabledev fails >=10RCdev
+1 fails >=10RCdev
+1.0 fails >=10RCdev
+1.0.0 fails >=10RCdev
+1.0.0.0 fails >=10RCdev
+v1.0 fails >=10RCdev
+V1.0.0 fails >=10RCdev
+01.0 fails >=10RCdev
+1.00 fails >=10RCdev
+1.0+build fails >=10RCdev
+1.0.0+20100101 fails >=10RCdev
+1.0-dev+b fails >=10RCdev
+1.0@dev fails >=10RCdev
+1.0@stable fails >=10RCdev
+1.0.0+foo@dev fails >=10RCdev
+1.0-p fails >=10RCdev
+1.0-p1 fails >=10RCdev
+1.0-pl1 fails >=10RCdev
+1.0.0.pl3-dev fails >=10RCdev
+1.0-patch1 fails >=10RCdev
+1.0-patch2 fails >=10RCdev
+1.0.1 fails >=10RCdev
+1.0.1-dev fails >=10RCdev
+1.1 fails >=10RCdev
+1.2 fails >=10RCdev
+1.2-dev fails >=10RCdev
+1.2. fails >=10RCdev
+1.2-beta fails >=10RCdev
+1.2.3-beta fails >=10RCdev
+1.2.3 fails >=10RCdev
+1.2.3b5 fails >=10RCdev
+1.2.3a1 fails >=10RCdev
+1.2.3p1234 fails >=10RCdev
+1.2.4 fails >=10RCdev
+1.2.3.4 fails >=10RCdev
+1.2.3.4-dev fails >=10RCdev
+1.3.0-beta fails >=10RCdev
+1.9999.9999 fails >=10RCdev
+1.9999999.9999999.9999999-dev fails >=10RCdev
+1.x-dev fails >=10RCdev
+1.X-dev fails >=10RCdev
+1.*-dev fails >=10RCdev
+1.xdev fails >=10RCdev
+1.x.dev fails >=10RCdev
+1.0.x-dev fails >=10RCdev
+1.2.x-dev fails >=10RCdev
+1.2.3.x-dev fails >=10RCdev
+v1.x-dev fails >=10RCdev
+041.x-dev satisfies >=10RCdev
+1.25.0-beta2.1 fails >=10RCdev
+1.25.0-b.2.1 fails >=10RCdev
+1.25.0beta2.1 fails >=10RCdev
+1.25.0-b2.1 fails >=10RCdev
+1.25.0-b-2.1 fails >=10RCdev
+1.25.0-b.3 fails >=10RCdev
+1.25.0beta.3 fails >=10RCdev
+1.25.0-rc fails >=10RCdev
+1.25.0 fails >=10RCdev
+1.26.0 fails >=10RCdev
+10.4.13beta.2 satisfies >=10RCdev
+v1.13.11-beta.0 fails >=10RCdev
+1.0.0-alpha-2.1-3+foo fails >=10RCdev
+2 fails >=10RCdev
+2.0 fails >=10RCdev
+2.0-dev fails >=10RCdev
+2.0.0-beta fails >=10RCdev
+2.0.5 fails >=10RCdev
+2.0.6 fails >=10RCdev
+2.1 fails >=10RCdev
+2.1.3 fails >=10RCdev
+2.4.0-alpha fails >=10RCdev
+2.4.3-alpha fails >=10RCdev
+2.9.0 fails >=10RCdev
+3.0 fails >=10RCdev
+10 satisfies >=10RCdev
+10.0-alpha fails >=10RCdev
+00.01.03.04 fails >=10RCdev
+0700 satisfies >=10RCdev
+12345 satisfies >=10RCdev
+99999 satisfies >=10RCdev
+100000 satisfies >=10RCdev
+123456 satisfies >=10RCdev
+2010.01 satisfies >=10RCdev
+2010.01.02 satisfies >=10RCdev
+2010-01-02 satisfies >=10RCdev
+2010-01-02-beta satisfies >=10RCdev
+2010-01-02.5 satisfies >=10RCdev
+20100102 satisfies >=10RCdev
+v20100102 satisfies >=10RCdev
+20100102.0 satisfies >=10RCdev
+20100102-dev satisfies >=10RCdev
+20100102-203040 satisfies >=10RCdev
+20100102-203040-p1 satisfies >=10RCdev
+20100102.x-dev satisfies >=10RCdev
+201903.0 satisfies >=10RCdev
+201903.0-p2 satisfies >=10RCdev
+201903.x-dev satisfies >=10RCdev
+2010-01-02-10-20-30.5 satisfies >=10RCdev
+9999999-dev satisfies >=10RCdev
+1.9223372036854775806 fails >=10RCdev
+1.9223372036854775807 fails >=10RCdev
+1.9223372036854775808 fails >=10RCdev
+1.99999999999999999999 fails >=10RCdev
+2010010203040506070808 satisfies >=10RCdev
+2010010203040506070809 satisfies >=10RCdev
+0 fails >=1.0-STABLE2
+0.0 fails >=1.0-STABLE2
+00 fails >=1.0-STABLE2
+0.0.0.0-dev fails >=1.0-STABLE2
+0.0.1 fails >=1.0-STABLE2
+0.0.3 fails >=1.0-STABLE2
+0.0.3-alpha fails >=1.0-STABLE2
+0.0.4-dev fails >=1.0-STABLE2
+0.1 fails >=1.0-STABLE2
+0.1.97 fails >=1.0-STABLE2
+0.2.9 fails >=1.0-STABLE2
+0.9 fails >=1.0-STABLE2
+0.x-dev fails >=1.0-STABLE2
+1-dev satisfies >=1.0-STABLE2
+1.0-dev satisfies >=1.0-STABLE2
+1.0.-dev satisfies >=1.0-STABLE2
+1.0.0-dev satisfies >=1.0-STABLE2
+1.2..dev satisfies >=1.0-STABLE2
+1.2-.dev satisfies >=1.0-STABLE2
+1.2_-dev satisfies >=1.0-STABLE2
+1.0.0-alpha satisfies >=1.0-STABLE2
+1.0-a satisfies >=1.0-STABLE2
+1.0a1 satisfies >=1.0-STABLE2
+1.0-alpha1 satisfies >=1.0-STABLE2
+1.0.0-ALPHA2 satisfies >=1.0-STABLE2
+1.0-alpha.2 satisfies >=1.0-STABLE2
+1.0-b satisfies >=1.0-STABLE2
+1.0-beta satisfies >=1.0-STABLE2
+1.0b1 satisfies >=1.0-STABLE2
+1.0-beta1 satisfies >=1.0-STABLE2
+1.0-beta.1.2 satisfies >=1.0-STABLE2
+1.0-beta1-2 satisfies >=1.0-STABLE2
+1.0-Beta2 satisfies >=1.0-STABLE2
+1.0-RC satisfies >=1.0-STABLE2
+1.0-rc1 satisfies >=1.0-STABLE2
+1.0RC1 satisfies >=1.0-STABLE2
+1.0-Rc1 satisfies >=1.0-STABLE2
+1.0-RC1-dev satisfies >=1.0-STABLE2
+1.0.0RC1dev satisfies >=1.0-STABLE2
+1.0.0-rC15-dev satisfies >=1.0-STABLE2
+1.0.0.RC.15-dev satisfies >=1.0-STABLE2
+1.0-RC2 satisfies >=1.0-STABLE2
+1.0-stable satisfies >=1.0-STABLE2
+1.0-STABLE fails >=1.0-STABLE2
+1.0-Stable-dev fails >=1.0-STABLE2
+1.0-stabledev satisfies >=1.0-STABLE2
+1 satisfies >=1.0-STABLE2
+1.0 satisfies >=1.0-STABLE2
+1.0.0 satisfies >=1.0-STABLE2
+1.0.0.0 satisfies >=1.0-STABLE2
+v1.0 satisfies >=1.0-STABLE2
+V1.0.0 satisfies >=1.0-STABLE2
+01.0 satisfies >=1.0-STABLE2
+1.00 satisfies >=1.0-STABLE2
+1.0+build satisfies >=1.0-STABLE2
+1.0.0+20100101 satisfies >=1.0-STABLE2
+1.0-dev+b satisfies >=1.0-STABLE2
+1.0@dev satisfies >=1.0-STABLE2
+1.0@stable satisfies >=1.0-STABLE2
+1.0.0+foo@dev satisfies >=1.0-STABLE2
+1.0-p satisfies >=1.0-STABLE2
+1.0-p1 satisfies >=1.0-STABLE2
+1.0-pl1 satisfies >=1.0-STABLE2
+1.0.0.pl3-dev satisfies >=1.0-STABLE2
+1.0-patch1 satisfies >=1.0-STABLE2
+1.0-patch2 satisfies >=1.0-STABLE2
+1.0.1 satisfies >=1.0-STABLE2
+1.0.1-dev satisfies >=1.0-STABLE2
+1.1 satisfies >=1.0-STABLE2
+1.2 satisfies >=1.0-STABLE2
+1.2-dev satisfies >=1.0-STABLE2
+1.2. satisfies >=1.0-STABLE2
+1.2-beta satisfies >=1.0-STABLE2
+1.2.3-beta satisfies >=1.0-STABLE2
+1.2.3 satisfies >=1.0-STABLE2
+1.2.3b5 satisfies >=1.0-STABLE2
+1.2.3a1 satisfies >=1.0-STABLE2
+1.2.3p1234 satisfies >=1.0-STABLE2
+1.2.4 satisfies >=1.0-STABLE2
+1.2.3.4 satisfies >=1.0-STABLE2
+1.2.3.4-dev satisfies >=1.0-STABLE2
+1.3.0-beta satisfies >=1.0-STABLE2
+1.9999.9999 satisfies >=1.0-STABLE2
+1.9999999.9999999.9999999-dev satisfies >=1.0-STABLE2
+1.x-dev satisfies >=1.0-STABLE2
+1.X-dev satisfies >=1.0-STABLE2
+1.*-dev satisfies >=1.0-STABLE2
+1.xdev satisfies >=1.0-STABLE2
+1.x.dev satisfies >=1.0-STABLE2
+1.0.x-dev satisfies >=1.0-STABLE2
+1.2.x-dev satisfies >=1.0-STABLE2
+1.2.3.x-dev satisfies >=1.0-STABLE2
+v1.x-dev satisfies >=1.0-STABLE2
+041.x-dev satisfies >=1.0-STABLE2
+1.25.0-beta2.1 satisfies >=1.0-STABLE2
+1.25.0-b.2.1 satisfies >=1.0-STABLE2
+1.25.0beta2.1 satisfies >=1.0-STABLE2
+1.25.0-b2.1 satisfies >=1.0-STABLE2
+1.25.0-b-2.1 satisfies >=1.0-STABLE2
+1.25.0-b.3 satisfies >=1.0-STABLE2
+1.25.0beta.3 satisfies >=1.0-STABLE2
+1.25.0-rc satisfies >=1.0-STABLE2
+1.25.0 satisfies >=1.0-STABLE2
+1.26.0 satisfies >=1.0-STABLE2
+10.4.13beta.2 satisfies >=1.0-STABLE2
+v1.13.11-beta.0 satisfies >=1.0-STABLE2
+1.0.0-alpha-2.1-3+foo satisfies >=1.0-STABLE2
+2 satisfies >=1.0-STABLE2
+2.0 satisfies >=1.0-STABLE2
+2.0-dev satisfies >=1.0-STABLE2
+2.0.0-beta satisfies >=1.0-STABLE2
+2.0.5 satisfies >=1.0-STABLE2
+2.0.6 satisfies >=1.0-STABLE2
+2.1 satisfies >=1.0-STABLE2
+2.1.3 satisfies >=1.0-STABLE2
+2.4.0-alpha satisfies >=1.0-STABLE2
+2.4.3-alpha satisfies >=1.0-STABLE2
+2.9.0 satisfies >=1.0-STABLE2
+3.0 satisfies >=1.0-STABLE2
+10 satisfies >=1.0-STABLE2
+10.0-alpha satisfies >=1.0-STABLE2
+00.01.03.04 fails >=1.0-STABLE2
+0700 satisfies >=1.0-STABLE2
+12345 satisfies >=1.0-STABLE2
+99999 satisfies >=1.0-STABLE2
+100000 satisfies >=1.0-STABLE2
+123456 satisfies >=1.0-STABLE2
+2010.01 satisfies >=1.0-STABLE2
+2010.01.02 satisfies >=1.0-STABLE2
+2010-01-02 satisfies >=1.0-STABLE2
+2010-01-02-beta satisfies >=1.0-STABLE2
+2010-01-02.5 satisfies >=1.0-STABLE2
+20100102 satisfies >=1.0-STABLE2
+v20100102 satisfies >=1.0-STABLE2
+20100102.0 satisfies >=1.0-STABLE2
+20100102-dev satisfies >=1.0-STABLE2
+20100102-203040 satisfies >=1.0-STABLE2
+20100102-203040-p1 satisfies >=1.0-STABLE2
+20100102.x-dev satisfies >=1.0-STABLE2
+201903.0 satisfies >=1.0-STABLE2
+201903.0-p2 satisfies >=1.0-STABLE2
+201903.x-dev satisfies >=1.0-STABLE2
+2010-01-02-10-20-30.5 satisfies >=1.0-STABLE2
+9999999-dev satisfies >=1.0-STABLE2
+1.9223372036854775806 satisfies >=1.0-STABLE2
+1.9223372036854775807 satisfies >=1.0-STABLE2
+1.9223372036854775808 satisfies >=1.0-STABLE2
+1.99999999999999999999 satisfies >=1.0-STABLE2
+2010010203040506070808 satisfies >=1.0-STABLE2
+2010010203040506070809 satisfies >=1.0-STABLE2
+0 satisfies <>10.0-STABLE2
+0.0 satisfies <>10.0-STABLE2
+00 satisfies <>10.0-STABLE2
+0.0.0.0-dev satisfies <>10.0-STABLE2
+0.0.1 satisfies <>10.0-STABLE2
+0.0.3 satisfies <>10.0-STABLE2
+0.0.3-alpha satisfies <>10.0-STABLE2
+0.0.4-dev satisfies <>10.0-STABLE2
+0.1 satisfies <>10.0-STABLE2
+0.1.97 satisfies <>10.0-STABLE2
+0.2.9 satisfies <>10.0-STABLE2
+0.9 satisfies <>10.0-STABLE2
+0.x-dev satisfies <>10.0-STABLE2
+1-dev satisfies <>10.0-STABLE2
+1.0-dev satisfies <>10.0-STABLE2
+1.0.-dev satisfies <>10.0-STABLE2
+1.0.0-dev satisfies <>10.0-STABLE2
+1.2..dev satisfies <>10.0-STABLE2
+1.2-.dev satisfies <>10.0-STABLE2
+1.2_-dev satisfies <>10.0-STABLE2
+1.0.0-alpha satisfies <>10.0-STABLE2
+1.0-a satisfies <>10.0-STABLE2
+1.0a1 satisfies <>10.0-STABLE2
+1.0-alpha1 satisfies <>10.0-STABLE2
+1.0.0-ALPHA2 satisfies <>10.0-STABLE2
+1.0-alpha.2 satisfies <>10.0-STABLE2
+1.0-b satisfies <>10.0-STABLE2
+1.0-beta satisfies <>10.0-STABLE2
+1.0b1 satisfies <>10.0-STABLE2
+1.0-beta1 satisfies <>10.0-STABLE2
+1.0-beta.1.2 satisfies <>10.0-STABLE2
+1.0-beta1-2 satisfies <>10.0-STABLE2
+1.0-Beta2 satisfies <>10.0-STABLE2
+1.0-RC satisfies <>10.0-STABLE2
+1.0-rc1 satisfies <>10.0-STABLE2
+1.0RC1 satisfies <>10.0-STABLE2
+1.0-Rc1 satisfies <>10.0-STABLE2
+1.0-RC1-dev satisfies <>10.0-STABLE2
+1.0.0RC1dev satisfies <>10.0-STABLE2
+1.0.0-rC15-dev satisfies <>10.0-STABLE2
+1.0.0.RC.15-dev satisfies <>10.0-STABLE2
+1.0-RC2 satisfies <>10.0-STABLE2
+1.0-stable satisfies <>10.0-STABLE2
+1.0-STABLE satisfies <>10.0-STABLE2
+1.0-Stable-dev satisfies <>10.0-STABLE2
+1.0-stabledev satisfies <>10.0-STABLE2
+1 satisfies <>10.0-STABLE2
+1.0 satisfies <>10.0-STABLE2
+1.0.0 satisfies <>10.0-STABLE2
+1.0.0.0 satisfies <>10.0-STABLE2
+v1.0 satisfies <>10.0-STABLE2
+V1.0.0 satisfies <>10.0-STABLE2
+01.0 satisfies <>10.0-STABLE2
+1.00 satisfies <>10.0-STABLE2
+1.0+build satisfies <>10.0-STABLE2
+1.0.0+20100101 satisfies <>10.0-STABLE2
+1.0-dev+b satisfies <>10.0-STABLE2
+1.0@dev satisfies <>10.0-STABLE2
+1.0@stable satisfies <>10.0-STABLE2
+1.0.0+foo@dev satisfies <>10.0-STABLE2
+1.0-p satisfies <>10.0-STABLE2
+1.0-p1 satisfies <>10.0-STABLE2
+1.0-pl1 satisfies <>10.0-STABLE2
+1.0.0.pl3-dev satisfies <>10.0-STABLE2
+1.0-patch1 satisfies <>10.0-STABLE2
+1.0-patch2 satisfies <>10.0-STABLE2
+1.0.1 satisfies <>10.0-STABLE2
+1.0.1-dev satisfies <>10.0-STABLE2
+1.1 satisfies <>10.0-STABLE2
+1.2 satisfies <>10.0-STABLE2
+1.2-dev satisfies <>10.0-STABLE2
+1.2. satisfies <>10.0-STABLE2
+1.2-beta satisfies <>10.0-STABLE2
+1.2.3-beta satisfies <>10.0-STABLE2
+1.2.3 satisfies <>10.0-STABLE2
+1.2.3b5 satisfies <>10.0-STABLE2
+1.2.3a1 satisfies <>10.0-STABLE2
+1.2.3p1234 satisfies <>10.0-STABLE2
+1.2.4 satisfies <>10.0-STABLE2
+1.2.3.4 satisfies <>10.0-STABLE2
+1.2.3.4-dev satisfies <>10.0-STABLE2
+1.3.0-beta satisfies <>10.0-STABLE2
+1.9999.9999 satisfies <>10.0-STABLE2
+1.9999999.9999999.9999999-dev satisfies <>10.0-STABLE2
+1.x-dev satisfies <>10.0-STABLE2
+1.X-dev satisfies <>10.0-STABLE2
+1.*-dev satisfies <>10.0-STABLE2
+1.xdev satisfies <>10.0-STABLE2
+1.x.dev satisfies <>10.0-STABLE2
+1.0.x-dev satisfies <>10.0-STABLE2
+1.2.x-dev satisfies <>10.0-STABLE2
+1.2.3.x-dev satisfies <>10.0-STABLE2
+v1.x-dev satisfies <>10.0-STABLE2
+041.x-dev satisfies <>10.0-STABLE2
+1.25.0-beta2.1 satisfies <>10.0-STABLE2
+1.25.0-b.2.1 satisfies <>10.0-STABLE2
+1.25.0beta2.1 satisfies <>10.0-STABLE2
+1.25.0-b2.1 satisfies <>10.0-STABLE2
+1.25.0-b-2.1 satisfies <>10.0-STABLE2
+1.25.0-b.3 satisfies <>10.0-STABLE2
+1.25.0beta.3 satisfies <>10.0-STABLE2
+1.25.0-rc satisfies <>10.0-STABLE2
+1.25.0 satisfies <>10.0-STABLE2
+1.26.0 satisfies <>10.0-STABLE2
+10.4.13beta.2 satisfies <>10.0-STABLE2
+v1.13.11-beta.0 satisfies <>10.0-STABLE2
+1.0.0-alpha-2.1-3+foo satisfies <>10.0-STABLE2
+2 satisfies <>10.0-STABLE2
+2.0 satisfies <>10.0-STABLE2
+2.0-dev satisfies <>10.0-STABLE2
+2.0.0-beta satisfies <>10.0-STABLE2
+2.0.5 satisfies <>10.0-STABLE2
+2.0.6 satisfies <>10.0-STABLE2
+2.1 satisfies <>10.0-STABLE2
+2.1.3 satisfies <>10.0-STABLE2
+2.4.0-alpha satisfies <>10.0-STABLE2
+2.4.3-alpha satisfies <>10.0-STABLE2
+2.9.0 satisfies <>10.0-STABLE2
+3.0 satisfies <>10.0-STABLE2
+10 satisfies <>10.0-STABLE2
+10.0-alpha satisfies <>10.0-STABLE2
+00.01.03.04 satisfies <>10.0-STABLE2
+0700 satisfies <>10.0-STABLE2
+12345 satisfies <>10.0-STABLE2
+99999 satisfies <>10.0-STABLE2
+100000 satisfies <>10.0-STABLE2
+123456 satisfies <>10.0-STABLE2
+2010.01 satisfies <>10.0-STABLE2
+2010.01.02 satisfies <>10.0-STABLE2
+2010-01-02 satisfies <>10.0-STABLE2
+2010-01-02-beta satisfies <>10.0-STABLE2
+2010-01-02.5 satisfies <>10.0-STABLE2
+20100102 satisfies <>10.0-STABLE2
+v20100102 satisfies <>10.0-STABLE2
+20100102.0 satisfies <>10.0-STABLE2
+20100102-dev satisfies <>10.0-STABLE2
+20100102-203040 satisfies <>10.0-STABLE2
+20100102-203040-p1 satisfies <>10.0-STABLE2
+20100102.x-dev satisfies <>10.0-STABLE2
+201903.0 satisfies <>10.0-STABLE2
+201903.0-p2 satisfies <>10.0-STABLE2
+201903.x-dev satisfies <>10.0-STABLE2
+2010-01-02-10-20-30.5 satisfies <>10.0-STABLE2
+9999999-dev satisfies <>10.0-STABLE2
+1.9223372036854775806 satisfies <>10.0-STABLE2
+1.9223372036854775807 satisfies <>10.0-STABLE2
+1.9223372036854775808 satisfies <>10.0-STABLE2
+1.99999999999999999999 satisfies <>10.0-STABLE2
+2010010203040506070808 satisfies <>10.0-STABLE2
+2010010203040506070809 satisfies <>10.0-STABLE2
+0 fails 1.0-STABLE2
+0.0 fails 1.0-STABLE2
+00 fails 1.0-STABLE2
+0.0.0.0-dev fails 1.0-STABLE2
+0.0.1 fails 1.0-STABLE2
+0.0.3 fails 1.0-STABLE2
+0.0.3-alpha fails 1.0-STABLE2
+0.0.4-dev fails 1.0-STABLE2
+0.1 fails 1.0-STABLE2
+0.1.97 fails 1.0-STABLE2
+0.2.9 fails 1.0-STABLE2
+0.9 fails 1.0-STABLE2
+0.x-dev fails 1.0-STABLE2
+1-dev fails 1.0-STABLE2
+1.0-dev fails 1.0-STABLE2
+1.0.-dev fails 1.0-STABLE2
+1.0.0-dev fails 1.0-STABLE2
+1.2..dev fails 1.0-STABLE2
+1.2-.dev fails 1.0-STABLE2
+1.2_-dev fails 1.0-STABLE2
+1.0.0-alpha fails 1.0-STABLE2
+1.0-a fails 1.0-STABLE2
+1.0a1 fails 1.0-STABLE2
+1.0-alpha1 fails 1.0-STABLE2
+1.0.0-ALPHA2 fails 1.0-STABLE2
+1.0-alpha.2 fails 1.0-STABLE2
+1.0-b fails 1.0-STABLE2
+1.0-beta fails 1.0-STABLE2
+1.0b1 fails 1.0-STABLE2
+1.0-beta1 fails 1.0-STABLE2
+1.0-beta.1.2 fails 1.0-STABLE2
+1.0-beta1-2 fails 1.0-STABLE2
+1.0-Beta2 fails 1.0-STABLE2
+1.0-RC fails 1.0-STABLE2
+1.0-rc1 fails 1.0-STABLE2
+1.0RC1 fails 1.0-STABLE2
+1.0-Rc1 fails 1.0-STABLE2
+1.0-RC1-dev fails 1.0-STABLE2
+1.0.0RC1dev fails 1.0-STABLE2
+1.0.0-rC15-dev fails 1.0-STABLE2
+1.0.0.RC.15-dev fails 1.0-STABLE2
+1.0-RC2 fails 1.0-STABLE2
+1.0-stable fails 1.0-STABLE2
+1.0-STABLE fails 1.0-STABLE2
+1.0-Stable-dev fails 1.0-STABLE2
+1.0-stabledev fails 1.0-STABLE2
+1 fails 1.0-STABLE2
+1.0 fails 1.0-STABLE2
+1.0.0 fails 1.0-STABLE2
+1.0.0.0 fails 1.0-STABLE2
+v1.0 fails 1.0-STABLE2
+V1.0.0 fails 1.0-STABLE2
+01.0 fails 1.0-STABLE2
+1.00 fails 1.0-STABLE2
+1.0+build fails 1.0-STABLE2
+1.0.0+20100101 fails 1.0-STABLE2
+1.0-dev+b fails 1.0-STABLE2
+1.0@dev fails 1.0-STABLE2
+1.0@stable fails 1.0-STABLE2
+1.0.0+foo@dev fails 1.0-STABLE2
+1.0-p fails 1.0-STABLE2
+1.0-p1 fails 1.0-STABLE2
+1.0-pl1 fails 1.0-STABLE2
+1.0.0.pl3-dev fails 1.0-STABLE2
+1.0-patch1 fails 1.0-STABLE2
+1.0-patch2 fails 1.0-STABLE2
+1.0.1 fails 1.0-STABLE2
+1.0.1-dev fails 1.0-STABLE2
+1.1 fails 1.0-STABLE2
+1.2 fails 1.0-STABLE2
+1.2-dev fails 1.0-STABLE2
+1.2. fails 1.0-STABLE2
+1.2-beta fails 1.0-STABLE2
+1.2.3-beta fails 1.0-STABLE2
+1.2.3 fails 1.0-STABLE2
+1.2.3b5 fails 1.0-STABLE2
+1.2.3a1 fails 1.0-STABLE2
+1.2.3p1234 fails 1.0-STABLE2
+1.2.4 fails 1.0-STABLE2
+1.2.3.4 fails 1.0-STABLE2
+1.2.3.4-dev fails 1.0-STABLE2
+1.3.0-beta fails 1.0-STABLE2
+1.9999.9999 fails 1.0-STABLE2
+1.9999999.9999999.9999999-dev fails 1.0-STABLE2
+1.x-dev fails 1.0-STABLE2
+1.X-dev fails 1.0-STABLE2
+1.*-dev fails 1.0-STABLE2
+1.xdev fails 1.0-STABLE2
+1.x.dev fails 1.0-STABLE2
+1.0.x-dev fails 1.0-STABLE2
+1.2.x-dev fails 1.0-STABLE2
+1.2.3.x-dev fails 1.0-STABLE2
+v1.x-dev fails 1.0-STABLE2
+041.x-dev fails 1.0-STABLE2
+1.25.0-beta2.1 fails 1.0-STABLE2
+1.25.0-b.2.1 fails 1.0-STABLE2
+1.25.0beta2.1 fails 1.0-STABLE2
+1.25.0-b2.1 fails 1.0-STABLE2
+1.25.0-b-2.1 fails 1.0-STABLE2
+1.25.0-b.3 fails 1.0-STABLE2
+1.25.0beta.3 fails 1.0-STABLE2
+1.25.0-rc fails 1.0-STABLE2
+1.25.0 fails 1.0-STABLE2
+1.26.0 fails 1.0-STABLE2
+10.4.13beta.2 fails 1.0-STABLE2
+v1.13.11-beta.0 fails 1.0-STABLE2
+1.0.0-alpha-2.1-3+foo fails 1.0-STABLE2
+2 fails 1.0-STABLE2
+2.0 fails 1.0-STABLE2
+2.0-dev fails 1.0-STABLE2
+2.0.0-beta fails 1.0-STABLE2
+2.0.5 fails 1.0-STABLE2
+2.0.6 fails 1.0-STABLE2
+2.1 fails 1.0-STABLE2
+2.1.3 fails 1.0-STABLE2
+2.4.0-alpha fails 1.0-STABLE2
+2.4.3-alpha fails 1.0-STABLE2
+2.9.0 fails 1.0-STABLE2
+3.0 fails 1.0-STABLE2
+10 fails 1.0-STABLE2
+10.0-alpha fails 1.0-STABLE2
+00.01.03.04 fails 1.0-STABLE2
+0700 fails 1.0-STABLE2
+12345 fails 1.0-STABLE2
+99999 fails 1.0-STABLE2
+100000 fails 1.0-STABLE2
+123456 fails 1.0-STABLE2
+2010.01 fails 1.0-STABLE2
+2010.01.02 fails 1.0-STABLE2
+2010-01-02 fails 1.0-STABLE2
+2010-01-02-beta fails 1.0-STABLE2
+2010-01-02.5 fails 1.0-STABLE2
+20100102 fails 1.0-STABLE2
+v20100102 fails 1.0-STABLE2
+20100102.0 fails 1.0-STABLE2
+20100102-dev fails 1.0-STABLE2
+20100102-203040 fails 1.0-STABLE2
+20100102-203040-p1 fails 1.0-STABLE2
+20100102.x-dev fails 1.0-STABLE2
+201903.0 fails 1.0-STABLE2
+201903.0-p2 fails 1.0-STABLE2
+201903.x-dev fails 1.0-STABLE2
+2010-01-02-10-20-30.5 fails 1.0-STABLE2
+9999999-dev fails 1.0-STABLE2
+1.9223372036854775806 fails 1.0-STABLE2
+1.9223372036854775807 fails 1.0-STABLE2
+1.9223372036854775808 fails 1.0-STABLE2
+1.99999999999999999999 fails 1.0-STABLE2
+2010010203040506070808 fails 1.0-STABLE2
+2010010203040506070809 fails 1.0-STABLE2
+0 fails >=1.0-STABLE.2-dev
+0.0 fails >=1.0-STABLE.2-dev
+00 fails >=1.0-STABLE.2-dev
+0.0.0.0-dev fails >=1.0-STABLE.2-dev
+0.0.1 fails >=1.0-STABLE.2-dev
+0.0.3 fails >=1.0-STABLE.2-dev
+0.0.3-alpha fails >=1.0-STABLE.2-dev
+0.0.4-dev fails >=1.0-STABLE.2-dev
+0.1 fails >=1.0-STABLE.2-dev
+0.1.97 fails >=1.0-STABLE.2-dev
+0.2.9 fails >=1.0-STABLE.2-dev
+0.9 fails >=1.0-STABLE.2-dev
+0.x-dev fails >=1.0-STABLE.2-dev
+1-dev satisfies >=1.0-STABLE.2-dev
+1.0-dev satisfies >=1.0-STABLE.2-dev
+1.0.-dev satisfies >=1.0-STABLE.2-dev
+1.0.0-dev satisfies >=1.0-STABLE.2-dev
+1.2..dev satisfies >=1.0-STABLE.2-dev
+1.2-.dev satisfies >=1.0-STABLE.2-dev
+1.2_-dev satisfies >=1.0-STABLE.2-dev
+1.0.0-alpha satisfies >=1.0-STABLE.2-dev
+1.0-a satisfies >=1.0-STABLE.2-dev
+1.0a1 satisfies >=1.0-STABLE.2-dev
+1.0-alpha1 satisfies >=1.0-STABLE.2-dev
+1.0.0-ALPHA2 satisfies >=1.0-STABLE.2-dev
+1.0-alpha.2 satisfies >=1.0-STABLE.2-dev
+1.0-b satisfies >=1.0-STABLE.2-dev
+1.0-beta satisfies >=1.0-STABLE.2-dev
+1.0b1 satisfies >=1.0-STABLE.2-dev
+1.0-beta1 satisfies >=1.0-STABLE.2-dev
+1.0-beta.1.2 satisfies >=1.0-STABLE.2-dev
+1.0-beta1-2 satisfies >=1.0-STABLE.2-dev
+1.0-Beta2 satisfies >=1.0-STABLE.2-dev
+1.0-RC satisfies >=1.0-STABLE.2-dev
+1.0-rc1 satisfies >=1.0-STABLE.2-dev
+1.0RC1 satisfies >=1.0-STABLE.2-dev
+1.0-Rc1 satisfies >=1.0-STABLE.2-dev
+1.0-RC1-dev satisfies >=1.0-STABLE.2-dev
+1.0.0RC1dev satisfies >=1.0-STABLE.2-dev
+1.0.0-rC15-dev satisfies >=1.0-STABLE.2-dev
+1.0.0.RC.15-dev satisfies >=1.0-STABLE.2-dev
+1.0-RC2 satisfies >=1.0-STABLE.2-dev
+1.0-stable satisfies >=1.0-STABLE.2-dev
+1.0-STABLE fails >=1.0-STABLE.2-dev
+1.0-Stable-dev fails >=1.0-STABLE.2-dev
+1.0-stabledev satisfies >=1.0-STABLE.2-dev
+1 satisfies >=1.0-STABLE.2-dev
+1.0 satisfies >=1.0-STABLE.2-dev
+1.0.0 satisfies >=1.0-STABLE.2-dev
+1.0.0.0 satisfies >=1.0-STABLE.2-dev
+v1.0 satisfies >=1.0-STABLE.2-dev
+V1.0.0 satisfies >=1.0-STABLE.2-dev
+01.0 satisfies >=1.0-STABLE.2-dev
+1.00 satisfies >=1.0-STABLE.2-dev
+1.0+build satisfies >=1.0-STABLE.2-dev
+1.0.0+20100101 satisfies >=1.0-STABLE.2-dev
+1.0-dev+b satisfies >=1.0-STABLE.2-dev
+1.0@dev satisfies >=1.0-STABLE.2-dev
+1.0@stable satisfies >=1.0-STABLE.2-dev
+1.0.0+foo@dev satisfies >=1.0-STABLE.2-dev
+1.0-p satisfies >=1.0-STABLE.2-dev
+1.0-p1 satisfies >=1.0-STABLE.2-dev
+1.0-pl1 satisfies >=1.0-STABLE.2-dev
+1.0.0.pl3-dev satisfies >=1.0-STABLE.2-dev
+1.0-patch1 satisfies >=1.0-STABLE.2-dev
+1.0-patch2 satisfies >=1.0-STABLE.2-dev
+1.0.1 satisfies >=1.0-STABLE.2-dev
+1.0.1-dev satisfies >=1.0-STABLE.2-dev
+1.1 satisfies >=1.0-STABLE.2-dev
+1.2 satisfies >=1.0-STABLE.2-dev
+1.2-dev satisfies >=1.0-STABLE.2-dev
+1.2. satisfies >=1.0-STABLE.2-dev
+1.2-beta satisfies >=1.0-STABLE.2-dev
+1.2.3-beta satisfies >=1.0-STABLE.2-dev
+1.2.3 satisfies >=1.0-STABLE.2-dev
+1.2.3b5 satisfies >=1.0-STABLE.2-dev
+1.2.3a1 satisfies >=1.0-STABLE.2-dev
+1.2.3p1234 satisfies >=1.0-STABLE.2-dev
+1.2.4 satisfies >=1.0-STABLE.2-dev
+1.2.3.4 satisfies >=1.0-STABLE.2-dev
+1.2.3.4-dev satisfies >=1.0-STABLE.2-dev
+1.3.0-beta satisfies >=1.0-STABLE.2-dev
+1.9999.9999 satisfies >=1.0-STABLE.2-dev
+1.9999999.9999999.9999999-dev satisfies >=1.0-STABLE.2-dev
+1.x-dev satisfies >=1.0-STABLE.2-dev
+1.X-dev satisfies >=1.0-STABLE.2-dev
+1.*-dev satisfies >=1.0-STABLE.2-dev
+1.xdev satisfies >=1.0-STABLE.2-dev
+1.x.dev satisfies >=1.0-STABLE.2-dev
+1.0.x-dev satisfies >=1.0-STABLE.2-dev
+1.2.x-dev satisfies >=1.0-STABLE.2-dev
+1.2.3.x-dev satisfies >=1.0-STABLE.2-dev
+v1.x-dev satisfies >=1.0-STABLE.2-dev
+041.x-dev satisfies >=1.0-STABLE.2-dev
+1.25.0-beta2.1 satisfies >=1.0-STABLE.2-dev
+1.25.0-b.2.1 satisfies >=1.0-STABLE.2-dev
+1.25.0beta2.1 satisfies >=1.0-STABLE.2-dev
+1.25.0-b2.1 satisfies >=1.0-STABLE.2-dev
+1.25.0-b-2.1 satisfies >=1.0-STABLE.2-dev
+1.25.0-b.3 satisfies >=1.0-STABLE.2-dev
+1.25.0beta.3 satisfies >=1.0-STABLE.2-dev
+1.25.0-rc satisfies >=1.0-STABLE.2-dev
+1.25.0 satisfies >=1.0-STABLE.2-dev
+1.26.0 satisfies >=1.0-STABLE.2-dev
+10.4.13beta.2 satisfies >=1.0-STABLE.2-dev
+v1.13.11-beta.0 satisfies >=1.0-STABLE.2-dev
+1.0.0-alpha-2.1-3+foo satisfies >=1.0-STABLE.2-dev
+2 satisfies >=1.0-STABLE.2-dev
+2.0 satisfies >=1.0-STABLE.2-dev
+2.0-dev satisfies >=1.0-STABLE.2-dev
+2.0.0-beta satisfies >=1.0-STABLE.2-dev
+2.0.5 satisfies >=1.0-STABLE.2-dev
+2.0.6 satisfies >=1.0-STABLE.2-dev
+2.1 satisfies >=1.0-STABLE.2-dev
+2.1.3 satisfies >=1.0-STABLE.2-dev
+2.4.0-alpha satisfies >=1.0-STABLE.2-dev
+2.4.3-alpha satisfies >=1.0-STABLE.2-dev
+2.9.0 satisfies >=1.0-STABLE.2-dev
+3.0 satisfies >=1.0-STABLE.2-dev
+10 satisfies >=1.0-STABLE.2-dev
+10.0-alpha satisfies >=1.0-STABLE.2-dev
+00.01.03.04 fails >=1.0-STABLE.2-dev
+0700 satisfies >=1.0-STABLE.2-dev
+12345 satisfies >=1.0-STABLE.2-dev
+99999 satisfies >=1.0-STABLE.2-dev
+100000 satisfies >=1.0-STABLE.2-dev
+123456 satisfies >=1.0-STABLE.2-dev
+2010.01 satisfies >=1.0-STABLE.2-dev
+2010.01.02 satisfies >=1.0-STABLE.2-dev
+2010-01-02 satisfies >=1.0-STABLE.2-dev
+2010-01-02-beta satisfies >=1.0-STABLE.2-dev
+2010-01-02.5 satisfies >=1.0-STABLE.2-dev
+20100102 satisfies >=1.0-STABLE.2-dev
+v20100102 satisfies >=1.0-STABLE.2-dev
+20100102.0 satisfies >=1.0-STABLE.2-dev
+20100102-dev satisfies >=1.0-STABLE.2-dev
+20100102-203040 satisfies >=1.0-STABLE.2-dev
+20100102-203040-p1 satisfies >=1.0-STABLE.2-dev
+20100102.x-dev satisfies >=1.0-STABLE.2-dev
+201903.0 satisfies >=1.0-STABLE.2-dev
+201903.0-p2 satisfies >=1.0-STABLE.2-dev
+201903.x-dev satisfies >=1.0-STABLE.2-dev
+2010-01-02-10-20-30.5 satisfies >=1.0-STABLE.2-dev
+9999999-dev satisfies >=1.0-STABLE.2-dev
+1.9223372036854775806 satisfies >=1.0-STABLE.2-dev
+1.9223372036854775807 satisfies >=1.0-STABLE.2-dev
+1.9223372036854775808 satisfies >=1.0-STABLE.2-dev
+1.99999999999999999999 satisfies >=1.0-STABLE.2-dev
+2010010203040506070808 satisfies >=1.0-STABLE.2-dev
+2010010203040506070809 satisfies >=1.0-STABLE.2-dev
+0 fails ^01.10.2.STABLE00
+0.0 fails ^01.10.2.STABLE00
+00 fails ^01.10.2.STABLE00
+0.0.0.0-dev fails ^01.10.2.STABLE00
+0.0.1 fails ^01.10.2.STABLE00
+0.0.3 fails ^01.10.2.STABLE00
+0.0.3-alpha fails ^01.10.2.STABLE00
+0.0.4-dev fails ^01.10.2.STABLE00
+0.1 fails ^01.10.2.STABLE00
+0.1.97 fails ^01.10.2.STABLE00
+0.2.9 fails ^01.10.2.STABLE00
+0.9 fails ^01.10.2.STABLE00
+0.x-dev fails ^01.10.2.STABLE00
+1-dev fails ^01.10.2.STABLE00
+1.0-dev fails ^01.10.2.STABLE00
+1.0.-dev fails ^01.10.2.STABLE00
+1.0.0-dev fails ^01.10.2.STABLE00
+1.2..dev fails ^01.10.2.STABLE00
+1.2-.dev fails ^01.10.2.STABLE00
+1.2_-dev fails ^01.10.2.STABLE00
+1.0.0-alpha fails ^01.10.2.STABLE00
+1.0-a fails ^01.10.2.STABLE00
+1.0a1 fails ^01.10.2.STABLE00
+1.0-alpha1 fails ^01.10.2.STABLE00
+1.0.0-ALPHA2 fails ^01.10.2.STABLE00
+1.0-alpha.2 fails ^01.10.2.STABLE00
+1.0-b fails ^01.10.2.STABLE00
+1.0-beta fails ^01.10.2.STABLE00
+1.0b1 fails ^01.10.2.STABLE00
+1.0-beta1 fails ^01.10.2.STABLE00
+1.0-beta.1.2 fails ^01.10.2.STABLE00
+1.0-beta1-2 fails ^01.10.2.STABLE00
+1.0-Beta2 fails ^01.10.2.STABLE00
+1.0-RC fails ^01.10.2.STABLE00
+1.0-rc1 fails ^01.10.2.STABLE00
+1.0RC1 fails ^01.10.2.STABLE00
+1.0-Rc1 fails ^01.10.2.STABLE00
+1.0-RC1-dev fails ^01.10.2.STABLE00
+1.0.0RC1dev fails ^01.10.2.STABLE00
+1.0.0-rC15-dev fails ^01.10.2.STABLE00
+1.0.0.RC.15-dev fails ^01.10.2.STABLE00
+1.0-RC2 fails ^01.10.2.STABLE00
+1.0-stable fails ^01.10.2.STABLE00
+1.0-STABLE fails ^01.10.2.STABLE00
+1.0-Stable-dev fails ^01.10.2.STABLE00
+1.0-stabledev fails ^01.10.2.STABLE00
+1 fails ^01.10.2.STABLE00
+1.0 fails ^01.10.2.STABLE00
+1.0.0 fails ^01.10.2.STABLE00
+1.0.0.0 fails ^01.10.2.STABLE00
+v1.0 fails ^01.10.2.STABLE00
+V1.0.0 fails ^01.10.2.STABLE00
+01.0 fails ^01.10.2.STABLE00
+1.00 fails ^01.10.2.STABLE00
+1.0+build fails ^01.10.2.STABLE00
+1.0.0+20100101 fails ^01.10.2.STABLE00
+1.0-dev+b fails ^01.10.2.STABLE00
+1.0@dev fails ^01.10.2.STABLE00
+1.0@stable fails ^01.10.2.STABLE00
+1.0.0+foo@dev fails ^01.10.2.STABLE00
+1.0-p fails ^01.10.2.STABLE00
+1.0-p1 fails ^01.10.2.STABLE00
+1.0-pl1 fails ^01.10.2.STABLE00
+1.0.0.pl3-dev fails ^01.10.2.STABLE00
+1.0-patch1 fails ^01.10.2.STABLE00
+1.0-patch2 fails ^01.10.2.STABLE00
+1.0.1 fails ^01.10.2.STABLE00
+1.0.1-dev fails ^01.10.2.STABLE00
+1.1 fails ^01.10.2.STABLE00
+1.2 fails ^01.10.2.STABLE00
+1.2-dev fails ^01.10.2.STABLE00
+1.2. fails ^01.10.2.STABLE00
+1.2-beta fails ^01.10.2.STABLE00
+1.2.3-beta fails ^01.10.2.STABLE00
+1.2.3 fails ^01.10.2.STABLE00
+1.2.3b5 fails ^01.10.2.STABLE00
+1.2.3a1 fails ^01.10.2.STABLE00
+1.2.3p1234 fails ^01.10.2.STABLE00
+1.2.4 fails ^01.10.2.STABLE00
+1.2.3.4 fails ^01.10.2.STABLE00
+1.2.3.4-dev fails ^01.10.2.STABLE00
+1.3.0-beta fails ^01.10.2.STABLE00
+1.9999.9999 satisfies ^01.10.2.STABLE00
+1.9999999.9999999.9999999-dev satisfies ^01.10.2.STABLE00
+1.x-dev satisfies ^01.10.2.STABLE00
+1.X-dev satisfies ^01.10.2.STABLE00
+1.*-dev satisfies ^01.10.2.STABLE00
+1.xdev satisfies ^01.10.2.STABLE00
+1.x.dev satisfies ^01.10.2.STABLE00
+1.0.x-dev fails ^01.10.2.STABLE00
+1.2.x-dev fails ^01.10.2.STABLE00
+1.2.3.x-dev fails ^01.10.2.STABLE00
+v1.x-dev satisfies ^01.10.2.STABLE00
+041.x-dev fails ^01.10.2.STABLE00
+1.25.0-beta2.1 satisfies ^01.10.2.STABLE00
+1.25.0-b.2.1 satisfies ^01.10.2.STABLE00
+1.25.0beta2.1 satisfies ^01.10.2.STABLE00
+1.25.0-b2.1 satisfies ^01.10.2.STABLE00
+1.25.0-b-2.1 satisfies ^01.10.2.STABLE00
+1.25.0-b.3 satisfies ^01.10.2.STABLE00
+1.25.0beta.3 satisfies ^01.10.2.STABLE00
+1.25.0-rc satisfies ^01.10.2.STABLE00
+1.25.0 satisfies ^01.10.2.STABLE00
+1.26.0 satisfies ^01.10.2.STABLE00
+10.4.13beta.2 fails ^01.10.2.STABLE00
+v1.13.11-beta.0 satisfies ^01.10.2.STABLE00
+1.0.0-alpha-2.1-3+foo fails ^01.10.2.STABLE00
+2 fails ^01.10.2.STABLE00
+2.0 fails ^01.10.2.STABLE00
+2.0-dev fails ^01.10.2.STABLE00
+2.0.0-beta fails ^01.10.2.STABLE00
+2.0.5 fails ^01.10.2.STABLE00
+2.0.6 fails ^01.10.2.STABLE00
+2.1 fails ^01.10.2.STABLE00
+2.1.3 fails ^01.10.2.STABLE00
+2.4.0-alpha fails ^01.10.2.STABLE00
+2.4.3-alpha fails ^01.10.2.STABLE00
+2.9.0 fails ^01.10.2.STABLE00
+3.0 fails ^01.10.2.STABLE00
+10 fails ^01.10.2.STABLE00
+10.0-alpha fails ^01.10.2.STABLE00
+00.01.03.04 fails ^01.10.2.STABLE00
+0700 fails ^01.10.2.STABLE00
+12345 fails ^01.10.2.STABLE00
+99999 fails ^01.10.2.STABLE00
+100000 fails ^01.10.2.STABLE00
+123456 fails ^01.10.2.STABLE00
+2010.01 fails ^01.10.2.STABLE00
+2010.01.02 fails ^01.10.2.STABLE00
+2010-01-02 fails ^01.10.2.STABLE00
+2010-01-02-beta fails ^01.10.2.STABLE00
+2010-01-02.5 fails ^01.10.2.STABLE00
+20100102 fails ^01.10.2.STABLE00
+v20100102 fails ^01.10.2.STABLE00
+20100102.0 fails ^01.10.2.STABLE00
+20100102-dev fails ^01.10.2.STABLE00
+20100102-203040 fails ^01.10.2.STABLE00
+20100102-203040-p1 fails ^01.10.2.STABLE00
+20100102.x-dev fails ^01.10.2.STABLE00
+201903.0 fails ^01.10.2.STABLE00
+201903.0-p2 fails ^01.10.2.STABLE00
+201903.x-dev fails ^01.10.2.STABLE00
+2010-01-02-10-20-30.5 fails ^01.10.2.STABLE00
+9999999-dev fails ^01.10.2.STABLE00
+1.9223372036854775806 satisfies ^01.10.2.STABLE00
+1.9223372036854775807 satisfies ^01.10.2.STABLE00
+1.9223372036854775808 satisfies ^01.10.2.STABLE00
+1.99999999999999999999 satisfies ^01.10.2.STABLE00
+2010010203040506070808 fails ^01.10.2.STABLE00
+2010010203040506070809 fails ^01.10.2.STABLE00
+0 fails ^9223372036854775807
+0.0 fails ^9223372036854775807
+00 fails ^9223372036854775807
+0.0.0.0-dev fails ^9223372036854775807
+0.0.1 fails ^9223372036854775807
+0.0.3 fails ^9223372036854775807
+0.0.3-alpha fails ^9223372036854775807
+0.0.4-dev fails ^9223372036854775807
+0.1 fails ^9223372036854775807
+0.1.97 fails ^9223372036854775807
+0.2.9 fails ^9223372036854775807
+0.9 fails ^9223372036854775807
+0.x-dev fails ^9223372036854775807
+1-dev fails ^9223372036854775807
+1.0-dev fails ^9223372036854775807
+1.0.-dev fails ^9223372036854775807
+1.0.0-dev fails ^9223372036854775807
+1.2..dev fails ^9223372036854775807
+1.2-.dev fails ^9223372036854775807
+1.2_-dev fails ^9223372036854775807
+1.0.0-alpha fails ^9223372036854775807
+1.0-a fails ^9223372036854775807
+1.0a1 fails ^9223372036854775807
+1.0-alpha1 fails ^9223372036854775807
+1.0.0-ALPHA2 fails ^9223372036854775807
+1.0-alpha.2 fails ^9223372036854775807
+1.0-b fails ^9223372036854775807
+1.0-beta fails ^9223372036854775807
+1.0b1 fails ^9223372036854775807
+1.0-beta1 fails ^9223372036854775807
+1.0-beta.1.2 fails ^9223372036854775807
+1.0-beta1-2 fails ^9223372036854775807
+1.0-Beta2 fails ^9223372036854775807
+1.0-RC fails ^9223372036854775807
+1.0-rc1 fails ^9223372036854775807
+1.0RC1 fails ^9223372036854775807
+1.0-Rc1 fails ^9223372036854775807
+1.0-RC1-dev fails ^9223372036854775807
+1.0.0RC1dev fails ^9223372036854775807
+1.0.0-rC15-dev fails ^9223372036854775807
+1.0.0.RC.15-dev fails ^9223372036854775807
+1.0-RC2 fails ^9223372036854775807
+1.0-stable fails ^9223372036854775807
+1.0-STABLE fails ^9223372036854775807
+1.0-Stable-dev fails ^9223372036854775807
+1.0-stabledev fails ^9223372036854775807
+1 fails ^9223372036854775807
+1.0 fails ^9223372036854775807
+1.0.0 fails ^9223372036854775807
+1.0.0.0 fails ^9223372036854775807
+v1.0 fails ^9223372036854775807
+V1.0.0 fails ^9223372036854775807
+01.0 fails ^9223372036854775807
+1.00 fails ^9223372036854775807
+1.0+build fails ^9223372036854775807
+1.0.0+20100101 fails ^9223372036854775807
+1.0-dev+b fails ^9223372036854775807
+1.0@dev fails ^9223372036854775807
+1.0@stable fails ^9223372036854775807
+1.0.0+foo@dev fails ^9223372036854775807
+1.0-p fails ^9223372036854775807
+1.0-p1 fails ^9223372036854775807
+1.0-pl1 fails ^9223372036854775807
+1.0.0.pl3-dev fails ^9223372036854775807
+1.0-patch1 fails ^9223372036854775807
+1.0-patch2 fails ^9223372036854775807
+1.0.1 fails ^9223372036854775807
+1.0.1-dev fails ^9223372036854775807
+1.1 fails ^9223372036854775807
+1.2 fails ^9223372036854775807
+1.2-dev fails ^9223372036854775807
+1.2. fails ^9223372036854775807
+1.2-beta fails ^9223372036854775807
+1.2.3-beta fails ^9223372036854775807
+1.2.3 fails ^9223372036854775807
+1.2.3b5 fails ^9223372036854775807
+1.2.3a1 fails ^9223372036854775807
+1.2.3p1234 fails ^9223372036854775807
+1.2.4 fails ^9223372036854775807
+1.2.3.4 fails ^9223372036854775807
+1.2.3.4-dev fails ^9223372036854775807
+1.3.0-beta fails ^9223372036854775807
+1.9999.9999 fails ^9223372036854775807
+1.9999999.9999999.9999999-dev fails ^9223372036854775807
+1.x-dev fails ^9223372036854775807
+1.X-dev fails ^9223372036854775807
+1.*-dev fails ^9223372036854775807
+1.xdev fails ^9223372036854775807
+1.x.dev fails ^9223372036854775807
+1.0.x-dev fails ^9223372036854775807
+1.2.x-dev fails ^9223372036854775807
+1.2.3.x-dev fails ^9223372036854775807
+v1.x-dev fails ^9223372036854775807
+041.x-dev fails ^9223372036854775807
+1.25.0-beta2.1 fails ^9223372036854775807
+1.25.0-b.2.1 fails ^9223372036854775807
+1.25.0beta2.1 fails ^9223372036854775807
+1.25.0-b2.1 fails ^9223372036854775807
+1.25.0-b-2.1 fails ^9223372036854775807
+1.25.0-b.3 fails ^9223372036854775807
+1.25.0beta.3 fails ^9223372036854775807
+1.25.0-rc fails ^9223372036854775807
+1.25.0 fails ^9223372036854775807
+1.26.0 fails ^9223372036854775807
+10.4.13beta.2 fails ^9223372036854775807
+v1.13.11-beta.0 fails ^9223372036854775807
+1.0.0-alpha-2.1-3+foo fails ^9223372036854775807
+2 fails ^9223372036854775807
+2.0 fails ^9223372036854775807
+2.0-dev fails ^9223372036854775807
+2.0.0-beta fails ^9223372036854775807
+2.0.5 fails ^9223372036854775807
+2.0.6 fails ^9223372036854775807
+2.1 fails ^9223372036854775807
+2.1.3 fails ^9223372036854775807
+2.4.0-alpha fails ^9223372036854775807
+2.4.3-alpha fails ^9223372036854775807
+2.9.0 fails ^9223372036854775807
+3.0 fails ^9223372036854775807
+10 fails ^9223372036854775807
+10.0-alpha fails ^9223372036854775807
+00.01.03.04 fails ^9223372036854775807
+0700 fails ^9223372036854775807
+12345 fails ^9223372036854775807
+99999 fails ^9223372036854775807
+100000 fails ^9223372036854775807
+123456 fails ^9223372036854775807
+2010.01 fails ^9223372036854775807
+2010.01.02 fails ^9223372036854775807
+2010-01-02 fails ^9223372036854775807
+2010-01-02-beta fails ^9223372036854775807
+2010-01-02.5 fails ^9223372036854775807
+20100102 fails ^9223372036854775807
+v20100102 fails ^9223372036854775807
+20100102.0 fails ^9223372036854775807
+20100102-dev fails ^9223372036854775807
+20100102-203040 fails ^9223372036854775807
+20100102-203040-p1 fails ^9223372036854775807
+20100102.x-dev fails ^9223372036854775807
+201903.0 fails ^9223372036854775807
+201903.0-p2 fails ^9223372036854775807
+201903.x-dev fails ^9223372036854775807
+2010-01-02-10-20-30.5 fails ^9223372036854775807
+9999999-dev fails ^9223372036854775807
+1.9223372036854775806 fails ^9223372036854775807
+1.9223372036854775807 fails ^9223372036854775807
+1.9223372036854775808 fails ^9223372036854775807
+1.99999999999999999999 fails ^9223372036854775807
+2010010203040506070808 fails ^9223372036854775807
+2010010203040506070809 fails ^9223372036854775807
+0 fails 1 - 9223372036854775807
+0.0 fails 1 - 9223372036854775807
+00 fails 1 - 9223372036854775807
+0.0.0.0-dev fails 1 - 9223372036854775807
+0.0.1 fails 1 - 9223372036854775807
+0.0.3 fails 1 - 9223372036854775807
+0.0.3-alpha fails 1 - 9223372036854775807
+0.0.4-dev fails 1 - 9223372036854775807
+0.1 fails 1 - 9223372036854775807
+0.1.97 fails 1 - 9223372036854775807
+0.2.9 fails 1 - 9223372036854775807
+0.9 fails 1 - 9223372036854775807
+0.x-dev fails 1 - 9223372036854775807
+1-dev satisfies 1 - 9223372036854775807
+1.0-dev satisfies 1 - 9223372036854775807
+1.0.-dev satisfies 1 - 9223372036854775807
+1.0.0-dev satisfies 1 - 9223372036854775807
+1.2..dev satisfies 1 - 9223372036854775807
+1.2-.dev satisfies 1 - 9223372036854775807
+1.2_-dev satisfies 1 - 9223372036854775807
+1.0.0-alpha satisfies 1 - 9223372036854775807
+1.0-a satisfies 1 - 9223372036854775807
+1.0a1 satisfies 1 - 9223372036854775807
+1.0-alpha1 satisfies 1 - 9223372036854775807
+1.0.0-ALPHA2 satisfies 1 - 9223372036854775807
+1.0-alpha.2 satisfies 1 - 9223372036854775807
+1.0-b satisfies 1 - 9223372036854775807
+1.0-beta satisfies 1 - 9223372036854775807
+1.0b1 satisfies 1 - 9223372036854775807
+1.0-beta1 satisfies 1 - 9223372036854775807
+1.0-beta.1.2 satisfies 1 - 9223372036854775807
+1.0-beta1-2 satisfies 1 - 9223372036854775807
+1.0-Beta2 satisfies 1 - 9223372036854775807
+1.0-RC satisfies 1 - 9223372036854775807
+1.0-rc1 satisfies 1 - 9223372036854775807
+1.0RC1 satisfies 1 - 9223372036854775807
+1.0-Rc1 satisfies 1 - 9223372036854775807
+1.0-RC1-dev satisfies 1 - 9223372036854775807
+1.0.0RC1dev satisfies 1 - 9223372036854775807
+1.0.0-rC15-dev satisfies 1 - 9223372036854775807
+1.0.0.RC.15-dev satisfies 1 - 9223372036854775807
+1.0-RC2 satisfies 1 - 9223372036854775807
+1.0-stable satisfies 1 - 9223372036854775807
+1.0-STABLE fails 1 - 9223372036854775807
+1.0-Stable-dev fails 1 - 9223372036854775807
+1.0-stabledev satisfies 1 - 9223372036854775807
+1 satisfies 1 - 9223372036854775807
+1.0 satisfies 1 - 9223372036854775807
+1.0.0 satisfies 1 - 9223372036854775807
+1.0.0.0 satisfies 1 - 9223372036854775807
+v1.0 satisfies 1 - 9223372036854775807
+V1.0.0 satisfies 1 - 9223372036854775807
+01.0 satisfies 1 - 9223372036854775807
+1.00 satisfies 1 - 9223372036854775807
+1.0+build satisfies 1 - 9223372036854775807
+1.0.0+20100101 satisfies 1 - 9223372036854775807
+1.0-dev+b satisfies 1 - 9223372036854775807
+1.0@dev satisfies 1 - 9223372036854775807
+1.0@stable satisfies 1 - 9223372036854775807
+1.0.0+foo@dev satisfies 1 - 9223372036854775807
+1.0-p satisfies 1 - 9223372036854775807
+1.0-p1 satisfies 1 - 9223372036854775807
+1.0-pl1 satisfies 1 - 9223372036854775807
+1.0.0.pl3-dev satisfies 1 - 9223372036854775807
+1.0-patch1 satisfies 1 - 9223372036854775807
+1.0-patch2 satisfies 1 - 9223372036854775807
+1.0.1 satisfies 1 - 9223372036854775807
+1.0.1-dev satisfies 1 - 9223372036854775807
+1.1 satisfies 1 - 9223372036854775807
+1.2 satisfies 1 - 9223372036854775807
+1.2-dev satisfies 1 - 9223372036854775807
+1.2. satisfies 1 - 9223372036854775807
+1.2-beta satisfies 1 - 9223372036854775807
+1.2.3-beta satisfies 1 - 9223372036854775807
+1.2.3 satisfies 1 - 9223372036854775807
+1.2.3b5 satisfies 1 - 9223372036854775807
+1.2.3a1 satisfies 1 - 9223372036854775807
+1.2.3p1234 satisfies 1 - 9223372036854775807
+1.2.4 satisfies 1 - 9223372036854775807
+1.2.3.4 satisfies 1 - 9223372036854775807
+1.2.3.4-dev satisfies 1 - 9223372036854775807
+1.3.0-beta satisfies 1 - 9223372036854775807
+1.9999.9999 satisfies 1 - 9223372036854775807
+1.9999999.9999999.9999999-dev satisfies 1 - 9223372036854775807
+1.x-dev satisfies 1 - 9223372036854775807
+1.X-dev satisfies 1 - 9223372036854775807
+1.*-dev satisfies 1 - 9223372036854775807
+1.xdev satisfies 1 - 9223372036854775807
+1.x.dev satisfies 1 - 9223372036854775807
+1.0.x-dev satisfies 1 - 9223372036854775807
+1.2.x-dev satisfies 1 - 9223372036854775807
+1.2.3.x-dev satisfies 1 - 9223372036854775807
+v1.x-dev satisfies 1 - 9223372036854775807
+041.x-dev fails 1 - 9223372036854775807
+1.25.0-beta2.1 satisfies 1 - 9223372036854775807
+1.25.0-b.2.1 satisfies 1 - 9223372036854775807
+1.25.0beta2.1 satisfies 1 - 9223372036854775807
+1.25.0-b2.1 satisfies 1 - 9223372036854775807
+1.25.0-b-2.1 satisfies 1 - 9223372036854775807
+1.25.0-b.3 satisfies 1 - 9223372036854775807
+1.25.0beta.3 satisfies 1 - 9223372036854775807
+1.25.0-rc satisfies 1 - 9223372036854775807
+1.25.0 satisfies 1 - 9223372036854775807
+1.26.0 satisfies 1 - 9223372036854775807
+10.4.13beta.2 fails 1 - 9223372036854775807
+v1.13.11-beta.0 satisfies 1 - 9223372036854775807
+1.0.0-alpha-2.1-3+foo satisfies 1 - 9223372036854775807
+2 satisfies 1 - 9223372036854775807
+2.0 satisfies 1 - 9223372036854775807
+2.0-dev satisfies 1 - 9223372036854775807
+2.0.0-beta satisfies 1 - 9223372036854775807
+2.0.5 satisfies 1 - 9223372036854775807
+2.0.6 satisfies 1 - 9223372036854775807
+2.1 satisfies 1 - 9223372036854775807
+2.1.3 satisfies 1 - 9223372036854775807
+2.4.0-alpha satisfies 1 - 9223372036854775807
+2.4.3-alpha satisfies 1 - 9223372036854775807
+2.9.0 satisfies 1 - 9223372036854775807
+3.0 satisfies 1 - 9223372036854775807
+10 fails 1 - 9223372036854775807
+10.0-alpha fails 1 - 9223372036854775807
+00.01.03.04 fails 1 - 9223372036854775807
+0700 fails 1 - 9223372036854775807
+12345 fails 1 - 9223372036854775807
+99999 fails 1 - 9223372036854775807
+100000 fails 1 - 9223372036854775807
+123456 fails 1 - 9223372036854775807
+2010.01 fails 1 - 9223372036854775807
+2010.01.02 fails 1 - 9223372036854775807
+2010-01-02 fails 1 - 9223372036854775807
+2010-01-02-beta fails 1 - 9223372036854775807
+2010-01-02.5 fails 1 - 9223372036854775807
+20100102 fails 1 - 9223372036854775807
+v20100102 fails 1 - 9223372036854775807
+20100102.0 fails 1 - 9223372036854775807
+20100102-dev fails 1 - 9223372036854775807
+20100102-203040 fails 1 - 9223372036854775807
+20100102-203040-p1 fails 1 - 9223372036854775807
+20100102.x-dev fails 1 - 9223372036854775807
+201903.0 fails 1 - 9223372036854775807
+201903.0-p2 fails 1 - 9223372036854775807
+201903.x-dev fails 1 - 9223372036854775807
+2010-01-02-10-20-30.5 fails 1 - 9223372036854775807
+9999999-dev fails 1 - 9223372036854775807
+1.9223372036854775806 satisfies 1 - 9223372036854775807
+1.9223372036854775807 satisfies 1 - 9223372036854775807
+1.9223372036854775808 satisfies 1 - 9223372036854775807
+1.99999999999999999999 satisfies 1 - 9223372036854775807
+2010010203040506070808 fails 1 - 9223372036854775807
+2010010203040506070809 fails 1 - 9223372036854775807
+0 fails ~9223372036854775807
+0.0 fails ~9223372036854775807
+00 fails ~9223372036854775807
+0.0.0.0-dev fails ~9223372036854775807
+0.0.1 fails ~9223372036854775807
+0.0.3 fails ~9223372036854775807
+0.0.3-alpha fails ~9223372036854775807
+0.0.4-dev fails ~9223372036854775807
+0.1 fails ~9223372036854775807
+0.1.97 fails ~9223372036854775807
+0.2.9 fails ~9223372036854775807
+0.9 fails ~9223372036854775807
+0.x-dev fails ~9223372036854775807
+1-dev fails ~9223372036854775807
+1.0-dev fails ~9223372036854775807
+1.0.-dev fails ~9223372036854775807
+1.0.0-dev fails ~9223372036854775807
+1.2..dev fails ~9223372036854775807
+1.2-.dev fails ~9223372036854775807
+1.2_-dev fails ~9223372036854775807
+1.0.0-alpha fails ~9223372036854775807
+1.0-a fails ~9223372036854775807
+1.0a1 fails ~9223372036854775807
+1.0-alpha1 fails ~9223372036854775807
+1.0.0-ALPHA2 fails ~9223372036854775807
+1.0-alpha.2 fails ~9223372036854775807
+1.0-b fails ~9223372036854775807
+1.0-beta fails ~9223372036854775807
+1.0b1 fails ~9223372036854775807
+1.0-beta1 fails ~9223372036854775807
+1.0-beta.1.2 fails ~9223372036854775807
+1.0-beta1-2 fails ~9223372036854775807
+1.0-Beta2 fails ~9223372036854775807
+1.0-RC fails ~9223372036854775807
+1.0-rc1 fails ~9223372036854775807
+1.0RC1 fails ~9223372036854775807
+1.0-Rc1 fails ~9223372036854775807
+1.0-RC1-dev fails ~9223372036854775807
+1.0.0RC1dev fails ~9223372036854775807
+1.0.0-rC15-dev fails ~9223372036854775807
+1.0.0.RC.15-dev fails ~9223372036854775807
+1.0-RC2 fails ~9223372036854775807
+1.0-stable fails ~9223372036854775807
+1.0-STABLE fails ~9223372036854775807
+1.0-Stable-dev fails ~9223372036854775807
+1.0-stabledev fails ~9223372036854775807
+1 fails ~9223372036854775807
+1.0 fails ~9223372036854775807
+1.0.0 fails ~9223372036854775807
+1.0.0.0 fails ~9223372036854775807
+v1.0 fails ~9223372036854775807
+V1.0.0 fails ~9223372036854775807
+01.0 fails ~9223372036854775807
+1.00 fails ~9223372036854775807
+1.0+build fails ~9223372036854775807
+1.0.0+20100101 fails ~9223372036854775807
+1.0-dev+b fails ~9223372036854775807
+1.0@dev fails ~9223372036854775807
+1.0@stable fails ~9223372036854775807
+1.0.0+foo@dev fails ~9223372036854775807
+1.0-p fails ~9223372036854775807
+1.0-p1 fails ~9223372036854775807
+1.0-pl1 fails ~9223372036854775807
+1.0.0.pl3-dev fails ~9223372036854775807
+1.0-patch1 fails ~9223372036854775807
+1.0-patch2 fails ~9223372036854775807
+1.0.1 fails ~9223372036854775807
+1.0.1-dev fails ~9223372036854775807
+1.1 fails ~9223372036854775807
+1.2 fails ~9223372036854775807
+1.2-dev fails ~9223372036854775807
+1.2. fails ~9223372036854775807
+1.2-beta fails ~9223372036854775807
+1.2.3-beta fails ~9223372036854775807
+1.2.3 fails ~9223372036854775807
+1.2.3b5 fails ~9223372036854775807
+1.2.3a1 fails ~9223372036854775807
+1.2.3p1234 fails ~9223372036854775807
+1.2.4 fails ~9223372036854775807
+1.2.3.4 fails ~9223372036854775807
+1.2.3.4-dev fails ~9223372036854775807
+1.3.0-beta fails ~9223372036854775807
+1.9999.9999 fails ~9223372036854775807
+1.9999999.9999999.9999999-dev fails ~9223372036854775807
+1.x-dev fails ~9223372036854775807
+1.X-dev fails ~9223372036854775807
+1.*-dev fails ~9223372036854775807
+1.xdev fails ~9223372036854775807
+1.x.dev fails ~9223372036854775807
+1.0.x-dev fails ~9223372036854775807
+1.2.x-dev fails ~9223372036854775807
+1.2.3.x-dev fails ~9223372036854775807
+v1.x-dev fails ~9223372036854775807
+041.x-dev fails ~9223372036854775807
+1.25.0-beta2.1 fails ~9223372036854775807
+1.25.0-b.2.1 fails ~9223372036854775807
+1.25.0beta2.1 fails ~9223372036854775807
+1.25.0-b2.1 fails ~9223372036854775807
+1.25.0-b-2.1 fails ~9223372036854775807
+1.25.0-b.3 fails ~9223372036854775807
+1.25.0beta.3 fails ~9223372036854775807
+1.25.0-rc fails ~9223372036854775807
+1.25.0 fails ~9223372036854775807
+1.26.0 fails ~9223372036854775807
+10.4.13beta.2 fails ~9223372036854775807
+v1.13.11-beta.0 fails ~9223372036854775807
+1.0.0-alpha-2.1-3+foo fails ~9223372036854775807
+2 fails ~9223372036854775807
+2.0 fails ~9223372036854775807
+2.0-dev fails ~9223372036854775807
+2.0.0-beta fails ~9223372036854775807
+2.0.5 fails ~9223372036854775807
+2.0.6 fails ~9223372036854775807
+2.1 fails ~9223372036854775807
+2.1.3 fails ~9223372036854775807
+2.4.0-alpha fails ~9223372036854775807
+2.4.3-alpha fails ~9223372036854775807
+2.9.0 fails ~9223372036854775807
+3.0 fails ~9223372036854775807
+10 fails ~9223372036854775807
+10.0-alpha fails ~9223372036854775807
+00.01.03.04 fails ~9223372036854775807
+0700 fails ~9223372036854775807
+12345 fails ~9223372036854775807
+99999 fails ~9223372036854775807
+100000 fails ~9223372036854775807
+123456 fails ~9223372036854775807
+2010.01 fails ~9223372036854775807
+2010.01.02 fails ~9223372036854775807
+2010-01-02 fails ~9223372036854775807
+2010-01-02-beta fails ~9223372036854775807
+2010-01-02.5 fails ~9223372036854775807
+20100102 fails ~9223372036854775807
+v20100102 fails ~9223372036854775807
+20100102.0 fails ~9223372036854775807
+20100102-dev fails ~9223372036854775807
+20100102-203040 fails ~9223372036854775807
+20100102-203040-p1 fails ~9223372036854775807
+20100102.x-dev fails ~9223372036854775807
+201903.0 fails ~9223372036854775807
+201903.0-p2 fails ~9223372036854775807
+201903.x-dev fails ~9223372036854775807
+2010-01-02-10-20-30.5 fails ~9223372036854775807
+9999999-dev fails ~9223372036854775807
+1.9223372036854775806 fails ~9223372036854775807
+1.9223372036854775807 fails ~9223372036854775807
+1.9223372036854775808 fails ~9223372036854775807
+1.99999999999999999999 fails ~9223372036854775807
+2010010203040506070808 fails ~9223372036854775807
+2010010203040506070809 fails ~9223372036854775807
+0 fails ^0.9223372036854775807
+0.0 fails ^0.9223372036854775807
+00 fails ^0.9223372036854775807
+0.0.0.0-dev fails ^0.9223372036854775807
+0.0.1 fails ^0.9223372036854775807
+0.0.3 fails ^0.9223372036854775807
+0.0.3-alpha fails ^0.9223372036854775807
+0.0.4-dev fails ^0.9223372036854775807
+0.1 fails ^0.9223372036854775807
+0.1.97 fails ^0.9223372036854775807
+0.2.9 fails ^0.9223372036854775807
+0.9 fails ^0.9223372036854775807
+0.x-dev fails ^0.9223372036854775807
+1-dev fails ^0.9223372036854775807
+1.0-dev fails ^0.9223372036854775807
+1.0.-dev fails ^0.9223372036854775807
+1.0.0-dev fails ^0.9223372036854775807
+1.2..dev fails ^0.9223372036854775807
+1.2-.dev fails ^0.9223372036854775807
+1.2_-dev fails ^0.9223372036854775807
+1.0.0-alpha fails ^0.9223372036854775807
+1.0-a fails ^0.9223372036854775807
+1.0a1 fails ^0.9223372036854775807
+1.0-alpha1 fails ^0.9223372036854775807
+1.0.0-ALPHA2 fails ^0.9223372036854775807
+1.0-alpha.2 fails ^0.9223372036854775807
+1.0-b fails ^0.9223372036854775807
+1.0-beta fails ^0.9223372036854775807
+1.0b1 fails ^0.9223372036854775807
+1.0-beta1 fails ^0.9223372036854775807
+1.0-beta.1.2 fails ^0.9223372036854775807
+1.0-beta1-2 fails ^0.9223372036854775807
+1.0-Beta2 fails ^0.9223372036854775807
+1.0-RC fails ^0.9223372036854775807
+1.0-rc1 fails ^0.9223372036854775807
+1.0RC1 fails ^0.9223372036854775807
+1.0-Rc1 fails ^0.9223372036854775807
+1.0-RC1-dev fails ^0.9223372036854775807
+1.0.0RC1dev fails ^0.9223372036854775807
+1.0.0-rC15-dev fails ^0.9223372036854775807
+1.0.0.RC.15-dev fails ^0.9223372036854775807
+1.0-RC2 fails ^0.9223372036854775807
+1.0-stable fails ^0.9223372036854775807
+1.0-STABLE fails ^0.9223372036854775807
+1.0-Stable-dev fails ^0.9223372036854775807
+1.0-stabledev fails ^0.9223372036854775807
+1 fails ^0.9223372036854775807
+1.0 fails ^0.9223372036854775807
+1.0.0 fails ^0.9223372036854775807
+1.0.0.0 fails ^0.9223372036854775807
+v1.0 fails ^0.9223372036854775807
+V1.0.0 fails ^0.9223372036854775807
+01.0 fails ^0.9223372036854775807
+1.00 fails ^0.9223372036854775807
+1.0+build fails ^0.9223372036854775807
+1.0.0+20100101 fails ^0.9223372036854775807
+1.0-dev+b fails ^0.9223372036854775807
+1.0@dev fails ^0.9223372036854775807
+1.0@stable fails ^0.9223372036854775807
+1.0.0+foo@dev fails ^0.9223372036854775807
+1.0-p fails ^0.9223372036854775807
+1.0-p1 fails ^0.9223372036854775807
+1.0-pl1 fails ^0.9223372036854775807
+1.0.0.pl3-dev fails ^0.9223372036854775807
+1.0-patch1 fails ^0.9223372036854775807
+1.0-patch2 fails ^0.9223372036854775807
+1.0.1 fails ^0.9223372036854775807
+1.0.1-dev fails ^0.9223372036854775807
+1.1 fails ^0.9223372036854775807
+1.2 fails ^0.9223372036854775807
+1.2-dev fails ^0.9223372036854775807
+1.2. fails ^0.9223372036854775807
+1.2-beta fails ^0.9223372036854775807
+1.2.3-beta fails ^0.9223372036854775807
+1.2.3 fails ^0.9223372036854775807
+1.2.3b5 fails ^0.9223372036854775807
+1.2.3a1 fails ^0.9223372036854775807
+1.2.3p1234 fails ^0.9223372036854775807
+1.2.4 fails ^0.9223372036854775807
+1.2.3.4 fails ^0.9223372036854775807
+1.2.3.4-dev fails ^0.9223372036854775807
+1.3.0-beta fails ^0.9223372036854775807
+1.9999.9999 fails ^0.9223372036854775807
+1.9999999.9999999.9999999-dev fails ^0.9223372036854775807
+1.x-dev fails ^0.9223372036854775807
+1.X-dev fails ^0.9223372036854775807
+1.*-dev fails ^0.9223372036854775807
+1.xdev fails ^0.9223372036854775807
+1.x.dev fails ^0.9223372036854775807
+1.0.x-dev fails ^0.9223372036854775807
+1.2.x-dev fails ^0.9223372036854775807
+1.2.3.x-dev fails ^0.9223372036854775807
+v1.x-dev fails ^0.9223372036854775807
+041.x-dev fails ^0.9223372036854775807
+1.25.0-beta2.1 fails ^0.9223372036854775807
+1.25.0-b.2.1 fails ^0.9223372036854775807
+1.25.0beta2.1 fails ^0.9223372036854775807
+1.25.0-b2.1 fails ^0.9223372036854775807
+1.25.0-b-2.1 fails ^0.9223372036854775807
+1.25.0-b.3 fails ^0.9223372036854775807
+1.25.0beta.3 fails ^0.9223372036854775807
+1.25.0-rc fails ^0.9223372036854775807
+1.25.0 fails ^0.9223372036854775807
+1.26.0 fails ^0.9223372036854775807
+10.4.13beta.2 fails ^0.9223372036854775807
+v1.13.11-beta.0 fails ^0.9223372036854775807
+1.0.0-alpha-2.1-3+foo fails ^0.9223372036854775807
+2 fails ^0.9223372036854775807
+2.0 fails ^0.9223372036854775807
+2.0-dev fails ^0.9223372036854775807
+2.0.0-beta fails ^0.9223372036854775807
+2.0.5 fails ^0.9223372036854775807
+2.0.6 fails ^0.9223372036854775807
+2.1 fails ^0.9223372036854775807
+2.1.3 fails ^0.9223372036854775807
+2.4.0-alpha fails ^0.9223372036854775807
+2.4.3-alpha fails ^0.9223372036854775807
+2.9.0 fails ^0.9223372036854775807
+3.0 fails ^0.9223372036854775807
+10 fails ^0.9223372036854775807
+10.0-alpha fails ^0.9223372036854775807
+00.01.03.04 fails ^0.9223372036854775807
+0700 fails ^0.9223372036854775807
+12345 fails ^0.9223372036854775807
+99999 fails ^0.9223372036854775807
+100000 fails ^0.9223372036854775807
+123456 fails ^0.9223372036854775807
+2010.01 fails ^0.9223372036854775807
+2010.01.02 fails ^0.9223372036854775807
+2010-01-02 fails ^0.9223372036854775807
+2010-01-02-beta fails ^0.9223372036854775807
+2010-01-02.5 fails ^0.9223372036854775807
+20100102 fails ^0.9223372036854775807
+v20100102 fails ^0.9223372036854775807
+20100102.0 fails ^0.9223372036854775807
+20100102-dev fails ^0.9223372036854775807
+20100102-203040 fails ^0.9223372036854775807
+20100102-203040-p1 fails ^0.9223372036854775807
+20100102.x-dev fails ^0.9223372036854775807
+201903.0 fails ^0.9223372036854775807
+201903.0-p2 fails ^0.9223372036854775807
+201903.x-dev fails ^0.9223372036854775807
+2010-01-02-10-20-30.5 fails ^0.9223372036854775807
+9999999-dev fails ^0.9223372036854775807
+1.9223372036854775806 fails ^0.9223372036854775807
+1.9223372036854775807 fails ^0.9223372036854775807
+1.9223372036854775808 fails ^0.9223372036854775807
+1.99999999999999999999 fails ^0.9223372036854775807
+2010010203040506070808 fails ^0.9223372036854775807
+2010010203040506070809 fails ^0.9223372036854775807
+0 fails ^99999999999999999999
+0.0 fails ^99999999999999999999
+00 fails ^99999999999999999999
+0.0.0.0-dev fails ^99999999999999999999
+0.0.1 fails ^99999999999999999999
+0.0.3 fails ^99999999999999999999
+0.0.3-alpha fails ^99999999999999999999
+0.0.4-dev fails ^99999999999999999999
+0.1 fails ^99999999999999999999
+0.1.97 fails ^99999999999999999999
+0.2.9 fails ^99999999999999999999
+0.9 fails ^99999999999999999999
+0.x-dev fails ^99999999999999999999
+1-dev fails ^99999999999999999999
+1.0-dev fails ^99999999999999999999
+1.0.-dev fails ^99999999999999999999
+1.0.0-dev fails ^99999999999999999999
+1.2..dev fails ^99999999999999999999
+1.2-.dev fails ^99999999999999999999
+1.2_-dev fails ^99999999999999999999
+1.0.0-alpha fails ^99999999999999999999
+1.0-a fails ^99999999999999999999
+1.0a1 fails ^99999999999999999999
+1.0-alpha1 fails ^99999999999999999999
+1.0.0-ALPHA2 fails ^99999999999999999999
+1.0-alpha.2 fails ^99999999999999999999
+1.0-b fails ^99999999999999999999
+1.0-beta fails ^99999999999999999999
+1.0b1 fails ^99999999999999999999
+1.0-beta1 fails ^99999999999999999999
+1.0-beta.1.2 fails ^99999999999999999999
+1.0-beta1-2 fails ^99999999999999999999
+1.0-Beta2 fails ^99999999999999999999
+1.0-RC fails ^99999999999999999999
+1.0-rc1 fails ^99999999999999999999
+1.0RC1 fails ^99999999999999999999
+1.0-Rc1 fails ^99999999999999999999
+1.0-RC1-dev fails ^99999999999999999999
+1.0.0RC1dev fails ^99999999999999999999
+1.0.0-rC15-dev fails ^99999999999999999999
+1.0.0.RC.15-dev fails ^99999999999999999999
+1.0-RC2 fails ^99999999999999999999
+1.0-stable fails ^99999999999999999999
+1.0-STABLE fails ^99999999999999999999
+1.0-Stable-dev fails ^99999999999999999999
+1.0-stabledev fails ^99999999999999999999
+1 fails ^99999999999999999999
+1.0 fails ^99999999999999999999
+1.0.0 fails ^99999999999999999999
+1.0.0.0 fails ^99999999999999999999
+v1.0 fails ^99999999999999999999
+V1.0.0 fails ^99999999999999999999
+01.0 fails ^99999999999999999999
+1.00 fails ^99999999999999999999
+1.0+build fails ^99999999999999999999
+1.0.0+20100101 fails ^99999999999999999999
+1.0-dev+b fails ^99999999999999999999
+1.0@dev fails ^99999999999999999999
+1.0@stable fails ^99999999999999999999
+1.0.0+foo@dev fails ^99999999999999999999
+1.0-p fails ^99999999999999999999
+1.0-p1 fails ^99999999999999999999
+1.0-pl1 fails ^99999999999999999999
+1.0.0.pl3-dev fails ^99999999999999999999
+1.0-patch1 fails ^99999999999999999999
+1.0-patch2 fails ^99999999999999999999
+1.0.1 fails ^99999999999999999999
+1.0.1-dev fails ^99999999999999999999
+1.1 fails ^99999999999999999999
+1.2 fails ^99999999999999999999
+1.2-dev fails ^99999999999999999999
+1.2. fails ^99999999999999999999
+1.2-beta fails ^99999999999999999999
+1.2.3-beta fails ^99999999999999999999
+1.2.3 fails ^99999999999999999999
+1.2.3b5 fails ^99999999999999999999
+1.2.3a1 fails ^99999999999999999999
+1.2.3p1234 fails ^99999999999999999999
+1.2.4 fails ^99999999999999999999
+1.2.3.4 fails ^99999999999999999999
+1.2.3.4-dev fails ^99999999999999999999
+1.3.0-beta fails ^99999999999999999999
+1.9999.9999 fails ^99999999999999999999
+1.9999999.9999999.9999999-dev fails ^99999999999999999999
+1.x-dev fails ^99999999999999999999
+1.X-dev fails ^99999999999999999999
+1.*-dev fails ^99999999999999999999
+1.xdev fails ^99999999999999999999
+1.x.dev fails ^99999999999999999999
+1.0.x-dev fails ^99999999999999999999
+1.2.x-dev fails ^99999999999999999999
+1.2.3.x-dev fails ^99999999999999999999
+v1.x-dev fails ^99999999999999999999
+041.x-dev fails ^99999999999999999999
+1.25.0-beta2.1 fails ^99999999999999999999
+1.25.0-b.2.1 fails ^99999999999999999999
+1.25.0beta2.1 fails ^99999999999999999999
+1.25.0-b2.1 fails ^99999999999999999999
+1.25.0-b-2.1 fails ^99999999999999999999
+1.25.0-b.3 fails ^99999999999999999999
+1.25.0beta.3 fails ^99999999999999999999
+1.25.0-rc fails ^99999999999999999999
+1.25.0 fails ^99999999999999999999
+1.26.0 fails ^99999999999999999999
+10.4.13beta.2 fails ^99999999999999999999
+v1.13.11-beta.0 fails ^99999999999999999999
+1.0.0-alpha-2.1-3+foo fails ^99999999999999999999
+2 fails ^99999999999999999999
+2.0 fails ^99999999999999999999
+2.0-dev fails ^99999999999999999999
+2.0.0-beta fails ^99999999999999999999
+2.0.5 fails ^99999999999999999999
+2.0.6 fails ^99999999999999999999
+2.1 fails ^99999999999999999999
+2.1.3 fails ^99999999999999999999
+2.4.0-alpha fails ^99999999999999999999
+2.4.3-alpha fails ^99999999999999999999
+2.9.0 fails ^99999999999999999999
+3.0 fails ^99999999999999999999
+10 fails ^99999999999999999999
+10.0-alpha fails ^99999999999999999999
+00.01.03.04 fails ^99999999999999999999
+0700 fails ^99999999999999999999
+12345 fails ^99999999999999999999
+99999 fails ^99999999999999999999
+100000 fails ^99999999999999999999
+123456 fails ^99999999999999999999
+2010.01 fails ^99999999999999999999
+2010.01.02 fails ^99999999999999999999
+2010-01-02 fails ^99999999999999999999
+2010-01-02-beta fails ^99999999999999999999
+2010-01-02.5 fails ^99999999999999999999
+20100102 fails ^99999999999999999999
+v20100102 fails ^99999999999999999999
+20100102.0 fails ^99999999999999999999
+20100102-dev fails ^99999999999999999999
+20100102-203040 fails ^99999999999999999999
+20100102-203040-p1 fails ^99999999999999999999
+20100102.x-dev fails ^99999999999999999999
+201903.0 fails ^99999999999999999999
+201903.0-p2 fails ^99999999999999999999
+201903.x-dev fails ^99999999999999999999
+2010-01-02-10-20-30.5 fails ^99999999999999999999
+9999999-dev fails ^99999999999999999999
+1.9223372036854775806 fails ^99999999999999999999
+1.9223372036854775807 fails ^99999999999999999999
+1.9223372036854775808 fails ^99999999999999999999
+1.99999999999999999999 fails ^99999999999999999999
+2010010203040506070808 fails ^99999999999999999999
+2010010203040506070809 fails ^99999999999999999999
+0 fails dev-master
+0.0 fails dev-master
+00 fails dev-master
+0.0.0.0-dev fails dev-master
+0.0.1 fails dev-master
+0.0.3 fails dev-master
+0.0.3-alpha fails dev-master
+0.0.4-dev fails dev-master
+0.1 fails dev-master
+0.1.97 fails dev-master
+0.2.9 fails dev-master
+0.9 fails dev-master
+0.x-dev fails dev-master
+1-dev fails dev-master
+1.0-dev fails dev-master
+1.0.-dev fails dev-master
+1.0.0-dev fails dev-master
+1.2..dev fails dev-master
+1.2-.dev fails dev-master
+1.2_-dev fails dev-master
+1.0.0-alpha fails dev-master
+1.0-a fails dev-master
+1.0a1 fails dev-master
+1.0-alpha1 fails dev-master
+1.0.0-ALPHA2 fails dev-master
+1.0-alpha.2 fails dev-master
+1.0-b fails dev-master
+1.0-beta fails dev-master
+1.0b1 fails dev-master
+1.0-beta1 fails dev-master
+1.0-beta.1.2 fails dev-master
+1.0-beta1-2 fails dev-master
+1.0-Beta2 fails dev-master
+1.0-RC fails dev-master
+1.0-rc1 fails dev-master
+1.0RC1 fails dev-master
+1.0-Rc1 fails dev-master
+1.0-RC1-dev fails dev-master
+1.0.0RC1dev fails dev-master
+1.0.0-rC15-dev fails dev-master
+1.0.0.RC.15-dev fails dev-master
+1.0-RC2 fails dev-master
+1.0-stable fails dev-master
+1.0-STABLE fails dev-master
+1.0-Stable-dev fails dev-master
+1.0-stabledev fails dev-master
+1 fails dev-master
+1.0 fails dev-master
+1.0.0 fails dev-master
+1.0.0.0 fails dev-master
+v1.0 fails dev-master
+V1.0.0 fails dev-master
+01.0 fails dev-master
+1.00 fails dev-master
+1.0+build fails dev-master
+1.0.0+20100101 fails dev-master
+1.0-dev+b fails dev-master
+1.0@dev fails dev-master
+1.0@stable fails dev-master
+1.0.0+foo@dev fails dev-master
+1.0-p fails dev-master
+1.0-p1 fails dev-master
+1.0-pl1 fails dev-master
+1.0.0.pl3-dev fails dev-master
+1.0-patch1 fails dev-master
+1.0-patch2 fails dev-master
+1.0.1 fails dev-master
+1.0.1-dev fails dev-master
+1.1 fails dev-master
+1.2 fails dev-master
+1.2-dev fails dev-master
+1.2. fails dev-master
+1.2-beta fails dev-master
+1.2.3-beta fails dev-master
+1.2.3 fails dev-master
+1.2.3b5 fails dev-master
+1.2.3a1 fails dev-master
+1.2.3p1234 fails dev-master
+1.2.4 fails dev-master
+1.2.3.4 fails dev-master
+1.2.3.4-dev fails dev-master
+1.3.0-beta fails dev-master
+1.9999.9999 fails dev-master
+1.9999999.9999999.9999999-dev fails dev-master
+1.x-dev fails dev-master
+1.X-dev fails dev-master
+1.*-dev fails dev-master
+1.xdev fails dev-master
+1.x.dev fails dev-master
+1.0.x-dev fails dev-master
+1.2.x-dev fails dev-master
+1.2.3.x-dev fails dev-master
+v1.x-dev fails dev-master
+041.x-dev fails dev-master
+1.25.0-beta2.1 fails dev-master
+1.25.0-b.2.1 fails dev-master
+1.25.0beta2.1 fails dev-master
+1.25.0-b2.1 fails dev-master
+1.25.0-b-2.1 fails dev-master
+1.25.0-b.3 fails dev-master
+1.25.0beta.3 fails dev-master
+1.25.0-rc fails dev-master
+1.25.0 fails dev-master
+1.26.0 fails dev-master
+10.4.13beta.2 fails dev-master
+v1.13.11-beta.0 fails dev-master
+1.0.0-alpha-2.1-3+foo fails dev-master
+2 fails dev-master
+2.0 fails dev-master
+2.0-dev fails dev-master
+2.0.0-beta fails dev-master
+2.0.5 fails dev-master
+2.0.6 fails dev-master
+2.1 fails dev-master
+2.1.3 fails dev-master
+2.4.0-alpha fails dev-master
+2.4.3-alpha fails dev-master
+2.9.0 fails dev-master
+3.0 fails dev-master
+10 fails dev-master
+10.0-alpha fails dev-master
+00.01.03.04 fails dev-master
+0700 fails dev-master
+12345 fails dev-master
+99999 fails dev-master
+100000 fails dev-master
+123456 fails dev-master
+2010.01 fails dev-master
+2010.01.02 fails dev-master
+2010-01-02 fails dev-master
+2010-01-02-beta fails dev-master
+2010-01-02.5 fails dev-master
+20100102 fails dev-master
+v20100102 fails dev-master
+20100102.0 fails dev-master
+20100102-dev fails dev-master
+20100102-203040 fails dev-master
+20100102-203040-p1 fails dev-master
+20100102.x-dev fails dev-master
+201903.0 fails dev-master
+201903.0-p2 fails dev-master
+201903.x-dev fails dev-master
+2010-01-02-10-20-30.5 fails dev-master
+9999999-dev fails dev-master
+1.9223372036854775806 fails dev-master
+1.9223372036854775807 fails dev-master
+1.9223372036854775808 fails dev-master
+1.99999999999999999999 fails dev-master
+2010010203040506070808 fails dev-master
+2010010203040506070809 fails dev-master
+0 fails master
+0.0 fails master
+00 fails master
+0.0.0.0-dev fails master
+0.0.1 fails master
+0.0.3 fails master
+0.0.3-alpha fails master
+0.0.4-dev fails master
+0.1 fails master
+0.1.97 fails master
+0.2.9 fails master
+0.9 fails master
+0.x-dev fails master
+1-dev fails master
+1.0-dev fails master
+1.0.-dev fails master
+1.0.0-dev fails master
+1.2..dev fails master
+1.2-.dev fails master
+1.2_-dev fails master
+1.0.0-alpha fails master
+1.0-a fails master
+1.0a1 fails master
+1.0-alpha1 fails master
+1.0.0-ALPHA2 fails master
+1.0-alpha.2 fails master
+1.0-b fails master
+1.0-beta fails master
+1.0b1 fails master
+1.0-beta1 fails master
+1.0-beta.1.2 fails master
+1.0-beta1-2 fails master
+1.0-Beta2 fails master
+1.0-RC fails master
+1.0-rc1 fails master
+1.0RC1 fails master
+1.0-Rc1 fails master
+1.0-RC1-dev fails master
+1.0.0RC1dev fails master
+1.0.0-rC15-dev fails master
+1.0.0.RC.15-dev fails master
+1.0-RC2 fails master
+1.0-stable fails master
+1.0-STABLE fails master
+1.0-Stable-dev fails master
+1.0-stabledev fails master
+1 fails master
+1.0 fails master
+1.0.0 fails master
+1.0.0.0 fails master
+v1.0 fails master
+V1.0.0 fails master
+01.0 fails master
+1.00 fails master
+1.0+build fails master
+1.0.0+20100101 fails master
+1.0-dev+b fails master
+1.0@dev fails master
+1.0@stable fails master
+1.0.0+foo@dev fails master
+1.0-p fails master
+1.0-p1 fails master
+1.0-pl1 fails master
+1.0.0.pl3-dev fails master
+1.0-patch1 fails master
+1.0-patch2 fails master
+1.0.1 fails master
+1.0.1-dev fails master
+1.1 fails master
+1.2 fails master
+1.2-dev fails master
+1.2. fails master
+1.2-beta fails master
+1.2.3-beta fails master
+1.2.3 fails master
+1.2.3b5 fails master
+1.2.3a1 fails master
+1.2.3p1234 fails master
+1.2.4 fails master
+1.2.3.4 fails master
+1.2.3.4-dev fails master
+1.3.0-beta fails master
+1.9999.9999 fails master
+1.9999999.9999999.9999999-dev fails master
+1.x-dev fails master
+1.X-dev fails master
+1.*-dev fails master
+1.xdev fails master
+1.x.dev fails master
+1.0.x-dev fails master
+1.2.x-dev fails master
+1.2.3.x-dev fails master
+v1.x-dev fails master
+041.x-dev fails master
+1.25.0-beta2.1 fails master
+1.25.0-b.2.1 fails master
+1.25.0beta2.1 fails master
+1.25.0-b2.1 fails master
+1.25.0-b-2.1 fails master
+1.25.0-b.3 fails master
+1.25.0beta.3 fails master
+1.25.0-rc fails master
+1.25.0 fails master
+1.26.0 fails master
+10.4.13beta.2 fails master
+v1.13.11-beta.0 fails master
+1.0.0-alpha-2.1-3+foo fails master
+2 fails master
+2.0 fails master
+2.0-dev fails master
+2.0.0-beta fails master
+2.0.5 fails master
+2.0.6 fails master
+2.1 fails master
+2.1.3 fails master
+2.4.0-alpha fails master
+2.4.3-alpha fails master
+2.9.0 fails master
+3.0 fails master
+10 fails master
+10.0-alpha fails master
+00.01.03.04 fails master
+0700 fails master
+12345 fails master
+99999 fails master
+100000 fails master
+123456 fails master
+2010.01 fails master
+2010.01.02 fails master
+2010-01-02 fails master
+2010-01-02-beta fails master
+2010-01-02.5 fails master
+20100102 fails master
+v20100102 fails master
+20100102.0 fails master
+20100102-dev fails master
+20100102-203040 fails master
+20100102-203040-p1 fails master
+20100102.x-dev fails master
+201903.0 fails master
+201903.0-p2 fails master
+201903.x-dev fails master
+2010-01-02-10-20-30.5 fails master
+9999999-dev fails master
+1.9223372036854775806 fails master
+1.9223372036854775807 fails master
+1.9223372036854775808 fails master
+1.99999999999999999999 fails master
+2010010203040506070808 fails master
+2010010203040506070809 fails master
+0 fails foobar-dev
+0.0 fails foobar-dev
+00 fails foobar-dev
+0.0.0.0-dev fails foobar-dev
+0.0.1 fails foobar-dev
+0.0.3 fails foobar-dev
+0.0.3-alpha fails foobar-dev
+0.0.4-dev fails foobar-dev
+0.1 fails foobar-dev
+0.1.97 fails foobar-dev
+0.2.9 fails foobar-dev
+0.9 fails foobar-dev
+0.x-dev fails foobar-dev
+1-dev fails foobar-dev
+1.0-dev fails foobar-dev
+1.0.-dev fails foobar-dev
+1.0.0-dev fails foobar-dev
+1.2..dev fails foobar-dev
+1.2-.dev fails foobar-dev
+1.2_-dev fails foobar-dev
+1.0.0-alpha fails foobar-dev
+1.0-a fails foobar-dev
+1.0a1 fails foobar-dev
+1.0-alpha1 fails foobar-dev
+1.0.0-ALPHA2 fails foobar-dev
+1.0-alpha.2 fails foobar-dev
+1.0-b fails foobar-dev
+1.0-beta fails foobar-dev
+1.0b1 fails foobar-dev
+1.0-beta1 fails foobar-dev
+1.0-beta.1.2 fails foobar-dev
+1.0-beta1-2 fails foobar-dev
+1.0-Beta2 fails foobar-dev
+1.0-RC fails foobar-dev
+1.0-rc1 fails foobar-dev
+1.0RC1 fails foobar-dev
+1.0-Rc1 fails foobar-dev
+1.0-RC1-dev fails foobar-dev
+1.0.0RC1dev fails foobar-dev
+1.0.0-rC15-dev fails foobar-dev
+1.0.0.RC.15-dev fails foobar-dev
+1.0-RC2 fails foobar-dev
+1.0-stable fails foobar-dev
+1.0-STABLE fails foobar-dev
+1.0-Stable-dev fails foobar-dev
+1.0-stabledev fails foobar-dev
+1 fails foobar-dev
+1.0 fails foobar-dev
+1.0.0 fails foobar-dev
+1.0.0.0 fails foobar-dev
+v1.0 fails foobar-dev
+V1.0.0 fails foobar-dev
+01.0 fails foobar-dev
+1.00 fails foobar-dev
+1.0+build fails foobar-dev
+1.0.0+20100101 fails foobar-dev
+1.0-dev+b fails foobar-dev
+1.0@dev fails foobar-dev
+1.0@stable fails foobar-dev
+1.0.0+foo@dev fails foobar-dev
+1.0-p fails foobar-dev
+1.0-p1 fails foobar-dev
+1.0-pl1 fails foobar-dev
+1.0.0.pl3-dev fails foobar-dev
+1.0-patch1 fails foobar-dev
+1.0-patch2 fails foobar-dev
+1.0.1 fails foobar-dev
+1.0.1-dev fails foobar-dev
+1.1 fails foobar-dev
+1.2 fails foobar-dev
+1.2-dev fails foobar-dev
+1.2. fails foobar-dev
+1.2-beta fails foobar-dev
+1.2.3-beta fails foobar-dev
+1.2.3 fails foobar-dev
+1.2.3b5 fails foobar-dev
+1.2.3a1 fails foobar-dev
+1.2.3p1234 fails foobar-dev
+1.2.4 fails foobar-dev
+1.2.3.4 fails foobar-dev
+1.2.3.4-dev fails foobar-dev
+1.3.0-beta fails foobar-dev
+1.9999.9999 fails foobar-dev
+1.9999999.9999999.9999999-dev fails foobar-dev
+1.x-dev fails foobar-dev
+1.X-dev fails foobar-dev
+1.*-dev fails foobar-dev
+1.xdev fails foobar-dev
+1.x.dev fails foobar-dev
+1.0.x-dev fails foobar-dev
+1.2.x-dev fails foobar-dev
+1.2.3.x-dev fails foobar-dev
+v1.x-dev fails foobar-dev
+041.x-dev fails foobar-dev
+1.25.0-beta2.1 fails foobar-dev
+1.25.0-b.2.1 fails foobar-dev
+1.25.0beta2.1 fails foobar-dev
+1.25.0-b2.1 fails foobar-dev
+1.25.0-b-2.1 fails foobar-dev
+1.25.0-b.3 fails foobar-dev
+1.25.0beta.3 fails foobar-dev
+1.25.0-rc fails foobar-dev
+1.25.0 fails foobar-dev
+1.26.0 fails foobar-dev
+10.4.13beta.2 fails foobar-dev
+v1.13.11-beta.0 fails foobar-dev
+1.0.0-alpha-2.1-3+foo fails foobar-dev
+2 fails foobar-dev
+2.0 fails foobar-dev
+2.0-dev fails foobar-dev
+2.0.0-beta fails foobar-dev
+2.0.5 fails foobar-dev
+2.0.6 fails foobar-dev
+2.1 fails foobar-dev
+2.1.3 fails foobar-dev
+2.4.0-alpha fails foobar-dev
+2.4.3-alpha fails foobar-dev
+2.9.0 fails foobar-dev
+3.0 fails foobar-dev
+10 fails foobar-dev
+10.0-alpha fails foobar-dev
+00.01.03.04 fails foobar-dev
+0700 fails foobar-dev
+12345 fails foobar-dev
+99999 fails foobar-dev
+100000 fails foobar-dev
+123456 fails foobar-dev
+2010.01 fails foobar-dev
+2010.01.02 fails foobar-dev
+2010-01-02 fails foobar-dev
+2010-01-02-beta fails foobar-dev
+2010-01-02.5 fails foobar-dev
+20100102 fails foobar-dev
+v20100102 fails foobar-dev
+20100102.0 fails foobar-dev
+20100102-dev fails foobar-dev
+20100102-203040 fails foobar-dev
+20100102-203040-p1 fails foobar-dev
+20100102.x-dev fails foobar-dev
+201903.0 fails foobar-dev
+201903.0-p2 fails foobar-dev
+201903.x-dev fails foobar-dev
+2010-01-02-10-20-30.5 fails foobar-dev
+9999999-dev fails foobar-dev
+1.9223372036854775806 fails foobar-dev
+1.9223372036854775807 fails foobar-dev
+1.9223372036854775808 fails foobar-dev
+1.99999999999999999999 fails foobar-dev
+2010010203040506070808 fails foobar-dev
+2010010203040506070809 fails foobar-dev
+0 fails dev-master || ^1.0
+0.0 fails dev-master || ^1.0
+00 fails dev-master || ^1.0
+0.0.0.0-dev fails dev-master || ^1.0
+0.0.1 fails dev-master || ^1.0
+0.0.3 fails dev-master || ^1.0
+0.0.3-alpha fails dev-master || ^1.0
+0.0.4-dev fails dev-master || ^1.0
+0.1 fails dev-master || ^1.0
+0.1.97 fails dev-master || ^1.0
+0.2.9 fails dev-master || ^1.0
+0.9 fails dev-master || ^1.0
+0.x-dev fails dev-master || ^1.0
+1-dev satisfies dev-master || ^1.0
+1.0-dev satisfies dev-master || ^1.0
+1.0.-dev satisfies dev-master || ^1.0
+1.0.0-dev satisfies dev-master || ^1.0
+1.2..dev satisfies dev-master || ^1.0
+1.2-.dev satisfies dev-master || ^1.0
+1.2_-dev satisfies dev-master || ^1.0
+1.0.0-alpha satisfies dev-master || ^1.0
+1.0-a satisfies dev-master || ^1.0
+1.0a1 satisfies dev-master || ^1.0
+1.0-alpha1 satisfies dev-master || ^1.0
+1.0.0-ALPHA2 satisfies dev-master || ^1.0
+1.0-alpha.2 satisfies dev-master || ^1.0
+1.0-b satisfies dev-master || ^1.0
+1.0-beta satisfies dev-master || ^1.0
+1.0b1 satisfies dev-master || ^1.0
+1.0-beta1 satisfies dev-master || ^1.0
+1.0-beta.1.2 satisfies dev-master || ^1.0
+1.0-beta1-2 satisfies dev-master || ^1.0
+1.0-Beta2 satisfies dev-master || ^1.0
+1.0-RC satisfies dev-master || ^1.0
+1.0-rc1 satisfies dev-master || ^1.0
+1.0RC1 satisfies dev-master || ^1.0
+1.0-Rc1 satisfies dev-master || ^1.0
+1.0-RC1-dev satisfies dev-master || ^1.0
+1.0.0RC1dev satisfies dev-master || ^1.0
+1.0.0-rC15-dev satisfies dev-master || ^1.0
+1.0.0.RC.15-dev satisfies dev-master || ^1.0
+1.0-RC2 satisfies dev-master || ^1.0
+1.0-stable satisfies dev-master || ^1.0
+1.0-STABLE fails dev-master || ^1.0
+1.0-Stable-dev fails dev-master || ^1.0
+1.0-stabledev satisfies dev-master || ^1.0
+1 satisfies dev-master || ^1.0
+1.0 satisfies dev-master || ^1.0
+1.0.0 satisfies dev-master || ^1.0
+1.0.0.0 satisfies dev-master || ^1.0
+v1.0 satisfies dev-master || ^1.0
+V1.0.0 satisfies dev-master || ^1.0
+01.0 satisfies dev-master || ^1.0
+1.00 satisfies dev-master || ^1.0
+1.0+build satisfies dev-master || ^1.0
+1.0.0+20100101 satisfies dev-master || ^1.0
+1.0-dev+b satisfies dev-master || ^1.0
+1.0@dev satisfies dev-master || ^1.0
+1.0@stable satisfies dev-master || ^1.0
+1.0.0+foo@dev satisfies dev-master || ^1.0
+1.0-p satisfies dev-master || ^1.0
+1.0-p1 satisfies dev-master || ^1.0
+1.0-pl1 satisfies dev-master || ^1.0
+1.0.0.pl3-dev satisfies dev-master || ^1.0
+1.0-patch1 satisfies dev-master || ^1.0
+1.0-patch2 satisfies dev-master || ^1.0
+1.0.1 satisfies dev-master || ^1.0
+1.0.1-dev satisfies dev-master || ^1.0
+1.1 satisfies dev-master || ^1.0
+1.2 satisfies dev-master || ^1.0
+1.2-dev satisfies dev-master || ^1.0
+1.2. satisfies dev-master || ^1.0
+1.2-beta satisfies dev-master || ^1.0
+1.2.3-beta satisfies dev-master || ^1.0
+1.2.3 satisfies dev-master || ^1.0
+1.2.3b5 satisfies dev-master || ^1.0
+1.2.3a1 satisfies dev-master || ^1.0
+1.2.3p1234 satisfies dev-master || ^1.0
+1.2.4 satisfies dev-master || ^1.0
+1.2.3.4 satisfies dev-master || ^1.0
+1.2.3.4-dev satisfies dev-master || ^1.0
+1.3.0-beta satisfies dev-master || ^1.0
+1.9999.9999 satisfies dev-master || ^1.0
+1.9999999.9999999.9999999-dev satisfies dev-master || ^1.0
+1.x-dev satisfies dev-master || ^1.0
+1.X-dev satisfies dev-master || ^1.0
+1.*-dev satisfies dev-master || ^1.0
+1.xdev satisfies dev-master || ^1.0
+1.x.dev satisfies dev-master || ^1.0
+1.0.x-dev satisfies dev-master || ^1.0
+1.2.x-dev satisfies dev-master || ^1.0
+1.2.3.x-dev satisfies dev-master || ^1.0
+v1.x-dev satisfies dev-master || ^1.0
+041.x-dev fails dev-master || ^1.0
+1.25.0-beta2.1 satisfies dev-master || ^1.0
+1.25.0-b.2.1 satisfies dev-master || ^1.0
+1.25.0beta2.1 satisfies dev-master || ^1.0
+1.25.0-b2.1 satisfies dev-master || ^1.0
+1.25.0-b-2.1 satisfies dev-master || ^1.0
+1.25.0-b.3 satisfies dev-master || ^1.0
+1.25.0beta.3 satisfies dev-master || ^1.0
+1.25.0-rc satisfies dev-master || ^1.0
+1.25.0 satisfies dev-master || ^1.0
+1.26.0 satisfies dev-master || ^1.0
+10.4.13beta.2 fails dev-master || ^1.0
+v1.13.11-beta.0 satisfies dev-master || ^1.0
+1.0.0-alpha-2.1-3+foo satisfies dev-master || ^1.0
+2 fails dev-master || ^1.0
+2.0 fails dev-master || ^1.0
+2.0-dev fails dev-master || ^1.0
+2.0.0-beta fails dev-master || ^1.0
+2.0.5 fails dev-master || ^1.0
+2.0.6 fails dev-master || ^1.0
+2.1 fails dev-master || ^1.0
+2.1.3 fails dev-master || ^1.0
+2.4.0-alpha fails dev-master || ^1.0
+2.4.3-alpha fails dev-master || ^1.0
+2.9.0 fails dev-master || ^1.0
+3.0 fails dev-master || ^1.0
+10 fails dev-master || ^1.0
+10.0-alpha fails dev-master || ^1.0
+00.01.03.04 fails dev-master || ^1.0
+0700 fails dev-master || ^1.0
+12345 fails dev-master || ^1.0
+99999 fails dev-master || ^1.0
+100000 fails dev-master || ^1.0
+123456 fails dev-master || ^1.0
+2010.01 fails dev-master || ^1.0
+2010.01.02 fails dev-master || ^1.0
+2010-01-02 fails dev-master || ^1.0
+2010-01-02-beta fails dev-master || ^1.0
+2010-01-02.5 fails dev-master || ^1.0
+20100102 fails dev-master || ^1.0
+v20100102 fails dev-master || ^1.0
+20100102.0 fails dev-master || ^1.0
+20100102-dev fails dev-master || ^1.0
+20100102-203040 fails dev-master || ^1.0
+20100102-203040-p1 fails dev-master || ^1.0
+20100102.x-dev fails dev-master || ^1.0
+201903.0 fails dev-master || ^1.0
+201903.0-p2 fails dev-master || ^1.0
+201903.x-dev fails dev-master || ^1.0
+2010-01-02-10-20-30.5 fails dev-master || ^1.0
+9999999-dev fails dev-master || ^1.0
+1.9223372036854775806 satisfies dev-master || ^1.0
+1.9223372036854775807 satisfies dev-master || ^1.0
+1.9223372036854775808 satisfies dev-master || ^1.0
+1.99999999999999999999 satisfies dev-master || ^1.0
+2010010203040506070808 fails dev-master || ^1.0
+2010010203040506070809 fails dev-master || ^1.0
+0 fails ^1.0 || foobar-dev
+0.0 fails ^1.0 || foobar-dev
+00 fails ^1.0 || foobar-dev
+0.0.0.0-dev fails ^1.0 || foobar-dev
+0.0.1 fails ^1.0 || foobar-dev
+0.0.3 fails ^1.0 || foobar-dev
+0.0.3-alpha fails ^1.0 || foobar-dev
+0.0.4-dev fails ^1.0 || foobar-dev
+0.1 fails ^1.0 || foobar-dev
+0.1.97 fails ^1.0 || foobar-dev
+0.2.9 fails ^1.0 || foobar-dev
+0.9 fails ^1.0 || foobar-dev
+0.x-dev fails ^1.0 || foobar-dev
+1-dev satisfies ^1.0 || foobar-dev
+1.0-dev satisfies ^1.0 || foobar-dev
+1.0.-dev satisfies ^1.0 || foobar-dev
+1.0.0-dev satisfies ^1.0 || foobar-dev
+1.2..dev satisfies ^1.0 || foobar-dev
+1.2-.dev satisfies ^1.0 || foobar-dev
+1.2_-dev satisfies ^1.0 || foobar-dev
+1.0.0-alpha satisfies ^1.0 || foobar-dev
+1.0-a satisfies ^1.0 || foobar-dev
+1.0a1 satisfies ^1.0 || foobar-dev
+1.0-alpha1 satisfies ^1.0 || foobar-dev
+1.0.0-ALPHA2 satisfies ^1.0 || foobar-dev
+1.0-alpha.2 satisfies ^1.0 || foobar-dev
+1.0-b satisfies ^1.0 || foobar-dev
+1.0-beta satisfies ^1.0 || foobar-dev
+1.0b1 satisfies ^1.0 || foobar-dev
+1.0-beta1 satisfies ^1.0 || foobar-dev
+1.0-beta.1.2 satisfies ^1.0 || foobar-dev
+1.0-beta1-2 satisfies ^1.0 || foobar-dev
+1.0-Beta2 satisfies ^1.0 || foobar-dev
+1.0-RC satisfies ^1.0 || foobar-dev
+1.0-rc1 satisfies ^1.0 || foobar-dev
+1.0RC1 satisfies ^1.0 || foobar-dev
+1.0-Rc1 satisfies ^1.0 || foobar-dev
+1.0-RC1-dev satisfies ^1.0 || foobar-dev
+1.0.0RC1dev satisfies ^1.0 || foobar-dev
+1.0.0-rC15-dev satisfies ^1.0 || foobar-dev
+1.0.0.RC.15-dev satisfies ^1.0 || foobar-dev
+1.0-RC2 satisfies ^1.0 || foobar-dev
+1.0-stable satisfies ^1.0 || foobar-dev
+1.0-STABLE fails ^1.0 || foobar-dev
+1.0-Stable-dev fails ^1.0 || foobar-dev
+1.0-stabledev satisfies ^1.0 || foobar-dev
+1 satisfies ^1.0 || foobar-dev
+1.0 satisfies ^1.0 || foobar-dev
+1.0.0 satisfies ^1.0 || foobar-dev
+1.0.0.0 satisfies ^1.0 || foobar-dev
+v1.0 satisfies ^1.0 || foobar-dev
+V1.0.0 satisfies ^1.0 || foobar-dev
+01.0 satisfies ^1.0 || foobar-dev
+1.00 satisfies ^1.0 || foobar-dev
+1.0+build satisfies ^1.0 || foobar-dev
+1.0.0+20100101 satisfies ^1.0 || foobar-dev
+1.0-dev+b satisfies ^1.0 || foobar-dev
+1.0@dev satisfies ^1.0 || foobar-dev
+1.0@stable satisfies ^1.0 || foobar-dev
+1.0.0+foo@dev satisfies ^1.0 || foobar-dev
+1.0-p satisfies ^1.0 || foobar-dev
+1.0-p1 satisfies ^1.0 || foobar-dev
+1.0-pl1 satisfies ^1.0 || foobar-dev
+1.0.0.pl3-dev satisfies ^1.0 || foobar-dev
+1.0-patch1 satisfies ^1.0 || foobar-dev
+1.0-patch2 satisfies ^1.0 || foobar-dev
+1.0.1 satisfies ^1.0 || foobar-dev
+1.0.1-dev satisfies ^1.0 || foobar-dev
+1.1 satisfies ^1.0 || foobar-dev
+1.2 satisfies ^1.0 || foobar-dev
+1.2-dev satisfies ^1.0 || foobar-dev
+1.2. satisfies ^1.0 || foobar-dev
+1.2-beta satisfies ^1.0 || foobar-dev
+1.2.3-beta satisfies ^1.0 || foobar-dev
+1.2.3 satisfies ^1.0 || foobar-dev
+1.2.3b5 satisfies ^1.0 || foobar-dev
+1.2.3a1 satisfies ^1.0 || foobar-dev
+1.2.3p1234 satisfies ^1.0 || foobar-dev
+1.2.4 satisfies ^1.0 || foobar-dev
+1.2.3.4 satisfies ^1.0 || foobar-dev
+1.2.3.4-dev satisfies ^1.0 || foobar-dev
+1.3.0-beta satisfies ^1.0 || foobar-dev
+1.9999.9999 satisfies ^1.0 || foobar-dev
+1.9999999.9999999.9999999-dev satisfies ^1.0 || foobar-dev
+1.x-dev satisfies ^1.0 || foobar-dev
+1.X-dev satisfies ^1.0 || foobar-dev
+1.*-dev satisfies ^1.0 || foobar-dev
+1.xdev satisfies ^1.0 || foobar-dev
+1.x.dev satisfies ^1.0 || foobar-dev
+1.0.x-dev satisfies ^1.0 || foobar-dev
+1.2.x-dev satisfies ^1.0 || foobar-dev
+1.2.3.x-dev satisfies ^1.0 || foobar-dev
+v1.x-dev satisfies ^1.0 || foobar-dev
+041.x-dev fails ^1.0 || foobar-dev
+1.25.0-beta2.1 satisfies ^1.0 || foobar-dev
+1.25.0-b.2.1 satisfies ^1.0 || foobar-dev
+1.25.0beta2.1 satisfies ^1.0 || foobar-dev
+1.25.0-b2.1 satisfies ^1.0 || foobar-dev
+1.25.0-b-2.1 satisfies ^1.0 || foobar-dev
+1.25.0-b.3 satisfies ^1.0 || foobar-dev
+1.25.0beta.3 satisfies ^1.0 || foobar-dev
+1.25.0-rc satisfies ^1.0 || foobar-dev
+1.25.0 satisfies ^1.0 || foobar-dev
+1.26.0 satisfies ^1.0 || foobar-dev
+10.4.13beta.2 fails ^1.0 || foobar-dev
+v1.13.11-beta.0 satisfies ^1.0 || foobar-dev
+1.0.0-alpha-2.1-3+foo satisfies ^1.0 || foobar-dev
+2 fails ^1.0 || foobar-dev
+2.0 fails ^1.0 || foobar-dev
+2.0-dev fails ^1.0 || foobar-dev
+2.0.0-beta fails ^1.0 || foobar-dev
+2.0.5 fails ^1.0 || foobar-dev
+2.0.6 fails ^1.0 || foobar-dev
+2.1 fails ^1.0 || foobar-dev
+2.1.3 fails ^1.0 || foobar-dev
+2.4.0-alpha fails ^1.0 || foobar-dev
+2.4.3-alpha fails ^1.0 || foobar-dev
+2.9.0 fails ^1.0 || foobar-dev
+3.0 fails ^1.0 || foobar-dev
+10 fails ^1.0 || foobar-dev
+10.0-alpha fails ^1.0 || foobar-dev
+00.01.03.04 fails ^1.0 || foobar-dev
+0700 fails ^1.0 || foobar-dev
+12345 fails ^1.0 || foobar-dev
+99999 fails ^1.0 || foobar-dev
+100000 fails ^1.0 || foobar-dev
+123456 fails ^1.0 || foobar-dev
+2010.01 fails ^1.0 || foobar-dev
+2010.01.02 fails ^1.0 || foobar-dev
+2010-01-02 fails ^1.0 || foobar-dev
+2010-01-02-beta fails ^1.0 || foobar-dev
+2010-01-02.5 fails ^1.0 || foobar-dev
+20100102 fails ^1.0 || foobar-dev
+v20100102 fails ^1.0 || foobar-dev
+20100102.0 fails ^1.0 || foobar-dev
+20100102-dev fails ^1.0 || foobar-dev
+20100102-203040 fails ^1.0 || foobar-dev
+20100102-203040-p1 fails ^1.0 || foobar-dev
+20100102.x-dev fails ^1.0 || foobar-dev
+201903.0 fails ^1.0 || foobar-dev
+201903.0-p2 fails ^1.0 || foobar-dev
+201903.x-dev fails ^1.0 || foobar-dev
+2010-01-02-10-20-30.5 fails ^1.0 || foobar-dev
+9999999-dev fails ^1.0 || foobar-dev
+1.9223372036854775806 satisfies ^1.0 || foobar-dev
+1.9223372036854775807 satisfies ^1.0 || foobar-dev
+1.9223372036854775808 satisfies ^1.0 || foobar-dev
+1.99999999999999999999 satisfies ^1.0 || foobar-dev
+2010010203040506070808 fails ^1.0 || foobar-dev
+2010010203040506070809 fails ^1.0 || foobar-dev
+0 satisfies !=dev-master
+0.0 satisfies !=dev-master
+00 satisfies !=dev-master
+0.0.0.0-dev satisfies !=dev-master
+0.0.1 satisfies !=dev-master
+0.0.3 satisfies !=dev-master
+0.0.3-alpha satisfies !=dev-master
+0.0.4-dev satisfies !=dev-master
+0.1 satisfies !=dev-master
+0.1.97 satisfies !=dev-master
+0.2.9 satisfies !=dev-master
+0.9 satisfies !=dev-master
+0.x-dev satisfies !=dev-master
+1-dev satisfies !=dev-master
+1.0-dev satisfies !=dev-master
+1.0.-dev satisfies !=dev-master
+1.0.0-dev satisfies !=dev-master
+1.2..dev satisfies !=dev-master
+1.2-.dev satisfies !=dev-master
+1.2_-dev satisfies !=dev-master
+1.0.0-alpha satisfies !=dev-master
+1.0-a satisfies !=dev-master
+1.0a1 satisfies !=dev-master
+1.0-alpha1 satisfies !=dev-master
+1.0.0-ALPHA2 satisfies !=dev-master
+1.0-alpha.2 satisfies !=dev-master
+1.0-b satisfies !=dev-master
+1.0-beta satisfies !=dev-master
+1.0b1 satisfies !=dev-master
+1.0-beta1 satisfies !=dev-master
+1.0-beta.1.2 satisfies !=dev-master
+1.0-beta1-2 satisfies !=dev-master
+1.0-Beta2 satisfies !=dev-master
+1.0-RC satisfies !=dev-master
+1.0-rc1 satisfies !=dev-master
+1.0RC1 satisfies !=dev-master
+1.0-Rc1 satisfies !=dev-master
+1.0-RC1-dev satisfies !=dev-master
+1.0.0RC1dev satisfies !=dev-master
+1.0.0-rC15-dev satisfies !=dev-master
+1.0.0.RC.15-dev satisfies !=dev-master
+1.0-RC2 satisfies !=dev-master
+1.0-stable satisfies !=dev-master
+1.0-STABLE satisfies !=dev-master
+1.0-Stable-dev satisfies !=dev-master
+1.0-stabledev satisfies !=dev-master
+1 satisfies !=dev-master
+1.0 satisfies !=dev-master
+1.0.0 satisfies !=dev-master
+1.0.0.0 satisfies !=dev-master
+v1.0 satisfies !=dev-master
+V1.0.0 satisfies !=dev-master
+01.0 satisfies !=dev-master
+1.00 satisfies !=dev-master
+1.0+build satisfies !=dev-master
+1.0.0+20100101 satisfies !=dev-master
+1.0-dev+b satisfies !=dev-master
+1.0@dev satisfies !=dev-master
+1.0@stable satisfies !=dev-master
+1.0.0+foo@dev satisfies !=dev-master
+1.0-p satisfies !=dev-master
+1.0-p1 satisfies !=dev-master
+1.0-pl1 satisfies !=dev-master
+1.0.0.pl3-dev satisfies !=dev-master
+1.0-patch1 satisfies !=dev-master
+1.0-patch2 satisfies !=dev-master
+1.0.1 satisfies !=dev-master
+1.0.1-dev satisfies !=dev-master
+1.1 satisfies !=dev-master
+1.2 satisfies !=dev-master
+1.2-dev satisfies !=dev-master
+1.2. satisfies !=dev-master
+1.2-beta satisfies !=dev-master
+1.2.3-beta satisfies !=dev-master
+1.2.3 satisfies !=dev-master
+1.2.3b5 satisfies !=dev-master
+1.2.3a1 satisfies !=dev-master
+1.2.3p1234 satisfies !=dev-master
+1.2.4 satisfies !=dev-master
+1.2.3.4 satisfies !=dev-master
+1.2.3.4-dev satisfies !=dev-master
+1.3.0-beta satisfies !=dev-master
+1.9999.9999 satisfies !=dev-master
+1.9999999.9999999.9999999-dev satisfies !=dev-master
+1.x-dev satisfies !=dev-master
+1.X-dev satisfies !=dev-master
+1.*-dev satisfies !=dev-master
+1.xdev satisfies !=dev-master
+1.x.dev satisfies !=dev-master
+1.0.x-dev satisfies !=dev-master
+1.2.x-dev satisfies !=dev-master
+1.2.3.x-dev satisfies !=dev-master
+v1.x-dev satisfies !=dev-master
+041.x-dev satisfies !=dev-master
+1.25.0-beta2.1 satisfies !=dev-master
+1.25.0-b.2.1 satisfies !=dev-master
+1.25.0beta2.1 satisfies !=dev-master
+1.25.0-b2.1 satisfies !=dev-master
+1.25.0-b-2.1 satisfies !=dev-master
+1.25.0-b.3 satisfies !=dev-master
+1.25.0beta.3 satisfies !=dev-master
+1.25.0-rc satisfies !=dev-master
+1.25.0 satisfies !=dev-master
+1.26.0 satisfies !=dev-master
+10.4.13beta.2 satisfies !=dev-master
+v1.13.11-beta.0 satisfies !=dev-master
+1.0.0-alpha-2.1-3+foo satisfies !=dev-master
+2 satisfies !=dev-master
+2.0 satisfies !=dev-master
+2.0-dev satisfies !=dev-master
+2.0.0-beta satisfies !=dev-master
+2.0.5 satisfies !=dev-master
+2.0.6 satisfies !=dev-master
+2.1 satisfies !=dev-master
+2.1.3 satisfies !=dev-master
+2.4.0-alpha satisfies !=dev-master
+2.4.3-alpha satisfies !=dev-master
+2.9.0 satisfies !=dev-master
+3.0 satisfies !=dev-master
+10 satisfies !=dev-master
+10.0-alpha satisfies !=dev-master
+00.01.03.04 satisfies !=dev-master
+0700 satisfies !=dev-master
+12345 satisfies !=dev-master
+99999 satisfies !=dev-master
+100000 satisfies !=dev-master
+123456 satisfies !=dev-master
+2010.01 satisfies !=dev-master
+2010.01.02 satisfies !=dev-master
+2010-01-02 satisfies !=dev-master
+2010-01-02-beta satisfies !=dev-master
+2010-01-02.5 satisfies !=dev-master
+20100102 satisfies !=dev-master
+v20100102 satisfies !=dev-master
+20100102.0 satisfies !=dev-master
+20100102-dev satisfies !=dev-master
+20100102-203040 satisfies !=dev-master
+20100102-203040-p1 satisfies !=dev-master
+20100102.x-dev satisfies !=dev-master
+201903.0 satisfies !=dev-master
+201903.0-p2 satisfies !=dev-master
+201903.x-dev satisfies !=dev-master
+2010-01-02-10-20-30.5 satisfies !=dev-master
+9999999-dev satisfies !=dev-master
+1.9223372036854775806 satisfies !=dev-master
+1.9223372036854775807 satisfies !=dev-master
+1.9223372036854775808 satisfies !=dev-master
+1.99999999999999999999 satisfies !=dev-master
+2010010203040506070808 satisfies !=dev-master
+2010010203040506070809 satisfies !=dev-master
+0 fails >=1.0 !=dev-master
+0.0 fails >=1.0 !=dev-master
+00 fails >=1.0 !=dev-master
+0.0.0.0-dev fails >=1.0 !=dev-master
+0.0.1 fails >=1.0 !=dev-master
+0.0.3 fails >=1.0 !=dev-master
+0.0.3-alpha fails >=1.0 !=dev-master
+0.0.4-dev fails >=1.0 !=dev-master
+0.1 fails >=1.0 !=dev-master
+0.1.97 fails >=1.0 !=dev-master
+0.2.9 fails >=1.0 !=dev-master
+0.9 fails >=1.0 !=dev-master
+0.x-dev fails >=1.0 !=dev-master
+1-dev satisfies >=1.0 !=dev-master
+1.0-dev satisfies >=1.0 !=dev-master
+1.0.-dev satisfies >=1.0 !=dev-master
+1.0.0-dev satisfies >=1.0 !=dev-master
+1.2..dev satisfies >=1.0 !=dev-master
+1.2-.dev satisfies >=1.0 !=dev-master
+1.2_-dev satisfies >=1.0 !=dev-master
+1.0.0-alpha satisfies >=1.0 !=dev-master
+1.0-a satisfies >=1.0 !=dev-master
+1.0a1 satisfies >=1.0 !=dev-master
+1.0-alpha1 satisfies >=1.0 !=dev-master
+1.0.0-ALPHA2 satisfies >=1.0 !=dev-master
+1.0-alpha.2 satisfies >=1.0 !=dev-master
+1.0-b satisfies >=1.0 !=dev-master
+1.0-beta satisfies >=1.0 !=dev-master
+1.0b1 satisfies >=1.0 !=dev-master
+1.0-beta1 satisfies >=1.0 !=dev-master
+1.0-beta.1.2 satisfies >=1.0 !=dev-master
+1.0-beta1-2 satisfies >=1.0 !=dev-master
+1.0-Beta2 satisfies >=1.0 !=dev-master
+1.0-RC satisfies >=1.0 !=dev-master
+1.0-rc1 satisfies >=1.0 !=dev-master
+1.0RC1 satisfies >=1.0 !=dev-master
+1.0-Rc1 satisfies >=1.0 !=dev-master
+1.0-RC1-dev satisfies >=1.0 !=dev-master
+1.0.0RC1dev satisfies >=1.0 !=dev-master
+1.0.0-rC15-dev satisfies >=1.0 !=dev-master
+1.0.0.RC.15-dev satisfies >=1.0 !=dev-master
+1.0-RC2 satisfies >=1.0 !=dev-master
+1.0-stable satisfies >=1.0 !=dev-master
+1.0-STABLE fails >=1.0 !=dev-master
+1.0-Stable-dev fails >=1.0 !=dev-master
+1.0-stabledev satisfies >=1.0 !=dev-master
+1 satisfies >=1.0 !=dev-master
+1.0 satisfies >=1.0 !=dev-master
+1.0.0 satisfies >=1.0 !=dev-master
+1.0.0.0 satisfies >=1.0 !=dev-master
+v1.0 satisfies >=1.0 !=dev-master
+V1.0.0 satisfies >=1.0 !=dev-master
+01.0 satisfies >=1.0 !=dev-master
+1.00 satisfies >=1.0 !=dev-master
+1.0+build satisfies >=1.0 !=dev-master
+1.0.0+20100101 satisfies >=1.0 !=dev-master
+1.0-dev+b satisfies >=1.0 !=dev-master
+1.0@dev satisfies >=1.0 !=dev-master
+1.0@stable satisfies >=1.0 !=dev-master
+1.0.0+foo@dev satisfies >=1.0 !=dev-master
+1.0-p satisfies >=1.0 !=dev-master
+1.0-p1 satisfies >=1.0 !=dev-master
+1.0-pl1 satisfies >=1.0 !=dev-master
+1.0.0.pl3-dev satisfies >=1.0 !=dev-master
+1.0-patch1 satisfies >=1.0 !=dev-master
+1.0-patch2 satisfies >=1.0 !=dev-master
+1.0.1 satisfies >=1.0 !=dev-master
+1.0.1-dev satisfies >=1.0 !=dev-master
+1.1 satisfies >=1.0 !=dev-master
+1.2 satisfies >=1.0 !=dev-master
+1.2-dev satisfies >=1.0 !=dev-master
+1.2. satisfies >=1.0 !=dev-master
+1.2-beta satisfies >=1.0 !=dev-master
+1.2.3-beta satisfies >=1.0 !=dev-master
+1.2.3 satisfies >=1.0 !=dev-master
+1.2.3b5 satisfies >=1.0 !=dev-master
+1.2.3a1 satisfies >=1.0 !=dev-master
+1.2.3p1234 satisfies >=1.0 !=dev-master
+1.2.4 satisfies >=1.0 !=dev-master
+1.2.3.4 satisfies >=1.0 !=dev-master
+1.2.3.4-dev satisfies >=1.0 !=dev-master
+1.3.0-beta satisfies >=1.0 !=dev-master
+1.9999.9999 satisfies >=1.0 !=dev-master
+1.9999999.9999999.9999999-dev satisfies >=1.0 !=dev-master
+1.x-dev satisfies >=1.0 !=dev-master
+1.X-dev satisfies >=1.0 !=dev-master
+1.*-dev satisfies >=1.0 !=dev-master
+1.xdev satisfies >=1.0 !=dev-master
+1.x.dev satisfies >=1.0 !=dev-master
+1.0.x-dev satisfies >=1.0 !=dev-master
+1.2.x-dev satisfies >=1.0 !=dev-master
+1.2.3.x-dev satisfies >=1.0 !=dev-master
+v1.x-dev satisfies >=1.0 !=dev-master
+041.x-dev satisfies >=1.0 !=dev-master
+1.25.0-beta2.1 satisfies >=1.0 !=dev-master
+1.25.0-b.2.1 satisfies >=1.0 !=dev-master
+1.25.0beta2.1 satisfies >=1.0 !=dev-master
+1.25.0-b2.1 satisfies >=1.0 !=dev-master
+1.25.0-b-2.1 satisfies >=1.0 !=dev-master
+1.25.0-b.3 satisfies >=1.0 !=dev-master
+1.25.0beta.3 satisfies >=1.0 !=dev-master
+1.25.0-rc satisfies >=1.0 !=dev-master
+1.25.0 satisfies >=1.0 !=dev-master
+1.26.0 satisfies >=1.0 !=dev-master
+10.4.13beta.2 satisfies >=1.0 !=dev-master
+v1.13.11-beta.0 satisfies >=1.0 !=dev-master
+1.0.0-alpha-2.1-3+foo satisfies >=1.0 !=dev-master
+2 satisfies >=1.0 !=dev-master
+2.0 satisfies >=1.0 !=dev-master
+2.0-dev satisfies >=1.0 !=dev-master
+2.0.0-beta satisfies >=1.0 !=dev-master
+2.0.5 satisfies >=1.0 !=dev-master
+2.0.6 satisfies >=1.0 !=dev-master
+2.1 satisfies >=1.0 !=dev-master
+2.1.3 satisfies >=1.0 !=dev-master
+2.4.0-alpha satisfies >=1.0 !=dev-master
+2.4.3-alpha satisfies >=1.0 !=dev-master
+2.9.0 satisfies >=1.0 !=dev-master
+3.0 satisfies >=1.0 !=dev-master
+10 satisfies >=1.0 !=dev-master
+10.0-alpha satisfies >=1.0 !=dev-master
+00.01.03.04 fails >=1.0 !=dev-master
+0700 satisfies >=1.0 !=dev-master
+12345 satisfies >=1.0 !=dev-master
+99999 satisfies >=1.0 !=dev-master
+100000 satisfies >=1.0 !=dev-master
+123456 satisfies >=1.0 !=dev-master
+2010.01 satisfies >=1.0 !=dev-master
+2010.01.02 satisfies >=1.0 !=dev-master
+2010-01-02 satisfies >=1.0 !=dev-master
+2010-01-02-beta satisfies >=1.0 !=dev-master
+2010-01-02.5 satisfies >=1.0 !=dev-master
+20100102 satisfies >=1.0 !=dev-master
+v20100102 satisfies >=1.0 !=dev-master
+20100102.0 satisfies >=1.0 !=dev-master
+20100102-dev satisfies >=1.0 !=dev-master
+20100102-203040 satisfies >=1.0 !=dev-master
+20100102-203040-p1 satisfies >=1.0 !=dev-master
+20100102.x-dev satisfies >=1.0 !=dev-master
+201903.0 satisfies >=1.0 !=dev-master
+201903.0-p2 satisfies >=1.0 !=dev-master
+201903.x-dev satisfies >=1.0 !=dev-master
+2010-01-02-10-20-30.5 satisfies >=1.0 !=dev-master
+9999999-dev satisfies >=1.0 !=dev-master
+1.9223372036854775806 satisfies >=1.0 !=dev-master
+1.9223372036854775807 satisfies >=1.0 !=dev-master
+1.9223372036854775808 satisfies >=1.0 !=dev-master
+1.99999999999999999999 satisfies >=1.0 !=dev-master
+2010010203040506070808 satisfies >=1.0 !=dev-master
+2010010203040506070809 satisfies >=1.0 !=dev-master
+0 fails >=dev-master
+0.0 fails >=dev-master
+00 fails >=dev-master
+0.0.0.0-dev fails >=dev-master
+0.0.1 fails >=dev-master
+0.0.3 fails >=dev-master
+0.0.3-alpha fails >=dev-master
+0.0.4-dev fails >=dev-master
+0.1 fails >=dev-master
+0.1.97 fails >=dev-master
+0.2.9 fails >=dev-master
+0.9 fails >=dev-master
+0.x-dev fails >=dev-master
+1-dev fails >=dev-master
+1.0-dev fails >=dev-master
+1.0.-dev fails >=dev-master
+1.0.0-dev fails >=dev-master
+1.2..dev fails >=dev-master
+1.2-.dev fails >=dev-master
+1.2_-dev fails >=dev-master
+1.0.0-alpha fails >=dev-master
+1.0-a fails >=dev-master
+1.0a1 fails >=dev-master
+1.0-alpha1 fails >=dev-master
+1.0.0-ALPHA2 fails >=dev-master
+1.0-alpha.2 fails >=dev-master
+1.0-b fails >=dev-master
+1.0-beta fails >=dev-master
+1.0b1 fails >=dev-master
+1.0-beta1 fails >=dev-master
+1.0-beta.1.2 fails >=dev-master
+1.0-beta1-2 fails >=dev-master
+1.0-Beta2 fails >=dev-master
+1.0-RC fails >=dev-master
+1.0-rc1 fails >=dev-master
+1.0RC1 fails >=dev-master
+1.0-Rc1 fails >=dev-master
+1.0-RC1-dev fails >=dev-master
+1.0.0RC1dev fails >=dev-master
+1.0.0-rC15-dev fails >=dev-master
+1.0.0.RC.15-dev fails >=dev-master
+1.0-RC2 fails >=dev-master
+1.0-stable fails >=dev-master
+1.0-STABLE fails >=dev-master
+1.0-Stable-dev fails >=dev-master
+1.0-stabledev fails >=dev-master
+1 fails >=dev-master
+1.0 fails >=dev-master
+1.0.0 fails >=dev-master
+1.0.0.0 fails >=dev-master
+v1.0 fails >=dev-master
+V1.0.0 fails >=dev-master
+01.0 fails >=dev-master
+1.00 fails >=dev-master
+1.0+build fails >=dev-master
+1.0.0+20100101 fails >=dev-master
+1.0-dev+b fails >=dev-master
+1.0@dev fails >=dev-master
+1.0@stable fails >=dev-master
+1.0.0+foo@dev fails >=dev-master
+1.0-p fails >=dev-master
+1.0-p1 fails >=dev-master
+1.0-pl1 fails >=dev-master
+1.0.0.pl3-dev fails >=dev-master
+1.0-patch1 fails >=dev-master
+1.0-patch2 fails >=dev-master
+1.0.1 fails >=dev-master
+1.0.1-dev fails >=dev-master
+1.1 fails >=dev-master
+1.2 fails >=dev-master
+1.2-dev fails >=dev-master
+1.2. fails >=dev-master
+1.2-beta fails >=dev-master
+1.2.3-beta fails >=dev-master
+1.2.3 fails >=dev-master
+1.2.3b5 fails >=dev-master
+1.2.3a1 fails >=dev-master
+1.2.3p1234 fails >=dev-master
+1.2.4 fails >=dev-master
+1.2.3.4 fails >=dev-master
+1.2.3.4-dev fails >=dev-master
+1.3.0-beta fails >=dev-master
+1.9999.9999 fails >=dev-master
+1.9999999.9999999.9999999-dev fails >=dev-master
+1.x-dev fails >=dev-master
+1.X-dev fails >=dev-master
+1.*-dev fails >=dev-master
+1.xdev fails >=dev-master
+1.x.dev fails >=dev-master
+1.0.x-dev fails >=dev-master
+1.2.x-dev fails >=dev-master
+1.2.3.x-dev fails >=dev-master
+v1.x-dev fails >=dev-master
+041.x-dev fails >=dev-master
+1.25.0-beta2.1 fails >=dev-master
+1.25.0-b.2.1 fails >=dev-master
+1.25.0beta2.1 fails >=dev-master
+1.25.0-b2.1 fails >=dev-master
+1.25.0-b-2.1 fails >=dev-master
+1.25.0-b.3 fails >=dev-master
+1.25.0beta.3 fails >=dev-master
+1.25.0-rc fails >=dev-master
+1.25.0 fails >=dev-master
+1.26.0 fails >=dev-master
+10.4.13beta.2 fails >=dev-master
+v1.13.11-beta.0 fails >=dev-master
+1.0.0-alpha-2.1-3+foo fails >=dev-master
+2 fails >=dev-master
+2.0 fails >=dev-master
+2.0-dev fails >=dev-master
+2.0.0-beta fails >=dev-master
+2.0.5 fails >=dev-master
+2.0.6 fails >=dev-master
+2.1 fails >=dev-master
+2.1.3 fails >=dev-master
+2.4.0-alpha fails >=dev-master
+2.4.3-alpha fails >=dev-master
+2.9.0 fails >=dev-master
+3.0 fails >=dev-master
+10 fails >=dev-master
+10.0-alpha fails >=dev-master
+00.01.03.04 fails >=dev-master
+0700 fails >=dev-master
+12345 fails >=dev-master
+99999 fails >=dev-master
+100000 fails >=dev-master
+123456 fails >=dev-master
+2010.01 fails >=dev-master
+2010.01.02 fails >=dev-master
+2010-01-02 fails >=dev-master
+2010-01-02-beta fails >=dev-master
+2010-01-02.5 fails >=dev-master
+20100102 fails >=dev-master
+v20100102 fails >=dev-master
+20100102.0 fails >=dev-master
+20100102-dev fails >=dev-master
+20100102-203040 fails >=dev-master
+20100102-203040-p1 fails >=dev-master
+20100102.x-dev fails >=dev-master
+201903.0 fails >=dev-master
+201903.0-p2 fails >=dev-master
+201903.x-dev fails >=dev-master
+2010-01-02-10-20-30.5 fails >=dev-master
+9999999-dev fails >=dev-master
+1.9223372036854775806 fails >=dev-master
+1.9223372036854775807 fails >=dev-master
+1.9223372036854775808 fails >=dev-master
+1.99999999999999999999 fails >=dev-master
+2010010203040506070808 fails >=dev-master
+2010010203040506070809 fails >=dev-master
+0 fails <dev-x
+0.0 fails <dev-x
+00 fails <dev-x
+0.0.0.0-dev fails <dev-x
+0.0.1 fails <dev-x
+0.0.3 fails <dev-x
+0.0.3-alpha fails <dev-x
+0.0.4-dev fails <dev-x
+0.1 fails <dev-x
+0.1.97 fails <dev-x
+0.2.9 fails <dev-x
+0.9 fails <dev-x
+0.x-dev fails <dev-x
+1-dev fails <dev-x
+1.0-dev fails <dev-x
+1.0.-dev fails <dev-x
+1.0.0-dev fails <dev-x
+1.2..dev fails <dev-x
+1.2-.dev fails <dev-x
+1.2_-dev fails <dev-x
+1.0.0-alpha fails <dev-x
+1.0-a fails <dev-x
+1.0a1 fails <dev-x
+1.0-alpha1 fails <dev-x
+1.0.0-ALPHA2 fails <dev-x
+1.0-alpha.2 fails <dev-x
+1.0-b fails <dev-x
+1.0-beta fails <dev-x
+1.0b1 fails <dev-x
+1.0-beta1 fails <dev-x
+1.0-beta.1.2 fails <dev-x
+1.0-beta1-2 fails <dev-x
+1.0-Beta2 fails <dev-x
+1.0-RC fails <dev-x
+1.0-rc1 fails <dev-x
+1.0RC1 fails <dev-x
+1.0-Rc1 fails <dev-x
+1.0-RC1-dev fails <dev-x
+1.0.0RC1dev fails <dev-x
+1.0.0-rC15-dev fails <dev-x
+1.0.0.RC.15-dev fails <dev-x
+1.0-RC2 fails <dev-x
+1.0-stable fails <dev-x
+1.0-STABLE fails <dev-x
+1.0-Stable-dev fails <dev-x
+1.0-stabledev fails <dev-x
+1 fails <dev-x
+1.0 fails <dev-x
+1.0.0 fails <dev-x
+1.0.0.0 fails <dev-x
+v1.0 fails <dev-x
+V1.0.0 fails <dev-x
+01.0 fails <dev-x
+1.00 fails <dev-x
+1.0+build fails <dev-x
+1.0.0+20100101 fails <dev-x
+1.0-dev+b fails <dev-x
+1.0@dev fails <dev-x
+1.0@stable fails <dev-x
+1.0.0+foo@dev fails <dev-x
+1.0-p fails <dev-x
+1.0-p1 fails <dev-x
+1.0-pl1 fails <dev-x
+1.0.0.pl3-dev fails <dev-x
+1.0-patch1 fails <dev-x
+1.0-patch2 fails <dev-x
+1.0.1 fails <dev-x
+1.0.1-dev fails <dev-x
+1.1 fails <dev-x
+1.2 fails <dev-x
+1.2-dev fails <dev-x
+1.2. fails <dev-x
+1.2-beta fails <dev-x
+1.2.3-beta fails <dev-x
+1.2.3 fails <dev-x
+1.2.3b5 fails <dev-x
+1.2.3a1 fails <dev-x
+1.2.3p1234 fails <dev-x
+1.2.4 fails <dev-x
+1.2.3.4 fails <dev-x
+1.2.3.4-dev fails <dev-x
+1.3.0-beta fails <dev-x
+1.9999.9999 fails <dev-x
+1.9999999.9999999.9999999-dev fails <dev-x
+1.x-dev fails <dev-x
+1.X-dev fails <dev-x
+1.*-dev fails <dev-x
+1.xdev fails <dev-x
+1.x.dev fails <dev-x
+1.0.x-dev fails <dev-x
+1.2.x-dev fails <dev-x
+1.2.3.x-dev fails <dev-x
+v1.x-dev fails <dev-x
+041.x-dev fails <dev-x
+1.25.0-beta2.1 fails <dev-x
+1.25.0-b.2.1 fails <dev-x
+1.25.0beta2.1 fails <dev-x
+1.25.0-b2.1 fails <dev-x
+1.25.0-b-2.1 fails <dev-x
+1.25.0-b.3 fails <dev-x
+1.25.0beta.3 fails <dev-x
+1.25.0-rc fails <dev-x
+1.25.0 fails <dev-x
+1.26.0 fails <dev-x
+10.4.13beta.2 fails <dev-x
+v1.13.11-beta.0 fails <dev-x
+1.0.0-alpha-2.1-3+foo fails <dev-x
+2 fails <dev-x
+2.0 fails <dev-x
+2.0-dev fails <dev-x
+2.0.0-beta fails <dev-x
+2.0.5 fails <dev-x
+2.0.6 fails <dev-x
+2.1 fails <dev-x
+2.1.3 fails <dev-x
+2.4.0-alpha fails <dev-x
+2.4.3-alpha fails <dev-x
+2.9.0 fails <dev-x
+3.0 fails <dev-x
+10 fails <dev-x
+10.0-alpha fails <dev-x
+00.01.03.04 fails <dev-x
+0700 fails <dev-x
+12345 fails <dev-x
+99999 fails <dev-x
+100000 fails <dev-x
+123456 fails <dev-x
+2010.01 fails <dev-x
+2010.01.02 fails <dev-x
+2010-01-02 fails <dev-x
+2010-01-02-beta fails <dev-x
+2010-01-02.5 fails <dev-x
+20100102 fails <dev-x
+v20100102 fails <dev-x
+20100102.0 fails <dev-x
+20100102-dev fails <dev-x
+20100102-203040 fails <dev-x
+20100102-203040-p1 fails <dev-x
+20100102.x-dev fails <dev-x
+201903.0 fails <dev-x
+201903.0-p2 fails <dev-x
+201903.x-dev fails <dev-x
+2010-01-02-10-20-30.5 fails <dev-x
+9999999-dev fails <dev-x
+1.9223372036854775806 fails <dev-x
+1.9223372036854775807 fails <dev-x
+1.9223372036854775808 fails <dev-x
+1.99999999999999999999 fails <dev-x
+2010010203040506070808 fails <dev-x
+2010010203040506070809 fails <dev-x
+0 fails dev-master as 1.0.0
+0.0 fails dev-master as 1.0.0
+00 fails dev-master as 1.0.0
+0.0.0.0-dev fails dev-master as 1.0.0
+0.0.1 fails dev-master as 1.0.0
+0.0.3 fails dev-master as 1.0.0
+0.0.3-alpha fails dev-master as 1.0.0
+0.0.4-dev fails dev-master as 1.0.0
+0.1 fails dev-master as 1.0.0
+0.1.97 fails dev-master as 1.0.0
+0.2.9 fails dev-master as 1.0.0
+0.9 fails dev-master as 1.0.0
+0.x-dev fails dev-master as 1.0.0
+1-dev fails dev-master as 1.0.0
+1.0-dev fails dev-master as 1.0.0
+1.0.-dev fails dev-master as 1.0.0
+1.0.0-dev fails dev-master as 1.0.0
+1.2..dev fails dev-master as 1.0.0
+1.2-.dev fails dev-master as 1.0.0
+1.2_-dev fails dev-master as 1.0.0
+1.0.0-alpha fails dev-master as 1.0.0
+1.0-a fails dev-master as 1.0.0
+1.0a1 fails dev-master as 1.0.0
+1.0-alpha1 fails dev-master as 1.0.0
+1.0.0-ALPHA2 fails dev-master as 1.0.0
+1.0-alpha.2 fails dev-master as 1.0.0
+1.0-b fails dev-master as 1.0.0
+1.0-beta fails dev-master as 1.0.0
+1.0b1 fails dev-master as 1.0.0
+1.0-beta1 fails dev-master as 1.0.0
+1.0-beta.1.2 fails dev-master as 1.0.0
+1.0-beta1-2 fails dev-master as 1.0.0
+1.0-Beta2 fails dev-master as 1.0.0
+1.0-RC fails dev-master as 1.0.0
+1.0-rc1 fails dev-master as 1.0.0
+1.0RC1 fails dev-master as 1.0.0
+1.0-Rc1 fails dev-master as 1.0.0
+1.0-RC1-dev fails dev-master as 1.0.0
+1.0.0RC1dev fails dev-master as 1.0.0
+1.0.0-rC15-dev fails dev-master as 1.0.0
+1.0.0.RC.15-dev fails dev-master as 1.0.0
+1.0-RC2 fails dev-master as 1.0.0
+1.0-stable fails dev-master as 1.0.0
+1.0-STABLE fails dev-master as 1.0.0
+1.0-Stable-dev fails dev-master as 1.0.0
+1.0-stabledev fails dev-master as 1.0.0
+1 fails dev-master as 1.0.0
+1.0 fails dev-master as 1.0.0
+1.0.0 fails dev-master as 1.0.0
+1.0.0.0 fails dev-master as 1.0.0
+v1.0 fails dev-master as 1.0.0
+V1.0.0 fails dev-master as 1.0.0
+01.0 fails dev-master as 1.0.0
+1.00 fails dev-master as 1.0.0
+1.0+build fails dev-master as 1.0.0
+1.0.0+20100101 fails dev-master as 1.0.0
+1.0-dev+b fails dev-master as 1.0.0
+1.0@dev fails dev-master as 1.0.0
+1.0@stable fails dev-master as 1.0.0
+1.0.0+foo@dev fails dev-master as 1.0.0
+1.0-p fails dev-master as 1.0.0
+1.0-p1 fails dev-master as 1.0.0
+1.0-pl1 fails dev-master as 1.0.0
+1.0.0.pl3-dev fails dev-master as 1.0.0
+1.0-patch1 fails dev-master as 1.0.0
+1.0-patch2 fails dev-master as 1.0.0
+1.0.1 fails dev-master as 1.0.0
+1.0.1-dev fails dev-master as 1.0.0
+1.1 fails dev-master as 1.0.0
+1.2 fails dev-master as 1.0.0
+1.2-dev fails dev-master as 1.0.0
+1.2. fails dev-master as 1.0.0
+1.2-beta fails dev-master as 1.0.0
+1.2.3-beta fails dev-master as 1.0.0
+1.2.3 fails dev-master as 1.0.0
+1.2.3b5 fails dev-master as 1.0.0
+1.2.3a1 fails dev-master as 1.0.0
+1.2.3p1234 fails dev-master as 1.0.0
+1.2.4 fails dev-master as 1.0.0
+1.2.3.4 fails dev-master as 1.0.0
+1.2.3.4-dev fails dev-master as 1.0.0
+1.3.0-beta fails dev-master as 1.0.0
+1.9999.9999 fails dev-master as 1.0.0
+1.9999999.9999999.9999999-dev fails dev-master as 1.0.0
+1.x-dev fails dev-master as 1.0.0
+1.X-dev fails dev-master as 1.0.0
+1.*-dev fails dev-master as 1.0.0
+1.xdev fails dev-master as 1.0.0
+1.x.dev fails dev-master as 1.0.0
+1.0.x-dev fails dev-master as 1.0.0
+1.2.x-dev fails dev-master as 1.0.0
+1.2.3.x-dev fails dev-master as 1.0.0
+v1.x-dev fails dev-master as 1.0.0
+041.x-dev fails dev-master as 1.0.0
+1.25.0-beta2.1 fails dev-master as 1.0.0
+1.25.0-b.2.1 fails dev-master as 1.0.0
+1.25.0beta2.1 fails dev-master as 1.0.0
+1.25.0-b2.1 fails dev-master as 1.0.0
+1.25.0-b-2.1 fails dev-master as 1.0.0
+1.25.0-b.3 fails dev-master as 1.0.0
+1.25.0beta.3 fails dev-master as 1.0.0
+1.25.0-rc fails dev-master as 1.0.0
+1.25.0 fails dev-master as 1.0.0
+1.26.0 fails dev-master as 1.0.0
+10.4.13beta.2 fails dev-master as 1.0.0
+v1.13.11-beta.0 fails dev-master as 1.0.0
+1.0.0-alpha-2.1-3+foo fails dev-master as 1.0.0
+2 fails dev-master as 1.0.0
+2.0 fails dev-master as 1.0.0
+2.0-dev fails dev-master as 1.0.0
+2.0.0-beta fails dev-master as 1.0.0
+2.0.5 fails dev-master as 1.0.0
+2.0.6 fails dev-master as 1.0.0
+2.1 fails dev-master as 1.0.0
+2.1.3 fails dev-master as 1.0.0
+2.4.0-alpha fails dev-master as 1.0.0
+2.4.3-alpha fails dev-master as 1.0.0
+2.9.0 fails dev-master as 1.0.0
+3.0 fails dev-master as 1.0.0
+10 fails dev-master as 1.0.0
+10.0-alpha fails dev-master as 1.0.0
+00.01.03.04 fails dev-master as 1.0.0
+0700 fails dev-master as 1.0.0
+12345 fails dev-master as 1.0.0
+99999 fails dev-master as 1.0.0
+100000 fails dev-master as 1.0.0
+123456 fails dev-master as 1.0.0
+2010.01 fails dev-master as 1.0.0
+2010.01.02 fails dev-master as 1.0.0
+2010-01-02 fails dev-master as 1.0.0
+2010-01-02-beta fails dev-master as 1.0.0
+2010-01-02.5 fails dev-master as 1.0.0
+20100102 fails dev-master as 1.0.0
+v20100102 fails dev-master as 1.0.0
+20100102.0 fails dev-master as 1.0.0
+20100102-dev fails dev-master as 1.0.0
+20100102-203040 fails dev-master as 1.0.0
+20100102-203040-p1 fails dev-master as 1.0.0
+20100102.x-dev fails dev-master as 1.0.0
+201903.0 fails dev-master as 1.0.0
+201903.0-p2 fails dev-master as 1.0.0
+201903.x-dev fails dev-master as 1.0.0
+2010-01-02-10-20-30.5 fails dev-master as 1.0.0
+9999999-dev fails dev-master as 1.0.0
+1.9223372036854775806 fails dev-master as 1.0.0
+1.9223372036854775807 fails dev-master as 1.0.0
+1.9223372036854775808 fails dev-master as 1.0.0
+1.99999999999999999999 fails dev-master as 1.0.0
+2010010203040506070808 fails dev-master as 1.0.0
+2010010203040506070809 fails dev-master as 1.0.0
+0 fails dev-feature#abc123
+0.0 fails dev-feature#abc123
+00 fails dev-feature#abc123
+0.0.0.0-dev fails dev-feature#abc123
+0.0.1 fails dev-feature#abc123
+0.0.3 fails dev-feature#abc123
+0.0.3-alpha fails dev-feature#abc123
+0.0.4-dev fails dev-feature#abc123
+0.1 fails dev-feature#abc123
+0.1.97 fails dev-feature#abc123
+0.2.9 fails dev-feature#abc123
+0.9 fails dev-feature#abc123
+0.x-dev fails dev-feature#abc123
+1-dev fails dev-feature#abc123
+1.0-dev fails dev-feature#abc123
+1.0.-dev fails dev-feature#abc123
+1.0.0-dev fails dev-feature#abc123
+1.2..dev fails dev-feature#abc123
+1.2-.dev fails dev-feature#abc123
+1.2_-dev fails dev-feature#abc123
+1.0.0-alpha fails dev-feature#abc123
+1.0-a fails dev-feature#abc123
+1.0a1 fails dev-feature#abc123
+1.0-alpha1 fails dev-feature#abc123
+1.0.0-ALPHA2 fails dev-feature#abc123
+1.0-alpha.2 fails dev-feature#abc123
+1.0-b fails dev-feature#abc123
+1.0-beta fails dev-feature#abc123
+1.0b1 fails dev-feature#abc123
+1.0-beta1 fails dev-feature#abc123
+1.0-beta.1.2 fails dev-feature#abc123
+1.0-beta1-2 fails dev-feature#abc123
+1.0-Beta2 fails dev-feature#abc123
+1.0-RC fails dev-feature#abc123
+1.0-rc1 fails dev-feature#abc123
+1.0RC1 fails dev-feature#abc123
+1.0-Rc1 fails dev-feature#abc123
+1.0-RC1-dev fails dev-feature#abc123
+1.0.0RC1dev fails dev-feature#abc123
+1.0.0-rC15-dev fails dev-feature#abc123
+1.0.0.RC.15-dev fails dev-feature#abc123
+1.0-RC2 fails dev-feature#abc123
+1.0-stable fails dev-feature#abc123
+1.0-STABLE fails dev-feature#abc123
+1.0-Stable-dev fails dev-feature#abc123
+1.0-stabledev fails dev-feature#abc123
+1 fails dev-feature#abc123
+1.0 fails dev-feature#abc123
+1.0.0 fails dev-feature#abc123
+1.0.0.0 fails dev-feature#abc123
+v1.0 fails dev-feature#abc123
+V1.0.0 fails dev-feature#abc123
+01.0 fails dev-feature#abc123
+1.00 fails dev-feature#abc123
+1.0+build fails dev-feature#abc123
+1.0.0+20100101 fails dev-feature#abc123
+1.0-dev+b fails dev-feature#abc123
+1.0@dev fails dev-feature#abc123
+1.0@stable fails dev-feature#abc123
+1.0.0+foo@dev fails dev-feature#abc123
+1.0-p fails dev-feature#abc123
+1.0-p1 fails dev-feature#abc123
+1.0-pl1 fails dev-feature#abc123
+1.0.0.pl3-dev fails dev-feature#abc123
+1.0-patch1 fails dev-feature#abc123
+1.0-patch2 fails dev-feature#abc123
+1.0.1 fails dev-feature#abc123
+1.0.1-dev fails dev-feature#abc123
+1.1 fails dev-feature#abc123
+1.2 fails dev-feature#abc123
+1.2-dev fails dev-feature#abc123
+1.2. fails dev-feature#abc123
+1.2-beta fails dev-feature#abc123
+1.2.3-beta fails dev-feature#abc123
+1.2.3 fails dev-feature#abc123
+1.2.3b5 fails dev-feature#abc123
+1.2.3a1 fails dev-feature#abc123
+1.2.3p1234 fails dev-feature#abc123
+1.2.4 fails dev-feature#abc123
+1.2.3.4 fails dev-feature#abc123
+1.2.3.4-dev fails dev-feature#abc123
+1.3.0-beta fails dev-feature#abc123
+1.9999.9999 fails dev-feature#abc123
+1.9999999.9999999.9999999-dev fails dev-feature#abc123
+1.x-dev fails dev-feature#abc123
+1.X-dev fails dev-feature#abc123
+1.*-dev fails dev-feature#abc123
+1.xdev fails dev-feature#abc123
+1.x.dev fails dev-feature#abc123
+1.0.x-dev fails dev-feature#abc123
+1.2.x-dev fails dev-feature#abc123
+1.2.3.x-dev fails dev-feature#abc123
+v1.x-dev fails dev-feature#abc123
+041.x-dev fails dev-feature#abc123
+1.25.0-beta2.1 fails dev-feature#abc123
+1.25.0-b.2.1 fails dev-feature#abc123
+1.25.0beta2.1 fails dev-feature#abc123
+1.25.0-b2.1 fails dev-feature#abc123
+1.25.0-b-2.1 fails dev-feature#abc123
+1.25.0-b.3 fails dev-feature#abc123
+1.25.0beta.3 fails dev-feature#abc123
+1.25.0-rc fails dev-feature#abc123
+1.25.0 fails dev-feature#abc123
+1.26.0 fails dev-feature#abc123
+10.4.13beta.2 fails dev-feature#abc123
+v1.13.11-beta.0 fails dev-feature#abc123
+1.0.0-alpha-2.1-3+foo fails dev-feature#abc123
+2 fails dev-feature#abc123
+2.0 fails dev-feature#abc123
+2.0-dev fails dev-feature#abc123
+2.0.0-beta fails dev-feature#abc123
+2.0.5 fails dev-feature#abc123
+2.0.6 fails dev-feature#abc123
+2.1 fails dev-feature#abc123
+2.1.3 fails dev-feature#abc123
+2.4.0-alpha fails dev-feature#abc123
+2.4.3-alpha fails dev-feature#abc123
+2.9.0 fails dev-feature#abc123
+3.0 fails dev-feature#abc123
+10 fails dev-feature#abc123
+10.0-alpha fails dev-feature#abc123
+00.01.03.04 fails dev-feature#abc123
+0700 fails dev-feature#abc123
+12345 fails dev-feature#abc123
+99999 fails dev-feature#abc123
+100000 fails dev-feature#abc123
+123456 fails dev-feature#abc123
+2010.01 fails dev-feature#abc123
+2010.01.02 fails dev-feature#abc123
+2010-01-02 fails dev-feature#abc123
+2010-01-02-beta fails dev-feature#abc123
+2010-01-02.5 fails dev-feature#abc123
+20100102 fails dev-feature#abc123
+v20100102 fails dev-feature#abc123
+20100102.0 fails dev-feature#abc123
+20100102-dev fails dev-feature#abc123
+20100102-203040 fails dev-feature#abc123
+20100102-203040-p1 fails dev-feature#abc123
+20100102.x-dev fails dev-feature#abc123
+201903.0 fails dev-feature#abc123
+201903.0-p2 fails dev-feature#abc123
+201903.x-dev fails dev-feature#abc123
+2010-01-02-10-20-30.5 fails dev-feature#abc123
+9999999-dev fails dev-feature#abc123
+1.9223372036854775806 fails dev-feature#abc123
+1.9223372036854775807 fails dev-feature#abc123
+1.9223372036854775808 fails dev-feature#abc123
+1.99999999999999999999 fails dev-feature#abc123
+2010010203040506070808 fails dev-feature#abc123
+2010010203040506070809 fails dev-feature#abc123

@@ -286,6 +286,17 @@ const CONSTRAINT_DIVERGENCES: ReadonlyMap<string, string> = new Map([
     'Composer appends the @beta flag to the patch version, giving the bound 1.0.0.0-patch1-beta, ' +
       'which is not a valid Composer version, so it cannot be written in VERS.',
   ],
+  ...[
+    '^9223372036854775807',
+    '1 - 9223372036854775807',
+    '~9223372036854775807',
+    '^0.9223372036854775807',
+    '^99999999999999999999',
+  ].map((c): [string, string] => [
+    key(COMPOSER_REQUIREMENTS, c),
+    'The upper bound is a number above PHP_INT_MAX plus one, which PHP turns into a float, so ' +
+      "Composer's bound is a string such as 9.2233720368548E+18.0.0.0-dev, which is not a version.",
+  ]),
 ])
 // Cargo's divergences are rules rather than rows: they apply to every build-metadata tie among the
 // oracle pairs and to hundreds of requirement rows (every pre-release case against almost every

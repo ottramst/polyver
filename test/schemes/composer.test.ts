@@ -344,6 +344,19 @@ describe('fromNative', () => {
     // MultiConstraint::create merges [>= 3 < 2] || [>= 2 < 4] into [>= 3 < 4].
     ['>=3 <2 || >=2 <4', 'vers:composer/>=3.0.0.0-dev|<4.0.0.0-dev'],
     ['  ^1.0\t||\t^2.0 ', 'vers:composer/>=1.0.0.0-dev|<3.0.0.0-dev'],
+    // Date versions keep their dashes, so that they normalize as dates again.
+    ['>=2010-01-02', 'vers:composer/>=2010-01-02-dev'],
+    ['2010-01-02', 'vers:composer/2010-01-02'],
+    ['>=2010:01:02@beta', 'vers:composer/>=2010-01-02-beta'],
+    // `dev` without a `-` gives Composer's bound X-dev-dev, which selects the same versions as X-dev.
+    ['>=1.0dev', 'vers:composer/>=1.0.0.0-dev'],
+    ['<0.*dev', 'vers:composer/<0.9999999.9999999.9999999-dev'],
+    ['>=10RCdev', 'vers:composer/>=10.0.0.0-RC-dev'],
+    ['1.0-STABLE2', 'vers:composer/1.0.0.0-STABLE2'],
+    // A dev- branch only matches itself.
+    ['dev-master || ^1.0', 'vers:composer/>=1.0.0.0-dev|<2.0.0.0-dev'],
+    ['!=dev-master', 'vers:composer/*'],
+    ['>=1.0 !=dev-master', 'vers:composer/>=1.0.0.0-dev'],
   ])('%j is %s', (native, expected) => {
     expect(vers(native)).toBe(expected)
   })
@@ -356,19 +369,21 @@ describe('fromNative', () => {
     ['^1.0 ||', 'INVALID_SYNTAX'],
     ['1.0.0-meh', 'INVALID_SYNTAX'],
     ['^2.0.*', 'INVALID_SYNTAX'],
-    // `dev-` branches have no order.
-    ['dev-master', 'INVALID_SYNTAX'],
-    ['>=dev-master', 'INVALID_SYNTAX'],
-    ['dev-master as 1.0.0', 'INVALID_SYNTAX'],
-    ['dev-feature#abc123', 'INVALID_SYNTAX'],
-    ['foobar-dev', 'INVALID_SYNTAX'],
-    ['master', 'INVALID_SYNTAX'],
-    ['^1.0 || dev-main', 'INVALID_SYNTAX'],
+    // A dev- branch only matches itself, so these match no version polyver accepts.
+    ['dev-master', 'INVALID_CONSTRAINTS'],
+    ['>=dev-master', 'INVALID_CONSTRAINTS'],
+    ['dev-master as 1.0.0', 'INVALID_CONSTRAINTS'],
+    ['dev-feature#abc123', 'INVALID_CONSTRAINTS'],
+    ['foobar-dev', 'INVALID_CONSTRAINTS'],
+    ['master', 'INVALID_CONSTRAINTS'],
+    ['>=1.0 dev-main', 'INVALID_CONSTRAINTS'],
     // Composer ignores the text after a line break.
     ['>=1.0\n<2.0', 'INVALID_SYNTAX'],
     // Composer bounds that are not versions.
     ['>=1.0-p1@beta', 'INVALID_SYNTAX'],
     ['^9223372036854775807', 'INVALID_SYNTAX'],
+    ['1 - 9223372036854775807', 'INVALID_SYNTAX'],
+    ['^99999999999999999999', 'INVALID_SYNTAX'],
     ['1.0 2.0', 'INVALID_CONSTRAINTS'],
   ])('rejects %j with %s', (native, code) => {
     expect(() => fromNative('composer', native)).toThrow(expect.objectContaining({ code }))
@@ -383,6 +398,8 @@ describe('fromNative', () => {
     expect(() => fromNative('composer', `~1.0-beta${'1'.repeat(n)}x`)).toThrow(VersError)
     expect(() => fromNative('composer', `1.0-b${'-1'.repeat(n)} - 2.0x`)).toThrow(VersError)
     expect(() => fromNative('composer', `${'a.x-dev'.repeat(n)}#`)).toThrow(VersError)
+    expect(() => fromNative('composer', `>=1.0-p1-STABLE${'1'.repeat(n)}x`)).toThrow(VersError)
+    expect(vers(`>=1.0-STABLE${'.1'.repeat(n)}`)).toMatch(/^vers:composer\/>=1\.0\.0\.0-STABLE1/)
     expect(() => fromNative('composer', `${'>=1.0 ,'.repeat(n / 10)}`)).toThrow(VersError)
     expect(vers(`>=1.0${spaces},${spaces}<2`)).toBe('vers:composer/>=1.0.0.0-dev|<2.0.0.0-dev')
   })

@@ -57,6 +57,8 @@ describe('requirements against Gem::Requirement#satisfied_by?', () => {
 
   it('agrees on every requirement and version', () => {
     expect(rows.length).toBeGreaterThan(3000)
+    // The RubyGems oracle never writes `error` rows; fail loudly if one appears.
+    expect(rows.filter((r) => r.rejected)).toEqual([])
     const wrong = rows
       .filter((r) => contains(fromNative('gem', r.requirement), r.version) !== r.satisfied)
       .map(

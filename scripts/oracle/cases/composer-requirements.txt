@@ -1,7 +1,6 @@
 # Hand-written Composer constraints, one per line. Each is checked with Semver::satisfies against every
 # version in composer.txt. Includes constraints of composer/semver's tests/VersionParserTest.php and
-# SemverTest.php (MIT). `dev-` branch constraints are left out: composer/semver parses them, but
-# polyver cannot express them in VERS and throws (see test/schemes/composer.test.ts).
+# SemverTest.php (MIT).
 *
 x
 v*
@@ -131,3 +130,46 @@ v1 - v2
 ~2.x
 1.x - 2.*
 *-dev
+# Date versions with dashes, whose bounds normalize as dates only when written with dashes.
+>=2010-01-02
+<2010-01-02
+2010-01-02
+!=2010-01-02
+>2010-01-02
+<=2010-01-02
+>=2010:01:02
+>=2010-01-02@beta
+>=2010-01-02-dev
+>=2010-01
+~2010-01-02
+# `dev` without a `-`: Composer's bound is X-dev-dev.
+>=1.0dev
+>=1.0.dev
+>=1.0_dev
+<1.0dev
+<0.*dev
+>=10RCdev
+# An upper-case STABLE with a number, an unknown word to version_compare.
+>=1.0-STABLE2
+<>10.0-STABLE2
+1.0-STABLE2
+>=1.0-STABLE.2-dev
+^01.10.2.STABLE00
+# Bounds above PHP_INT_MAX, which PHP turns into floats.
+^9223372036854775807
+1 - 9223372036854775807
+~9223372036854775807
+^0.9223372036854775807
+^99999999999999999999
+# dev- branches, which match only themselves.
+dev-master
+master
+foobar-dev
+dev-master || ^1.0
+^1.0 || foobar-dev
+!=dev-master
+>=1.0 !=dev-master
+>=dev-master
+<dev-x
+dev-master as 1.0.0
+dev-feature#abc123

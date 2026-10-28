@@ -195,10 +195,11 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 ## Findings from the Composer oracle (2026-10-28)
 
 - composer/semver 3.5.2 on PHP 8.5.12 matched the port on all 13,805 oracle pairs and 3,988 validity
-  verdicts with their normalized forms. Of 128 constraints, Composer rejects 8 and polyver rejects the
-  same 8 plus `>=1.0-p1@beta`: Composer appends the flag to the patch version, and
-  `1.0.0.0-patch1-beta` is not a version. The other 119 agree with `Semver::satisfies` on every
-  version (18,000 checks).
+  verdicts with their normalized forms. Of 166 constraints, Composer rejects 9 and polyver rejects the
+  same 9 plus 6 whose bound is not a version: `>=1.0-p1@beta` (Composer appends the flag to the patch
+  version, giving `1.0.0.0-patch1-beta`) and 5 whose bound is above PHP_INT_MAX, which PHP turns into
+  a float string (`^9223372036854775807` gives `9.2233720368548E+18.0.0.0-dev`). The other 151 agree
+  with `Semver::satisfies` on every version (22,800 checks).
 - `Comparator::compare` passes its strings to PHP's `version_compare` unchanged; `Semver::sort` and
   constraints normalize them first. On raw strings, `1.0 < 1.0.0`, `3.0 < 3.0.0-beta`, and `ALPHA`,
   `BETA` and `stable` are unknown words that sort before `dev`. osv-scalibr's Packagist vectors
@@ -212,6 +213,12 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   `1.0.0.0-stable`, an unknown word sorting below `dev`), while `1.0-stable` loses its suffix. A
   stability flag in a constraint keeps its case, so `>=1.0@BETA` matches `1.0-alpha` and `>=1.0@beta`
   does not. polyver writes such a bound as `-STABLE`, which normalizes to the same unknown word.
+- Composer's bounds are not always their own normalized form. A date bound such as `2010.01.02-dev`
+  (from `>=2010-01-02`) normalizes again as the classical `2010.01.02.0-dev`, so polyver writes it
+  with dashes. `<` and `>=` append `-dev` unless the text has a `-` modifier, so `>=1.0dev` gives
+  `1.0.0.0-dev-dev`; no normalized version lies between that and `1.0.0.0-dev`, which polyver uses.
+- A `dev-` branch only matches itself (`Constraint::versionCompare`), so over numeric versions
+  `== dev-x` matches nothing and `!= dev-x` everything: `dev-master || ^1.0` is `^1.0`.
 - `MultiConstraint::create` merges `[>= a < b] || [>= b < c]` into `[>= a < c]` without checking that
   the first group is non-empty, so `>=3 <2 || >=2 <4` matches `3.0` but not `2.5`. polyver applies the
   same merge.

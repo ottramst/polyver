@@ -10,7 +10,7 @@
  * A version is valid if `VersionParser::normalize` accepts it, except that `dev-` branches
  * (`dev-main`, `dev-feature/x`, and `master`, `trunk` and `default`, which Composer reads as `dev-`
  * branches) are rejected, because Composer gives them no order: a branch only equals itself. Versions
- * with whitespace, which Composer trims or reads as an alias (`1.0 as 2.0`), are also rejected.
+ * with whitespace or NUL, which Composer trims or reads as an alias (`1.0 as 2.0`), are also rejected.
  * Normalization pads a version to four numbers (`1.2` is `1.2.0.0`), drops a leading `v`, build
  * metadata (`+build`) and a stability flag (`@dev`), spells out stabilities (`1.0b2` is
  * `1.0.0.0-beta2`), and turns branch aliases into numbers (`1.x-dev` is
@@ -22,8 +22,10 @@
  * Native ranges are Composer constraints, converted as `VersionParser::parseConstraints` reads them:
  * `^`, `~`, wildcards, hyphen ranges, comparisons, `,` or space for AND and `||` or `|` for OR. The
  * VERS bounds are the versions Composer compares against, including its `-dev` bounds (`^1.2` is
- * `>=1.2.0.0-dev|<2.0.0.0-dev`). Constraints on `dev-` branches cannot be expressed and throw. Unlike
- * Composer, a line break inside a constraint is rejected (Composer ignores the text after it).
+ * `>=1.2.0.0-dev|<2.0.0.0-dev`). A `dev-` branch only matches itself, so `== dev-x` matches no version
+ * polyver accepts and `!= dev-x` every one (`dev-main || ^1.0` is `^1.0`); a constraint that then
+ * matches nothing throws. Unlike Composer, a line break inside a constraint is rejected (Composer
+ * ignores the text after it).
  */
 import { VersError } from '../errors.ts'
 import {
@@ -393,15 +395,13 @@ function parseConstraint(text: string, range: string): Atom[] {
     version = `dev-${text2.slice(0, -4)}`
   }
   const op = m[1] || '='
-  if (version.startsWith('dev-')) {
-    throw syntaxError(
-      range,
-      `the branch ${version} has no order, so it cannot be expressed in VERS`,
-    )
-  }
   if (op !== '==' && op !== '=' && stabilityModifier && parseStability(version) === 'stable') {
     version += `-${stabilityModifier}`
-  } else if ((op === '<' || op === '>=') && !HAS_MODIFIER.test(text2)) {
+  } else if (
+    (op === '<' || op === '>=') &&
+    !HAS_MODIFIER.test(text2) &&
+    !text2.startsWith('dev-')
+  ) {
     version += '-dev'
   }
   return [{ op: OPS[op] as Op, version }]
@@ -506,17 +506,57 @@ function mergeContiguous(groups: Atom[][]): Atom[][] {
  * unknown word too. Versions that no Composer version orders like, such as `1.0.0.0-patch1-beta`,
  * throw.
  */
-function bound(version: string, range: string): string {
-  const candidates = [version, version.replace(/-([A-Za-z]+)((?:-dev)?)$/, '-STABLE$2')]
+function bound(composerVersion: string, range: string): string {
+  // `<` and `>=` append `-dev` unless the version text has a `-` modifier, so `>=1.0dev` gives
+  // `1.0.0.0-dev-dev`. No normalized version lies in [X-dev-dev, X-dev): nothing follows `-dev` in a
+  // normalized version, and unknown words sort below `dev`. So the bound X-dev selects the same
+  // versions, and it is a valid version.
+  const version = composerVersion.endsWith('-dev-dev')
+    ? composerVersion.slice(0, -'-dev'.length)
+    : composerVersion
+  const stable = unknownWordAsStable(version)
+  const candidates = [version, stable, dashedDate(version), dashedDate(stable)]
   for (const c of candidates) {
     const n = WHITESPACE.test(c) ? undefined : normalize(c)
     if (n !== undefined && !n.startsWith('dev-') && phpVersionCompare(n, version) === 0) return c
   }
-  throw syntaxError(range, `Composer compares against ${version}, which is not a valid version`)
+  throw syntaxError(
+    range,
+    `Composer compares against ${composerVersion}, which cannot be written as a VERS version`,
+  )
 }
 
+/**
+ * Writes the stability word of `X-word[digits][-dev]` as `STABLE` (`1.0.0.0-BETA2` becomes
+ * `1.0.0.0-STABLE2`), scanning back from the end, so that it stays linear.
+ */
+function unknownWordAsStable(version: string): string {
+  const dev = version.endsWith('-dev') ? '-dev' : ''
+  const body = version.slice(0, version.length - dev.length)
+  let k = body.length
+  while (k > 0 && /[\d.-]/.test(body[k - 1] as string)) k--
+  let j = k
+  while (j > 0 && /[A-Za-z]/.test(body[j - 1] as string)) j--
+  if (j === k || body[j - 1] !== '-') return version
+  return `${body.slice(0, j)}STABLE${body.slice(k)}${dev}`
+}
+
+/**
+ * A date version as Composer normalizes it (`2010.01.02-dev`) normalizes again as a classical version
+ * (`2010.01.02.0-dev`); with dashes (`2010-01-02-dev`) it stays a date.
+ */
+function dashedDate(version: string): string {
+  return version.replace(/^[\d.]+/, (p) => p.replaceAll('.', '-'))
+}
+
+/**
+ * The versions a Composer constraint matches. A `dev-` branch is only matched by itself, so over the
+ * versions polyver accepts, `!= dev-x` matches everything and any other comparison nothing, as in
+ * `Constraint::versionCompare`.
+ */
 function atomSet(atom: Atom, range: string): VersionSet {
   if (atom === 'all') return ALL
+  if (atom.version.startsWith('dev-')) return atom.op === '!=' ? ALL : []
   const comparator = atom.op === '==' ? '=' : atom.op
   return comparatorSet(comparator as Comparator, bound(atom.version, range))
 }
@@ -535,9 +575,11 @@ function fromNative(range: string): Constraint[] {
     compare,
   )
   if (set.length === 0) {
+    const branch = groups.some((g) => g.some((a) => a !== 'all' && a.version.startsWith('dev-')))
     throw new VersError(
       'INVALID_CONSTRAINTS',
-      `composer constraint ${JSON.stringify(range)} matches no version`,
+      `composer constraint ${JSON.stringify(range)} matches no version` +
+        (branch ? ' (a dev- branch has no order, so it only matches itself)' : ''),
     )
   }
   return toConstraints(set, compare)

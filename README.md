@@ -88,8 +88,12 @@ rejects `2.1.a` for `~> 2.0.8`) or post-releases (PEP 440 `>V`) are not applied,
 is a plain set of intervals. A Cargo range therefore contains every version that the requirement
 matches, and some pre-releases that it does not.
 Composer constraints keep the bounds Composer itself compares against, including its `-dev` bounds:
-`^1.2` is `>=1.2.0.0-dev|<2.0.0.0-dev`, so `1.2.0-beta` matches and `2.0.0-beta` does not. A constraint
-on a `dev-` branch (`dev-main`, `1.0 || dev-main`) throws, because a branch has no place in the order.
+`^1.2` is `>=1.2.0.0-dev|<2.0.0.0-dev`, so `1.2.0-beta` matches and `2.0.0-beta` does not. A
+`dev-` branch only matches itself, so it is dropped from an OR (`dev-main || ^1.0` is `^1.0`),
+`!=dev-main` matches every version, and a constraint that matches only branches (`dev-main`,
+`>=dev-main`) throws. A stability flag in a constraint keeps its case in Composer, so `>=1.0@BETA` is
+`>=1.0.0.0-STABLE`: `version_compare` reads both `BETA` and `STABLE` as unknown words, which compare
+equal, so the range is exact.
 
 ### Notes
 
@@ -177,10 +181,13 @@ Composer's composer/semver) as an oracle. See
   `dev < alpha < beta < RC < (release) < patch`, branch aliases sort after their branch's releases
   (`1.x-dev` is `1.9999999.9999999.9999999-dev`), and numbers above 2^63 - 1 are equal, as in PHP.
   `dev-` branches (`dev-main`, and `master`, which Composer reads as `dev-master`) are rejected, because
-  Composer only matches a branch to itself, and so are versions with whitespace, which Composer trims
-  or reads as an alias (`1.0 as 2.0`). `fromNative` is checked against `Semver::satisfies` on 18,000
-  constraint and version pairs. It rejects a line break inside a constraint (Composer ignores the rest
-  of the line) and throws on `>=1.0-p1@beta`, whose bound `1.0.0.0-patch1-beta` is not a version.
+  Composer only matches a branch to itself, and so are versions with whitespace or NUL (`1.0\0`), which
+  Composer trims or reads as an alias (`1.0 as 2.0`). `fromNative` is checked against
+  `Semver::satisfies` on 22,800 constraint and version pairs. It rejects a line break inside a
+  constraint (Composer ignores the rest of the line) and throws where Composer's bound is not a
+  version: `>=1.0-p1@beta` (`1.0.0.0-patch1-beta`), and bounds above PHP_INT_MAX, which PHP turns into
+  floats (`^9223372036854775807`, `^0.9223372036854775807`, `~9223372036854775807`,
+  `1 - 9223372036854775807`, `^99999999999999999999`).
 
 Upstream test cases that polyver deliberately disagrees with are listed, with reasons, in
 [`test/support/divergences.ts`](test/support/divergences.ts).
