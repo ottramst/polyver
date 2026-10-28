@@ -2,8 +2,10 @@
 // Usage: polyver-oracle <versions> <pairs> <requirements> <validity-out> <pairs-out> <requirements-out>
 // A version is valid if Version::parse accepts it; each pair of valid versions is written as
 // `a <op> b` using Version's Ord, which breaks ties between equal versions by build metadata. Each
-// `version<TAB>requirement` row with a valid version is written as `version satisfies|fails requirement`
-// using VersionReq::matches, and each requirement that VersionReq::parse rejects as `rejects requirement`.
+// `version<TAB>quoted<TAB>requirement` row with a valid version is written as
+// `version satisfies|fails quoted` using VersionReq::matches, and each requirement that
+// VersionReq::parse rejects as `rejects quoted`, where `quoted` is the requirement as generate.ts quotes
+// it (JSON if it has unusual whitespace).
 use semver::{Version, VersionReq};
 use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
@@ -48,17 +50,19 @@ fn main() {
     let mut out = create(&args[6]);
     let mut rejected = HashSet::new();
     for line in lines(&args[3]) {
-        // A requirement may contain tabs, but a version never does.
-        let (v, req) = line.split_once('\t').unwrap();
+        // `version<TAB>quoted<TAB>requirement`: a requirement may contain tabs, but the version and
+        // its quoted form (written to the output) never do.
+        let (v, rest) = line.split_once('\t').unwrap();
+        let (quoted, req) = rest.split_once('\t').unwrap();
         let Ok(parsed) = VersionReq::parse(req) else {
-            if rejected.insert(req.to_string()) {
-                writeln!(out, "rejects {}", req).unwrap();
+            if rejected.insert(quoted.to_string()) {
+                writeln!(out, "rejects {}", quoted).unwrap();
             }
             continue;
         };
         if let Ok(version) = Version::parse(v) {
             let verdict = if parsed.matches(&version) { "satisfies" } else { "fails" };
-            writeln!(out, "{} {} {}", v, verdict, req).unwrap();
+            writeln!(out, "{} {} {}", v, verdict, quoted).unwrap();
         }
     }
     out.flush().unwrap();

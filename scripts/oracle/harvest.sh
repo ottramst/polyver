@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 # Samples real-world version strings from a distribution's own package index (for Maven, the
 # maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt; for Go, the module
-# index; for RubyGems, the compact index; for Cargo, the sparse index entries of the crates in
-# scripts/oracle/cargo-crates.txt) into testdata/oracle/<eco>-index.txt. The repositories change
-# daily, so the sample is committed and `run.sh` only reads committed inputs.
-# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|cargo
+# index; for RubyGems, the compact index; for NuGet, the nuget.org search API; for Cargo, the sparse
+# index entries of the crates in scripts/oracle/cargo-crates.txt) into testdata/oracle/<eco>-index.txt.
+# The repositories change daily, so the sample is committed and `run.sh` only reads committed inputs.
+# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -13,7 +13,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|cargo}"
+eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem|nuget|cargo}"
 case "$eco" in
   deb)
     image="$DEB_IMAGE"
@@ -38,6 +38,9 @@ case "$eco" in
     ;;
   gem)
     source='the RubyGems compact index, without yanked versions or platform suffixes'
+    ;;
+  nuget)
+    source='the listed versions of the 4,000 most downloaded packages in the nuget.org search API'
     ;;
   cargo)
     source='the crates.io sparse index (scripts/oracle/cargo-crates.txt), without yanked versions'
@@ -94,6 +97,16 @@ elif [ "$eco" = gem ]; then
         print k
       }
     }' | LC_ALL=C sort -u)"
+elif [ "$eco" = nuget ]; then
+  origin='Index: https://azuresearch-usnc.nuget.org/query (the SearchQueryService of https://api.nuget.org/v3/index.json)'
+  index="$(mktemp)"
+  trap 'rm -f "$index"' EXIT
+  # The search API skips at most 3,000 results and returns at most 1,000. It lists only listed
+  # versions, normalized by nuget.org (`1.0` is stored as `1.0.0`; build metadata is kept).
+  for skip in 0 1000 2000 3000; do
+    curl -fsSL "https://azuresearch-usnc.nuget.org/query?skip=$skip&take=1000&prerelease=true&semVerLevel=2.0.0" >>"$index"
+  done
+  all="$(grep -o '"version":"[^"]*"' "$index" | sed 's/^"version":"//; s/"$//' | LC_ALL=C sort -u)"
 elif [ "$eco" = cargo ]; then
   origin='Index: https://index.crates.io'
   index="$(mktemp)"

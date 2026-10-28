@@ -23,6 +23,8 @@ commits below; do not edit them by hand.
 | `vers-spec/tests/lexicographic-test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/tests/maven_version_cmp_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/tests/gem_range_from_native_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
+| `vers-spec/tests/nuget_version_cmp_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
+| `vers-spec/tests/nuget_range_from_native_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/types/npm-definition.json` | vers-spec `types/` | MIT | `7d0cc19` |
 | `vers-spec/types/pypi-definition.json` | vers-spec `types/` | MIT | `7d0cc19` |
 | `osv-scalibr/LICENSE` | [google/osv-scalibr](https://github.com/google/osv-scalibr) | Apache-2.0 | `1ca96d6` |
@@ -36,6 +38,7 @@ commits below; do not edit them by hand.
 | `osv-scalibr/maven-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with maven-artifact 3.8.6 by osv-scanner's `GenerateMavenVersions.java`) | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/rubygems-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/rubygems-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with `Gem::Version` from OSV RubyGems advisories by osv-scanner's `generate-rubygems-versions.rb`) | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/nuget-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
 | `oracle/{deb,rpm,apk}-index.txt` | Version strings sampled from the Debian, Fedora and Alpine package indexes by `scripts/oracle/harvest.sh` (date and image in each header) | Facts from public package metadata | 2026-10-26 |
 | `oracle/maven-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the Maven Central `maven-metadata.xml` of the artifacts in `scripts/oracle/maven-artifacts.txt` | Facts from public package metadata | 2026-10-28 |
 | `oracle/{deb,rpm,apk}.txt`, `oracle/{deb,rpm,apk}-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs dpkg 1.22.22, rpm 6.0.2 and apk-tools 3.0.8 in digest-pinned containers (`scripts/oracle/images.env`) | MIT (our output) | see headers |
@@ -44,6 +47,8 @@ commits below; do not edit them by hand.
 | `oracle/golang.txt`, `oracle/golang-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs `semver.IsValid` and `semver.Compare` from golang.org/x/mod v0.42.0 (pinned by `scripts/oracle/golang/go.sum`) in a digest-pinned Go container | MIT (our output) | see headers |
 | `oracle/gem-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the RubyGems compact index (`rubygems.org/versions`), without yanked versions or platform suffixes | Facts from public package metadata | 2026-10-28 |
 | `oracle/gem.txt`, `oracle/gem-validity.txt`, `oracle/gem-requirements.txt` | Our oracle output: `scripts/oracle/run.sh` runs `Gem::Version` and `Gem::Requirement` from RubyGems 4.0.20, bundled with Ruby 4.0.9, in a digest-pinned Ruby container. The hand-written cases in `scripts/oracle/cases/gem*.txt` include those of RubyGems' `test_gem_version.rb` and `test_gem_requirement.rb` (MIT) | MIT (our output) | see headers |
+| `oracle/nuget-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the nuget.org search API (listed versions of the 4,000 most downloaded packages, as normalized by nuget.org) | Facts from public package metadata | 2026-10-28 |
+| `oracle/nuget.txt`, `oracle/nuget-validity.txt`, `oracle/nuget-ranges.txt` | Our oracle output: `scripts/oracle/run.sh` runs `NuGetVersion.TryParse`, `VersionComparer.Default`, `VersionRange.TryParse` and `VersionRange.Satisfies` from NuGet.Versioning 7.9.0 (pinned with its content hash by `scripts/oracle/nuget/packages.lock.json`) in a digest-pinned .NET SDK 10.0 container | MIT (our output) | see headers |
 | `oracle/cargo-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the crates.io sparse index (`index.crates.io`) entries of the crates in `scripts/oracle/cargo-crates.txt`, without yanked versions | Facts from public package metadata | 2026-10-28 |
 | `oracle/cargo.txt`, `oracle/cargo-validity.txt`, `oracle/cargo-requirements.txt` | Our oracle output: `scripts/oracle/run.sh` runs `Version::parse`, `Version`'s `Ord`, `VersionReq::parse` and `VersionReq::matches` from dtolnay/semver 1.0.28 (pinned by `scripts/oracle/cargo/Cargo.lock`) in a digest-pinned Rust container. The hand-written cases in `scripts/oracle/cases/cargo*.txt` include those of dtolnay/semver's `test_version.rs` and `test_version_req.rs` (MIT/Apache-2.0) | MIT (our output) | see headers |
 | `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
@@ -67,19 +72,21 @@ of oracle rows; the cargo tests check that no other row differs.
 
 ## Oracle vectors
 
-`pnpm oracle <deb|rpm|apk|maven|golang|gem|cargo>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt`
-(and, for gem and cargo, `oracle/<eco>-requirements.txt`) from committed inputs only, so a rerun is byte-identical. Its inputs are:
+`pnpm oracle <deb|rpm|apk|maven|golang|gem|nuget|cargo>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt`
+(and, for gem and cargo, `oracle/<eco>-requirements.txt`; for nuget, `oracle/nuget-ranges.txt`) from committed inputs
+only, so a rerun is byte-identical. Its inputs are:
 
 - hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
   (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format, the
-  POM version order specification and its examples, the Go modules reference), not from any test suite,
-  except that the gem and cargo cases include those of RubyGems' and dtolnay/semver's own (MIT) tests;
+  POM version order specification and its examples, the Go modules reference, NuGet's package versioning
+  page), not from any test suite, except that the gem and cargo cases include those of RubyGems' and
+  dtolnay/semver's own (MIT) tests;
 - the index sample, refreshed with `pnpm oracle:harvest <eco>`;
 - grammar-based random versions and single-edit mutations from a fixed-seed PRNG
   (`scripts/oracle/generate.ts`).
 
 Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`,
-`new ComparableVersion`, `semver.IsValid`, `Gem::Version.correct?`, `Version::parse`), and only pairs of valid versions are compared, because dpkg merely warns about
+`new ComparableVersion`, `semver.IsValid`, `Gem::Version.correct?`, `NuGetVersion.TryParse`, `Version::parse`), and only pairs of valid versions are compared, because dpkg merely warns about
 some invalid versions and apk prints nothing for them.
 
 The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and

@@ -75,7 +75,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 | maven    | [POM version order](https://maven.apache.org/pom.html#version-order-specification)                                   | `ComparableVersion.java` (Apache) | osv-scalibr `maven-versions*.txt`; vers-spec `maven_version_cmp_test.json` | `alpha < beta < milestone < rc=cr < snapshot < "" = ga = final < sp`; `1.0 == 1.0.0`                  |
 | golang   | [go.dev/ref/mod#versions](https://go.dev/ref/mod#versions)                                                           | golang.org/x/mod (BSD-3)          | `semver_test.go`, `pseudo_test.go`                                         | pseudo-versions are pre-releases; `+incompatible`; `v` prefix often omitted in OSV/VERS               |
 | gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`; vers-spec `gem_*`; our `gem` oracle  | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
-| nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | vers-spec `nuget_*`                                                        | 4-part versions; case-insensitive pre-release labels                                                  |
+| nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | osv-scalibr `nuget-versions.txt`; vers-spec `nuget_*`; our `nuget` oracle  | 4-part versions; case-insensitive labels; `-1` is a numeric label                                     |
 | cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests; our `cargo` oracle                                              | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`; `Ord` breaks ties by build metadata                         |
 | composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                      | 4-part normalization; stability flags; `dev-` branches                                                |
 
@@ -133,6 +133,32 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 - The compact index is append-only: a yank appends `name -1.0.0`, and the earlier line still lists
   `1.0.0`, so dropping entries that start with `-` keeps every yanked version. `harvest.sh` matches
   yanks by gem name and version instead (285 yanked versions on 2026-10-28).
+
+## Findings from the NuGet oracle (2026-10-28)
+
+- NuGet.Versioning 7.9.0 matched the port on all 6,595 oracle pairs and 4,077 validity verdicts. Of 84
+  ranges parsed with `VersionRange.TryParse` without floating versions (the same as `Parse` for ranges
+  that do not float), it differs only on three that polyver rejects on purpose (below), and it matched
+  all 3,960 range checks (`VersionRange.Satisfies`) on the others: `Satisfies` only compares bounds,
+  with no pre-release rule like npm's.
+- A pre-release label is a number when `int.TryParse` reads it, not when it is all digits as in SemVer.
+  So `-1` and `-05` are numbers (`1.0--1 < 1.0-0`, and `1.0--0 == 1.0-0`), while `2147483648` is a string,
+  which sorts after every number and before letters. `VersionComparer.Equals` compares labels as strings,
+  so it calls `1.0--0` and `1.0-0` different although `Compare` returns 0; polyver follows `Compare`.
+- `NuGetVersion.TryParse` trims the string and also skips .NET whitespace around each number, so
+  `1 . 0` is valid and equals `1.0`. polyver rejects whitespace in a version, as VERS cannot contain it;
+  in a native range it trims each bound as NuGet does, but rejects whitespace inside one. .NET whitespace
+  includes U+0085 and excludes U+FEFF, unlike JavaScript's `trim()`.
+- `VersionRangeFactory.TryParse` rejects `[,]` but reads `[ , ]` as every version, because it checks
+  for empty bounds before trimming them. It accepts `(1.0,1.0)`, which matches no version; polyver throws
+  `INVALID_CONSTRAINTS`, since VERS cannot express an empty range.
+- The nuget.org search API returns versions as nuget.org normalizes them on upload: none of the 323
+  four-part versions in the sample ends in `.0`, and no number has a leading zero, but build metadata is
+  kept (19 of 994). 351 (35%) are pre-releases, 128 use SemVer 1.0 labels such as `beta2`, and 4 have an
+  upper-case label. The search index holds only listed versions, so unlisted ones are excluded.
+- vers-spec `nuget_version_cmp_test.json` lower-cases the labels in four expected sort orders
+  (`1.0.0-BETA` becomes `1.0.0-beta`), so they are not permutations of their inputs. osv-scalibr's
+  `nuget-versions.txt` compares 30-digit numbers, which NuGet rejects.
 
 ## Findings from the Cargo oracle (2026-10-28)
 
