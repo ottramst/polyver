@@ -34,6 +34,7 @@ it('lists the supported schemes', () => {
     'maven',
     'none',
     'npm',
+    'nuget',
     'pypi',
     'rpm',
     'semver',

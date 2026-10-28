@@ -1,0 +1,84 @@
+# Hand-written NuGet version ranges, one per line, from the version range examples of the NuGet
+# package versioning documentation and the cases of VersionRangeFactory.TryParse. Each is parsed with
+# VersionRange.TryParse (without floating versions) and checked with VersionRange.Satisfies against
+# every version in nuget.txt. Leading and trailing whitespace is trimmed by generate.ts.
+# A bare version is a minimum, inclusive.
+1.0
+1.0.0.0
+1.0-beta
+1.0-beta.1+build
+01.0.0.1
+# Intervals.
+[1.0]
+[1.0.0.0]
+[1.0-beta]
+[1.0+build]
+[1.0,2.0)
+[1.0,2.0]
+(1.0,2.0)
+(1.0,2.0]
+[1.0.0, 2.0.0)
+[ 1.0 , 2.0 )
+[1.0 ,2.0)
+[1.0,2.0 )
+(,1.0]
+(,1.0)
+[,1.0]
+[,1.0)
+( ,1.0]
+[1.0,)
+(1.0,)
+(1.0,]
+[1.0, ]
+[1.0-beta,1.0)
+[1.0-alpha,1.0-beta]
+(1.0-beta,1.0-beta.1)
+(1.0-beta,1.0-beta1)
+[1.0-BETA,1.0-beta]
+[1.0,1.0.0.0]
+[1.0+a,1.0+b]
+(1.0,1.0.0.1)
+[1.0.0.1,1.0.1)
+[0.0.0-0,0.0.0]
+(,0.0.0--2147483648]
+(2147483647,]
+[1.0--1,1.0-0)
+[ , ]
+( , )
+# Invalid: NuGet rejects these.
+(1.0]
+[1.0)
+(1.0)
+[2.0,1.0]
+[1.0,1.0)
+(1.0,1.0]
+[1.0-beta,1.0-BETA)
+[,]
+(,)
+[]
+()
+[
+(
+[1.0,2.0,3.0]
+[1.0,2.0)(3.0,4.0)
+[1.0,2.0),[3.0,4.0)
+[1.0
+1.0]
+(1.0,2.0)x
+x(1.0,2.0)
+{1.0,2.0}
+>=1.0
+1.0,2.0
+1.0 - 2.0
+v1.0
+[v1.0,2.0)
+[1.0,v2.0)
+1.0.0.0.0
+[1.0.0.0.0,)
+# Floating versions, which polyver does not support (and VersionRange.TryParse rejects here).
+*
+1.*
+1.0.*
+1.0-*
+[1.0.*,2.0)
+[1.0,2.*)

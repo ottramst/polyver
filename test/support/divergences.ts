@@ -7,6 +7,8 @@
 
 interface Divergence {
   readonly reason: string
+  /** The test type the divergence applies to, if the same input also appears in other test types. */
+  readonly testType?: string
   /** Fields that replace the upstream expectation. */
   readonly override: { readonly expected_failure?: boolean; readonly expected_output?: unknown }
 }
@@ -24,6 +26,20 @@ const MAVEN_CMP = 'vers-spec/tests/maven_version_cmp_test.json'
 const MAVEN_DOT =
   'Maven 3.9 and later read a qualifier after "." as one after "-" (MNG-7644), so 2.0.a and 2.0.0.a ' +
   'are both 2-a, which sorts before 2-1. maven-artifact 3.9.16 and 4.0.0-rc-7 give this order.'
+
+const NUGET_CMP = 'vers-spec/tests/nuget_version_cmp_test.json'
+const NUGET_CASE =
+  'The expected output lower-cases the pre-release labels of an input (1.0.0-BETA becomes ' +
+  '1.0.0-beta), so it is not a sorted copy of the input. polyver returns the input strings in the ' +
+  'same order; NuGet compares labels ignoring case, so the versions are equal either way.'
+
+/** A NuGet comparison case whose expected output lower-cases the labels of its sorted input. */
+function nugetCase(versions: readonly [string, string]): [string, Divergence] {
+  return [
+    key(NUGET_CMP, { input_scheme: 'nuget', versions }),
+    { reason: NUGET_CASE, testType: 'comparison', override: { expected_output: versions } },
+  ]
+}
 
 const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
   [
@@ -152,6 +168,10 @@ const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
     // The two versions are equal, so a stable sort keeps the input order.
     { reason: MAVEN_DOT, override: { expected_output: ['2.0.0.a', '2.0.a'] } },
   ],
+  nugetCase(['1.0.0-BETA', '1.0.0-beta2']),
+  nugetCase(['1.0.0-BETA', '1.0.0-beta.1+AA']),
+  nugetCase(['1.0.0-BETA.X.y.5.77.0+AA', '1.0.0-beta.x.y.5.79.0+aa']),
+  nugetCase(['1.0.0-BETA.X.y.5.79.0+AA', '1.0.0-beta.x.y.5.790.0+abc']),
 ])
 
 /** A pair of an `a <op> b` file (see loadComparisonPairs) where polyver gives another order. */

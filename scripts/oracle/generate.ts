@@ -4,14 +4,16 @@
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison). For
 // gem, also <out>/requirements.txt: `version<TAB>requirement` for every version in cases/gem.txt and
-// every requirement in cases/gem-requirements.txt.
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem <out-dir>
+// every requirement in cases/gem-requirements.txt. For nuget, also <out>/ranges.txt (the ranges in
+// cases/nuget-ranges.txt) and <out>/range-rows.txt (`version<TAB>range` for every version in
+// cases/nuget.txt and every range).
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem|nuget <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem' | 'nuget'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem', 'nuget'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem|nuget <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -113,6 +115,20 @@ const GRAMMAR: Record<Eco, () => string> = {
     (chance(0.2)
       ? `-${repeat(1 + int(3), () => pick([digits(), 'a', 'rc', 'beta', '.', '-']))}`
       : ''),
+  // One to five numbers (four is the most NuGet accepts), some near int.MaxValue, then optional
+  // pre-release labels (numeric, negative, SemVer 1.0 style such as `beta1`) and build metadata.
+  nuget: () =>
+    Array.from({ length: pick([1, 2, 3, 3, 3, 4, 4, 5]) }, () =>
+      chance(0.05) ? pick(['2147483647', '2147483648', '4294967296']) : digits(),
+    ).join('.') +
+    (chance(0.5)
+      ? `-${repeat(
+          1 + int(3),
+          () =>
+            `${pick([digits(), 'alpha', 'beta', 'BETA', 'Beta1', 'rc', 'pre', '-', '-1', 'a-b', '0a', '2147483648'])}.`,
+        ).slice(0, -1)}`
+      : '') +
+    (chance(0.2) ? `+${pick(['meta', 'build.5', '007', 'sha.abc123', 'A-B', '', 'a..b'])}` : ''),
 }
 
 /** A pseudo-version timestamp, yyyymmddhhmmss. */
@@ -127,6 +143,7 @@ const EDITS: Record<Eco, readonly string[]> = {
   maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
   golang: ['-0', '-rc.1', '.0', '+incompatible', '-pre', '.01', 'v', '-', '+', '.'],
   gem: ['.0', '.a', '-rc1', '.pre', '0', 'A', '-', '.b2', 'a', '.'],
+  nuget: ['.0', '-0', '-beta', '-BETA.1', '+meta', '.', '-', '+', '01', '.-1'],
 }
 
 /** A single random edit: bump a digit, insert or append a token, or drop a character. */
@@ -195,4 +212,12 @@ if (eco === 'gem') {
   )
   writeFileSync(`${out}/requirements.txt`, `${rows.join('\n')}\n`)
   console.log(`gem: ${rows.length} requirement rows`)
+}
+
+if (eco === 'nuget') {
+  const ranges = lines('scripts/oracle/cases/nuget-ranges.txt')
+  const rows = ranges.flatMap((r) => cases.map((v) => `${v}\t${r}`))
+  writeFileSync(`${out}/ranges.txt`, `${ranges.join('\n')}\n`)
+  writeFileSync(`${out}/range-rows.txt`, `${rows.join('\n')}\n`)
+  console.log(`nuget: ${ranges.length} ranges, ${rows.length} range rows`)
 }

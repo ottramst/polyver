@@ -27,9 +27,15 @@ export interface RequirementRow {
   readonly divergence?: string
 }
 
-/** Reads testdata/oracle/<eco>-requirements.txt (`<version> satisfies|fails <requirement>`). */
-export function oracleRequirements(eco: string): RequirementRow[] {
-  const path = `oracle/${eco}-requirements.txt`
+/**
+ * Reads testdata/oracle/<eco>-<file>.txt (`<version> satisfies|fails <requirement>`): `requirements`
+ * for gem, `ranges` for nuget.
+ */
+export function oracleRequirements(
+  eco: string,
+  file: 'requirements' | 'ranges' = 'requirements',
+): RequirementRow[] {
+  const path = `oracle/${eco}-${file}.txt`
   return readTestdata(path)
     .split('\n')
     .flatMap((text, i) => {
@@ -39,6 +45,16 @@ export function oracleRequirements(eco: string): RequirementRow[] {
       const divergence = requirementDivergence(path, version, requirement)
       const satisfied = (verdict === 'satisfies') !== (divergence !== undefined)
       return [{ version, requirement, satisfied, line: i + 1, ...(divergence && { divergence }) }]
+    })
+}
+
+/** Reads the `valid-range <range>` and `invalid-range <range>` lines of testdata/oracle/<eco>-ranges.txt. */
+export function oracleRangeValidity(eco: string): [string, boolean][] {
+  return readTestdata(`oracle/${eco}-ranges.txt`)
+    .split('\n')
+    .flatMap((line) => {
+      const m = /^(valid|invalid)-range (.+)$/.exec(line)
+      return m ? [[m[2] as string, m[1] === 'valid'] as [string, boolean]] : []
     })
 }
 
