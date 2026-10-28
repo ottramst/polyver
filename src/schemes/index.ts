@@ -1,6 +1,7 @@
 import { apk } from './apk.ts'
 import { datetime } from './datetime.ts'
 import { deb } from './deb.ts'
+import { gem } from './gem.ts'
 import { golang } from './golang.ts'
 import { intdot } from './intdot.ts'
 import { lexicographic } from './lexicographic.ts'
@@ -15,9 +16,22 @@ import type { Scheme } from './types.ts'
 export type { Scheme } from './types.ts'
 
 const schemes = new Map<string, Scheme>(
-  [all, apk, datetime, deb, golang, intdot, lexicographic, maven, none, npm, pypi, rpm, semver].map(
-    (s) => [s.type, s],
-  ),
+  [
+    all,
+    apk,
+    datetime,
+    deb,
+    gem,
+    golang,
+    intdot,
+    lexicographic,
+    maven,
+    none,
+    npm,
+    pypi,
+    rpm,
+    semver,
+  ].map((s) => [s.type, s]),
 )
 
 /** Returns the scheme for a VERS type, or `undefined` if it is not supported. */
