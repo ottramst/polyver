@@ -74,7 +74,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 | npm      | [semver 2.0.0](https://semver.org/spec/v2.0.0.html), [node-semver ranges](https://github.com/npm/node-semver#ranges) | node-semver (ISC)                 | node-semver fixtures; vers-spec `npm_*`                                    | pre-releases only match within the same `M.m.p`; build metadata ignored                               |
 | maven    | [POM version order](https://maven.apache.org/pom.html#version-order-specification)                                   | `ComparableVersion.java` (Apache) | osv-scalibr `maven-versions*.txt`; vers-spec `maven_version_cmp_test.json` | `alpha < beta < milestone < rc=cr < snapshot < "" = ga = final < sp`; `1.0 == 1.0.0`                  |
 | golang   | [go.dev/ref/mod#versions](https://go.dev/ref/mod#versions)                                                           | golang.org/x/mod (BSD-3)          | `semver_test.go`, `pseudo_test.go`                                         | pseudo-versions are pre-releases; `+incompatible`; `v` prefix often omitted in OSV/VERS               |
-| gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`                                       | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
+| gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`; vers-spec `gem_*`; our `gem` oracle  | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
 | nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | vers-spec `nuget_*`                                                        | 4-part versions; case-insensitive pre-release labels                                                  |
 | cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests                                                                  | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`                                                              |
 | composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                      | 4-part normalization; stability flags; `dev-` branches                                                |
@@ -109,6 +109,30 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 - Real versions are mostly pseudo-versions: in a sample of 902 versions from the module index, 554 are
   pseudo-versions and 44 end in `+incompatible`. All 902 are valid and none is a shorthand or lacks
   the `v`, so those forms come from advisory data, not from Go.
+
+## Findings from the RubyGems oracle (2026-10-28)
+
+- `Gem::Version` in RubyGems 4.0.20 matched the port on all 7,970 oracle pairs and 3,938 validity
+  verdicts. Its quirks come from two regexes in `canonical_segments`: trailing zeros go only after a
+  letter or dot (`1.a0 == 1.a`), and only the first run of zeros before a letter is removed
+  (`1.a.0.b == 1.a.b`, but `1.0.a.0.b` keeps its second zero). Letters compare by byte, so
+  `1.A < 1.a`, and a trailing letter makes a version smaller, so there is no smallest pre-release
+  (`2.1.A.A < 2.1.A`).
+- Ported as regexes, those two take quadratic time in V8 on a long run of `.0` (54 s for 200 KB),
+  because the engine backtracks through the run once per starting position. polyver uses equivalent
+  loops, checked against the regexes on every oracle version and 200,000 random strings.
+- That is why `~>` cannot be exact in VERS: `Gem::Requirement` checks `v.release < r.bump`, which
+  rejects every pre-release of the bump. All 15 disagreements among 3,663 requirement checks are such
+  pre-releases.
+- RubyGems rejects a letter right after the first number (`1beta`), which osv-scalibr's
+  `rubygems-versions.txt` uses in two pairs.
+- In the compact index, a `-` in a version always starts a platform (`java`, `x86_64-linux`, and odd
+  ones such as `do_not_install`), because `Gem::Version` stores `-` as `.pre.`. 392 of 991 sampled
+  versions (40%) are pre-releases, 18 contain an upper-case letter and 205 join letters and digits
+  (`1.0.0.rc1`).
+- The compact index is append-only: a yank appends `name -1.0.0`, and the earlier line still lists
+  `1.0.0`, so dropping entries that start with `-` keeps every yanked version. `harvest.sh` matches
+  yanks by gem name and version instead (285 yanked versions on 2026-10-28).
 
 ## Licensing of test data
 

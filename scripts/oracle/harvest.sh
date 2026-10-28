@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 # Samples real-world version strings from a distribution's own package index (for Maven, the
 # maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt; for Go, the module
-# index) into testdata/oracle/<eco>-index.txt. The repositories change daily, so the sample is committed
-# and `run.sh` only reads committed inputs. Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang
+# index; for RubyGems, the compact index) into testdata/oracle/<eco>-index.txt. The repositories change
+# daily, so the sample is committed and `run.sh` only reads committed inputs.
+# Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang|gem
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -11,7 +12,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang}"
+eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang|gem}"
 case "$eco" in
   deb)
     image="$DEB_IMAGE"
@@ -33,6 +34,9 @@ case "$eco" in
     ;;
   golang)
     source='the Go module index (2,000 entries from each 1 April, 2019-2026)'
+    ;;
+  gem)
+    source='the RubyGems compact index, without yanked versions or platform suffixes'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2
@@ -61,6 +65,31 @@ elif [ "$eco" = golang ]; then
     curl -fsSL "https://index.golang.org/index?since=$year-04-01T00:00:00Z&limit=2000" >>"$index"
   done
   all="$(sed -n 's|.*"Version":"\([^"]*\)".*|\1|p' "$index" | LC_ALL=C sort -u)"
+elif [ "$eco" = gem ]; then
+  origin='Index: https://rubygems.org/versions'
+  index="$(mktemp)"
+  trap 'rm -f "$index"' EXIT
+  curl -fsSL https://rubygems.org/versions -o "$index"
+  # Lines are `name v1,v2,... md5` after a `---` header. The file is append-only: a yank appends
+  # `name -v`, and the earlier line still lists `v`, so yanks are matched by gem name and version. A
+  # `-` within a version starts its platform (`1.0.0-java`): Gem::Version reads `-` as `.pre.`, so a
+  # published version never contains one.
+  all="$(sed '1,/^---$/d' "$index" | awk '
+    {
+      n = split($2, v, ",")
+      for (i = 1; i <= n; i++) {
+        if (sub(/^-/, "", v[i])) yanked[$1 " " v[i]] = 1
+        else listed[$1 " " v[i]] = 1
+      }
+    }
+    END {
+      for (k in listed) {
+        if (k in yanked) continue
+        sub(/^[^ ]* /, "", k)
+        sub(/-.*/, "", k)
+        print k
+      }
+    }' | LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"

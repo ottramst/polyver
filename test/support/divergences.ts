@@ -206,14 +206,44 @@ const PAIR_DIVERGENCES: ReadonlyMap<string, PairDivergence> = new Map([
   pair(MAVEN_GENERATED, 'v3.7.0rc2', '>', 'v3.7.0-rc.3', MAVEN_4),
 ])
 
+/** A row of testdata/oracle/gem-requirements.txt where polyver gives the opposite verdict. */
+const GEM_REQUIREMENTS = 'oracle/gem-requirements.txt'
+const GEM_TILDE =
+  'RubyGems also rejects pre-releases of the ~> upper bound (v.release < r.bump), which no VERS ' +
+  'interval can express, since there is no smallest pre-release (2.1.A.A < 2.1.A). As in vers-spec, ' +
+  '~>2.0.8 is >=2.0.8|<2.1, which contains 2.1.a.'
+
+const REQUIREMENT_DIVERGENCES: ReadonlyMap<string, string> = new Map(
+  [
+    ['2.0.a', '~> 1'],
+    ['2.0.a', '~> 1.2'],
+    ['1.5.a', '~> 1.4.4'],
+    ['1.5.0.rc1', '~> 1.4.4'],
+    ['2.1.a', '~> 2.0.8'],
+    ['2.1.0.a', '~> 2.0.8'],
+    ['2.1.A', '~> 2.0.8'],
+    ['2.1.A.A', '~> 2.0.8'],
+    ['3.0.rc2', '~> 2.0'],
+    ['1.1.pre', '~> 1.0.0'],
+    ['1.1.pre', '~> 1.0.0.a'],
+    ['2.0.a', '~> 1.0a1'],
+    ['2.0.a', '~>1.1'],
+    ['2.0.a', '~> 1.4, >= 1.4.4'],
+    ['3.0.rc2', '~> 2.0, != 2.0.9'],
+  ].map(([version, requirement]) => [key(GEM_REQUIREMENTS, [version, requirement]), GEM_TILDE]),
+)
+
 function key(path: string, input: unknown): string {
   return `${path} ${JSON.stringify(input)}`
 }
 
 /** The number of divergences for vendored files whose path starts with `prefix`. */
 export function divergenceCount(prefix: string): number {
-  return [...DIVERGENCES.keys(), ...PAIR_DIVERGENCES.keys()].filter((k) => k.startsWith(prefix))
-    .length
+  return [
+    ...DIVERGENCES.keys(),
+    ...PAIR_DIVERGENCES.keys(),
+    ...REQUIREMENT_DIVERGENCES.keys(),
+  ].filter((k) => k.startsWith(prefix)).length
 }
 
 export function divergence(path: string, input: unknown): Divergence | undefined {
@@ -222,4 +252,13 @@ export function divergence(path: string, input: unknown): Divergence | undefined
 
 export function pairDivergence(path: string, a: string, b: string): PairDivergence | undefined {
   return PAIR_DIVERGENCES.get(key(path, [a, b]))
+}
+
+/** The reason polyver gives the opposite verdict for a row of an oracle requirements file, if it does. */
+export function requirementDivergence(
+  path: string,
+  version: string,
+  requirement: string,
+): string | undefined {
+  return REQUIREMENT_DIVERGENCES.get(key(path, [version, requirement]))
 }

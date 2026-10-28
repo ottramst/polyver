@@ -28,6 +28,7 @@ for f in \
   tests/datetime_version_cmp_test.json \
   tests/lexicographic-test.json \
   tests/maven_version_cmp_test.json \
+  tests/gem_range_from_native_test.json \
   types/npm-definition.json \
   types/pypi-definition.json; do
   fetch package-url/vers-spec "$VERS_SPEC" "$f" "testdata/vers-spec/$f"
@@ -36,7 +37,7 @@ done
 fetch google/osv-scalibr "$OSV_SCALIBR" LICENSE testdata/osv-scalibr/LICENSE
 for f in semver-versions.txt pypi-versions.txt pypi-versions-generated.txt debian-versions.txt \
   debian-versions-generated.txt alpine-versions-generated.txt maven-versions.txt \
-  maven-versions-generated.txt; do
+  maven-versions-generated.txt rubygems-versions.txt rubygems-versions-generated.txt; do
   fetch google/osv-scalibr "$OSV_SCALIBR" "semantic/testdata/$f" "testdata/osv-scalibr/$f"
 done
 

@@ -1,6 +1,7 @@
 // Helpers for testing a scheme against its oracle output in testdata/oracle (see scripts/oracle).
 import { expect } from 'vitest'
 import type { Scheme } from '../../src/index.ts'
+import { requirementDivergence } from './divergences.ts'
 import { readTestdata } from './vectors.ts'
 
 export const SIGN = { '<': -1, '=': 0, '>': 1 } as const
@@ -13,6 +14,31 @@ export function oracleValidity(eco: string): [string, boolean][] {
     .map((l) => {
       const [status, version] = l.split(' ') as [string, string]
       return [version, status === 'valid']
+    })
+}
+
+export interface RequirementRow {
+  readonly version: string
+  readonly requirement: string
+  /** The native tool's verdict, or polyver's where it deliberately differs (see divergences.ts). */
+  readonly satisfied: boolean
+  /** 1-based line number in the source file. */
+  readonly line: number
+  readonly divergence?: string
+}
+
+/** Reads testdata/oracle/<eco>-requirements.txt (`<version> satisfies|fails <requirement>`). */
+export function oracleRequirements(eco: string): RequirementRow[] {
+  const path = `oracle/${eco}-requirements.txt`
+  return readTestdata(path)
+    .split('\n')
+    .flatMap((text, i) => {
+      const m = /^(\S+) (satisfies|fails) (.+)$/.exec(text)
+      if (!m) return []
+      const [, version = '', verdict, requirement = ''] = m
+      const divergence = requirementDivergence(path, version, requirement)
+      const satisfied = (verdict === 'satisfies') !== (divergence !== undefined)
+      return [{ version, requirement, satisfied, line: i + 1, ...(divergence && { divergence }) }]
     })
 }
 
