@@ -65,7 +65,12 @@ type Item = NumItem | StrItem | ComboItem | ListItem
 const MAX_LENGTH = 256
 const QUALIFIERS = ['alpha', 'beta', 'milestone', 'rc', 'snapshot', '', 'sp']
 const RELEASE_KEY = String(QUALIFIERS.indexOf(''))
-const SHORT: Readonly<Record<string, string>> = { a: 'alpha', b: 'beta', m: 'milestone' }
+// A Map, not an object literal, so that qualifiers such as `constructor` do not find Object members.
+const SHORT: ReadonlyMap<string, string> = new Map([
+  ['a', 'alpha'],
+  ['b', 'beta'],
+  ['m', 'milestone'],
+])
 
 function isDigit(c: string | undefined): boolean {
   return c !== undefined && c >= '0' && c <= '9'
@@ -77,7 +82,7 @@ function num(digits: string): NumItem {
 
 // `a1`, `b1` and `m1` mean alpha-1, beta-1 and milestone-1, so the short forms count only before a number.
 function str(value: string, followedByDigit: boolean): StrItem {
-  const long = followedByDigit ? (SHORT[value] ?? value) : value
+  const long = followedByDigit ? (SHORT.get(value) ?? value) : value
   return { kind: 'str', value: long === 'cr' ? 'rc' : long }
 }
 

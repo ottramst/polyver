@@ -7,6 +7,9 @@
 1.0-0
 1.ga
 1-ga
+# A qualifier with a number before the same qualifier alone, so both argument orders are compared.
+1.final0
+1-release0
 1.final
 1-final
 1-release
@@ -42,12 +45,15 @@
 1-snapshot
 1-SNAPSHOT
 1.0-SNAPSHOT
+1-sp0
 1-sp
 1-sp1
 1-sp.1
 1-sp-1
 1-ga.1
 1-ga-1
+1-ga0
+1-ga1
 1-foo
 1.foo
 1-foo1
@@ -55,6 +61,11 @@
 1-foo10
 1-bar
 1-x
+1-d1
+# Names of JavaScript Object members, which a plain-object lookup would find.
+1-constructor1
+1-__proto__
+1-__proto__1
 1.0.RC2
 1.0-RC3
 1.0.0-RC2

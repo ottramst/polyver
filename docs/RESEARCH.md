@@ -96,7 +96,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   makes a qualifier followed by a number, such as `sp1` or `X-1`, a single item, so `1-sp1 > 1-final`;
   MNG-6568 (September 2026) removes cycles from qualifier comparison; and a fix from the same month
   corrects parsing inconsistencies and rejects versions over 256 characters. On the same inputs, 3.9.16
-  orders 81 of 7,119 pairs differently; none of the 945 pairs of two real Maven Central versions are
+  orders 110 of 7,883 pairs differently; none of the 946 pairs of two real Maven Central versions are
   affected.
 - osv-scalibr's Maven vectors predate Maven 3.9: 19 of their pairs disagree with both 3.9.16 and
   4.0.0-rc-7, and 5 more with 4.0.0-rc-7 only. vers-spec `maven_version_cmp_test.json` expects

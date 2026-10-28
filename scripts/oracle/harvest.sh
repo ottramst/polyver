@@ -41,11 +41,15 @@ out="testdata/oracle/$eco-index.txt"
 mkdir -p testdata/oracle
 if [ "$eco" = maven ]; then
   origin='Repository: https://repo1.maven.org/maven2'
-  all="$(sed -n '/^[^#]/p' scripts/oracle/maven-artifacts.txt | while IFS=: read -r group artifact; do
-    group_path="$(printf '%s' "$group" | tr . /)"
-    curl -fsSL "https://repo1.maven.org/maven2/$group_path/$artifact/maven-metadata.xml" |
-      sed -n 's|.*<version>\(.*\)</version>.*|\1|p'
-  done | LC_ALL=C sort -u)"
+  metadata="$(mktemp)"
+  trap 'rm -f "$metadata"' EXIT
+  # Not a pipeline, so that `set -e` stops on a failed download instead of dropping the artifact.
+  for coordinates in $(sed -n '/^[^#]/p' scripts/oracle/maven-artifacts.txt); do
+    group_path="$(printf '%s' "${coordinates%%:*}" | tr . /)"
+    curl -fsSL "https://repo1.maven.org/maven2/$group_path/${coordinates#*:}/maven-metadata.xml" \
+      >>"$metadata"
+  done
+  all="$(sed -n 's|.*<version>\(.*\)</version>.*|\1|p' "$metadata" | LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"

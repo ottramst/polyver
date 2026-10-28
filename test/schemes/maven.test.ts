@@ -118,6 +118,11 @@ describe('POM version order specification', () => {
     expectOrder([['1.0.RC2', '1.0-RC2'], ['1.0-RC3'], ['1.0.1']])
   })
 
+  it('reads qualifiers named like Object members as plain qualifiers', () => {
+    expectOrder([['1-constructor1'], ['1-d1']])
+    expectOrder([['1-__proto__'], ['1-__proto__1']])
+  })
+
   it('compares numbers of any length', () => {
     expectOrder([['999999999'], ['1000000000'], ['999999999999999999'], ['1000000000000000000000']])
   })

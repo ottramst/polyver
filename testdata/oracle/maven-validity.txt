@@ -8,6 +8,8 @@ valid 1-0
 valid 1.0-0
 valid 1.ga
 valid 1-ga
+valid 1.final0
+valid 1-release0
 valid 1.final
 valid 1-final
 valid 1-release
@@ -43,12 +45,15 @@ valid 1-CR1
 valid 1-snapshot
 valid 1-SNAPSHOT
 valid 1.0-SNAPSHOT
+valid 1-sp0
 valid 1-sp
 valid 1-sp1
 valid 1-sp.1
 valid 1-sp-1
 valid 1-ga.1
 valid 1-ga-1
+valid 1-ga0
+valid 1-ga1
 valid 1-foo
 valid 1.foo
 valid 1-foo1
@@ -56,6 +61,10 @@ valid 1-foo2
 valid 1-foo10
 valid 1-bar
 valid 1-x
+valid 1-d1
+valid 1-constructor1
+valid 1-__proto__
+valid 1-__proto__1
 valid 1.0.RC2
 valid 1.0-RC3
 valid 1.0.0-RC2

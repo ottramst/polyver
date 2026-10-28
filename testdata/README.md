@@ -80,7 +80,7 @@ for deb. None occur for rpm. This is the same bar as the osv-scalibr generated f
   orders `0.002-r6 > 0.0.202605-r0` and 2.x the opposite.
 
 **Maven 3.9.** polyver follows maven-artifact 4.0.0-rc-7. `pnpm oracle maven` also runs 3.9.16 and
-writes `oracle/maven-3.9.txt`, which no test reads. It orders 81 of the 7,119 pairs differently, none of
+writes `oracle/maven-3.9.txt`, which no test reads. It orders 110 of the 7,883 pairs differently, none of
 them between two versions from the Maven Central sample; for example, 4.0 orders `1.0-1 > 1-1` and
 `10.0.0.beta0 > 10.0.0.beta`, where 3.9 finds both pairs equal. See
 [docs/RESEARCH.md](../docs/RESEARCH.md#findings-from-the-maven-oracle-2026-10-28).
