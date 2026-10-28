@@ -3,15 +3,16 @@
 // - testdata/oracle/<eco>-index.txt: versions sampled from the distribution's package index,
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison). For
-// gem, also <out>/requirements.txt: `version<TAB>requirement` for every version in cases/gem.txt and
-// every requirement in cases/gem-requirements.txt.
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem <out-dir>
+// gem and cargo, also <out>/requirements.txt: `version<TAB>requirement` for every version in
+// cases/<eco>.txt and every requirement in cases/<eco>-requirements.txt. A requirement line that starts
+// with `"` is a JSON string, for requirements with surrounding or unusual whitespace.
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang|gem|cargo <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang' | 'gem' | 'cargo'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven', 'golang', 'gem', 'cargo'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang|gem|cargo <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -113,6 +114,21 @@ const GRAMMAR: Record<Eco, () => string> = {
     (chance(0.2)
       ? `-${repeat(1 + int(3), () => pick([digits(), 'a', 'rc', 'beta', '.', '-']))}`
       : ''),
+  // Mostly MAJOR.MINOR.PATCH, sometimes a part missing or extra, or a number around u64::MAX, with
+  // pre-releases and build metadata as crates publish them (`2.0.15+zstd.1.5.7`).
+  cargo: () =>
+    Array.from({ length: pick([2, 3, 3, 3, 3, 3, 4]) }, () =>
+      chance(0.05) ? pick(['18446744073709551615', '18446744073709551616']) : digits(),
+    ).join('.') +
+    (chance(0.4)
+      ? `-${repeat(
+          1 + int(3),
+          () => `${pick([digits(), 'alpha', 'beta', 'rc', 'pre', '-', 'x-y', '0a'])}.`,
+        ).slice(0, -1)}`
+      : '') +
+    (chance(0.25)
+      ? `+${pick(['build', '001', '0', 'zstd.1.5.7', '1.1.1t', 'wasi-0.2.2', 'a.b', ''])}`
+      : ''),
 }
 
 /** A pseudo-version timestamp, yyyymmddhhmmss. */
@@ -127,6 +143,7 @@ const EDITS: Record<Eco, readonly string[]> = {
   maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
   golang: ['-0', '-rc.1', '.0', '+incompatible', '-pre', '.01', 'v', '-', '+', '.'],
   gem: ['.0', '.a', '-rc1', '.pre', '0', 'A', '-', '.b2', 'a', '.'],
+  cargo: ['-0', '-rc.1', '.0', '+build', '-pre', '.01', '+001', '-', '+', '.'],
 }
 
 /** A single random edit: bump a digit, insert or append a token, or drop a character. */
@@ -189,10 +206,13 @@ writeFileSync(`${out}/versions.txt`, `${versions.join('\n')}\n`)
 writeFileSync(`${out}/pairs.txt`, `${unique.map((p) => p.join(' ')).join('\n')}\n`)
 console.log(`${eco}: ${versions.length} versions, ${unique.length} pairs`)
 
-if (eco === 'gem') {
-  const rows = lines('scripts/oracle/cases/gem-requirements.txt').flatMap((r) =>
-    cases.map((v) => `${v}\t${r}`),
-  )
+if (eco === 'gem' || eco === 'cargo') {
+  const requirements = lines(`scripts/oracle/cases/${eco}-requirements.txt`).map((r) => {
+    const req = r.startsWith('"') ? (JSON.parse(r) as string) : r
+    if (/[\n\r]/.test(req)) throw new Error(`a requirement cannot span lines: ${r}`)
+    return req
+  })
+  const rows = requirements.flatMap((r) => cases.map((v) => `${v}\t${r}`))
   writeFileSync(`${out}/requirements.txt`, `${rows.join('\n')}\n`)
-  console.log(`gem: ${rows.length} requirement rows`)
+  console.log(`${eco}: ${rows.length} requirement rows`)
 }

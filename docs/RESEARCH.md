@@ -76,7 +76,7 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 | golang   | [go.dev/ref/mod#versions](https://go.dev/ref/mod#versions)                                                           | golang.org/x/mod (BSD-3)          | `semver_test.go`, `pseudo_test.go`                                         | pseudo-versions are pre-releases; `+incompatible`; `v` prefix often omitted in OSV/VERS               |
 | gem      | [RubyGems patterns](https://guides.rubygems.org/patterns/)                                                           | `rubygems/version.rb` (MIT)       | osv-scalibr `rubygems-versions*.txt`; vers-spec `gem_*`; our `gem` oracle  | any letter makes a pre-release; `1.0 == 1.0.0`                                                        |
 | nuget    | [NuGet versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)                              | NuGet.Versioning (Apache)         | vers-spec `nuget_*`                                                        | 4-part versions; case-insensitive pre-release labels                                                  |
-| cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests                                                                  | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`                                                              |
+| cargo    | [Cargo dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)                         | dtolnay/semver (MIT/Apache)       | its tests; our `cargo` oracle                                              | bare `1.2` = `^1.2`; `^0.0.3` = `=0.0.3`; `Ord` breaks ties by build metadata                         |
 | composer | [Composer versions](https://getcomposer.org/doc/articles/versions.md)                                                | composer/semver (MIT)             | osv-scalibr `packagist-versions*.txt`                                      | 4-part normalization; stability flags; `dev-` branches                                                |
 
 ## Findings from the oracles (2026-10-26)
@@ -133,6 +133,31 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
 - The compact index is append-only: a yank appends `name -1.0.0`, and the earlier line still lists
   `1.0.0`, so dropping entries that start with `-` keeps every yanked version. `harvest.sh` matches
   yanks by gem name and version instead (285 yanked versions on 2026-10-28).
+
+## Findings from the Cargo oracle (2026-10-28)
+
+- `Version::parse` in dtolnay/semver 1.0.28 is SemVer 2.0.0 with one limit: the major, minor and patch
+  numbers are u64, so `18446744073709551616.0.0` is invalid. Pre-release numbers have no limit
+  (`1.0.0-18446744073709551616` is valid). It matched the port on all 7,093 oracle pairs and 3,619
+  validity verdicts once build metadata is set aside.
+- `Ord` for `Version` breaks ties by build metadata (`1.0.0+0 < 1.0.0+00 < 1.0.0+build`), while
+  `Version::cmp_precedence` and `VersionReq::matches` ignore it, so `=1.0.0` matches `1.0.0+build`.
+  polyver follows precedence; 93 oracle pairs and 3 assertions of dtolnay/semver's own tests are such
+  ties.
+- `VersionReq::parse` skips only U+0020, accepts at most 32 comparators and no `||` or `!=`, and
+  takes a pre-release or build metadata only after a full `major.minor.patch` (`1.2-alpha` is
+  rejected). A wildcard after an explicit operator is a missing part (`>=1.*` is `>=1.0.0`), and a lone
+  `*`, `x` or `X` must be the only comparator. It accepted or rejected all 141 hand-written
+  requirements as the port does.
+- `VersionReq::matches` agreed with the VERS ranges on all 5,170 rows with a release version. Of the
+  4,606 rows with a pre-release, 1,321 differ, all because Cargo rejects a pre-release that the
+  interval contains. In 1,307 no comparator names a pre-release of the same `major.minor.patch`,
+  which a pre-release needs in order to match; the other 14 come from a partial bound, which ends
+  below the pre-releases of the bound (`>1.0.0-alpha, <1.0` rejects `1.0.0-beta`).
+- In a sample of 863 versions from the sparse index entries of 242 crates (the 200 most downloaded and
+  42 that publish pre-releases or build metadata), 118 are pre-releases and 64 have build metadata,
+  mostly the bundled C library's version (`0.4.83+curl-8.15.0`, `0.11.2+zstd.1.5.2`). All are valid.
+  A yank only sets `"yanked":true` on a version's line, so `harvest.sh` drops those lines.
 
 ## Licensing of test data
 

@@ -3,9 +3,10 @@
 # inputs from generate.ts, and writes:
 # - testdata/oracle/<eco>.txt: `a <op> b` for every pair whose versions are both valid,
 # - testdata/oracle/<eco>-validity.txt: `valid <v>` or `invalid <v>` for every input version,
-# - for gem, testdata/oracle/gem-requirements.txt: `<v> satisfies|fails <requirement>`.
+# - for gem and cargo, testdata/oracle/<eco>-requirements.txt: `<v> satisfies|fails <requirement>`, and
+#   for cargo also `rejects <requirement>`.
 # The output depends only on committed files and the pinned image, so a rerun is byte-identical.
-# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem
+# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang|gem|cargo
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -14,7 +15,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem}"
+eco="${1:?usage: run.sh deb|rpm|apk|maven|golang|gem|cargo}"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 node scripts/oracle/generate.ts "$eco" "$tmp" >&2
@@ -107,6 +108,15 @@ case "$eco" in
     tool="echo \"rubygems \$(gem -v) on \$(ruby -v | cut -d ' ' -f 1-2)\""
     cp scripts/oracle/gem.rb "$tmp/"
     script='cd /in && ruby gem.rb versions.txt pairs.txt requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
+    ;;
+  cargo)
+    image="$CARGO_IMAGE"
+    semver="$(awk '/^name = "semver"$/ { getline; gsub(/^version = "|"$/, ""); print }' scripts/oracle/cargo/Cargo.lock)"
+    tool="rustc --version | cut -d ' ' -f 1-2 | sed 's|^|semver $semver on |'"
+    mkdir -p "$tmp/cargo/src"
+    cp scripts/oracle/cargo/Cargo.toml scripts/oracle/cargo/Cargo.lock "$tmp/cargo/"
+    cp scripts/oracle/cargo/src/main.rs "$tmp/cargo/src/"
+    script='cd /in/cargo && CARGO_TARGET_DIR=/tmp/target cargo run --quiet --locked --release -- /in/versions.txt /in/pairs.txt /in/requirements.txt /out/validity.txt /out/pairs.txt /out/requirements.txt'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2

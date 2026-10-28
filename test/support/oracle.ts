@@ -42,6 +42,13 @@ export function oracleRequirements(eco: string): RequirementRow[] {
     })
 }
 
+/** Reads the `rejects <requirement>` rows of testdata/oracle/<eco>-requirements.txt. */
+export function oracleRejectedRequirements(eco: string): string[] {
+  return readTestdata(`oracle/${eco}-requirements.txt`)
+    .split('\n')
+    .flatMap((text) => (text.startsWith('rejects ') ? [text.slice('rejects '.length)] : []))
+}
+
 /**
  * Sorts a sample of valid versions and checks every pair against the resulting ranks. Pairwise
  * vectors cannot show that `compare` is a total order (transitive and consistent), which VERS

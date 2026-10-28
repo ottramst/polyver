@@ -1,5 +1,11 @@
 ## Unreleased
 
+FEATURES:
+
+- Scheme `cargo`, matching `Version` from dtolnay/semver 1.0.28 (the crate Cargo uses) with build
+  metadata ignored, and `fromNative` for Cargo requirements such as `^0.2.3`, `~1.2`, `1.*` and
+  `>= 1.0, < 2.0`.
+
 ## v0.4.0
 
 FEATURES:
