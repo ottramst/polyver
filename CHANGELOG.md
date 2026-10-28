@@ -1,5 +1,12 @@
 ## Unreleased
 
+## v1.0.0
+
+NOTES:
+
+- First stable release. Every scheme on the roadmap is done, and the API now follows Semantic
+  Versioning: breaking changes need a new major version.
+
 FEATURES:
 
 - Scheme `nuget`, matching NuGet.Versioning 7.9.0, and `fromNative` for NuGet version ranges such as

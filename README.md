@@ -3,7 +3,8 @@
 Compare package versions and evaluate [VERS](https://github.com/package-url/vers-spec) version ranges
 across ecosystems, in JavaScript and TypeScript. Zero dependencies; runs in Node.js, browsers, Deno and Bun.
 
-> **Status:** early development; the API may change before 1.0. See [Supported schemes](#supported-schemes).
+> **Status:** stable. Since 1.0.0 the API follows [Semantic Versioning](https://semver.org). See
+> [Supported schemes](#supported-schemes).
 
 ```shell
 npm install polyver
