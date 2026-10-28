@@ -90,6 +90,18 @@ Implementations in other languages: [univers](https://github.com/aboutcode-org/u
   more components sort higher (`1.0 < 1.0.0`). apk-tools 2.14 differs on `~hash`
   validity and on components with leading zeros; see [testdata/README.md](../testdata/README.md#oracle-vectors).
 
+## Findings from the Maven oracle (2026-10-28)
+
+- `ComparableVersion` in maven-artifact 4.0.0-rc-7 has changes that 3.9.16 lacks: MNG-7714 (2023)
+  makes a qualifier followed by a number, such as `sp1` or `X-1`, a single item, so `1-sp1 > 1-final`;
+  MNG-6568 (September 2026) removes cycles from qualifier comparison; and a fix from the same month
+  corrects parsing inconsistencies and rejects versions over 256 characters. On the same inputs, 3.9.16
+  orders 110 of 7,883 pairs differently; none of the 946 pairs of two real Maven Central versions are
+  affected.
+- osv-scalibr's Maven vectors predate Maven 3.9: 19 of their pairs disagree with both 3.9.16 and
+  4.0.0-rc-7, and 5 more with 4.0.0-rc-7 only. vers-spec `maven_version_cmp_test.json` expects
+  `2-1 < 2.0.a`, but since Maven 3.9 (MNG-7644) `2.0.a` reads as `2-a`, which sorts first.
+
 ## Licensing of test data
 
 - **Do not vendor** dpkg's `t-version.c`, rpm's `tests/rpmvercmp.at`, apk-tools' `test/unit/version.data`,

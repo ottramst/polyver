@@ -98,7 +98,8 @@ function run(t: VersTest): void {
   }
 }
 
-let divergent = 0
+// Upstream files repeat some inputs, so count the distinct divergent inputs.
+const divergent = new Set<string>()
 
 for (const file of files) {
   describe(file, () => {
@@ -109,12 +110,12 @@ for (const file of files) {
         it.todo(name)
         continue
       }
-      if (t.divergence) divergent++
+      if (t.divergence) divergent.add(`${file} ${JSON.stringify(t.input)}`)
       it(t.divergence ? `${name} (diverges: ${t.divergence})` : name, () => run(t))
     }
   })
 }
 
 it('every documented divergence matches a vendored case', () => {
-  expect(divergent).toBe(divergenceCount(DIR))
+  expect(divergent.size).toBe(divergenceCount(DIR))
 })

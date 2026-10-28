@@ -20,6 +20,11 @@ const OVERLAP =
   'Upstream keeps overlapping || alternatives as-is, which gives duplicate versions or repeated "<"/">" ' +
   'and breaks Clause 5.4; polyver merges the intervals.'
 
+const MAVEN_CMP = 'vers-spec/tests/maven_version_cmp_test.json'
+const MAVEN_DOT =
+  'Maven 3.9 and later read a qualifier after "." as one after "-" (MNG-7644), so 2.0.a and 2.0.0.a ' +
+  'are both 2-a, which sorts before 2-1. maven-artifact 3.9.16 and 4.0.0-rc-7 give this order.'
+
 const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
   [
     key('vers-spec/tests/vers_canonical_parse_test.json', 'vers:npm/1.0%252F0'),
@@ -134,6 +139,71 @@ const DIVERGENCES: ReadonlyMap<string, Divergence> = new Map([
     key('vers-spec/types/npm-definition.json', '2.0.x || 2.1.x'),
     { reason: OVERLAP, override: { expected_output: 'vers:npm/>=2.0.0|<2.2.0' } },
   ],
+  [
+    key(MAVEN_CMP, { input_scheme: 'maven', versions: ['2-1', '2.0.a'] }),
+    { reason: MAVEN_DOT, override: { expected_output: ['2.0.a', '2-1'] } },
+  ],
+  [
+    key(MAVEN_CMP, { input_scheme: 'maven', versions: ['2-1', '2.0.0.a'] }),
+    { reason: MAVEN_DOT, override: { expected_output: ['2.0.0.a', '2-1'] } },
+  ],
+  [
+    key(MAVEN_CMP, { input_scheme: 'maven', versions: ['2.0.0.a', '2.0.a'] }),
+    // The two versions are equal, so a stable sort keeps the input order.
+    { reason: MAVEN_DOT, override: { expected_output: ['2.0.0.a', '2.0.a'] } },
+  ],
+])
+
+/** A pair of an `a <op> b` file (see loadComparisonPairs) where polyver gives another order. */
+interface PairDivergence {
+  readonly reason: string
+  readonly op: '<' | '=' | '>'
+}
+
+const MAVEN_PAIRS = 'osv-scalibr/maven-versions.txt'
+const MAVEN_GENERATED = 'osv-scalibr/maven-versions-generated.txt'
+const MAVEN_39 =
+  "osv-scalibr's Maven vectors predate Maven 3.9 (the generated file comes from maven-artifact " +
+  '3.8.6); maven-artifact 3.9.16 and 4.0.0-rc-7 both give this order.'
+const MAVEN_4 =
+  'Maven 4 changed this order (polyver follows maven-artifact 4.0.0-rc-7); maven-artifact 3.9.16 ' +
+  'gives the upstream order.'
+
+function pair(
+  path: string,
+  a: string,
+  op: PairDivergence['op'],
+  b: string,
+  reason: string,
+): [string, PairDivergence] {
+  return [key(path, [a, b]), { reason, op }]
+}
+
+const PAIR_DIVERGENCES: ReadonlyMap<string, PairDivergence> = new Map([
+  pair(MAVEN_PAIRS, '1-1.foo-bar-1-baz-0.1', '>', '1-1.foo-bar1baz-.1', MAVEN_4),
+  pair(MAVEN_PAIRS, '1-1', '>', '1-ga-1', MAVEN_39),
+  pair(MAVEN_GENERATED, '3.2.0rc2', '>', '3.2.0-rc.1', MAVEN_4),
+  pair(MAVEN_GENERATED, '1.0.0-RC16', '>', '1.0.0.RC8-beta', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.0.0-gradle-rework-beta3', '>', '1.0.0.RC7-3', MAVEN_39),
+  pair(MAVEN_GENERATED, '2.9.0-1', '>', '2.9.0.RC1', MAVEN_39),
+  pair(MAVEN_GENERATED, '6.1.12.rc5', '>', '6.1.12rc1', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.0.0-beta11', '>', '1.0.0-beta.6', MAVEN_4),
+  pair(MAVEN_GENERATED, '1.1.31.sec10', '>', '1.1.31_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.1.34.sec10', '>', '1.1.34_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.1.46.sec10', '>', '1.1.46_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.8.sec10_noneautotype', '>', '1.2.8_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.31.sec10', '>', '1.2.31_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.48.sec10', '>', '1.2.48_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.50.sec10', '>', '1.2.50_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.54.sec10', '>', '1.2.54_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.57.sec10', '>', '1.2.57_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.60.sec10', '>', '1.2.60_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.2.67.sec10', '>', '1.2.67_noneautotype', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.0.0rc0', '>', '1.0.beta8', MAVEN_39),
+  pair(MAVEN_GENERATED, '1.5.9.RC1', '>', '1.5.9-RC0', MAVEN_39),
+  pair(MAVEN_GENERATED, '3.5.0-CR-2', '>', '3.5.0.Beta-1', MAVEN_4),
+  pair(MAVEN_GENERATED, '1.1.0-01-glassfish', '>', '1.1.0.Beta1', MAVEN_39),
+  pair(MAVEN_GENERATED, 'v3.7.0rc2', '>', 'v3.7.0-rc.3', MAVEN_4),
 ])
 
 function key(path: string, input: unknown): string {
@@ -142,9 +212,14 @@ function key(path: string, input: unknown): string {
 
 /** The number of divergences for vendored files whose path starts with `prefix`. */
 export function divergenceCount(prefix: string): number {
-  return [...DIVERGENCES.keys()].filter((k) => k.startsWith(prefix)).length
+  return [...DIVERGENCES.keys(), ...PAIR_DIVERGENCES.keys()].filter((k) => k.startsWith(prefix))
+    .length
 }
 
 export function divergence(path: string, input: unknown): Divergence | undefined {
   return DIVERGENCES.get(key(path, input))
+}
+
+export function pairDivergence(path: string, a: string, b: string): PairDivergence | undefined {
+  return PAIR_DIVERGENCES.get(key(path, [a, b]))
 }
