@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.2.0
+
 FEATURES:
 
 - Scheme `maven`, matching `ComparableVersion` from Maven 4.0.0-rc-7, and `fromNative` for Maven
