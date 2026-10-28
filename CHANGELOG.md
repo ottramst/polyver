@@ -1,5 +1,10 @@
 ## Unreleased
 
+FEATURES:
+
+- Scheme `golang`, matching `golang.org/x/mod/semver` v0.42.0, including pseudo-versions and
+  `+incompatible`. The `v` prefix is optional, so `1.2.3` equals `v1.2.3`.
+
 ## v0.2.0
 
 FEATURES:

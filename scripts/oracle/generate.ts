@@ -3,13 +3,13 @@
 // - testdata/oracle/<eco>-index.txt: versions sampled from the distribution's package index,
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison).
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven <out-dir>
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven|golang <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk' | 'maven'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven' | 'golang'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk', 'maven'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk|maven <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven', 'golang'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven|golang <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -83,6 +83,27 @@ const GRAMMAR: Record<Eco, () => string> = {
           pick(['ga', 'final', 'Final', 'release', 'RELEASE', 'sp', 'jre', 'foo', 'x', 'sec']),
         ]),
     ),
+  // Mostly vMAJOR.MINOR.PATCH, sometimes a shorthand, and the three pseudo-version forms.
+  golang: () =>
+    (chance(0.9) ? 'v' : '') +
+    Array.from({ length: pick([1, 2, 3, 3, 3, 3, 4]) }, digits).join('.') +
+    (chance(0.5)
+      ? `-${pick([
+          () =>
+            repeat(
+              1 + int(3),
+              () => `${pick([digits(), 'alpha', 'beta', 'rc', 'pre', '-', 'x-y'])}.`,
+            ).slice(0, -1),
+          () =>
+            `${pick(['', '0.', 'rc.1.0.', 'pre.0.'])}${timestamp()}-${pick(['abcdef123456', '0123456789ab', 'deadbeef'])}`,
+        ])()}`
+      : '') +
+    (chance(0.15) ? pick(['+incompatible', '+meta.1', '+build-5', '+']) : ''),
+}
+
+/** A pseudo-version timestamp, yyyymmddhhmmss. */
+function timestamp(): string {
+  return `20${10 + int(17)}${repeat(5, () => String(10 + int(18)))}`
 }
 
 const EDITS: Record<Eco, readonly string[]> = {
@@ -90,6 +111,7 @@ const EDITS: Record<Eco, readonly string[]> = {
   rpm: ['~', '~rc1', '^', '^git1', '.0', 'a', '-1', '_1', '.', '1:'],
   apk: ['_rc1', '_p1', '_alpha', 'a', '.0', '-r1', '~abc', '_git1', '.01', '0'],
   maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
+  golang: ['-0', '-rc.1', '.0', '+incompatible', '-pre', '.01', 'v', '-', '+', '.'],
 }
 
 /** A single random edit: bump a digit, insert or append a token, or drop a character. */

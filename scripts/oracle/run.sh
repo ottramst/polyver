@@ -4,7 +4,7 @@
 # - testdata/oracle/<eco>.txt: `a <op> b` for every pair whose versions are both valid,
 # - testdata/oracle/<eco>-validity.txt: `valid <v>` or `invalid <v>` for every input version.
 # The output depends only on committed files and the pinned image, so a rerun is byte-identical.
-# Usage: scripts/oracle/run.sh deb|rpm|apk|maven
+# Usage: scripts/oracle/run.sh deb|rpm|apk|maven|golang
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -13,7 +13,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: run.sh deb|rpm|apk|maven}"
+eco="${1:?usage: run.sh deb|rpm|apk|maven|golang}"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 node scripts/oracle/generate.ts "$eco" "$tmp" >&2
@@ -93,6 +93,13 @@ case "$eco" in
         /out/validity.txt /out/pairs.txt &&
       java -cp /in/maven-artifact-old.jar /in/Oracle.java /in/versions.txt /in/pairs.txt \
         /tmp/validity.txt /out/pairs-old.txt'
+    ;;
+  golang)
+    image="$GOLANG_IMAGE"
+    xmod="$(sed -n 's|^require golang.org/x/mod ||p' scripts/oracle/golang/go.mod)"
+    tool="go env GOVERSION | sed 's|^|golang.org/x/mod $xmod on |'"
+    cp scripts/oracle/golang/main.go scripts/oracle/golang/go.mod scripts/oracle/golang/go.sum "$tmp/"
+    script='cd /in && go run . /in/versions.txt /in/pairs.txt /out/validity.txt /out/pairs.txt'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2

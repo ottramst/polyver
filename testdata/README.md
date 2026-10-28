@@ -36,11 +36,15 @@ commits below; do not edit them by hand.
 | `oracle/{deb,rpm,apk}-index.txt` | Version strings sampled from the Debian, Fedora and Alpine package indexes by `scripts/oracle/harvest.sh` (date and image in each header) | Facts from public package metadata | 2026-10-26 |
 | `oracle/maven-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the Maven Central `maven-metadata.xml` of the artifacts in `scripts/oracle/maven-artifacts.txt` | Facts from public package metadata | 2026-10-28 |
 | `oracle/{deb,rpm,apk}.txt`, `oracle/{deb,rpm,apk}-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs dpkg 1.22.22, rpm 6.0.2 and apk-tools 3.0.8 in digest-pinned containers (`scripts/oracle/images.env`) | MIT (our output) | see headers |
+| `oracle/golang-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the Go module index (`index.golang.org`) | Facts from public package metadata | 2026-10-28 |
 | `oracle/maven.txt`, `oracle/maven-validity.txt`, `oracle/maven-3.9.txt` | Our oracle output: `scripts/oracle/run.sh` runs `ComparableVersion` from maven-artifact 4.0.0-rc-7 (and 3.9.16 for `maven-3.9.txt`), checksum-verified jars from Maven Central, in a digest-pinned JDK container | MIT (our output) | see headers |
+| `oracle/golang.txt`, `oracle/golang-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs `semver.IsValid` and `semver.Compare` from golang.org/x/mod v0.42.0 (pinned by `scripts/oracle/golang/go.sum`) in a digest-pinned Go container | MIT (our output) | see headers |
 | `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
 | `node-semver/{comparisons,equality,range-include,range-exclude,range-parse}.json` | node-semver `test/fixtures/*.js`, converted to JSON by `scripts/js-fixture-to-json.ts` | ISC | v7.8.5 (`6e05b76`) |
 | `packaging/LICENSE.BSD` | [pypa/packaging](https://github.com/pypa/packaging) (dual BSD-2-Clause / Apache-2.0) | BSD-2-Clause | 26.3 (`929fd4b`) |
 | `packaging/versions.json` | packaging `tests/test_version.py` (`VERSIONS`, `test_invalid_versions`, `test_normalized_versions`), extracted by `scripts/extract-packaging-vectors.py` | BSD-2-Clause | 26.3 (`929fd4b`) |
+| `x-mod/LICENSE` | [golang/mod](https://github.com/golang/mod) (`golang.org/x/mod`) | BSD-3-Clause | v0.42.0 (`b5136e5`) |
+| `x-mod/semver.json`, `x-mod/pseudo.json` | x/mod `semver/semver_test.go` (`tests`) and `module/pseudo_test.go` (`pseudoTests`), extracted by `scripts/go-fixture-to-json.ts` | BSD-3-Clause | v0.42.0 (`b5136e5`) |
 
 vers-spec `7d0cc19` is the `main` branch after the v1.2.1 tag; it includes the fix to
 `npm_range_from_native_test.json` that treats a space as intersection
@@ -52,18 +56,18 @@ asserts polyver's result.
 
 ## Oracle vectors
 
-`pnpm oracle <deb|rpm|apk|maven>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt` from committed
+`pnpm oracle <deb|rpm|apk|maven|golang>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt` from committed
 inputs only, so a rerun is byte-identical. Its inputs are:
 
 - hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
   (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format, the
-  POM version order specification and its examples), not from any test suite;
+  POM version order specification and its examples, the Go modules reference), not from any test suite;
 - the index sample, refreshed with `pnpm oracle:harvest <eco>`;
 - grammar-based random versions and single-edit mutations from a fixed-seed PRNG
   (`scripts/oracle/generate.ts`).
 
 Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`,
-`new ComparableVersion`), and only pairs of valid versions are compared, because dpkg merely warns about
+`new ComparableVersion`, `semver.IsValid`), and only pairs of valid versions are compared, because dpkg merely warns about
 some invalid versions and apk prints nothing for them.
 
 The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and

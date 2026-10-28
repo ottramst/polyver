@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 # Samples real-world version strings from a distribution's own package index (for Maven, the
-# maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt) into
-# testdata/oracle/<eco>-index.txt. The repositories change daily, so the sample is committed and
-# `run.sh` only reads committed inputs. Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven
+# maven-metadata.xml of the artifacts listed in scripts/oracle/maven-artifacts.txt; for Go, the module
+# index) into testdata/oracle/<eco>-index.txt. The repositories change daily, so the sample is committed
+# and `run.sh` only reads committed inputs. Usage: scripts/oracle/harvest.sh deb|rpm|apk|maven|golang
 # The single-quoted scripts here run inside the container, so they must not expand on the host.
 # shellcheck disable=SC2016
 set -eu
@@ -11,7 +11,7 @@ cd "$(dirname "$0")/../.."
 # shellcheck source=scripts/oracle/images.env
 . scripts/oracle/images.env
 
-eco="${1:?usage: harvest.sh deb|rpm|apk|maven}"
+eco="${1:?usage: harvest.sh deb|rpm|apk|maven|golang}"
 case "$eco" in
   deb)
     image="$DEB_IMAGE"
@@ -30,6 +30,9 @@ case "$eco" in
     ;;
   maven)
     source='Maven Central (maven-metadata.xml of scripts/oracle/maven-artifacts.txt)'
+    ;;
+  golang)
+    source='the Go module index (2,000 entries from each 1 April, 2019-2026)'
     ;;
   *)
     echo "unknown ecosystem: $eco" >&2
@@ -50,6 +53,14 @@ if [ "$eco" = maven ]; then
       >>"$metadata"
   done
   all="$(sed -n 's|.*<version>\(.*\)</version>.*|\1|p' "$metadata" | LC_ALL=C sort -u)"
+elif [ "$eco" = golang ]; then
+  origin='Index: https://index.golang.org/index'
+  index="$(mktemp)"
+  trap 'rm -f "$index"' EXIT
+  for year in 2019 2020 2021 2022 2023 2024 2025 2026; do
+    curl -fsSL "https://index.golang.org/index?since=$year-04-01T00:00:00Z&limit=2000" >>"$index"
+  done
+  all="$(sed -n 's|.*"Version":"\([^"]*\)".*|\1|p' "$index" | LC_ALL=C sort -u)"
 else
   origin="Image: $image"
   all="$(docker run --rm "$image" sh -c "$cmd" | LC_ALL=C sort -u)"

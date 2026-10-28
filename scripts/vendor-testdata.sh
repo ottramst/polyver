@@ -9,6 +9,7 @@ VERS_SPEC=7d0cc1914aa921ade2a68ed83640fbc3f9701e40
 OSV_SCALIBR=1ca96d6fb34c58289978fbf732cac83281b962c4
 NODE_SEMVER=6e05b7637396ac66522cff8731f07cfe0ef49a29 # v7.8.5
 PACKAGING=929fd4b1410ac7ef61ef3f45b2f5d7e87711a9b5 # 26.3
+XMOD=b5136e5ba156da612a1efc6e49b55988a134a5e0 # v0.42.0
 
 fetch() { # <repo> <commit> <path> <dest>
   mkdir -p "$(dirname "$4")"
@@ -52,3 +53,9 @@ done
 fetch pypa/packaging "$PACKAGING" LICENSE.BSD testdata/packaging/LICENSE.BSD
 fetch pypa/packaging "$PACKAGING" tests/test_version.py "$tmp/test_version.py"
 python3 -I scripts/extract-packaging-vectors.py "$tmp/test_version.py" testdata/packaging/versions.json
+
+# golang.org/x/mod's version tables are Go struct literals; extract them without running the tests.
+fetch golang/mod "$XMOD" LICENSE testdata/x-mod/LICENSE
+fetch golang/mod "$XMOD" semver/semver_test.go "$tmp/semver_test.go"
+fetch golang/mod "$XMOD" module/pseudo_test.go "$tmp/pseudo_test.go"
+node scripts/go-fixture-to-json.ts "$tmp/semver_test.go" "$tmp/pseudo_test.go" testdata/x-mod
