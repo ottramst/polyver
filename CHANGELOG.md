@@ -1,5 +1,10 @@
 ## Unreleased
 
+FEATURES:
+
+- Scheme `nuget`, matching NuGet.Versioning 7.9.0, and `fromNative` for NuGet version ranges such as
+  `[1.0,2.0)`, `(,1.0]` and `1.0`. Floating versions such as `1.*` are not supported.
+
 ## v0.4.0
 
 FEATURES:
