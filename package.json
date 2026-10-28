@@ -1,6 +1,6 @@
 {
   "name": "polyver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compare package versions and evaluate VERS version ranges across ecosystems: npm, PyPI, Debian, RPM, Alpine, Maven, Go, RubyGems, NuGet, Cargo, Composer and more. Zero dependencies.",
   "keywords": [
     "vers",

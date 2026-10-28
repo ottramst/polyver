@@ -1,5 +1,12 @@
 ## Unreleased
 
+## v1.0.1
+
+NOTES:
+
+- The README's "Native ranges" and "Correctness" sections are restructured: a table of each scheme's
+  native range syntax, and a section per scheme naming the tool and version it matches. No code changes.
+
 ## v1.0.0
 
 NOTES:
