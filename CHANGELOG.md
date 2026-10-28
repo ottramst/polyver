@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.4.0
+
 FEATURES:
 
 - Scheme `gem`, matching `Gem::Version` from RubyGems 4.0.20, and `fromNative` for RubyGems
