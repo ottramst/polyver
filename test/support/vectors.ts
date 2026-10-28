@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { divergence } from './divergences.ts'
+import { divergence, pairDivergence } from './divergences.ts'
 
 const TESTDATA = new URL('../../testdata/', import.meta.url)
 
@@ -78,11 +78,14 @@ export interface ComparisonPair {
   readonly b: string
   /** 1-based line number in the source file. */
   readonly line: number
+  /** Set when polyver deliberately differs from the upstream order; see divergences.ts. */
+  readonly divergence?: string
 }
 
 /**
  * Loads a file of `a <op> b` lines, the format of osv-scalibr semantic/testdata and of our oracle
- * output. Blank lines and lines starting with `#` or `//` are ignored, as is anything after a `#`.
+ * output, with polyver's documented divergences applied. Blank lines and lines starting with `#` or
+ * `//` are ignored, as is anything after a `#`.
  */
 export function loadComparisonPairs(path: string): ComparisonPair[] {
   const pairs: ComparisonPair[] = []
@@ -95,7 +98,10 @@ export function loadComparisonPairs(path: string): ComparisonPair[] {
       if (!a || !b || (op !== '<' && op !== '=' && op !== '>') || rest.length > 0) {
         throw new Error(`${path}:${i + 1}: cannot parse ${JSON.stringify(text)}`)
       }
-      pairs.push({ a, op, b, line: i + 1 })
+      const d = pairDivergence(path, a, b)
+      pairs.push(
+        d ? { a, op: d.op, b, line: i + 1, divergence: d.reason } : { a, op, b, line: i + 1 },
+      )
     })
   return pairs
 }

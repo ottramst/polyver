@@ -3,13 +3,13 @@
 // - testdata/oracle/<eco>-index.txt: versions sampled from the distribution's package index,
 // - grammar-based random versions and single-edit mutations, from a fixed-seed PRNG.
 // Writes <out>/versions.txt (for validity) and <out>/pairs.txt (`a b` per line, for comparison).
-// Usage: node scripts/oracle/generate.ts deb|rpm|apk <out-dir>
+// Usage: node scripts/oracle/generate.ts deb|rpm|apk|maven <out-dir>
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-type Eco = 'deb' | 'rpm' | 'apk'
+type Eco = 'deb' | 'rpm' | 'apk' | 'maven'
 const [eco, out] = process.argv.slice(2) as [Eco, string]
-if (!['deb', 'rpm', 'apk'].includes(eco) || !out) {
-  throw new Error('usage: generate.ts deb|rpm|apk <out-dir>')
+if (!['deb', 'rpm', 'apk', 'maven'].includes(eco) || !out) {
+  throw new Error('usage: generate.ts deb|rpm|apk|maven <out-dir>')
 }
 
 const root = new URL('../../', import.meta.url)
@@ -70,12 +70,26 @@ const GRAMMAR: Record<Eco, () => string> = {
     ) +
     (chance(0.1) ? `~${pick(['abc123', '0f', 'deadbeef', '123abc'])}` : '') +
     (chance(0.5) ? `-r${digits()}` : ''),
+  // An empty separator makes a transition between digits and letters, as in `1.0rc1`.
+  maven: () =>
+    digits() +
+    repeat(
+      int(5),
+      () =>
+        pick(['.', '-', '.', '-', '']) +
+        pick([
+          digits(),
+          pick(['alpha', 'a', 'beta', 'B', 'milestone', 'm', 'rc', 'CR', 'snapshot', 'SNAPSHOT']),
+          pick(['ga', 'final', 'Final', 'release', 'RELEASE', 'sp', 'jre', 'foo', 'x', 'sec']),
+        ]),
+    ),
 }
 
 const EDITS: Record<Eco, readonly string[]> = {
   deb: ['~', '~rc1', '+', 'a', '.0', '-1', '-0', '+b1', '~bpo', '1:'],
   rpm: ['~', '~rc1', '^', '^git1', '.0', 'a', '-1', '_1', '.', '1:'],
   apk: ['_rc1', '_p1', '_alpha', 'a', '.0', '-r1', '~abc', '_git1', '.01', '0'],
+  maven: ['-SNAPSHOT', '.0', '-0', '-rc1', '.RC1', '-sp1', 'a1', '-final', '-1', '.'],
 }
 
 /** A single random edit: bump a digit, insert or append a token, or drop a character. */

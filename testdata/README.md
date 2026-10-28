@@ -21,6 +21,7 @@ commits below; do not edit them by hand.
 | `vers-spec/tests/intdot_version_cmp_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/tests/datetime_version_cmp_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/tests/lexicographic-test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
+| `vers-spec/tests/maven_version_cmp_test.json` | vers-spec `tests/` | MIT | `7d0cc19` |
 | `vers-spec/types/npm-definition.json` | vers-spec `types/` | MIT | `7d0cc19` |
 | `vers-spec/types/pypi-definition.json` | vers-spec `types/` | MIT | `7d0cc19` |
 | `osv-scalibr/LICENSE` | [google/osv-scalibr](https://github.com/google/osv-scalibr) | Apache-2.0 | `1ca96d6` |
@@ -30,8 +31,12 @@ commits below; do not edit them by hand.
 | `osv-scalibr/debian-versions.txt` | osv-scalibr `semantic/testdata` | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/debian-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with dpkg) | Apache-2.0 | `1ca96d6` |
 | `osv-scalibr/alpine-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with apk-tools) | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/maven-versions.txt` | osv-scalibr `semantic/testdata` (hand-written; most cases follow Maven's `ComparableVersionTest`, Apache-2.0) | Apache-2.0 | `1ca96d6` |
+| `osv-scalibr/maven-versions-generated.txt` | osv-scalibr `semantic/testdata` (generated with maven-artifact 3.8.6 by osv-scanner's `GenerateMavenVersions.java`) | Apache-2.0 | `1ca96d6` |
 | `oracle/{deb,rpm,apk}-index.txt` | Version strings sampled from the Debian, Fedora and Alpine package indexes by `scripts/oracle/harvest.sh` (date and image in each header) | Facts from public package metadata | 2026-10-26 |
+| `oracle/maven-index.txt` | Version strings sampled by `scripts/oracle/harvest.sh` from the Maven Central `maven-metadata.xml` of the artifacts in `scripts/oracle/maven-artifacts.txt` | Facts from public package metadata | 2026-10-28 |
 | `oracle/{deb,rpm,apk}.txt`, `oracle/{deb,rpm,apk}-validity.txt` | Our oracle output: `scripts/oracle/run.sh` runs dpkg 1.22.22, rpm 6.0.2 and apk-tools 3.0.8 in digest-pinned containers (`scripts/oracle/images.env`) | MIT (our output) | see headers |
+| `oracle/maven.txt`, `oracle/maven-validity.txt`, `oracle/maven-3.9.txt` | Our oracle output: `scripts/oracle/run.sh` runs `ComparableVersion` from maven-artifact 4.0.0-rc-7 (and 3.9.16 for `maven-3.9.txt`), checksum-verified jars from Maven Central, in a digest-pinned JDK container | MIT (our output) | see headers |
 | `node-semver/LICENSE` | [npm/node-semver](https://github.com/npm/node-semver) | ISC | v7.8.5 (`6e05b76`) |
 | `node-semver/{comparisons,equality,range-include,range-exclude,range-parse}.json` | node-semver `test/fixtures/*.js`, converted to JSON by `scripts/js-fixture-to-json.ts` | ISC | v7.8.5 (`6e05b76`) |
 | `packaging/LICENSE.BSD` | [pypa/packaging](https://github.com/pypa/packaging) (dual BSD-2-Clause / Apache-2.0) | BSD-2-Clause | 26.3 (`929fd4b`) |
@@ -47,19 +52,19 @@ asserts polyver's result.
 
 ## Oracle vectors
 
-`pnpm oracle <deb|rpm|apk>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt` from committed
+`pnpm oracle <deb|rpm|apk|maven>` regenerates `oracle/<eco>.txt` and `oracle/<eco>-validity.txt` from committed
 inputs only, so a rerun is byte-identical. Its inputs are:
 
 - hand-written edge cases in `scripts/oracle/cases/<eco>.txt`, written from the format documentation
-  (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format),
-  not from any test suite;
+  (Debian Policy §5.6.12, Fedora's versioning guidelines and its examples, the apk version format, the
+  POM version order specification and its examples), not from any test suite;
 - the index sample, refreshed with `pnpm oracle:harvest <eco>`;
 - grammar-based random versions and single-edit mutations from a fixed-seed PRNG
   (`scripts/oracle/generate.ts`).
 
-Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`), and
-only pairs of valid versions are compared, because dpkg merely warns about some invalid versions and apk
-prints nothing for them.
+Each version is first checked for validity (`dpkg --validate-version`, `apk version -c`, `rpm.ver`,
+`new ComparableVersion`), and only pairs of valid versions are compared, because dpkg merely warns about
+some invalid versions and apk prints nothing for them.
 
 The generated pairs were checked against the GPL suites (dpkg's `t-version.c` and
 `scripts/t/Dpkg_Version.t`, rpm's `rpmvercmp.at`, apk-tools' `version.data`) on 2026-10-26. Only a few
@@ -73,6 +78,12 @@ for deb. None occur for rpm. This is the same bar as the osv-scalibr generated f
 - order: 109 of 3,168 pairs differ, all involving a `~hash` or a non-first component with a leading
   zero. The latter occurs in real versions (59 of 932 sampled, mostly Perl modules); for example, 3.x
   orders `0.002-r6 > 0.0.202605-r0` and 2.x the opposite.
+
+**Maven 3.9.** polyver follows maven-artifact 4.0.0-rc-7. `pnpm oracle maven` also runs 3.9.16 and
+writes `oracle/maven-3.9.txt`, which no test reads. It orders 81 of the 7,119 pairs differently, none of
+them between two versions from the Maven Central sample; for example, 4.0 orders `1.0-1 > 1-1` and
+`10.0.0.beta0 > 10.0.0.beta`, where 3.9 finds both pairs equal. See
+[docs/RESEARCH.md](../docs/RESEARCH.md#findings-from-the-maven-oracle-2026-10-28).
 
 ## Excluded
 

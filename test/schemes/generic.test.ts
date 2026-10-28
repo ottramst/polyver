@@ -29,6 +29,7 @@ it('lists the supported schemes', () => {
     'deb',
     'intdot',
     'lexicographic',
+    'maven',
     'none',
     'npm',
     'pypi',
